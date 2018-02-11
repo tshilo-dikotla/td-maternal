@@ -2,10 +2,11 @@ from django.contrib import admin
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalSubstanceUsePriorPregForm
 from ..models import MaternalSubstanceUsePriorPreg
+from .modeladmin_mixins import CrfModelAdminMixin
 
 
 @admin.register(MaternalSubstanceUsePriorPreg, site=td_maternal_admin)
-class MaternalSubstanceUsePriorPregAdmin(admin.ModelAdmin):
+class MaternalSubstanceUsePriorPregAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalSubstanceUsePriorPregForm
 

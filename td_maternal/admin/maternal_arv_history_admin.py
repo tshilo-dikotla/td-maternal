@@ -2,10 +2,11 @@ from django.contrib import admin
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalLifetimeArvHistoryForm
 from ..models import MaternalLifetimeArvHistory
+from .modeladmin_mixins import CrfModelAdminMixin
 
 
 @admin.register(MaternalLifetimeArvHistory, site=td_maternal_admin)
-class MaternalLifetimeArvHistoryAdmin(admin.ModelAdmin):
+class MaternalLifetimeArvHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     form = MaternalLifetimeArvHistoryForm
 
     list_display = ('maternal_visit', 'haart_start_date', 'preg_on_haart')

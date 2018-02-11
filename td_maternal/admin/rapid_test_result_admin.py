@@ -1,10 +1,11 @@
 from django.contrib import admin
 from ..admin_site import td_maternal_admin
 from ..models import RapidTestResult
+from .modeladmin_mixins import CrfModelAdminMixin
 
 
 @admin.register(RapidTestResult, site=td_maternal_admin)
-class RapidTestResultAdmin(admin.ModelAdmin):
+class RapidTestResultAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     fields = ('maternal_visit',
               'rapid_test_done',

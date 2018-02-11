@@ -2,10 +2,11 @@ from django.contrib import admin
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalSubstanceUseDuringPregForm
 from ..models import MaternalSubstanceUseDuringPreg
+from .modeladmin_mixins import CrfModelAdminMixin
 
 
 @admin.register(MaternalSubstanceUseDuringPreg, site=td_maternal_admin)
-class MaternalSubstanceUseDuringPregAdmin(admin.ModelAdmin):
+class MaternalSubstanceUseDuringPregAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalSubstanceUseDuringPregForm
 
@@ -25,6 +26,3 @@ class MaternalSubstanceUseDuringPregAdmin(admin.ModelAdmin):
         'alcohol_during_preg_freq': admin.VERTICAL,
         'marijuana_during_preg': admin.VERTICAL,
         'marijuana_during_preg_freq': admin.VERTICAL}
-
-admin.site.register(
-    MaternalSubstanceUseDuringPreg, MaternalSubstanceUseDuringPregAdmin)

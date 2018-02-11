@@ -2,10 +2,11 @@ from django.contrib import admin
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalPostPartumDepForm
 from ..models import MaternalPostPartumDep
+from .modeladmin_mixins import CrfModelAdminMixin
 
 
 @admin.register(MaternalPostPartumDep, site=td_maternal_admin)
-class MaternalPostPartumDepAdmin(admin.ModelAdmin):
+class MaternalPostPartumDepAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalPostPartumDepForm
     list_display = ('maternal_visit', 'laugh', 'enjoyment', 'blame')

@@ -2,10 +2,11 @@ from django.contrib import admin
 from ..admin_site import td_maternal_admin
 from ..models import MaternalContraception
 from ..forms import MaternalContraceptionForm
+from .modeladmin_mixins import CrfModelAdminMixin
 
 
 @admin.register(MaternalContraception, site=td_maternal_admin)
-class MaternalContraceptionAdmin(admin.ModelAdmin):
+class MaternalContraceptionAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalContraceptionForm
 

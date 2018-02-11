@@ -3,10 +3,11 @@ from django.contrib import admin
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalClinicalMeasurementsOneForm, MaternalClinicalMeasurementsTwoForm
 from ..models import MaternalClinicalMeasurementsOne, MaternalClinicalMeasurementsTwo
+from .modeladmin_mixins import CrfModelAdminMixin
 
 
 @admin.register(MaternalClinicalMeasurementsOne, site=td_maternal_admin)
-class MaternalClinicalMeasurementsOneAdmin(admin.ModelAdmin):
+class MaternalClinicalMeasurementsOneAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalClinicalMeasurementsOneForm
 
@@ -14,7 +15,7 @@ class MaternalClinicalMeasurementsOneAdmin(admin.ModelAdmin):
 
 
 @admin.register(MaternalClinicalMeasurementsTwo, site=td_maternal_admin)
-class MaternalClinicalMeasurementsTwoAdmin(admin.ModelAdmin):
+class MaternalClinicalMeasurementsTwoAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalClinicalMeasurementsTwoForm
 

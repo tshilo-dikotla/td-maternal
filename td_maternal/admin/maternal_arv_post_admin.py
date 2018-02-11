@@ -3,6 +3,7 @@ from edc_model_admin import TabularInlineMixin
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalArvPostForm, MaternalArvPostMedForm, MaternalArvPostAdhForm
 from ..models import MaternalArvPost, MaternalArvPostMed, MaternalArvPostAdh
+from .modeladmin_mixins import CrfModelAdminMixin
 
 
 class MaternalArvPostModInlineAdmin(TabularInlineMixin):
@@ -13,7 +14,7 @@ class MaternalArvPostModInlineAdmin(TabularInlineMixin):
 
 
 @admin.register(MaternalArvPostMed, site=td_maternal_admin)
-class MaternalArvPostModAdmin(admin.ModelAdmin):
+class MaternalArvPostMedAdmin(admin.ModelAdmin):
 
     form = MaternalArvPostMedForm
     list_display = ('maternal_arv_post', 'arv_code',
@@ -27,7 +28,7 @@ class MaternalArvPostModAdmin(admin.ModelAdmin):
 
 
 @admin.register(MaternalArvPost, site=td_maternal_admin)
-class MaternalArvPostAdmin(admin.ModelAdmin):
+class MaternalArvPostAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalArvPostForm
 
@@ -46,7 +47,7 @@ class MaternalArvPostAdmin(admin.ModelAdmin):
 
 
 @admin.register(MaternalArvPostAdh, site=td_maternal_admin)
-class MaternalArvPostAdhAdmin(admin.ModelAdmin):
+class MaternalArvPostAdhAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalArvPostAdhForm
     fields = (

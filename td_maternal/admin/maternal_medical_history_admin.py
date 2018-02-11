@@ -2,10 +2,11 @@ from django.contrib import admin
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalMedicalHistoryForm
 from ..models import MaternalMedicalHistory
+from .modeladmin_mixins import CrfModelAdminMixin
 
 
 @admin.register(MaternalMedicalHistory, site=td_maternal_admin)
-class MaternalMedicalHistoryAdmin(admin.ModelAdmin):
+class MaternalMedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalMedicalHistoryForm
 
