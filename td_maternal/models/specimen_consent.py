@@ -1,8 +1,9 @@
 from django.db import models
+from django.db.models.deletion import PROTECT
 
 from edc_base.model_mixins import BaseUuidModel
 from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
-from edc_consent.models.fields import SampleCollectionFieldsMixin, VulnerabilityFieldsMixin
+from edc_consent.field_mixins import SampleCollectionFieldsMixin, VulnerabilityFieldsMixin
 from edc_base.model_managers import HistoricalRecords
 from edc_registration.models import RegisteredSubject
 
@@ -12,7 +13,8 @@ class SpecimenConsent(SampleCollectionFieldsMixin, RequiresConsentFieldsModelMix
 
     """ A model completed by the user when a mother gives consent for specimen storage. """
 
-    registered_subject = models.OneToOneField(RegisteredSubject, null=True)
+    registered_subject = models.OneToOneField(
+        RegisteredSubject, on_delete=PROTECT, null=True)
 
     history = HistoricalRecords()
 

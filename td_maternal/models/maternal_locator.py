@@ -1,14 +1,15 @@
 from django.db import models
 from django.utils import timezone
+from django.db.models.deletion import PROTECT
 
 from django_crypto_fields.fields import EncryptedCharField
 from edc_base.model_fields import OtherCharField
 from edc_base.model_mixins import BaseUuidModel
-from edc_protocol.validators import datetime_not_before_study_start
-from edc_base.model_validators import datetime_not_future
 from edc_base.model_validators import CellNumber, TelephoneNumber
+from edc_base.model_validators import datetime_not_future
 from edc_constants.choices import YES_NO
 from edc_locator.model_mixins import LocatorModelMixin
+from edc_protocol.validators import datetime_not_before_study_start
 from edc_registration.models import RegisteredSubject
 
 
@@ -17,9 +18,9 @@ class MaternalLocator(LocatorModelMixin, BaseUuidModel):
     """ A model completed by the user to capture locator information and
     the details of the infant caretaker. """
 
-    registered_subject = models.OneToOneField(RegisteredSubject, null=True)
+    registered_subject = models.OneToOneField(
+        RegisteredSubject, on_delete=PROTECT, null=True)
 
-    # appointment = models.ForeignKey(Appointment, null=True)
     report_datetime = models.DateTimeField(
         verbose_name="Report Date",
         validators=[

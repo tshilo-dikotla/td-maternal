@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import PROTECT
 
 from edc_base.model_fields import OtherCharField
 from edc_base.model_mixins import BaseUuidModel
@@ -12,16 +13,14 @@ from edc_registration.models import RegisteredSubject
 from ..maternal_choices import DELIVERY_HEALTH_FACILITY, DELIVERY_MODE, CSECTION_REASON
 
 from .list_models import DeliveryComplications
-from .maternal_consent import MaternalConsent
 
 
 class MaternalLabourDel(BaseUuidModel):
 
     """ A model completed by the user on Maternal Labor and Delivery which triggers registration of infants. """
 
-    consent_model = MaternalConsent
-
-    registered_subject = models.OneToOneField(RegisteredSubject, null=True)
+    registered_subject = models.OneToOneField(
+        RegisteredSubject, on_delete=PROTECT, null=True)
 
     report_datetime = models.DateTimeField(
         verbose_name="Report date",

@@ -1,7 +1,9 @@
 from django.db import models
+from django.db.models.deletion import PROTECT
 
-from edc_base.model.models import BaseUuidModel
-from edc_base.model.validators import datetime_not_before_study_start, datetime_not_future
+from edc_base.model_mixins import BaseUuidModel
+from edc_protocol.validators import datetime_not_before_study_start
+from edc_base.model_validators import datetime_not_future
 from edc_base.model_managers import HistoricalRecords
 from edc_constants.choices import YES_NO
 from edc_registration.models import RegisteredSubject
@@ -12,7 +14,8 @@ class MaternalEligibility(BaseUuidModel):
 
     This model has no PII."""
 
-    registered_subject = models.OneToOneField(RegisteredSubject, null=True)
+    registered_subject = models.OneToOneField(
+        RegisteredSubject, on_delete=PROTECT, null=True)
 
     eligibility_id = models.CharField(
         verbose_name="Eligibility Identifier",

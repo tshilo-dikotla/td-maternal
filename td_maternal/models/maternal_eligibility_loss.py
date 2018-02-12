@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils import timezone
+from django.db.models.deletion import PROTECT
 
-from edc_base.model.models import BaseUuidModel
+from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_managers import HistoricalRecords
 
 from .maternal_eligibility import MaternalEligibility
@@ -10,7 +11,8 @@ from .maternal_eligibility import MaternalEligibility
 class MaternalEligibilityLoss(BaseUuidModel):
     """ A model triggered and completed by system when a mother is in-eligible. """
 
-    maternal_eligibility = models.OneToOneField(MaternalEligibility)
+    maternal_eligibility = models.OneToOneField(
+        MaternalEligibility, on_delete=PROTECT)
 
     report_datetime = models.DateTimeField(
         verbose_name="Report Date and Time",

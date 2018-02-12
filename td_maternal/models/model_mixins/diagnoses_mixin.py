@@ -1,8 +1,8 @@
 from django.db import models
 
-from edc_base.model.fields import OtherCharField
+from edc_base.model_fields import OtherCharField
 from edc_constants.choices import YES_NO, YES_NO_NA
-from .list_models import WcsDxAdult, MaternalDiagnoses
+from ..list_models import WcsDxAdult, MaternalDiagnosesList
 
 
 class DiagnosesMixin(models.Model):
@@ -18,7 +18,7 @@ class DiagnosesMixin(models.Model):
     )
 
     diagnoses = models.ManyToManyField(
-        MaternalDiagnoses,
+        MaternalDiagnosesList,
         verbose_name="Have any of the following diagnoses occured since last visit?",
         blank=True,
     )

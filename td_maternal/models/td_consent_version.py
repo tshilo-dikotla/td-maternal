@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import PROTECT
 
 from edc_base.model_mixins import BaseUuidModel
 from edc_protocol.validators import date_not_before_study_start
@@ -13,7 +14,8 @@ CONSENT_VERSION = (
 
 class TdConsentVersion(BaseUuidModel):
 
-    maternal_eligibility = models.ForeignKey(MaternalEligibility, null=True)
+    maternal_eligibility = models.ForeignKey(
+        MaternalEligibility, on_delete=PROTECT, null=True)
 
     version = models.CharField(
         verbose_name="Which version of the consent would you like to be consented with.",

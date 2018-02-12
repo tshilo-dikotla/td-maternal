@@ -1,6 +1,6 @@
 from django.db import models
 
-from edc_base.model.fields.custom_fields import OtherCharField
+from edc_base.model_fields import OtherCharField
 from edc_constants.choices import YES_NO
 
 from ..maternal_choices import SIZE_CHECK

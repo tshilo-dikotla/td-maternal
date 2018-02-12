@@ -7,9 +7,9 @@ from edc_metadata.model_mixins.updates import UpdatesCrfMetadataModelMixin
 from edc_reference.model_mixins import ReferenceModelMixin
 from edc_visit_schedule.model_mixins import SubjectScheduleCrfModelMixin
 from edc_visit_tracking.model_mixins import CrfModelMixin as BaseCrfModelMixin
-from edc_visit_tracking.model_mixins import PreviousVisitModelMix
+from edc_visit_tracking.model_mixins import PreviousVisitModelMixin
 
-from .maternal_visit import MaternalVisit
+from ..maternal_visit import MaternalVisit
 
 
 class CrfModelMixin(BaseCrfModelMixin, SubjectScheduleCrfModelMixin,

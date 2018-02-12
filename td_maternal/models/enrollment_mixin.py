@@ -1,12 +1,12 @@
 from django.db import models
 from django.apps import apps
-from django.core.exceptions import ValidationError
 
-from edc_base.model.validators import (date_not_before_study_start, date_not_future,
-                                       datetime_not_future, datetime_not_before_study_start)
+from edc_protocol.validators import datetime_not_before_study_start
+from edc_protocol.validators import date_not_before_study_start
+from edc_base.model_validators import datetime_not_future, date_not_future
 from edc_constants.choices import POS_NEG_UNTESTED_REFUSAL, YES_NO_NA, POS_NEG, YES_NO
 from edc_constants.constants import NO, YES, POS, NEG
-from edc_registration.models import RegisteredSubject
+# from edc_registration.models import RegisteredSubject
 
 from .enrollment_helper import EnrollmentHelper
 
@@ -15,7 +15,7 @@ class EnrollmentMixin(models.Model):
 
     """Base Model for antenal enrollment"""
 
-    registered_subject = models.OneToOneField(RegisteredSubject)
+    # registered_subject = models.OneToOneField(RegisteredSubject)
 
     report_datetime = models.DateTimeField(
         verbose_name="Report date",
@@ -149,7 +149,8 @@ class EnrollmentMixin(models.Model):
 #         if not enrollment_helper.validate_rapid_test():
 #             raise ValidationError('Ensure a rapid test id done for this subject.')
         self.edd_by_lmp = enrollment_helper.evaluate_edd_by_lmp
-        self.ga_lmp_enrollment_wks = enrollment_helper.evaluate_ga_lmp(self.report_datetime.date())
+        self.ga_lmp_enrollment_wks = enrollment_helper.evaluate_ga_lmp(
+            self.report_datetime.date())
         self.enrollment_hiv_status = enrollment_helper.enrollment_hiv_status
         self.date_at_32wks = enrollment_helper.date_at_32wks
         if not self.ultrasound:
@@ -181,7 +182,8 @@ class EnrollmentMixin(models.Model):
 
     @property
     def ultrasound(self):
-        MaternalUltraSoundInitial = apps.get_model('td_maternal', 'MaternalUltraSoundInitial')
+        MaternalUltraSoundInitial = apps.get_model(
+            'td_maternal', 'MaternalUltraSoundInitial')
         try:
             return MaternalUltraSoundInitial.objects.get(
                 maternal_visit__appointment__registered_subject=self.registered_subject)

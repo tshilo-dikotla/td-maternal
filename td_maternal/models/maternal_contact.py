@@ -1,14 +1,15 @@
-from django.utils import timezone
 from django.db import models
+from django.db.models.deletion import PROTECT
+from django.utils import timezone
 
-from edc_base.model.models.base_uuid_model import BaseUuidModel
-from edc_base.model.validators import datetime_not_before_study_start, datetime_not_future
 from edc_base.model_managers import HistoricalRecords
+from edc_base.model_mixins import BaseUuidModel
+from edc_base.model_validators import datetime_not_future
 from edc_constants.choices import YES_NO
+from edc_protocol.validators import datetime_not_before_study_start
 from edc_registration.models import RegisteredSubject
 
 from ..maternal_choices import CALL_REASON, CONTACT_TYPE
-
 from .maternal_consent import MaternalConsent
 
 
@@ -31,7 +32,8 @@ class MaternalContact(BaseUuidModel, models.Model):
         help_text=('If reporting today, use today\'s date/time, otherwise use '
                    'the date/time this information was reported.'))
 
-    registered_subject = models.ForeignKey(RegisteredSubject)
+    registered_subject = models.ForeignKey(
+        RegisteredSubject, on_delete=PROTECT)
 
     contact_type = models.CharField(
         verbose_name='Type of contact',
@@ -72,7 +74,7 @@ class MaternalContact(BaseUuidModel, models.Model):
         blank=True
     )
 
-    history = SyncHistoricalRecords()
+    history = HistoricalRecords()
 
     objects = MaternalContactManager()
 

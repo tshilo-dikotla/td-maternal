@@ -1,11 +1,12 @@
 from django.db import models
+from django.db.models.deletion import PROTECT
 
-from edc_base.model.models import BaseUuidModel
+from edc_base.model_mixins import BaseUuidModel
+from edc_base.model_validators import date_not_future
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NOT_APPLICABLE
-from edc_base.model.validators import date_not_future
 
-from .choices import ARV_INTERRUPTION_REASON, ARV_DRUG_LIST, REASON_ARV_STOP
+from ..choices import ARV_INTERRUPTION_REASON, ARV_DRUG_LIST, REASON_ARV_STOP
 from .model_mixins import CrfModelMixin
 
 
@@ -50,7 +51,7 @@ class MaternalArv(BaseUuidModel):
 
     """ Inline ARV table to indicate ARV medication taken by mother """
 
-    maternal_arv_preg = models.ForeignKey(MaternalArvPreg)
+    maternal_arv_preg = models.ForeignKey(MaternalArvPreg, on_delete=PROTECT)
 
     arv_code = models.CharField(
         verbose_name="ARV code",

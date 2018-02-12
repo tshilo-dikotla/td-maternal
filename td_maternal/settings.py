@@ -33,6 +33,14 @@ INSTALLED_APPS = [
     'django_revision.apps.AppConfig',
     'rest_framework',
     'rest_framework.authtoken',
+    'edc_registration.apps.AppConfig',
+    'edc_timepoint.apps.AppConfig',
+    'edc_visit_schedule.apps.AppConfig',
+    'td_maternal.apps.EdcVisitTrackingAppConfig',
+    'td_maternal.apps.EdcProtocolAppConfig',
+    'td_maternal.apps.EdcAppointmentAppConfig',
+    'td_maternal.apps.EdcMetadataAppConfig',
+    'td_maternal.apps.AppConfig',
 ]
 
 MIDDLEWARE = [

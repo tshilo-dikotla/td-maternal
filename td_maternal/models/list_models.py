@@ -21,7 +21,7 @@ class WcsDxAdult(ListModelMixin, BaseUuidModel):
     pass
 
 
-class MaternalDiagnoses(ListModelMixin, BaseUuidModel):
+class MaternalDiagnosesList(ListModelMixin, BaseUuidModel):
 
     pass
 

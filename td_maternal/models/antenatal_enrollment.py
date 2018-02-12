@@ -1,25 +1,17 @@
 from django.db import models
 
-from edc_appointment.models import AppointmentMixin
-from edc_base.model.models import BaseUuidModel
-from edc_base.model.validators import (
-    date_not_before_study_start, date_not_future)
-from edc_export.models import ExportTrackingFieldsMixin
-from edc_consent.models import RequiresConsentMixin
-from edc_constants.constants import NO, YES
+from edc_base.model_managers import HistoricalRecords
+from edc_base.model_mixins import BaseUuidModel
+from edc_base.model_validators import date_not_future
 from edc_constants.choices import YES_NO
-from edc_offstudy.models import OffStudyMixin
-from edc_registration.models import RegisteredSubject
-from edc_sync.models import SyncModelMixin, SyncHistoricalRecords
-
-from ..managers import AntenatalEnrollmentManager
+from edc_constants.constants import NO, YES
+from edc_protocol.validators import date_not_before_study_start
 
 from .enrollment_mixin import EnrollmentMixin
 from .maternal_consent import MaternalConsent
 
 
-class AntenatalEnrollment(SyncModelMixin, EnrollmentMixin, OffStudyMixin, AppointmentMixin,
-                          RequiresConsentMixin, ExportTrackingFieldsMixin, BaseUuidModel):
+class AntenatalEnrollment(EnrollmentMixin, BaseUuidModel):
 
     consent_model = MaternalConsent
 
@@ -62,9 +54,7 @@ class AntenatalEnrollment(SyncModelMixin, EnrollmentMixin, OffStudyMixin, Appoin
         blank=True,
         help_text="")
 
-    objects = AntenatalEnrollmentManager()
-
-    history = SyncHistoricalRecords()
+    history = HistoricalRecords()
 
     def save(self, *args, **kwargs):
         super(AntenatalEnrollment, self).save(*args, **kwargs)

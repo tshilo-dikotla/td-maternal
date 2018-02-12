@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import PROTECT
 from edc_base.model_fields import OtherCharField
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_managers import HistoricalRecords
@@ -33,7 +34,8 @@ class MaternalConsent(
 
     """ A model completed by the user on the mother's consent. """
 
-    maternal_eligibility = models.ForeignKey(MaternalEligibility)
+    maternal_eligibility = models.ForeignKey(
+        MaternalEligibility, on_delete=PROTECT)
 
     recruit_source = models.CharField(
         max_length=75,
