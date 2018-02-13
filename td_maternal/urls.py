@@ -3,7 +3,7 @@ from django.views.generic.base import RedirectView
 
 from .admin_site import td_maternal_admin
 
-app_name = 'ambition_subject'
+app_name = 'td_maternal'
 
 urlpatterns = [
     path('admin/', td_maternal_admin.urls),

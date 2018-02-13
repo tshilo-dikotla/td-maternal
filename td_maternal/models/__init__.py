@@ -20,7 +20,6 @@ from .maternal_eligibility_loss import MaternalEligibilityLoss
 from .maternal_hiv_interim_hx import MaternalHivInterimHx
 from .maternal_interim_idcc_data import MaternalInterimIdcc
 from .maternal_labour_del import MaternalLabourDel
-from .maternal_locator import MaternalLocator
 from .maternal_medical_history import MaternalMedicalHistory
 from .maternal_obsterical_history import MaternalObstericalHistory
 from .maternal_postpartum_dep import MaternalPostPartumDep

@@ -4,6 +4,8 @@ import sys
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP_NAME = 'td_maternal'
+SITE_ID = 40
+REVIEWER_SITE_ID = 40
 ETC_DIR = os.path.join(BASE_DIR, 'etc')
 
 # RANDOMIZATION_LIST_PATH = os.path.join(BASE_DIR, 'test_randomization_list.csv')
@@ -33,9 +35,13 @@ INSTALLED_APPS = [
     'django_revision.apps.AppConfig',
     'rest_framework',
     'rest_framework.authtoken',
+    'edc_action_item.apps.AppConfig',
+    'edc_fieldsets.apps.AppConfig',
+    'edc_locator.apps.AppConfig',
     'edc_registration.apps.AppConfig',
     'edc_timepoint.apps.AppConfig',
     'edc_visit_schedule.apps.AppConfig',
+    'td_maternal.apps.EdcFacilityAppConfig',
     'td_maternal.apps.EdcVisitTrackingAppConfig',
     'td_maternal.apps.EdcProtocolAppConfig',
     'td_maternal.apps.EdcAppointmentAppConfig',
@@ -145,6 +151,11 @@ EDC_SYNC_SERVER_IP = None
 EDC_SYNC_FILES_REMOTE_HOST = None
 EDC_SYNC_FILES_USER = None
 EDC_SYNC_FILES_USB_VOLUME = None
+
+DASHBOARD_URL_NAMES = {
+    'subject_listboard_url': 'td_dashboard:subject_listboard_url',
+    'subject_dashboard_url': 'td_dashboard:subject_dashboard_url',
+}
 
 if 'test' in sys.argv:
 

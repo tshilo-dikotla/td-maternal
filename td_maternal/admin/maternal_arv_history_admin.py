@@ -9,7 +9,7 @@ from .modeladmin_mixins import CrfModelAdminMixin
 class MaternalLifetimeArvHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     form = MaternalLifetimeArvHistoryForm
 
-    list_display = ('maternal_visit', 'haart_start_date', 'preg_on_haart')
+    list_display = ('haart_start_date', 'preg_on_haart')
 
     list_filter = ('preg_on_haart', )
 

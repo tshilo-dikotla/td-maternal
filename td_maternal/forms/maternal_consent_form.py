@@ -1,4 +1,3 @@
-from ambition_validators import SubjectConsentFormValidator
 from django import forms
 from edc_base.sites import SiteModelFormMixin
 from edc_consent.modelform_mixins import ConsentModelFormMixin
@@ -7,8 +6,7 @@ from edc_form_validators import FormValidatorMixin
 from ..models import MaternalConsent
 
 
-class MaternalConsentForm(SiteModelFormMixin, SubjectConsentFormValidator,
-                          FormValidatorMixin, ConsentModelFormMixin, forms.ModelForm):
+class MaternalConsentForm(SiteModelFormMixin, FormValidatorMixin, ConsentModelFormMixin, forms.ModelForm):
 
     #     study_site = forms.ChoiceField(
     #         label='Study site',
