@@ -10,18 +10,18 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='ambition-subject',
-    version='0.1.1',
-    author=u'Erik van Widenfelt',
-    author_email='ew2789@gmail.com',
+    name='tshilo-dikotla materan',
+    version='0.1.0',
+    author=u'',
+    author_email='',
     packages=find_packages(),
     include_package_data=True,
-    url='https://github.com/botswana-harvard/ambition-subject',
+    url='https://github.com/tshilo-dikotla/td-maternal',
     license='GPL license, see LICENSE',
-    description='ambition.',
+    description='Tshilo Dikotla.',
     long_description=README,
     zip_safe=False,
-    keywords='django ambition',
+    keywords='django tshilo dikotla',
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',

@@ -1,7 +1,7 @@
 from django.db import models
 
-from ...validators import validate_bpd, validate_hc, validate_fl, validate_ac
 from ...choices import AMNIOTIC_FLUID
+from ...validators import validate_bpd, validate_hc, validate_ac, validate_fl
 
 
 class UltraSoundModelMixin(models.Model):
