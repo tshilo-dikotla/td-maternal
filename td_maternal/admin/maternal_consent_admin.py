@@ -43,7 +43,6 @@ class MaternalConsentAdmin(admin.ModelAdmin):
         'consent_copy': admin.VERTICAL,
         'consent_reviewed': admin.VERTICAL,
         'consent_signature': admin.VERTICAL,
-        'identity_type': admin.VERTICAL,
         'is_dob_estimated': admin.VERTICAL,
         'is_literate': admin.VERTICAL,
         'language': admin.VERTICAL,

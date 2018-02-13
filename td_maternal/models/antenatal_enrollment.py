@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import PROTECT
 
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
@@ -6,18 +7,15 @@ from edc_base.model_validators import date_not_future
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NO, YES
 from edc_protocol.validators import date_not_before_study_start
+from edc_registration.models import RegisteredSubject
 
 from .enrollment_mixin import EnrollmentMixin
-from .maternal_consent import MaternalConsent
 
 
 class AntenatalEnrollment(EnrollmentMixin, BaseUuidModel):
 
-    consent_model = MaternalConsent
-
-    off_study_model = ('td_maternal', 'MaternalOffStudy')
-
-    weeks_base_field = 'ga_lmp_enrollment_wks'
+    registered_subject = models.OneToOneField(
+        RegisteredSubject, on_delete=PROTECT, null=True)
 
     knows_lmp = models.CharField(
         verbose_name="Does the mother know the approximate date of the first day her last menstrual period?",

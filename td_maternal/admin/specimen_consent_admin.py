@@ -19,25 +19,18 @@ class SpecimenConsentAdmin(admin.ModelAdmin):
               'witness_name',
               'purpose_explained',
               'purpose_understood',
-              'offered_copy')
+              )
     radio_fields = {'language': admin.VERTICAL,
                     'may_store_samples': admin.VERTICAL,
-                    'is_literate': admin.VERTICAL,
-                    'purpose_explained': admin.VERTICAL,
-                    'purpose_understood': admin.VERTICAL,
-                    'offered_copy': admin.VERTICAL, }
+                    'is_literate': admin.VERTICAL, }
 
     list_display = ('subject_identifier',
                     'registered_subject',
-                    'is_verified',
-                    'is_verified_datetime',
-                    'consent_datetime',
                     'created',
                     'modified',
                     'user_created',
                     'user_modified')
     list_filter = ('language',
-                   'is_verified',
                    'is_literate')
     actions = [
         flag_as_verified_against_paper,

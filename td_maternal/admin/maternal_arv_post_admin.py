@@ -6,7 +6,7 @@ from ..models import MaternalArvPost, MaternalArvPostMed, MaternalArvPostAdh
 from .modeladmin_mixins import CrfModelAdminMixin
 
 
-class MaternalArvPostModInlineAdmin(TabularInlineMixin):
+class MaternalArvPostMedInlineAdmin(TabularInlineMixin, admin.TabularInline):
 
     model = MaternalArvPostMed
     form = MaternalArvPostMedForm
@@ -43,7 +43,7 @@ class MaternalArvPostAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         "on_arv_since": admin.VERTICAL,
         "on_arv_reason": admin.VERTICAL,
         "arv_status": admin.VERTICAL}
-    inlines = [MaternalArvPostModInlineAdmin, ]
+    inlines = [MaternalArvPostMedInlineAdmin, ]
 
 
 @admin.register(MaternalArvPostAdh, site=td_maternal_admin)

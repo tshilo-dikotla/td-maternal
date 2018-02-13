@@ -20,7 +20,7 @@ class CrfModelMixin(BaseCrfModelMixin, SubjectScheduleCrfModelMixin,
     """ Base model for all scheduled models
     """
 
-    subject_visit = models.OneToOneField(MaternalVisit, on_delete=PROTECT)
+    maternal_visit = models.OneToOneField(MaternalVisit, on_delete=PROTECT)
 
     def natural_key(self):
         return self.subject_visit.natural_key()

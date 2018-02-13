@@ -6,7 +6,7 @@ from ..models import MaternalArvPreg, MaternalArv
 from .modeladmin_mixins import CrfModelAdminMixin
 
 
-class MaternalArvInlineAdmin(TabularInlineMixin):
+class MaternalArvInlineAdmin(TabularInlineMixin, admin.TabularInline):
     model = MaternalArv
     form = MaternalArvForm
     extra = 1
