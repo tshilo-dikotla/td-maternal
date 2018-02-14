@@ -6,7 +6,7 @@ from edc_visit_tracking.form_validators import VisitFormValidator
 from ..models import MaternalVisit
 
 
-class MaternalVisitForm (SiteModelFormMixin, FormValidatorMixin, forms.ModelForm):
+class MaternalVisitForm(SiteModelFormMixin, FormValidatorMixin, forms.ModelForm):
 
     form_validator_cls = VisitFormValidator
 

@@ -11,6 +11,7 @@ from edc_consent.model_mixins import ConsentModelMixin
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin
 from edc_search.model_mixins import SearchSlugManager
+from edc_base.sites.site_model_mixin import SiteModelMixin
 
 from .model_mixins import SearchSlugModelMixin
 
@@ -27,7 +28,7 @@ class SubjectConsentManager(SearchSlugManager, models.Manager):
 
 
 class MaternalConsent(
-        ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
+        ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin, SiteModelMixin,
         NonUniqueSubjectIdentifierModelMixin, IdentityFieldsMixin,
         ReviewFieldsMixin, PersonalFieldsMixin, CitizenFieldsMixin,
         VulnerabilityFieldsMixin, SearchSlugModelMixin, BaseUuidModel):
