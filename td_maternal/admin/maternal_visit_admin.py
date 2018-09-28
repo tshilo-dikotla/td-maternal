@@ -34,8 +34,13 @@ class MaternalVisitAdmin(VisitModelAdminMixin, ModelAdminMixin, admin.ModelAdmin
         audit_fieldset_tuple
     )
 
-    def get_fieldsets(self, request, obj=None):
-        fields = copy(self.fields)
-        fields.remove('information_provider')
-        fields.remove('information_provider_other')
-        return [(None, {'fields': fields})]
+    radio_fields = {
+        'reason': admin.VERTICAL,
+        'reason_unscheduled': admin.VERTICAL,
+        'info_source': admin.VERTICAL}
+
+#     def get_fieldsets(self, request, obj=None):
+#         fields = copy(self.fields)
+#         fields.remove('information_provider')
+#         fields.remove('information_provider_other')
+#         return [(None, {'fields': fields})]

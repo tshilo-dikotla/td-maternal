@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 .pydevproject
+db.sqlite3-journal
 .DS_Store
 .project
 .settings
