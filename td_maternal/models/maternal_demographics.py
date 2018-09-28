@@ -83,9 +83,11 @@ class MaternalDemographics(CrfModelMixin):
 
     water_source = models.CharField(
         max_length=50,
-        verbose_name="At your primary home  where do you get most of your family's drinking water?",
+        verbose_name="At your primary home  where do you "
+            "get most of your family's drinking water?",
         choices=WATER_SOURCE,
-        help_text=("the home where you are likely to spend the most time with your baby over the"
+        help_text=("the home where you are likely to spend the"
+                   " most time with your baby over the"
                    " first 18 months"),)
 
     house_electrified = models.CharField(
