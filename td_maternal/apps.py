@@ -7,8 +7,8 @@ class AppConfig(DjangoApponfig):
     verbose_name = 'Tshilo Dikotla Maternal CRFs'
     admin_site_name = 'td_maternal_admin'
 
-if settings.APP_NAME == 'td_maternal':
 
+if settings.APP_NAME == 'td_maternal':
     from datetime import datetime
     from dateutil.relativedelta import MO, TU, WE, TH, FR, SA, SU
     from dateutil.tz import gettz
