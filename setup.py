@@ -10,10 +10,10 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='tshilo-dikotla materan',
+    name='TD Maternal',
     version='0.1.0',
-    author=u'',
-    author_email='',
+    author='Coulson Thabo Kgathi',
+    author_email='ckgathi@gmail.com',
     packages=find_packages(),
     include_package_data=True,
     url='https://github.com/tshilo-dikotla/td-maternal',
@@ -21,7 +21,7 @@ setup(
     description='Tshilo Dikotla.',
     long_description=README,
     zip_safe=False,
-    keywords='django tshilo dikotla',
+    keywords='django tshilo dikotla maternal',
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
