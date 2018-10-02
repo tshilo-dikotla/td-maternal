@@ -8,7 +8,8 @@ from .model_mixins import CrfModelMixin
 
 class RapidTestResult(CrfModelMixin):
 
-    """ A model completed by the user on the mother's rapid test result. """
+    """ A model completed by the user on the mother's rapid test result.
+    """
 
     rapid_test_done = models.CharField(
         verbose_name="Was a rapid test processed?",

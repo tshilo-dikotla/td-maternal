@@ -5,11 +5,13 @@ from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_managers import HistoricalRecords
 from edc_consent.field_mixins import IdentityFieldsMixin
 from edc_consent.field_mixins import ReviewFieldsMixin, PersonalFieldsMixin
-from edc_consent.field_mixins import CitizenFieldsMixin, VulnerabilityFieldsMixin
+from edc_consent.field_mixins import (
+    CitizenFieldsMixin, VulnerabilityFieldsMixin)
 from edc_consent.managers import ConsentManager
 from edc_consent.model_mixins import ConsentModelMixin
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
-from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin
+from edc_registration.model_mixins import (
+    UpdatesOrCreatesRegistrationModelMixin)
 from edc_search.model_mixins import SearchSlugManager
 from edc_base.sites.site_model_mixin import SiteModelMixin
 
@@ -28,7 +30,8 @@ class SubjectConsentManager(SearchSlugManager, models.Manager):
 
 
 class MaternalConsent(
-        ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin, SiteModelMixin,
+        ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
+        SiteModelMixin,
         NonUniqueSubjectIdentifierModelMixin, IdentityFieldsMixin,
         ReviewFieldsMixin, PersonalFieldsMixin, CitizenFieldsMixin,
         VulnerabilityFieldsMixin, SearchSlugModelMixin, BaseUuidModel):
@@ -41,7 +44,8 @@ class MaternalConsent(
     recruit_source = models.CharField(
         max_length=75,
         choices=RECRUIT_SOURCE,
-        verbose_name="The mother first learned about the tshilo dikotla study from ")
+        verbose_name="The mother first learned about the tshilo "
+        "dikotla study from ")
 
     recruit_source_other = OtherCharField(
         max_length=35,

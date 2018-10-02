@@ -4,7 +4,8 @@ from django.db import models
 
 class MaternalClinicalMeasurementsMixin(models.Model):
 
-    """ A model completed by the user on Height, Weight details for all mothers. """
+    """ A model completed by the user on Height, Weight details
+    for all mothers. """
 
     weight_kg = models.DecimalField(
         max_digits=5,

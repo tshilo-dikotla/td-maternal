@@ -7,7 +7,8 @@ from edc_form_validators import FormValidatorMixin
 from ..models import MaternalVisit
 
 
-class SubjectModelFormMixin(SiteModelFormMixin, FormValidatorMixin, forms.ModelForm):
+class SubjectModelFormMixin(
+        SiteModelFormMixin, FormValidatorMixin, forms.ModelForm):
 
     visit_model = MaternalVisit
 

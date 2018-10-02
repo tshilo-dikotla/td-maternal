@@ -1,5 +1,6 @@
 from django.contrib import admin
-from edc_consent.actions import flag_as_verified_against_paper, unflag_as_verified_against_paper
+from edc_consent.actions import (
+    flag_as_verified_against_paper, unflag_as_verified_against_paper)
 
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalConsentForm

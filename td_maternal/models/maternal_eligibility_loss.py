@@ -9,7 +9,8 @@ from .maternal_eligibility import MaternalEligibility
 
 
 class MaternalEligibilityLoss(BaseUuidModel):
-    """ A model triggered and completed by system when a mother is in-eligible. """
+    """ A model triggered and completed by system when a mother is in-eligible.
+    """
 
     maternal_eligibility = models.OneToOneField(
         MaternalEligibility, on_delete=PROTECT)

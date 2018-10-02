@@ -1,7 +1,8 @@
 from django.contrib import admin
 from edc_model_admin import TabularInlineMixin
 from ..admin_site import td_maternal_admin
-from ..forms import MaternalArvPostForm, MaternalArvPostMedForm, MaternalArvPostAdhForm
+from ..forms import (MaternalArvPostForm,
+                     MaternalArvPostMedForm, MaternalArvPostAdhForm)
 from ..models import MaternalArvPost, MaternalArvPostMed, MaternalArvPostAdh
 from .modeladmin_mixins import CrfModelAdminMixin
 

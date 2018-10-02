@@ -15,10 +15,12 @@ from edc_visit_tracking.modeladmin_mixins import (
     CrfModelAdminMixin as VisitTrackingCrfModelAdminMixin)
 
 
-class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructionsMixin,
+class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
+                      ModelAdminFormInstructionsMixin,
                       ModelAdminFormAutoNumberMixin, ModelAdminRevisionMixin,
                       ModelAdminAuditFieldsMixin, ModelAdminReadOnlyMixin,
-                      ModelAdminInstitutionMixin, ModelAdminRedirectOnDeleteMixin,
+                      ModelAdminInstitutionMixin,
+                      ModelAdminRedirectOnDeleteMixin,
                       ModelAdminSiteMixin):
 
     list_per_page = 10

@@ -7,11 +7,14 @@ from .model_mixins import CrfModelMixin
 
 class MaternalHivInterimHx(CrfModelMixin):
 
-    """ Laboratory and other clinical information collected during labor and delivery.
-    for HIV +ve mothers ONLY"""
+    """ Laboratory and other clinical information collected during labor
+    and delivery.
+    for HIV +ve mothers ONLY
+    """
 
     has_cd4 = models.CharField(
-        verbose_name=("During this pregnancy did the mother have at least one CD4 count"
+        verbose_name=("During this pregnancy did the mother have at least"
+                      " one CD4 count"
                       " performed (outside the study)? "),
         max_length=3,
         choices=YES_NO)
@@ -28,8 +31,8 @@ class MaternalHivInterimHx(CrfModelMixin):
         null=True)
 
     has_vl = models.CharField(
-        verbose_name=("During this pregnancy did the mother have a viral load perfomed"
-                      " (outside the study)? "),
+        verbose_name=("During this pregnancy did the mother have a viral "
+                      "load perfomed (outside the study)? "),
         max_length=3,
         choices=YES_NO,
         help_text="(if 'YES' continue. Otherwise go to question 9)")

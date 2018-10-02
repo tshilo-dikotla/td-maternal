@@ -18,7 +18,8 @@ class TdConsentVersion(BaseUuidModel):
         MaternalEligibility, on_delete=PROTECT, null=True)
 
     version = models.CharField(
-        verbose_name="Which version of the consent would you like to be consented with.",
+        verbose_name="Which version of the consent would you like to "
+        "be consented with.",
         choices=CONSENT_VERSION,
         max_length=3)
 

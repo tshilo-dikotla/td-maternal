@@ -10,10 +10,13 @@ class MaternalMedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalMedicalHistoryForm
 
-    list_display = ('maternal_visit', 'chronic_since', 'sero_posetive', 'date_hiv_diagnosis', 'perinataly_infected',
-                    'lowest_cd4_known', 'cd4_count', 'cd4_date')
+    list_display = (
+        'maternal_visit', 'chronic_since', 'sero_posetive',
+        'date_hiv_diagnosis', 'perinataly_infected',
+        'lowest_cd4_known', 'cd4_count', 'cd4_date')
     list_filter = (
-        'chronic_since', 'sero_posetive', 'date_hiv_diagnosis', 'perinataly_infected')
+        'chronic_since', 'sero_posetive',
+        'date_hiv_diagnosis', 'perinataly_infected')
     radio_fields = {'chronic_since': admin.VERTICAL,
                     'who_diagnosis': admin.VERTICAL,
                     'sero_posetive': admin.VERTICAL,

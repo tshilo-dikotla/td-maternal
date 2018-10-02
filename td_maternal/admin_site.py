@@ -9,7 +9,7 @@ class AdminSite(DjangoAdminSite):
     def each_context(self, request):
         context = super().each_context(request)
         context.update(global_site=get_current_site(request))
-        label = f'Td Maternal {get_current_site(request).name.title()}: Subjects'
+        label = f'Maternal {get_current_site(request).name.title()}: Subjects'
         context.update(
             site_title=label,
             site_header=label,

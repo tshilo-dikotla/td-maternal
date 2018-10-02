@@ -47,5 +47,6 @@ class AntenatalEnrollmentAdmin(admin.ModelAdmin):
                     'rapid_test_done': admin.VERTICAL,
                     'rapid_test_result': admin.VERTICAL,
                     'knows_lmp': admin.VERTICAL}
-    list_display = ('registered_subject', 'report_datetime', 'evidence_hiv_status',
-                    'will_get_arvs', 'ga_lmp_anc_wks', 'enrollment_hiv_status')
+    list_display = (
+        'registered_subject', 'report_datetime', 'evidence_hiv_status',
+        'will_get_arvs', 'ga_lmp_anc_wks', 'enrollment_hiv_status')

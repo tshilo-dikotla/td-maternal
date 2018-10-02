@@ -11,7 +11,8 @@ class MaternalSubstanceUseDuringPreg(CrfModelMixin):
     smoked_during_pregnancy = models.CharField(
         max_length=3,
         choices=YES_NO,
-        verbose_name='Has the participant ever smoked cigarettes during this pregnancy?  ',
+        verbose_name='Has the participant ever smoked cigarettes during this'
+        ' pregnancy?  ',
     )
 
     smoking_during_preg_freq = models.CharField(
@@ -25,7 +26,8 @@ class MaternalSubstanceUseDuringPreg(CrfModelMixin):
     alcohol_during_pregnancy = models.CharField(
         max_length=3,
         choices=YES_NO,
-        verbose_name='Has the participant ever drank alcohol during this pregnancy?',
+        verbose_name='Has the participant ever drank alcohol during this'
+        ' pregnancy?',
     )
 
     alcohol_during_preg_freq = models.CharField(
@@ -39,7 +41,8 @@ class MaternalSubstanceUseDuringPreg(CrfModelMixin):
     marijuana_during_preg = models.CharField(
         max_length=3,
         choices=YES_NO,
-        verbose_name='Has the participant ever used marijuana during this pregnancy?',
+        verbose_name='Has the participant ever used marijuana during this'
+        ' pregnancy?',
     )
 
     marijuana_during_preg_freq = models.CharField(
@@ -52,7 +55,8 @@ class MaternalSubstanceUseDuringPreg(CrfModelMixin):
 
     other_illicit_substances_during_preg = models.TextField(
         max_length=500,
-        verbose_name='Please list any other illicit substances that the participant '
+        verbose_name='Please list any other illicit substances that the'
+        ' participant '
         'reports using during to this pregnancy.',
         blank=True,
         null=True,

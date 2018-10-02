@@ -6,7 +6,9 @@ from edc_form_validators import FormValidatorMixin
 from ..models import MaternalConsent
 
 
-class MaternalConsentForm(SiteModelFormMixin, FormValidatorMixin, ConsentModelFormMixin, forms.ModelForm):
+class MaternalConsentForm(
+        SiteModelFormMixin, FormValidatorMixin, ConsentModelFormMixin,
+        forms.ModelForm):
 
     #     study_site = forms.ChoiceField(
     #         label='Study site',

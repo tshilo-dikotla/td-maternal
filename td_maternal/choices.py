@@ -1,9 +1,11 @@
 from edc_constants.constants import NOT_APPLICABLE, UNKNOWN, OTHER
-from edc_constants.constants import OFF_STUDY, ON_STUDY, FAILED_ELIGIBILITY, PARTICIPANT
+from edc_constants.constants import (
+    OFF_STUDY, ON_STUDY, FAILED_ELIGIBILITY, PARTICIPANT)
 
 from edc_visit_tracking.constants import MISSED_VISIT, COMPLETED_PROTOCOL_VISIT
 from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
-from .constants import NO_MODIFICATIONS, START, BREASTFEED_ONLY, DISCONTINUED, NEVER_STARTED, MODIFIED
+from .constants import BREASTFEED_ONLY, NEVER_STARTED, MODIFIED
+from td_maternal.constants import NO_MODIFICATIONS, START
 
 STUDY_SITES = (
     ('40', 'Gaborone'),
@@ -188,15 +190,19 @@ COWS_MILK = (
 
 CTX_PLACEBO_STATUS = (
     ('No modification',
-     'No modifications made to CTX/Placebo since the last scheduled visit or today'),
+     'No modifications made to CTX/Placebo since the last '
+     'scheduled visit or today'),
     ('Starting CTX/Placebo today',
      'Starting CTX/Placebo today or since the last scheduled visit'),
     ('Permanently discontinued',
      'Permanently discontinued CTX/Placebo at or before last scheduled visit'),
     ('Never started', 'Never started CTX/Placebo'),
     ('Change in CTX/Placebo since the last scheduled visit or today',
-     ('Change in CTX/Placebo since the last scheduled visit or today (dose modification, '
-      'permanent discontinuation, temporary hold, resumption / initiation after temporary hold)')),
+     (
+         'Change in CTX/Placebo since the last scheduled visit or'
+         ' today (dose modification, '
+         'permanent discontinuation, temporary hold, resumption /'
+         ' initiation after temporary hold)')),
 )
 
 DX_INFANT = (
@@ -208,8 +214,10 @@ DX_INFANT = (
      'Pneumonia, suspected (no CXR or microbiologic confirmation)'),
     ('Pneumonia, CXR confirmed, no bacterial pathogen',
      'Pneumonia, CXR confirmed, no bacterial pathogen'),
-    ('Pneumonia, CXR confirmed, bacterial pathogen isolated (specify pathogen)',
-     'Pneumonia, CXR confirmed, bacterial pathogen isolated (specify pathogen)'),
+    ('Pneumonia, CXR confirmed, bacterial pathogen '
+     'isolated (specify pathogen)',
+     'Pneumonia, CXR confirmed, bacterial pathogen '
+     'isolated (specify pathogen)'),
     ('Pulmonary TB, suspected(no CXR or microbiologic confirmation)',
      'Pulmonary TB, suspected(no CXR or microbiologic confirmation)'),
     ('Pulmonary TB, CXR-confirmed (no microbiologic confirmation)',
@@ -235,9 +243,11 @@ DX_INFANT = (
     ('Cholecystitis/cholanangitis', 'Cholecystitis/cholanangitis'),
     ('Pancreatitis', 'Pancreatitis'),
     ('Acute Renal Failure',
-     'Acute Renal Failure (Record highest creatinine level if creatine tested outside of the study) '),
+     'Acute Renal Failure (Record highest creatinine level if creatine '
+     'tested outside of the study) '),
     ('Anemia',
-     'Anemia(Only report grade 3 or 4 anemia based on a lab value drawn outside the study'),
+     'Anemia(Only report grade 3 or 4 anemia based on a lab value drawn '
+     'outside the study'),
     ('Rash', 'Rash (report for Grades 2,3,4)'),
     ('Trauma/accident', 'Trauma/accident'),
     (
@@ -247,7 +257,8 @@ DX_INFANT = (
          'tests done as part of this study),specify test and result')
     ),
     ('New congenital abnormality not previously identified?,specify',
-     'New congenital abnormality not previously identified?,specify and complete "Congenital Anomaly"form'),
+     'New congenital abnormality not previously identified?,specify and '
+     'complete "Congenital Anomaly"form'),
     ('Other serious (grade 3 or 4)infection(not listed above),specify',
      'Other serious (grade 3 or 4)infection(not listed above),specify'),
     ('Other serious (grade 3 or 4) non-infectious(not listed above),specify',
@@ -260,8 +271,10 @@ DX_MATERNAL = (
      'Pneumonia suspected, no CXR or microbiologic confirmation'),
     ('Pneumonia, CXR confirmed, no bacterial pathogen',
      'Pneumonia, CXR confirmed, no bacterial pathogen'),
-    ('Pneumonia, CXR confirmed, bacterial pathogen isolated (specify pathogen)',
-     'Pneumonia, CXR confirmed, bacterial pathogen isolated (specify pathogen)'),
+    ('Pneumonia, CXR confirmed, bacterial pathogen isolated'
+     ' (specify pathogen)',
+     'Pneumonia, CXR confirmed, bacterial pathogen isolated'
+     ' (specify pathogen)'),
     ('Pulmonary TB, suspected(no CXR or microbiologic confirmation)',
      'Pulmonary TB, suspected(no CXR or microbiologic confirmation)'),
     ('Pulmonary TB, CXR-confirmed (no microbiologic confirmation)',
@@ -273,9 +286,11 @@ DX_MATERNAL = (
     ('Extrapulmonary TB, smear and/or culture positive',
      'Extrapulmonary TB, smear and/or culture positive'),
     (
-        ('Acute diarrheal illness (bloody diarrhean OR increase of at least 7 stools per day '
+        ('Acute diarrheal illness (bloody diarrhean OR increase of'
+         ' at least 7 stools per day '
          'OR life threatening for less than 14 days'),
-        ('Acute diarrheal illness (bloody diarrhean OR increase of at least 7 stools per day '
+        ('Acute diarrheal illness (bloody diarrhean OR increase of at'
+         ' least 7 stools per day '
          'OR life threatening for less than 14 days')),
     ('Chronic diarrheal illness (as above but for 14 days or longer) ',
      'Chronic diarrheal illness (as above but for 14 days or longer) '),
@@ -301,9 +316,11 @@ DX_MATERNAL = (
     ('Cholecystitis/cholanangitis', 'Cholecystitis/cholanangitis'),
     ('Pancreatitis', 'Pancreatitis'),
     ('Acute Renal failure',
-     'Acute Renal failure (Record highest creatinine level if tested outside of the study)'),
+     'Acute Renal failure (Record highest creatinine level if tested '
+     'outside of the study)'),
     ('Anemia',
-     'Anemia (Only report grade 3 or 4 anemia based on the lab value drawn outside the study)'),
+     'Anemia (Only report grade 3 or 4 anemia based on the lab value '
+     'drawn outside the study)'),
     ('Pregnancy/peripartum cardiomyopathy or CHF ',
      'Pregnancy/peripartum cardiomyopathy or CHF '),
     ('Drug rash on HAART', 'Drug rash on HAART'),
@@ -311,7 +328,8 @@ DX_MATERNAL = (
     ('Other serious (grade 3 or 4) infection, specify',
      'Other serious (grade 3 or 4) infection(not listed above), specify'),
     ('Other serious (grade 3 or 4) non-infectious diagnosis, specify',
-     'Other serious (grade 3 or 4) non-infectious diagnosis(not listed above), specify'),
+     'Other serious (grade 3 or 4) non-infectious diagnosis(not listed '
+     'above), specify'),
 )
 
 FACIAL_DEFECT = (
@@ -336,7 +354,8 @@ FEM_GENITAL_ANOMALY = (
     ('Absent or streak ovary', 'Absent or streak ovary'),
     ('Uterine anomaly', 'Uterine anomaly'),
     (OTHER,
-     'Other ovarian, fallopian, uterine, cervical, vaginal, or vulvar abnormality'),
+     'Other ovarian, fallopian, uterine, cervical, vaginal, or '
+     'vulvar abnormality'),
 )
 
 INFO_PROVIDER = (
@@ -352,13 +371,15 @@ INFANT_OFF_DRUG_REASON = (
     ('completed protocol',
      '1. Completion of protocol-required period of study treatment'),
     ('off-study',
-     '2. Participant going off-study for any reason, including death or lost to follow-up'),
+     '2. Participant going off-study for any reason, including death '
+     'or lost to follow-up'),
     (
         'toxicity',
         ('3. At Investigator\'s discretion, due to persistent toxicity '
          '(confirmed or suspected to be possibly related to study drug)')),
     ('caregiver',
-     '4. Participant\'s mother/caregiver no longer wants child to receive study drug'),
+     '4. Participant\'s mother/caregiver no longer wants child to '
+     'receive study drug'),
     ('hiv infected', '5. Child is HIV- infected (Open-label CTX indicated)'),
     (OTHER, '9. Other'),
 )
@@ -366,14 +387,16 @@ INFANT_OFF_DRUG_REASON = (
 INFANT_VISIT_STUDY_STATUS = (
     (ON_STUDY, 'On study'),
     (OFF_STUDY,
-     'Off study-no further follow-up (including death); use only for last study contact'),
+     'Off study-no further follow-up (including death); use only '
+     'for last study contact'),
 )
 
 
 MATERNAL_VISIT_STUDY_STATUS = (
     (ON_STUDY, 'On study'),
     (OFF_STUDY,
-     'Off study-no further follow-up (including death); use only for last study contact'),
+     'Off study-no further follow-up (including death); use only '
+     'for last study contact'),
 )
 
 
@@ -389,37 +412,47 @@ OFF_STUDY_REASON = [
     ('took_art_less_than_4weeks',
      'Mother took ART for less than 4 weeks during pregnancy'),
     ('maternal_death_pre_deliv',
-     'Maternal death PRIOR to delivery (complete the Death Report Form AF005)'),
+     'Maternal death PRIOR to delivery (complete the Death Report '
+     'Form AF005)'),
     ('maternal_death_post_deliv',
      'Maternal death POST delivery (complete the Death Report Form AF005)'),
     ('moving_out_of_study_area_pre_deliv',
-     'Participant stated she will be moving out of the study area or unable to stay in study area PRIOR delivery'),
+     'Participant stated she will be moving out of the study area or '
+     'unable to stay in study area PRIOR delivery'),
     ('moving_out_of_study_area_post_deliv',
-     'Participant stated she will be moving out of the study area or unable to stay in study area POST delivery'),
+     'Participant stated she will be moving out of the study area or '
+     'unable to stay in study area POST delivery'),
     ('loss_to_followup_prior_deliv',
      'Participant lost to follow-up/unable to locate PRIOR to delivery'),
     ('loss_to_followup_post_deliv',
      'Participant lost to follow-up/unable to locate POST to delivery'),
     ('loss_to_followup_contacted_prior_deliv',
-     'Participant lost to follow-up, contacted but did not come to study clinic PRIOR to delivery'),
+     'Participant lost to follow-up, contacted but did not come to study '
+     'clinic PRIOR to delivery'),
     ('loss_to_followup_contacted_post_deliv',
-     'Participant lost to follow-up, contacted but did not come to study clinic POST to delivery'),
+     'Participant lost to follow-up, contacted but did not come to study '
+     'clinic POST to delivery'),
     ('withdrew_consent_prior_deliv',
      'Mother changed mind and withdrew consent PRIOR to delivery'),
     ('withdrew_consent_post_deliv',
      'Mother changed mind and withdrew consent POST to delivery'),
     ('father_refused_prior_deliv',
-     'Father of the baby refused to participate, hence participant withdrew consent PRIOR delivery'),
+     'Father of the baby refused to participate, hence participant '
+     'withdrew consent PRIOR delivery'),
     ('father_refused_post_deliv',
-     'Father of the baby refused to participate, hence participant withdrew consent POST delivery'),
+     'Father of the baby refused to participate, hence participant '
+     'withdrew consent POST delivery'),
     ('family_member_refused_prior_deliv',
-     'Other family member refused to participate, hence participant withdrew consent PRIOR delivery'),
+     'Other family member refused to participate, hence participant '
+     'withdrew consent PRIOR delivery'),
     ('family_member_refused_post_deliv',
-     'Other family member refused to participate, hence participant withdrew consent POST delivery'),
+     'Other family member refused to participate, hence participant '
+     'withdrew consent POST delivery'),
     ('infant_hiv_infected', 'Infant found to be HIV infected'),
     ('infant_death', 'Infant death (complete infant Death Report Form)'),
     ('protocol_completion',
-     'Completion of protocol required period of time for observation (see Study Protocol for definition of'
+     'Completion of protocol required period of time for observation '
+     '(see Study Protocol for definition of'
      ' "Completion") (skip to end of form)'),
     ('unable_to_determine_ga', 'Unable to confirm GA by Ultrasound.'),
     ('enrolled_erroneously',
@@ -592,17 +625,23 @@ RANDOMIZATION_SITE = (
 REASON_RCV_FORMULA = (
     ('no milk', '1. Mother did not have enough breast milk'),
     ('back to work',
-     '2. Mother returned to work so unable to breastfeed participant exclusively'),
+     '2. Mother returned to work so unable to breastfeed '
+     'participant exclusively'),
     ('off HAART',
      '3. Mother stopped breastfeeding because no longer taking HAART'),
-    ('afraid to transmit', ('4. Mother stopped because she is afraid she will transmit HIV '
-                            'to the participant even though she\'s taking HAART')),
+    ('afraid to transmit', ('4. Mother stopped because she is '
+                            'afraid she will transmit HIV '
+                            'to the participant even though '
+                            'she\'s taking HAART')),
     ('advised to mix feed',
      '5. Mother advised to add other food/liquids by partner/family'),
-    ('felt to mix feed', ('6. Mother felt that baby needed other foods/liquids to be healthy '
+    ('felt to mix feed', ('6. Mother felt that baby needed other '
+                          'foods/liquids to be healthy '
                           '(for babies <= 6 months old)')),
-    ('complete per protocol', ('7. <Per breastfeeding randomisation, infant is >5 months or >11 '
-                               'months of age and completed breastfeeding per protocol')),
+    ('complete per protocol', ('7. <Per breastfeeding randomisation, '
+                               'infant is >5 months or >11 '
+                               'months of age and completed breastfeeding '
+                               'per protocol')),
     (OTHER, '9. Other'),
     (NOT_APPLICABLE, 'Not Applicable'),
 )
@@ -612,17 +651,21 @@ REASON_MISSED_CTX_PLACEBO = (
     ('caregiver ran out/lost',
      'Caregiver ran out of CTX/Placebo or lost the bottle'),
     ('caregiver away',
-     'Primary caregiver was away from home and did not have another person give the CTX/Placebo'),
+     'Primary caregiver was away from home and did not have another '
+     'person give the CTX/Placebo'),
     ('infant away',
-     'Infant was away from home and the CTX/Placebo bottle was not at the other location'),
+     'Infant was away from home and the CTX/Placebo bottle was not '
+     'at the other location'),
     ('caregiver decision/sick',
-     'Caregiver chose not to give the CTX/Placebo because baby was sick or for other reasons'),
+     'Caregiver chose not to give the CTX/Placebo because baby was '
+     'ick or for other reasons'),
     (OTHER, 'Other'),
     (NOT_APPLICABLE, 'Not Applicable'),
 )
 
 REASONS_VACCINES_MISSED = (
-    ('missed scheduled vaccination', 'Mother or Caregiver has not yet taken infant '
+    ('missed scheduled vaccination', 'Mother or Caregiver has not '
+     'yet taken infant '
         'to clinic for this scheduled vaccination'),
     ('caregiver declines vaccination',
      'Mother or Caregiver declines this vaccicnation'),
@@ -634,11 +677,14 @@ REASON_MISSED_PROPHYLAXIS = (
     ('caregiver forgot', 'Caregiver forgot to give the NVP'),
     ('caregiver ran out/lost', 'Caregiver ran out of NVP or lost the bottle'),
     ('caregiver away',
-     'Primary caregiver was away from home and did not have another person give the NVP'),
+     'Primary caregiver was away from home and did not have another '
+     'person give the NVP'),
     ('infant away',
-     'Infant was away from home and the NVP bottle was not at the other location'),
+     'Infant was away from home and the NVP bottle was not at '
+     'the other location'),
     ('caregiver decision/sick',
-     'Caregiver chose not to give the NVP because baby was sick or for other reasons'),
+     'Caregiver chose not to give the NVP because baby was sick or '
+     'for other reasons'),
     (OTHER, 'Other'),
 )
 
@@ -749,7 +795,8 @@ ILLNESS_CLASSIFICATION = (
     (NOT_APPLICABLE, 'Not applicable'),
     ('respi_illness', 'Respiratory Illness'),
     ('gastro_illness',
-     'Gastrointestinal illness (examples including vomiting, diarrhea or both)'),
+     'Gastrointestinal illness (examples including vomiting, '
+     'diarrhea or both)'),
     (OTHER, 'Other'),
 )
 
@@ -779,12 +826,14 @@ CONTINUOUS_LOOSE_STOOLS = (
 
 ARV_STATUS_WITH_NEVER = (
     (NO_MODIFICATIONS,
-     '1. No modifications made since the last attended scheduled visit or today'),
+     '1. No modifications made since the last attended scheduled'
+     ' visit or today'),
     (START,
      '2. Starting today or has started since last attended scheduled visit'),
     (NEVER_STARTED, '3. Never started'),
     (MODIFIED,
-     '4. Change in at least one medication since the last attended scheduled visit or today'),
+     '4. Change in at least one medication since the last attended'
+     ' scheduled visit or today'),
 )
 
 CIRCUMCISION = (

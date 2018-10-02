@@ -16,4 +16,5 @@ class MaternalInterimIdccAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     list_display = ('report_datetime', 'recent_cd4', 'value_vl',)
 
     list_filter = (
-        'info_since_lastvisit', 'recent_cd4_date', 'value_vl_size', 'recent_vl_date')
+        'info_since_lastvisit', 'recent_cd4_date',
+        'value_vl_size', 'recent_vl_date')

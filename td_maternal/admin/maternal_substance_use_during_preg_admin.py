@@ -6,7 +6,8 @@ from .modeladmin_mixins import CrfModelAdminMixin
 
 
 @admin.register(MaternalSubstanceUseDuringPreg, site=td_maternal_admin)
-class MaternalSubstanceUseDuringPregAdmin(CrfModelAdminMixin, admin.ModelAdmin):
+class MaternalSubstanceUseDuringPregAdmin(
+        CrfModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalSubstanceUseDuringPregForm
 

@@ -15,27 +15,31 @@ class MaternalMedicalHistory(CrfModelMixin):
         max_length=25,
         choices=YES_NO,
         verbose_name=(
-            'Does the mother have any significant chronic condition(s) that were'
-            ' diagnosed prior to the current pregnancy and that remain ongoing?')
+            'Does the mother have any significant chronic condition(s) that'
+            'were diagnosed prior to the current pregnancy and that '
+            'remain ongoing?')
     )
 
     who_diagnosis = models.CharField(
         max_length=25,
         choices=YES_NO_NA,
-        verbose_name='Prior to the current pregnancy, was the participant ever '
-        'diagnosed with a WHO Stage III or IV illness?',
-        help_text='Please use the WHO Staging Guidelines. ONLY for HIV infected mothers'
+        verbose_name='Prior to the current pregnancy, was the participant ever'
+        ' diagnosed with a WHO Stage III or IV illness?',
+        help_text='Please use the WHO Staging Guidelines. ONLY for HIV '
+        'infected mothers'
     )
 
     who = models.ManyToManyField(
         WcsDxAdult,
-        verbose_name='List any new WHO Stage III/IV diagnoses that are not reported'
+        verbose_name='List any new WHO Stage III/IV diagnoses that are '
+        'not reported'
     )
 
     mother_chronic = models.ManyToManyField(
         ChronicConditions,
         related_name='mother',
-        verbose_name='Does the mother have any of the above. Tick all that apply',
+        verbose_name='Does the mother have any of the above. Tick all '
+        'that apply',
     )
 
     mother_chronic_other = OtherCharField(
@@ -47,8 +51,8 @@ class MaternalMedicalHistory(CrfModelMixin):
     father_chronic = models.ManyToManyField(
         ChronicConditions,
         related_name='fathe',
-        verbose_name='Does the father of the infant or the mother\'s other children '
-        'have any of the above. Tick all that apply',
+        verbose_name='Does the father of the infant or the mother\'s '
+        'other children have any of the above. Tick all that apply',
     )
 
     father_chronic_other = OtherCharField(
@@ -59,8 +63,8 @@ class MaternalMedicalHistory(CrfModelMixin):
 
     mother_medications = models.ManyToManyField(
         MaternalMedications,
-        verbose_name='Does the mother currently take any of the above medications.'
-                     ' Tick all that apply',
+        verbose_name='Does the mother currently take any of the above '
+        'medications. Tick all that apply',
     )
 
     mother_medications_other = OtherCharField(
@@ -75,7 +79,8 @@ class MaternalMedicalHistory(CrfModelMixin):
         choices=YES_NO,)
 
     date_hiv_diagnosis = models.DateField(
-        verbose_name='If HIV sero-posetive, what is the approximate date of diagnosis?',
+        verbose_name='If HIV sero-posetive, what is the approximate date '
+        'of diagnosis?',
         help_text='EDD Confirmed. Derived variable, see AntenatalEnrollment.',
         blank=True,
         null=True)

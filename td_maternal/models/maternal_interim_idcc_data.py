@@ -11,7 +11,8 @@ class MaternalInterimIdcc(CrfModelMixin):
 
     info_since_lastvisit = models.CharField(
         max_length=25,
-        verbose_name="Is there new laboratory information available on the mother since last visit",
+        verbose_name="Is there new laboratory information available on the "
+        "mother since last visit",
         choices=YES_NO,
         help_text="",)
 
@@ -30,7 +31,8 @@ class MaternalInterimIdcc(CrfModelMixin):
 
     value_vl_size = models.CharField(
         max_length=25,
-        verbose_name="Is the value for the most recent VL available “=” , “<”, or “>” a number? ",
+        verbose_name="Is the value for the most recent VL available “=” ,"
+        "“<”, or “>” a number? ",
         choices=SIZE_CHECK,
         blank=True,
         null=True)
@@ -50,7 +52,8 @@ class MaternalInterimIdcc(CrfModelMixin):
 
     other_diagnoses = OtherCharField(
         max_length=25,
-        verbose_name="Please specify any other diagnoses found in the IDCC since the last visit ",
+        verbose_name="Please specify any other diagnoses found in the IDCC "
+        "since the last visit ",
         blank=True,
         null=True)
 

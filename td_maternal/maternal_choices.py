@@ -1,5 +1,6 @@
 from edc_constants.choices import YES, NO
-from edc_constants.constants import CONTINUOUS, RESTARTED, OTHER, STOPPED, NOT_APPLICABLE, NEW, NEG, POS, IND
+from edc_constants.constants import (
+    CONTINUOUS, RESTARTED, OTHER, STOPPED, NOT_APPLICABLE, NEW, NEG, POS, IND)
 
 from .constants import LIVE, STILL_BIRTH
 
@@ -61,7 +62,8 @@ PRIOR_PREG_HAART_STATUS = (
     (RESTARTED,
      'Had treatment interruption but restarted HAART prior to this pregnancy'),
     (STOPPED,
-     'Had treatment interruption and never restarted HAART prior to this pregnancy'),
+     'Had treatment interruption and never restarted HAART '
+     'prior to this pregnancy'),
     (NOT_APPLICABLE, 'Not Applicable'),
 )
 
@@ -189,8 +191,10 @@ DX = (
      'Pneumonia suspected, no CXR or microbiologic confirmation'),
     ('Pneumonia, CXR confirmed, no bacterial pathogen',
      'Pneumonia, CXR confirmed, no bacterial pathogen'),
-    ('Pneumonia, CXR confirmed, bacterial pathogen isolated (specify pathogen)',
-     'Pneumonia, CXR confirmed, bacterial pathogen isolated (specify pathogen)'),
+    ('Pneumonia, CXR confirmed, bacterial pathogen isolated '
+     '(specify pathogen)',
+     'Pneumonia, CXR confirmed, bacterial pathogen isolated '
+     '(specify pathogen)'),
     ('Pulmonary TB, suspected(no CXR or microbiologic confirmation)',
      'Pulmonary TB, suspected(no CXR or microbiologic confirmation)'),
     ('Pulmonary TB, CXR-confirmed (no microbiologic confirmation)',
@@ -201,9 +205,11 @@ DX = (
      'Extrapulmonary TB,suspected (no CXR or microbiologic confirmation) '),
     ('Extrapulmonary TB, smear and/or culture positive',
      'Extrapulmonary TB, smear and/or culture positive'),
-    (('Acute diarrheal illness (bloody diarrhean OR increase of at least 7 stools per day '
+    (('Acute diarrheal illness (bloody diarrhean OR increase of at least '
+      '7 stools per day '
       'OR life threatening for less than 14 days) '),
-     ('Acute diarrheal illness (bloody diarrhean OR increase of at least 7 stools per day OR '
+     ('Acute diarrheal illness (bloody diarrhean OR increase of at least '
+      '7 stools per day OR '
       'life threatening for less than 14 days)')),
     ('Chronic diarrheal illness (as above but for 14 days or longer) ',
      'Chronic diarrheal illness (as above but for 14 days or longer) '),
@@ -229,9 +235,11 @@ DX = (
     ('Cholecystitis/cholanangitis', 'Cholecystitis/cholanangitis'),
     ('Pancreatitis', 'Pancreatitis'),
     ('Acute Renal failure',
-     'Acute Renal failure (Record highest creatinine level if tested outside of the study)'),
+     'Acute Renal failure (Record highest creatinine level if tested '
+     'outside of the study)'),
     ('Anemia',
-     'Anemia (Only report grade 3 or 4 anemia based on the lab value drawn outside the study)'),
+     'Anemia (Only report grade 3 or 4 anemia based on the lab value '
+     'drawn outside the study)'),
     ('Pregnancy/peripartum cardiomyopathy or CHF ',
      'Pregnancy/peripartum cardiomyopathy or CHF '),
     ('Drug rash on HAART', 'Drug rash on HAART'),
@@ -239,7 +247,8 @@ DX = (
     ('Other serious (grade 3 or 4) infection, specify',
      'Other serious (grade 3 or 4) infection(not listed above), specify'),
     ('Other serious (grade 3 or 4) non-infectious diagnosis, specify',
-     'Other serious (grade 3 or 4) non-infectious diagnosis(not listed above), specify'),
+     'Other serious (grade 3 or 4) non-infectious diagnosis(not listed '
+     'above), specify'),
 )
 
 REASON_FOR_HAART = (
@@ -345,11 +354,13 @@ REASON_UNSEEN_AT_CLINIC = (
 REASON_CONTRACEPTIVE_NOT_INITIATED = (
     ('no_options', 'There was not an option I preferred'),
     ('no_stock_for_preference',
-     'The option I preferred was out of stock (state option if this answer is indicated)'),
+     'The option I preferred was out of stock (state option if this'
+     ' answer is indicated)'),
     ('not_sexually_active', 'I am not currently sexually active'),
     ('disrespected', 'I felt disrespected by the SRH clinic'),
     ('no_contraception_bf',
-     'I was told that because I am breastfeeding, I do not need a contraceptive metod'),
+     'I was told that because I am breastfeeding, I do not need a '
+     'contraceptive metod'),
     ('partner_refused',
      'My current partner does not want me to use a contraceptive method'),
     ('was not attended by a clinician',
@@ -397,7 +408,8 @@ INFLUENTIAL_IN_DECISION_MAKING = (
     ('DWTA', 'I do not wish to answer this question'),
     (NOT_APPLICABLE, 'Not Applicable'),
     (OTHER,
-     'Another person was the most influential (Please type in the description of this person below)')
+     'Another person was the most influential (Please type in the '
+     'description of this person below)')
 )
 
 FEEDING_CHOICES = (

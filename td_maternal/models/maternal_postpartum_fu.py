@@ -11,14 +11,16 @@ class MaternalPostPartumFu(CrfModelMixin, DiagnosesMixin):
 
     hospitalized = models.CharField(
         max_length=25,
-        verbose_name="Has the mother been hospitalized since the last study visit?",
+        verbose_name="Has the mother been hospitalized since the last"
+        " study visit?",
         choices=YES_NO,
         help_text="",
     )
 
     hospitalization_reason = models.ManyToManyField(
         MaternalHospitalization,
-        verbose_name="Was the hospitalization for any of the following reasons?",
+        verbose_name="Was the hospitalization for any of the following "
+        "reasons?",
         blank=True,
         help_text="",
     )

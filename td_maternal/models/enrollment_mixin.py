@@ -4,7 +4,8 @@ from django.apps import apps
 from edc_protocol.validators import datetime_not_before_study_start
 from edc_protocol.validators import date_not_before_study_start
 from edc_base.model_validators import datetime_not_future, date_not_future
-from edc_constants.choices import POS_NEG_UNTESTED_REFUSAL, YES_NO_NA, POS_NEG, YES_NO
+from edc_constants.choices import (
+    POS_NEG_UNTESTED_REFUSAL, YES_NO_NA, POS_NEG, YES_NO)
 from edc_constants.constants import NO, YES, POS, NEG
 # from edc_registration.models import RegisteredSubject
 
@@ -54,7 +55,8 @@ class EnrollmentMixin(models.Model):
         max_length=3)
 
     will_remain_onstudy = models.CharField(
-        verbose_name="Are you willing to remain in the study for the child's first three year of life",
+        verbose_name="Are you willing to remain in the study for the"
+        " child's first three year of life",
         choices=YES_NO,
         help_text='INELIGIBLE if NO',
         max_length=3)
@@ -71,10 +73,13 @@ class EnrollmentMixin(models.Model):
         null=True,
         blank=False,
         choices=YES_NO_NA,
-        help_text=("evidence = clinic and/or IDCC records. check regimes/drugs. If NO, more criteria required."))
+        help_text=(
+            "evidence = clinic and/or IDCC records. check regimes/drugs. "
+            "If NO, more criteria required."))
 
     week32_test = models.CharField(
-        verbose_name="Have you tested for HIV before or during this pregnancy?",
+        verbose_name=(
+            "Have you tested for HIV before or during this pregnancy?"),
         choices=YES_NO,
         default=NO,
         max_length=3)
@@ -92,21 +97,27 @@ class EnrollmentMixin(models.Model):
         blank=True)
 
     evidence_32wk_hiv_status = models.CharField(
-        verbose_name="(Interviewer) Have you seen evidence of the result from HIV test on or before this pregnancy?",
+        verbose_name=(
+            "(Interviewer) Have you seen evidence of the result from "
+            "HIV test on or before this pregnancy?"),
         max_length=15,
         null=True,
         blank=False,
         choices=YES_NO_NA,
-        help_text=("evidence = clinic and/or IDCC records. check regimes/drugs."))
+        help_text=(
+            "evidence = clinic and/or IDCC records. check regimes/drugs."))
 
     will_get_arvs = models.CharField(
-        verbose_name="(Interviewer) If HIV+ve, do records show that participant is taking, is prescribed,"
-                     "or will be prescribed ARVs (if newly diagnosed) during pregnancy?",
+        verbose_name=("(Interviewer) If HIV+ve, do records show that "
+                      "participant is taking, is prescribed,"
+                      "or will be prescribed ARVs (if newly diagnosed) "
+                      "during pregnancy?"),
         choices=YES_NO_NA,
         null=True,
         blank=False,
         max_length=15,
-        help_text=("If found POS by RAPID TEST. Then answer YES, can take them OFF STUDY at birth visit if there were"
+        help_text=("If found POS by RAPID TEST. Then answer YES, can take them"
+                   " OFF STUDY at birth visit if there were"
                    " not on therapy for atleast 4 weeks."))
 
     rapid_test_done = models.CharField(
@@ -116,7 +127,8 @@ class EnrollmentMixin(models.Model):
         blank=False,
         max_length=15,
         help_text=(
-            'Remember, rapid test is for NEG, UNTESTED, UNKNOWN and Don\'t want to answer.'))
+            "Remember, rapid test is for NEG, UNTESTED, UNKNOWN and Don\'t"
+            " want to answer."))
 
     rapid_test_date = models.DateField(
         verbose_name="Date of rapid test",
@@ -146,8 +158,8 @@ class EnrollmentMixin(models.Model):
 
     def save(self, *args, **kwargs):
         enrollment_helper = EnrollmentHelper(instance_antenatal=self)
-#         if not enrollment_helper.validate_rapid_test():
-#             raise ValidationError('Ensure a rapid test id done for this subject.')
+#      if not enrollment_helper.validate_rapid_test():
+#        raise ValidationError('Ensure a rapid test id done for this subject.')
         self.edd_by_lmp = enrollment_helper.evaluate_edd_by_lmp
         self.ga_lmp_enrollment_wks = enrollment_helper.evaluate_ga_lmp(
             self.report_datetime.date())
@@ -164,13 +176,19 @@ class EnrollmentMixin(models.Model):
         if self.pending_ultrasound:
             basic_criteria = False
         else:
-            lmp_to_use = self.ga_lmp_enrollment_wks if self.ga_lmp_enrollment_wks else self.ultrasound.ga_confirmed
+            lmp_to_use = (
+                self.ga_lmp_enrollment_wks if
+                self.ga_lmp_enrollment_wks else self.ultrasound.ga_confirmed)
             basic_criteria = (lmp_to_use >= 16 and lmp_to_use <= 36 and
-                              enrollment_helper.no_chronic_conditions() and self.will_breastfeed == YES and
+                              enrollment_helper.no_chronic_conditions() and
+                              self.will_breastfeed == YES and
                               self.will_remain_onstudy == YES and
-                              (self.ultrasound.pass_antenatal_enrollment if self.ultrasound else True) and
-                              (self.delivery.keep_on_study if self.delivery else True))
-        if basic_criteria and self.enrollment_hiv_status == POS and self.will_get_arvs == YES:
+                              (self.ultrasound.pass_antenatal_enrollment if
+                               self.ultrasound else True) and
+                              (self.delivery.keep_on_study if
+                               self.delivery else True))
+        if (basic_criteria and self.enrollment_hiv_status == POS and
+                self.will_get_arvs == YES):
             return True
         elif basic_criteria and self.enrollment_hiv_status == NEG:
             return True
@@ -184,9 +202,10 @@ class EnrollmentMixin(models.Model):
     def ultrasound(self):
         MaternalUltraSoundInitial = apps.get_model(
             'td_maternal', 'MaternalUltraSoundInitial')
+        rs = self.registered_subject
         try:
             return MaternalUltraSoundInitial.objects.get(
-                maternal_visit__appointment__registered_subject=self.registered_subject)
+                maternal_visit__appointment__registered_subject=rs)
         except MaternalUltraSoundInitial.DoesNotExist:
             return None
 

@@ -14,8 +14,8 @@ class MaternalLabDelDx(CrfModelMixin):
     has_who_dx = models.CharField(
         verbose_name=(
             'During this pregnancy, did the mother have any new diagnoses '
-            'listed in the WHO Adult/Adolescent HIV clinical staging document which '
-            'is/are NOT reported?'),
+            'listed in the WHO Adult/Adolescent HIV clinical staging document'
+            'which is/are NOT reported?'),
         max_length=3,
         choices=YES_NO_NA)
 
@@ -35,7 +35,8 @@ class MaternalLabDelDx(CrfModelMixin):
 class MaternalLabDelDxT(BaseUuidModel):
 
     """ Inline diagnosis during pregnancy collected during
-    labor and delivery (transactions). """
+    labor and delivery (transactions).
+    """
 
     maternal_lab_del_dx = models.OneToOneField(MaternalLabDelDx)
 

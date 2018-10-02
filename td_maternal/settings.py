@@ -8,7 +8,7 @@ SITE_ID = 40
 REVIEWER_SITE_ID = 40
 ETC_DIR = os.path.join(BASE_DIR, 'etc')
 
-# RANDOMIZATION_LIST_PATH = os.path.join(BASE_DIR, 'test_randomization_list.csv')
+# RANDOMIZATION_LIST_PATH=os.path.join(BASE_DIR,'test_randomization_list.csv')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -98,18 +98,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME':
+     'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'
+     },
+    {'NAME':
+     'django.contrib.auth.password_validation.MinimumLengthValidator',
+     },
+    {'NAME':
+     'django.contrib.auth.password_validation.CommonPasswordValidator',
+     },
+    {'NAME':
+     'django.contrib.auth.password_validation.NumericPasswordValidator',
+     },
 ]
 
 

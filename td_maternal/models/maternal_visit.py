@@ -13,10 +13,12 @@ from edc_visit_tracking.model_mixins import VisitModelMixin
 from ..choices import VISIT_UNSCHEDULED_REASON, VISIT_REASON, VISIT_INFO_SOURCE
 
 
-class MaternalVisit(VisitModelMixin, ReferenceModelMixin, CreatesMetadataModelMixin,
-                    SiteModelMixin, RequiresConsentFieldsModelMixin, BaseUuidModel):
+class MaternalVisit(
+    VisitModelMixin, ReferenceModelMixin, CreatesMetadataModelMixin,
+        SiteModelMixin, RequiresConsentFieldsModelMixin, BaseUuidModel):
 
-    """ Maternal visit form that links all antenatal/ postnatal follow-up forms """
+    """ Maternal visit form that links all antenatal/ postnatal follow-up forms
+    """
 
     appointment = models.OneToOneField(Appointment, on_delete=models.PROTECT)
 

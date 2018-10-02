@@ -5,7 +5,8 @@ from .model_mixins import CrfModelMixin
 from .model_mixins import MaternalClinicalMeasurementsMixin
 
 
-class MaternalClinicalMeasurementsOne(CrfModelMixin, MaternalClinicalMeasurementsMixin):
+class MaternalClinicalMeasurementsOne(
+        CrfModelMixin, MaternalClinicalMeasurementsMixin):
 
     height = models.DecimalField(
         max_digits=5,

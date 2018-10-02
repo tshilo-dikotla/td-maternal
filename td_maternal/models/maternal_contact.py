@@ -16,7 +16,8 @@ from .maternal_consent import MaternalConsent
 class MaternalContactManager(models.Manager):
 
     def get_by_natural_key(self, registered_subject):
-        return self.get(subject_identifier=registered_subject.subject_identifier)
+        return self.get(
+            subject_identifier=registered_subject.subject_identifier)
 
 
 class MaternalContact(BaseUuidModel, models.Model):

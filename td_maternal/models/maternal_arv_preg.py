@@ -26,7 +26,8 @@ class MaternalArvPreg(CrfModelMixin):
     is_interrupt = models.CharField(
         max_length=3,
         choices=YES_NO,
-        verbose_name="Was there an interruption in the ARVs received during pregnancy through delivery of >/=3days?",
+        verbose_name="Was there an interruption in the ARVs received during "
+        "pregnancy through delivery of >/=3days?",
     )
 
     interrupt = models.CharField(
@@ -64,7 +65,8 @@ class MaternalArv(BaseUuidModel):
         validators=[date_not_future],
         null=True,
         blank=False,
-        help_text='WARNING: If date started is less than 4 weeks at delivery, complete off study.')
+        help_text='WARNING: If date started is less than 4 weeks at delivery, '
+        'complete off study.')
 
     stop_date = models.DateField(
         verbose_name="Date Stopped",

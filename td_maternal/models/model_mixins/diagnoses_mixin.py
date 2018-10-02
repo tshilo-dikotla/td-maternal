@@ -19,7 +19,8 @@ class DiagnosesMixin(models.Model):
 
     diagnoses = models.ManyToManyField(
         MaternalDiagnosesList,
-        verbose_name="Have any of the following diagnoses occured since last visit?",
+        verbose_name="Have any of the following diagnoses"
+        " occured since last visit?",
         blank=True,
     )
 
@@ -33,8 +34,8 @@ class DiagnosesMixin(models.Model):
     has_who_dx = models.CharField(
         verbose_name=(
             "During this pregnancy, did the mother have any new diagnoses "
-            "listed in the WHO Adult/Adolescent HIV clinical staging document which "
-            "is/are NOT reported?"),
+            "listed in the WHO Adult/Adolescent HIV clinical staging document "
+            "which  is/are NOT reported?"),
         max_length=3,
         choices=YES_NO_NA)
 

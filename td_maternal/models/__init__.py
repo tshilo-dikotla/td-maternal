@@ -30,6 +30,5 @@ from .maternal_substance_prior_preg import MaternalSubstanceUsePriorPreg
 from .maternal_ultrasound_initial import MaternalUltraSoundInitial
 from .maternal_visit import MaternalVisit
 from .rapid_test_result import RapidTestResult
-from .signals import *
 from .specimen_consent import SpecimenConsent
 from .td_consent_version import TdConsentVersion

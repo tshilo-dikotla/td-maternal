@@ -11,7 +11,8 @@ from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(MaternalVisit, site=td_maternal_admin)
-class MaternalVisitAdmin(VisitModelAdminMixin, ModelAdminMixin, admin.ModelAdmin):
+class MaternalVisitAdmin(
+        VisitModelAdminMixin, ModelAdminMixin, admin.ModelAdmin):
 
     visit_attr = 'maternal_visit'
     dashboard_type = 'maternal'

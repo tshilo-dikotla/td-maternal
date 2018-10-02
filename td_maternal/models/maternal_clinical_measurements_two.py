@@ -2,7 +2,8 @@ from .model_mixins import CrfModelMixin
 from .model_mixins import MaternalClinicalMeasurementsMixin
 
 
-class MaternalClinicalMeasurementsTwo(CrfModelMixin, MaternalClinicalMeasurementsMixin):
+class MaternalClinicalMeasurementsTwo(
+        CrfModelMixin, MaternalClinicalMeasurementsMixin):
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'td_maternal'

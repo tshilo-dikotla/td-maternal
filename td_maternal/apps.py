@@ -18,7 +18,8 @@ if settings.APP_NAME == 'td_maternal':
     from edc_facility.apps import AppConfig as BaseEdcFacilityAppConfig
     from edc_metadata.apps import AppConfig as BaseEdcMetadataAppConfig
     from edc_protocol.apps import AppConfig as BaseEdcProtocolAppConfig
-    from edc_visit_tracking.apps import AppConfig as BaseEdcVisitTrackingAppConfig
+    from edc_visit_tracking.apps import (
+        AppConfig as BaseEdcVisitTrackingAppConfig)
     from edc_visit_tracking.constants import MISSED_VISIT
     from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
 

@@ -17,4 +17,5 @@ class AntenataVisitMembershipAdmin(admin.ModelAdmin):
     list_display = (
         'registered_subject', 'report_datetime', 'antenatal_visits')
 
+
 admin.site.register(AntenatalVisitMembership, AntenataVisitMembershipAdmin)

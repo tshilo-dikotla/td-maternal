@@ -3,9 +3,11 @@ from django.db import models
 from edc_base.model_fields import OtherCharField
 from edc_constants.choices import YES_NO_DWTA
 
-from ..maternal_choices import YES_NO_DNT_DWTA, NEXT_CHILD_PLAN, YES_NO_NO_PARTNER_DWTA
+from ..maternal_choices import (
+    YES_NO_DNT_DWTA, NEXT_CHILD_PLAN, YES_NO_NO_PARTNER_DWTA)
 from ..maternal_choices import INFLUENTIAL_IN_DECISION_MAKING
-from ..maternal_choices import PAP_SMEAR, NORMAL_ABNORMAL_DWTA, PAP_SMEAR_ESTIMATE
+from ..maternal_choices import (
+    PAP_SMEAR, NORMAL_ABNORMAL_DWTA, PAP_SMEAR_ESTIMATE)
 
 from .model_mixins import CrfModelMixin
 from .list_models import Contraceptives, MaternalRelatives
@@ -13,7 +15,9 @@ from .list_models import Contraceptives, MaternalRelatives
 
 class MaternalContraception(CrfModelMixin):
 
-    """ A model completed by the user on the mother's sexual reproductive health. """
+    """ A model completed by the user on the mother's sexual reproductive
+    health.
+    """
 
     more_children = models.CharField(
         verbose_name='Do you desire more children?',
@@ -31,35 +35,41 @@ class MaternalContraception(CrfModelMixin):
         help_text='')
 
     contraceptive_partner = models.CharField(
-        verbose_name='Have you discussed a contraceptive method with your current partner?',
+        verbose_name='Have you discussed a contraceptive method with '
+        'your current partner?',
         max_length=10,
         choices=YES_NO_NO_PARTNER_DWTA,
         help_text='')
 
     contraceptive_relative = models.ManyToManyField(
         MaternalRelatives,
-        verbose_name='Have you discussed your contraceptive method with any of the following individuals? '
+        verbose_name='Have you discussed your contraceptive method with any of'
+        ' the following individuals? '
                      '(Please select all that apply)',
         help_text='')
 
     contraceptive_relative_other = OtherCharField(
         max_length=35,
-        verbose_name="If Other enter text description of other please give other people you discussed with",
+        verbose_name="If Other enter text description of other please give "
+        "other people you discussed with",
         blank=True,
         null=True,
-        help_text='If \'Other\' is selected above, please type in the person or persons '
-                  '(by description only and not by name) with whom you have discussed your contraceptive method')
+        help_text='If \'Other\' is selected above, please type in the person '
+        'or persons (by description only and not by name) with whom you'
+        ' have discussed your contraceptive method')
 
     influential_decision_making = models.CharField(
         verbose_name='Of the following individuals listed in questions 3-6, '
-                     'please indicate who has influenced you the most in making the decision',
+                     'please indicate who has influenced you the most in '
+                     'making the decision',
         max_length=50,
         choices=INFLUENTIAL_IN_DECISION_MAKING,
         help_text='')
 
     influential_decision_making_other = OtherCharField(
         max_length=35,
-        verbose_name='If another person was most influential, please give details below.',
+        verbose_name='If another person was most influential, please give '
+        'details below.',
         blank=True,
         null=True)
 
@@ -70,7 +80,8 @@ class MaternalContraception(CrfModelMixin):
         help_text='')
 
     contraceptive_startdate = models.DateField(
-        verbose_name='If yes, what date after delivery did you start using this contraceptive method?',
+        verbose_name='If yes, what date after delivery did you start using this'
+        ' contraceptive method?',
         null=True,
         blank=True,
         help_text='')
@@ -82,7 +93,8 @@ class MaternalContraception(CrfModelMixin):
 
     contr_other = OtherCharField(
         max_length=35,
-        verbose_name="If Other enter text description of other contraceptive method being used",
+        verbose_name="If Other enter text description of other contraceptive"
+        " method being used",
         blank=True,
         null=True)
 
@@ -111,7 +123,8 @@ class MaternalContraception(CrfModelMixin):
         help_text='')
 
     pap_smear_estimate = models.CharField(
-        verbose_name='If you dont know that date of your last Pap Smear, is it possible that your last Pap smear was:',
+        verbose_name='If you dont know that date of your last Pap Smear, is '
+        'it possible that your last Pap smear was:',
         max_length=60,
         choices=PAP_SMEAR_ESTIMATE,
         blank=True,
@@ -135,7 +148,8 @@ class MaternalContraception(CrfModelMixin):
         help_text='')
 
     pap_smear_result_abnormal = models.TextField(
-        verbose_name='If the results of the Pap Smear were abnormal, can you please share the results with us: ',
+        verbose_name='If the results of the Pap Smear were abnormal, can you '
+        'please share the results with us: ',
         max_length=50,
         blank=True,
         null=True,
@@ -149,7 +163,8 @@ class MaternalContraception(CrfModelMixin):
     )
 
     srh_referral = models.CharField(
-        verbose_name='Would you like to be referred to the Sexual Reproductive Health Clinic?',
+        verbose_name='Would you like to be referred to the Sexual Reproductive'
+        ' Health Clinic?',
         max_length=25,
         choices=YES_NO_DWTA,
         help_text='')

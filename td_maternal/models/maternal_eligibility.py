@@ -10,9 +10,11 @@ from edc_registration.models import RegisteredSubject
 
 
 class MaternalEligibility(BaseUuidModel):
-    """ A model completed by the user to test and capture the result of the pre-consent eligibility checks.
+    """ A model completed by the user to test and capture the result of
+    the pre-consent eligibility checks.
 
-    This model has no PII."""
+    This model has no PII.
+    """
 
     registered_subject = models.OneToOneField(
         RegisteredSubject, on_delete=PROTECT, null=True)

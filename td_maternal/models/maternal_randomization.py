@@ -12,29 +12,31 @@ class MaternalRando (CrfModelMixin):
     """ Stores a prepared infant randomization list.
 
     If you need to undo a randomization, here is an example of how::
-        >>> # To undo a randomization
-        >>> subject_identifier = '056-1980294-0'
-        >>> void_sid = '222222'
-        >>> # clear rando record but set to void to not allow it to be used
-        >>> maternal_rando = MaternalRando.objects.get(subject_identifier=subject_identifier, sid=void_sid)
-        >>> if maternal_rando:
-        >>>     maternal_rando.subject_identifier='void'
-        >>>     maternal_rando.randomization_datetime = None
-        >>>     maternal_rando.initials = 'XX'
-        >>>     maternal_rando.feeding_choice=None
-        >>>     maternal_rando.infant_initials='XX'
-        >>>     maternal_rando.haart_status=None
-        >>>     maternal_rando.comment = "used in error by %s" % (subject_identifier,)
-        >>>     maternal_rando.save()
-        >>>     print "OK, SID %s is now void" % (void_sid,)
-        >>>     # clear SID from registered subject
-        >>>     rs = RegisteredSubject.object.get(subject_identifier=subject_identifier, sid=void_sid)
-        >>>     rs.sid = None
-        >>>     rs.registration_status = None
-        >>>     print "OK, RegisteredSubject SID set to None"
-        >>> else:
-        >>>     print "Error"
-"""
+    >>> # To undo a randomization
+    >>> subject_identifier = '056-1980294-0'
+    >>> void_sid = '222222'
+    >>> # clear rando record but set to void to not allow it to be used
+    >>> maternal_rando = MaternalRando.objects.get(
+                        subject_identifier=subject_identifier, sid=void_sid)
+    >>> if maternal_rando:
+    >>>     maternal_rando.subject_identifier='void'
+    >>>     maternal_rando.randomization_datetime = None
+    >>>     maternal_rando.initials = 'XX'
+    >>>     maternal_rando.feeding_choice=None
+    >>>     maternal_rando.infant_initials='XX'
+    >>>     maternal_rando.haart_status=None
+    >>>     maternal_rando.comment = "used in error by%s"%(subject_identifier,)
+    >>>     maternal_rando.save()
+    >>>     print "OK, SID %s is now void" % (void_sid,)
+    >>>     # clear SID from registered subject
+    >>>     rs = RegisteredSubject.object.get(
+                subject_identifier=subject_identifier, sid=void_sid)
+    >>>     rs.sid = None
+    >>>     rs.registration_status = None
+    >>>     print "OK, RegisteredSubject SID set to None"
+    >>> else:
+    >>>     print "Error"
+    """
     site = models.CharField(
         verbose_name='Site',
         max_length=15)
@@ -92,7 +94,8 @@ class MaternalRando (CrfModelMixin):
     #    if not self.id:
     #        randomization_helper = Randomization(self, ValidationError)
     #        (self.site, self.sid, self.rx, self.subject_identifier,
-    #         self.randomization_datetime, self.initials) = randomization_helper.randomize()
+    # self.randomization_datetime, self.initials
+#     ) = randomization_helper.randomize()
     #    super(MaternalRando, self).save(*args, **kwargs)
 
     class Meta(CrfModelMixin.Meta):

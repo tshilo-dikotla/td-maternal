@@ -9,8 +9,11 @@ class MartenalRandoAdmin(admin.ModelAdmin):
 
     form = MaternalRandomizationForm
 
-    fields = ('maternal_visit', 'dispensed', 'comment', 'subject_identifier', 'initials',
-              'site', 'randomization_datetime', 'delivery_clinic')
+    fields = (
+        'maternal_visit', 'dispensed',
+        'comment', 'subject_identifier',
+        'initials', 'site', 'randomization_datetime',
+        'delivery_clinic')
 
     list_filter = ('randomization_datetime', 'site')
     readonly_fields = (

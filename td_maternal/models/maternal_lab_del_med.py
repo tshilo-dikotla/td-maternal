@@ -7,7 +7,8 @@ from .model_mixins import CrfModelMixin
 
 class MaternalLabDelMed(CrfModelMixin):
 
-    """ Medical history collected during labor and delivery. """
+    """ Medical history collected during labor and delivery.
+    """
 
     has_health_cond = models.CharField(
         verbose_name=(
@@ -28,7 +29,8 @@ class MaternalLabDelMed(CrfModelMixin):
     ob_comp_other = OtherCharField()
 
     took_supplements = models.CharField(
-        verbose_name="Did the mother take any of the following medications during this pregnancy?",
+        verbose_name="Did the mother take any of the following medications "
+        "during this pregnancy?",
         max_length=3,
         choices=YES_NO)
 
