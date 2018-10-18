@@ -65,3 +65,11 @@ class MaternalEligibility(BaseUuidModel):
         app_label = 'td_maternal'
         verbose_name = "Maternal Eligibility"
         verbose_name_plural = "Maternal Eligibility"
+
+    def save(self, *args, **kwargs):
+        self.set_uuid_for_eligibility_if_none()
+        self.is_eligible, error_message = self.check_eligibility()
+        # error_message not None if is_eligible is False
+        self.ineligibility = error_message
+        super(MaternalEligibility, self).save(*args, **kwargs)
+

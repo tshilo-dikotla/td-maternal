@@ -32,3 +32,4 @@ from .maternal_visit import MaternalVisit
 from .rapid_test_result import RapidTestResult
 from .specimen_consent import SpecimenConsent
 from .td_consent_version import TdConsentVersion
+from .eligibility import Eligibility
