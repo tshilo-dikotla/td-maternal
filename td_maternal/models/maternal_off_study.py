@@ -4,7 +4,8 @@
 #
 # class MaternalOffStudy(OffstudyModelMixin, BaseUuidModel):
 #
-#     """ A model completed by the user on the visit when the mother is taken off-study. """
+#     """ A model completed by the user on the visit when the mother is takens
+# """off-study. """
 #
 #     class Meta:
 #         app_label = 'td_maternal'

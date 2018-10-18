@@ -10,7 +10,8 @@ from edc_constants.choices import YES_NO, YES_NO_NA
 from edc_registration.models import RegisteredSubject
 
 
-from ..maternal_choices import DELIVERY_HEALTH_FACILITY, DELIVERY_MODE, CSECTION_REASON
+from ..maternal_choices import (
+    DELIVERY_HEALTH_FACILITY, DELIVERY_MODE, CSECTION_REASON)
 
 from .list_models import DeliveryComplications
 

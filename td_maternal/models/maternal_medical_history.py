@@ -2,7 +2,8 @@ from django.db import models
 from edc_base.model_fields import OtherCharField
 from edc_constants.choices import YES_NO, YES_NO_NA
 
-from ..maternal_choices import KNOW_HIV_STATUS, LOWEST_CD4_KNOWN, IS_DATE_ESTIMATED
+from ..maternal_choices import (
+    KNOW_HIV_STATUS, LOWEST_CD4_KNOWN, IS_DATE_ESTIMATED)
 from .list_models import ChronicConditions, MaternalMedications, WcsDxAdult
 from .model_mixins import CrfModelMixin
 

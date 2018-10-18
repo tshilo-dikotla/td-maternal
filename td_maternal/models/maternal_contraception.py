@@ -80,8 +80,8 @@ class MaternalContraception(CrfModelMixin):
         help_text='')
 
     contraceptive_startdate = models.DateField(
-        verbose_name='If yes, what date after delivery did you start using this'
-        ' contraceptive method?',
+        verbose_name='If yes, what date after delivery did you start'
+        ' using this contraceptive method?',
         null=True,
         blank=True,
         help_text='')

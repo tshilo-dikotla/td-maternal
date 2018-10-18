@@ -50,7 +50,8 @@ class MaternalPostPartumDep(CrfModelMixin):
 
     top = models.CharField(
         max_length=75,
-        verbose_name="In the past 7 days, things have been getting on top of me",
+        verbose_name="In the past 7 days, things have been getting"
+        " on top of me",
         choices=TOP,
         help_text="",
     )
