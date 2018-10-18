@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.db import models
 from django.db.models.deletion import PROTECT
 
@@ -7,6 +8,9 @@ from edc_base.model_validators import datetime_not_future
 from edc_base.model_managers import HistoricalRecords
 from edc_constants.choices import YES_NO
 from edc_registration.models import RegisteredSubject
+from uuid import uuid4
+
+from .eligibility import Eligibility
 
 
 class MaternalEligibility(BaseUuidModel):
@@ -67,9 +71,26 @@ class MaternalEligibility(BaseUuidModel):
         verbose_name_plural = "Maternal Eligibility"
 
     def save(self, *args, **kwargs):
+        eligibility_criteria = Eligibility(self.age_in_years, self.has_omang)
         self.set_uuid_for_eligibility_if_none()
-        self.is_eligible, error_message = self.check_eligibility()
-        # error_message not None if is_eligible is False
-        self.ineligibility = error_message
+        self.is_eligible = eligibility_criteria.is_eligible
+        self.ineligibility = eligibility_criteria.error_message
         super(MaternalEligibility, self).save(*args, **kwargs)
 
+    def natural_key(self):
+        return self.eligibility_id
+
+    @property
+    def maternal_eligibility_loss(self):
+        MaternalEligibilityLoss = apps.get_model(
+            'td_maternal', 'MaternalEligibilityLoss')
+        try:
+            maternal_eligibility_loss = MaternalEligibilityLoss.objects.get(
+                maternal_eligibility_id=self.id)
+        except MaternalEligibilityLoss.DoesNotExist:
+            maternal_eligibility_loss = None
+        return maternal_eligibility_loss
+
+    def set_uuid_for_eligibility_if_none(self):
+        if not self.eligibility_id:
+            self.eligibility_id = str(uuid4())

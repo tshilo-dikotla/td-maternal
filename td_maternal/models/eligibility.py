@@ -1,4 +1,3 @@
-from django.apps import apps
 from edc_constants.constants import NO
 
 from ..constants import (MAX_AGE_OF_CONSENT, MIN_AGE_OF_CONSENT)
@@ -6,9 +5,9 @@ from ..constants import (MAX_AGE_OF_CONSENT, MIN_AGE_OF_CONSENT)
 
 class Eligibility:
 
-    def __init__(self, age_in_years, has_omang):
-        """Returns a tuple (True, None) if mother is eligible otherwise'
-        ' (False, error_messsage) where error message is the reason for'
+    def __init__(self, age_in_years=None, has_omang=None):
+        """checks if mother is eligible otherwise'
+        ' error message is the reason for'
         ' eligibility test failed."""
         self.error_message = []
         self.age_in_years = age_in_years
@@ -25,15 +24,3 @@ class Eligibility:
 
     def __str__(self):
         return "Screened, age ({})".format(self.age_in_years)
-
-    @property
-    def maternal_eligibility_loss(self):
-        MaternalEligibilityLoss = apps.get_model(
-            'td_maternal', 'MaternalEligibilityLoss')
-        try:
-            maternal_eligibility_loss = MaternalEligibilityLoss.objects.get(
-                maternal_eligibility_id=self.id)
-        except MaternalEligibilityLoss.DoesNotExist:
-            maternal_eligibility_loss = None
-        return maternal_eligibility_loss
-

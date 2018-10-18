@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django_revision.apps.AppConfig',
     'rest_framework',
     'rest_framework.authtoken',
+    'edc_device.apps.AppConfig',
     'edc_action_item.apps.AppConfig',
     'edc_fieldsets.apps.AppConfig',
     'edc_locator.apps.AppConfig',
