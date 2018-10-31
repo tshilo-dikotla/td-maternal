@@ -7,6 +7,10 @@ class AppConfig(DjangoApponfig):
     verbose_name = 'Tshilo Dikotla Maternal CRFs'
     admin_site_name = 'td_maternal_admin'
 
+    def ready(self):
+        pass
+        #from .models.signals import maternal_eligibility_on_post_save
+
 
 if settings.APP_NAME == 'td_maternal':
     from datetime import datetime

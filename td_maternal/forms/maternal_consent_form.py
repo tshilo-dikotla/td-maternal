@@ -3,10 +3,10 @@ from edc_base.sites import SiteModelFormMixin
 from edc_consent.modelform_mixins import ConsentModelFormMixin
 from edc_form_validators import FormValidatorMixin
 
-from ..models import MaternalConsent
+from ..models import SubjectConsent
 
 
-class MaternalConsentForm(
+class SubjectConsentForm(
         SiteModelFormMixin, FormValidatorMixin, ConsentModelFormMixin,
         forms.ModelForm):
 
@@ -18,5 +18,5 @@ class MaternalConsentForm(
     #         widget=AdminRadioSelect(renderer=AdminRadioFieldRenderer))
 
     class Meta:
-        model = MaternalConsent
+        model = SubjectConsent
         fields = '__all__'

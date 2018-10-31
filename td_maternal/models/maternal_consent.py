@@ -29,7 +29,7 @@ class SubjectConsentManager(SearchSlugManager, models.Manager):
             subject_identifier=subject_identifier, version=version)
 
 
-class MaternalConsent(
+class SubjectConsent(
         ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
         SiteModelMixin,
         NonUniqueSubjectIdentifierModelMixin, IdentityFieldsMixin,

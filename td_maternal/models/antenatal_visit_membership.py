@@ -8,12 +8,12 @@ from edc_constants.choices import YES_NO
 from edc_registration.models import RegisteredSubject
 
 
-from .maternal_consent import MaternalConsent
+from .maternal_consent import SubjectConsent
 
 
 class AntenatalVisitMembership(BaseUuidModel):
 
-    consent_model = MaternalConsent
+    consent_model = SubjectConsent
 
     registered_subject = models.OneToOneField(
         RegisteredSubject, on_delete=PROTECT, null=True)

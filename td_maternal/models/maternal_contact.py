@@ -10,7 +10,7 @@ from edc_protocol.validators import datetime_not_before_study_start
 from edc_registration.models import RegisteredSubject
 
 from ..maternal_choices import CALL_REASON, CONTACT_TYPE
-from .maternal_consent import MaternalConsent
+from .maternal_consent import SubjectConsent
 
 
 class MaternalContactManager(models.Manager):
@@ -22,7 +22,7 @@ class MaternalContactManager(models.Manager):
 
 class MaternalContact(BaseUuidModel, models.Model):
 
-    consent_model = MaternalConsent
+    consent_model = SubjectConsent
 
     report_datetime = models.DateTimeField(
         verbose_name='Report Date',

@@ -3,14 +3,14 @@ from edc_consent.actions import (
     flag_as_verified_against_paper, unflag_as_verified_against_paper)
 
 from ..admin_site import td_maternal_admin
-from ..forms import MaternalConsentForm
-from ..models import MaternalConsent
+from ..forms import SubjectConsentForm
+from ..models import SubjectConsent
 
 
-@admin.register(MaternalConsent, site=td_maternal_admin)
-class MaternalConsentAdmin(admin.ModelAdmin):
+@admin.register(SubjectConsent, site=td_maternal_admin)
+class SubjectConsentAdmin(admin.ModelAdmin):
 
-    form = MaternalConsentForm
+    form = SubjectConsentForm
 
     fields = ('maternal_eligibility',
               'first_name',
