@@ -4,7 +4,7 @@ from edc_consent.actions import (
 
 from ..admin_site import td_maternal_admin
 from ..forms import SubjectConsentForm
-from ..models import SubjectConsent
+from ..models import SubjectConsent, MaternalEligibility
 
 
 @admin.register(SubjectConsent, site=td_maternal_admin)
@@ -17,7 +17,7 @@ class SubjectConsentAdmin(admin.ModelAdmin):
               'last_name',
               'initials',
               'language',
-              'study_site',
+              #               'study_site',
               'recruit_source',
               'recruit_source_other',
               'recruitment_clinic',
@@ -73,3 +73,15 @@ class SubjectConsentAdmin(admin.ModelAdmin):
     actions = [
         flag_as_verified_against_paper,
         unflag_as_verified_against_paper, ]
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "maternal_eligibility":
+            kwargs["queryset"] = MaternalEligibility.objects.filter(
+                registered_subject__id__exact=request.GET.get('registered_subject'))
+        else:
+            self.readonly_fields = list(self.readonly_fields)
+            try:
+                self.readonly_fields.index('registered_subject')
+            except ValueError:
+                self.readonly_fields.append('registered_subject')
+        return super(SubjectConsentAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
