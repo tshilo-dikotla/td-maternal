@@ -2,17 +2,18 @@ from django.db import transaction
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
-
-from edc_registration.models import RegisteredSubject
 from edc_appointment.models import Appointment
 from edc_constants.constants import (
     FEMALE, SCREENED, CONSENTED, FAILED_ELIGIBILITY, ALIVE, OFF_STUDY, ON_STUDY)
+from edc_registration.models import RegisteredSubject
+
 from td_maternal.models.subject_consent import SubjectConsent
-from .maternal_ultrasound_initial import MaternalUltraSoundInitial
-from .antenatal_enrollment import AntenatalEnrollment
 from td_maternal.models.subject_screening import SubjectScreening
-from .maternal_visit import MaternalVisit
+
+from .antenatal_enrollment import AntenatalEnrollment
 from .maternal_labour_del import MaternalLabourDel
+from .maternal_ultrasound_initial import MaternalUltraSoundInitial
+from .maternal_visit import MaternalVisit
 
 
 def create_maternal_registered_subject(instance):
@@ -22,7 +23,7 @@ def create_maternal_registered_subject(instance):
         gender=FEMALE,
         registration_status=SCREENED,
         screening_datetime=instance.report_datetime,
-        screening_identifier=instance.eligibility_id,
+        screening_identifier=instance.screening_identifier,
         screening_age_in_years=instance.age_in_years,
         subject_type='maternal',
         user_created=instance.user_created)
@@ -33,7 +34,7 @@ def update_maternal_registered_subject(registered_subject, instance):
     registered_subject.gender = FEMALE
     registered_subject.registration_status = SCREENED
     registered_subject.screening_datetime = instance.report_datetime
-    registered_subject.screening_identifier = instance.eligibility_id
+    registered_subject.screening_identifier = instance.screening_identifier
     registered_subject.screening_age_in_years = instance.age_in_years
     registered_subject.subject_type = 'maternal'
     registered_subject.user_modified = instance.user_modified
