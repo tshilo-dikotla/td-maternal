@@ -10,6 +10,6 @@ class TdConsentVersionAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = TdConsentVersionForm
 
-    fields = ('maternal_eligibility', 'version', 'report_datetime',)
+    fields = ('subject_screening', 'version', 'report_datetime',)
     radio_fields = {'version': admin.VERTICAL}
     list_display = ('version', 'report_datetime',)
