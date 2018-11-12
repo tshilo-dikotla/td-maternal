@@ -2,10 +2,11 @@ from django.contrib import admin
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalLabourDelForm, MaternalHivInterimHxForm
 from ..models import MaternalLabourDel, MaternalHivInterimHx
+from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(MaternalLabourDel, site=td_maternal_admin)
-class MaternalLabourDelAdmin(admin.ModelAdmin):
+class MaternalLabourDelAdmin(admin.ModelAdmin, ModelAdminMixin):
 
     dashboard_type = 'maternal'
     form = MaternalLabourDelForm
@@ -31,7 +32,7 @@ class MaternalLabourDelAdmin(admin.ModelAdmin):
 
 
 @admin.register(MaternalHivInterimHx, site=td_maternal_admin)
-class MaternalHivInterimHxAdmin(admin.ModelAdmin):
+class MaternalHivInterimHxAdmin(admin.ModelAdmin, ModelAdminMixin):
 
     form = MaternalHivInterimHxForm
 

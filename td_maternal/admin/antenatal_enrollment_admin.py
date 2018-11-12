@@ -2,10 +2,11 @@ from django.contrib import admin
 from ..admin_site import td_maternal_admin
 from ..forms import AntenatalEnrollmentForm
 from ..models import AntenatalEnrollment
+from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(AntenatalEnrollment, site=td_maternal_admin)
-class AntenatalEnrollmentAdmin(admin.ModelAdmin):
+class AntenatalEnrollmentAdmin(admin.ModelAdmin, ModelAdminMixin):
 
     form = AntenatalEnrollmentForm
 

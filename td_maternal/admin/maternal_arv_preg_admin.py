@@ -3,7 +3,7 @@ from edc_model_admin import TabularInlineMixin
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalArvPregForm, MaternalArvForm
 from ..models import MaternalArvPreg, MaternalArv
-from .modeladmin_mixins import CrfModelAdminMixin
+from .modeladmin_mixins import CrfModelAdminMixin, ModelAdminMixin
 
 
 class MaternalArvInlineAdmin(TabularInlineMixin, admin.TabularInline):
@@ -14,7 +14,7 @@ class MaternalArvInlineAdmin(TabularInlineMixin, admin.TabularInline):
 
 
 @admin.register(MaternalArv, site=td_maternal_admin)
-class MaternalArvAdmin(admin.ModelAdmin):
+class MaternalArvAdmin(admin.ModelAdmin, ModelAdminMixin):
     form = MaternalArvForm
 
 
