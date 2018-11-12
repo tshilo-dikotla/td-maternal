@@ -28,7 +28,6 @@ def maternal_eligibility_on_post_save(sender, instance, raw, created, using, **k
     if not raw:
         if isinstance(instance, MaternalEligibility) and not kwargs.get('update_fields'):
             if not instance.is_eligible:
-                print("here signals triggered >>>>>>>>>>>>> not eligible")
                 try:
                     maternal_eligibility_loss = MaternalEligibilityLoss.objects.get(
                         maternal_eligibility_id=instance.id)
@@ -44,7 +43,6 @@ def maternal_eligibility_on_post_save(sender, instance, raw, created, using, **k
                         user_created=instance.user_created,
                         user_modified=instance.user_modified)
             else:
-                print("here signals triggered >>>>>>>>>>>>> eligible")
                 MaternalEligibilityLoss.objects.filter(
                     maternal_eligibility_id=instance.id).delete()
                 if not instance.is_consented:

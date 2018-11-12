@@ -13,8 +13,7 @@ class SpecimenConsentAdmin(admin.ModelAdmin, ModelAdminMixin):
 
     form = SpecimenConsentForm
 
-    fields = ('registered_subject',
-              'consent_datetime',
+    fields = ('consent_datetime',
               'language',
               'may_store_samples',
               'is_literate',
@@ -27,7 +26,6 @@ class SpecimenConsentAdmin(admin.ModelAdmin, ModelAdminMixin):
                     'is_literate': admin.VERTICAL, }
 
     list_display = ('subject_identifier',
-                    'registered_subject',
                     'created',
                     'modified',
                     'user_created',

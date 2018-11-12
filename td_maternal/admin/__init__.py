@@ -9,7 +9,7 @@ from .maternal_arv_preg_admin import MaternalArvAdmin
 from .maternal_arv_preg_admin import MaternalArvPregAdmin
 from .maternal_clinical_measurements_admin import (
     MaternalClinicalMeasurementsOneAdmin, MaternalClinicalMeasurementsTwoAdmin)
-from .maternal_consent_admin import SubjectConsentAdmin
+from .subject_consent_admin import SubjectConsentAdmin
 from .maternal_contact_admin import MaternalContactAdmin
 from .maternal_contraception_admin import MaternalContraception
 from .maternal_demographics_admin import MaternalDemographicsAdmin

@@ -1,6 +1,5 @@
 from django.apps import apps
 from django.db import models
-from django.db.models.deletion import PROTECT
 
 from edc_base.model_mixins import BaseUuidModel
 from edc_protocol.validators import datetime_not_before_study_start
@@ -10,7 +9,6 @@ from edc_base.sites import SiteModelMixin
 from edc_constants.choices import YES_NO
 from edc_constants.constants import UUID_PATTERN
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
-from edc_registration.models import RegisteredSubject
 from edc_search.model_mixins import SearchSlugManager, SearchSlugModelMixin
 
 import re
