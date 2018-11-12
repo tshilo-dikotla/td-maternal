@@ -13,8 +13,7 @@ from .maternal_contact_form import MaternalContactForm
 from .maternal_contraception_form import MaternalContraceptionForm
 from .maternal_demographics_form import MaternalDemographicsForm
 from .maternal_diagnoses_form import MaternalDiagnosesForm
-from .maternal_eligibility_form import MaternalEligibilityForm
-from .maternal_eligibility_loss_form import MaternalEligibilityLossForm
+from .subject_screening_form import SubjectScreeningForm
 from .maternal_interim_idcc_form import MaternalInterimIdccForm
 from .maternal_labour_del_form import MaternalLabourDelForm
 from .maternal_medical_history_form import MaternalMedicalHistoryForm

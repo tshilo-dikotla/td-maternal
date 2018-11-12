@@ -1,24 +1,24 @@
 from django.contrib import admin
 
 from ..admin_site import td_maternal_admin
-from ..forms import MaternalEligibilityForm
-from ..models import MaternalEligibility
+from ..forms import SubjectScreeningForm
+from ..models import SubjectScreening
 from .modeladmin_mixins import ModelAdminMixin
 
 
-@admin.register(MaternalEligibility, site=td_maternal_admin)
-class MaternalEligibilityAdmin(ModelAdminMixin, admin.ModelAdmin):
+@admin.register(SubjectScreening, site=td_maternal_admin)
+class SubjectScreeningAdmin(ModelAdminMixin, admin.ModelAdmin):
 
-    form = MaternalEligibilityForm
+    form = SubjectScreeningForm
 
-    fields = ('eligibility_id',
+    fields = ('screening_identifier',
               'report_datetime',
               'age_in_years',
               'has_omang')
 
     radio_fields = {'has_omang': admin.VERTICAL}
 
-    readonly_fields = ('eligibility_id',)
+    readonly_fields = ('screening_identifier',)
 
     list_display = (
         'report_datetime', 'age_in_years', 'is_eligible', 'is_consented')
