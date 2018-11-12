@@ -35,21 +35,15 @@ class AntenatalVisitMembership(UniqueSubjectIdentifierFieldMixin, BaseUuidModel)
         super(AntenatalVisitMembership, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "{0}".format(self.registered_subject.subject_identifier)
+        return f"{self.subject_identifier}"
 
-    def natural_key(self):
-        return self.registered_subject.natural_key()
-    natural_key.dependencies = ['edc_registration.registeredsubject']
+#     def natural_key(self):
+#         return self.registered_subject.natural_key()
+#     natural_key.dependencies = ['edc_registration.registeredsubject']
 
     def get_registration_datetime(self):
         return self.report_datetime
 
-    @property
-    def subject_identifier(self):
-        return self.registered_subject.subject_identifier
-
-    def get_subject_identifier(self):
-        return self.registered_subject.subject_identifier
 
     class Meta:
         app_label = 'td_maternal'
