@@ -1,20 +1,19 @@
+import re
+
 from django.apps import apps
 from django.db import models
-
-from edc_base.model_mixins import BaseUuidModel
-from edc_protocol.validators import datetime_not_before_study_start
-from edc_base.model_validators import datetime_not_future
 from edc_base.model_managers import HistoricalRecords
+from edc_base.model_mixins import BaseUuidModel
+from edc_base.model_validators import datetime_not_future
 from edc_base.sites import SiteModelMixin
 from edc_constants.choices import YES_NO
 from edc_constants.constants import UUID_PATTERN
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
+from edc_protocol.validators import datetime_not_before_study_start
 from edc_search.model_mixins import SearchSlugManager, SearchSlugModelMixin
 
-import re
-
-from .eligibility import Eligibility
 from ..identifiers import ScreeningIdentifier
+from .eligibility import Eligibility
 
 
 class SubjectScreeningManager(SearchSlugManager, models.Manager):
@@ -100,7 +99,6 @@ class SubjectScreening(SubjectIdentifierModelMixin, SiteModelMixin,
 
     def save(self, *args, **kwargs):
         eligibility_criteria = Eligibility(self.age_in_years, self.has_omang)
-        self.set_uuid_for_eligibility_if_none()
         self.is_eligible = eligibility_criteria.is_eligible
         self.ineligibility = eligibility_criteria.error_message
         if not self.id:
