@@ -1,43 +1,55 @@
 from django.contrib import admin
 from edc_consent.actions import (
     flag_as_verified_against_paper, unflag_as_verified_against_paper)
+from edc_consent.modeladmin_mixins import ModelAdminConsentMixin
+from edc_model_admin import audit_fieldset_tuple, audit_fields
+from simple_history.admin import SimpleHistoryAdmin
 
 from ..admin_site import td_maternal_admin
 from ..forms import SubjectConsentForm
-from ..models import SubjectConsent, MaternalEligibility
+from ..models import MaternalEligibility, SubjectConsent
 from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(SubjectConsent, site=td_maternal_admin)
-class SubjectConsentAdmin(ModelAdminMixin, admin.ModelAdmin):
+class SubjectConsentAdmin(ModelAdminConsentMixin, ModelAdminMixin,
+                          SimpleHistoryAdmin, admin.ModelAdmin):
 
     form = SubjectConsentForm
 
-    fields = ('maternal_eligibility',
-              'first_name',
-              'last_name',
-              'initials',
-              'language',
-              #               'study_site',
-              'recruit_source',
-              'recruit_source_other',
-              'recruitment_clinic',
-              'recruitment_clinic_other',
-              'is_literate',
-              'witness_name',
-              'consent_datetime',
-              'dob',
-              'is_dob_estimated',
-              'citizen',
-              'identity',
-              'identity_type',
-              'confirm_identity',
-              'comment',
-              'consent_reviewed',
-              'study_questions',
-              'assessment_score',
-              'consent_signature',
-              'consent_copy')
+    fieldsets = (
+        (None, {
+            'fields': (
+                'screening_identifier',
+                'subject_identifier',
+                'first_name',
+                'last_name',
+                'initials',
+                'language',
+                #               'study_site',
+                'recruit_source',
+                'recruit_source_other',
+                'recruitment_clinic',
+                'recruitment_clinic_other',
+                'is_literate',
+                'witness_name',
+                'consent_datetime',
+                'dob',
+                'is_dob_estimated',
+                'citizen',
+                'identity',
+                'identity_type',
+                'confirm_identity',
+                'comment')}),
+        ('Review Questions', {
+            'fields': (
+                'consent_reviewed',
+                'study_questions',
+                'assessment_score',
+                'consent_signature',
+                'consent_copy'),
+            'description': 'The following questions are directed to the interviewer.'}),
+        audit_fieldset_tuple)
 
     radio_fields = {
         'assessment_score': admin.VERTICAL,
@@ -75,14 +87,6 @@ class SubjectConsentAdmin(ModelAdminMixin, admin.ModelAdmin):
         flag_as_verified_against_paper,
         unflag_as_verified_against_paper, ]
 
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "maternal_eligibility":
-            kwargs["queryset"] = MaternalEligibility.objects.filter(
-                registered_subject__id__exact=request.GET.get('registered_subject'))
-        else:
-            self.readonly_fields = list(self.readonly_fields)
-            try:
-                self.readonly_fields.index('registered_subject')
-            except ValueError:
-                self.readonly_fields.append('registered_subject')
-        return super(SubjectConsentAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+    def get_readonly_fields(self, request, obj=None):
+        return (super().get_readonly_fields(request, obj=obj)
+                + audit_fields)

@@ -10,12 +10,9 @@ class SubjectConsentForm(
         SiteModelFormMixin, FormValidatorMixin, ConsentModelFormMixin,
         forms.ModelForm):
 
-    #     study_site = forms.ChoiceField(
-    #         label='Study site',
-    #         choices=STUDY_SITES,
-    #         initial=settings.DEFAULT_STUDY_SITE,
-    #         help_text="",
-    #         widget=AdminRadioSelect(renderer=AdminRadioFieldRenderer))
+    screening_identifier = forms.CharField(
+        label='Screening Identifier',
+        widget=forms.TextInput(attrs={'readonly': 'readonly'}))
 
     class Meta:
         model = SubjectConsent
