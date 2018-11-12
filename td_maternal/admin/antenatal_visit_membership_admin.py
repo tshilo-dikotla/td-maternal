@@ -10,13 +10,12 @@ class AntenataVisitMembershipAdmin(admin.ModelAdmin, ModelAdminMixin):
 
     form = AntenatalVisitMembershipForm
 
-    search_fields = ['registered_subject__subject_identifier',
-                     'registered_subject__initials']
+    search_fields = ['subject_identifier']
 
     radio_fields = {'antenatal_visits': admin.VERTICAL}
 
     list_display = (
-        'registered_subject', 'report_datetime', 'antenatal_visits')
+        'report_datetime', 'antenatal_visits')
 
 
 admin.site.register(AntenatalVisitMembership, AntenataVisitMembershipAdmin)

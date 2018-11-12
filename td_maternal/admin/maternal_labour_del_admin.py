@@ -11,8 +11,7 @@ class MaternalLabourDelAdmin(admin.ModelAdmin, ModelAdminMixin):
     dashboard_type = 'maternal'
     form = MaternalLabourDelForm
 
-    list_display = ('registered_subject',
-                    'delivery_datetime',
+    list_display = ('delivery_datetime',
                     'labour_hrs',
                     'delivery_hospital',
                     'valid_regiment_duration')
@@ -20,7 +19,7 @@ class MaternalLabourDelAdmin(admin.ModelAdmin, ModelAdminMixin):
     list_filter = ('delivery_hospital',
                    'valid_regiment_duration')
 
-    search_fields = ('registered_subject__subject_identifier', )
+    search_fields = ('subject_identifier', )
 
     radio_fields = {'delivery_time_estimated': admin.VERTICAL,
                     'delivery_hospital': admin.VERTICAL,

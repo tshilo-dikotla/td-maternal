@@ -10,11 +10,9 @@ class AntenatalEnrollmentAdmin(admin.ModelAdmin, ModelAdminMixin):
 
     form = AntenatalEnrollmentForm
 
-    search_fields = ['registered_subject__subject_identifier',
-                     'registered_subject__initials']
+    search_fields = ['subject_identifier']
 
-    fields = ('registered_subject',
-              'report_datetime',
+    fields = ('report_datetime',
               'knows_lmp',
               'last_period_date',
               'edd_by_lmp',
@@ -49,5 +47,5 @@ class AntenatalEnrollmentAdmin(admin.ModelAdmin, ModelAdminMixin):
                     'rapid_test_result': admin.VERTICAL,
                     'knows_lmp': admin.VERTICAL}
     list_display = (
-        'registered_subject', 'report_datetime', 'evidence_hiv_status',
+        'report_datetime', 'evidence_hiv_status',
         'will_get_arvs', 'ga_lmp_anc_wks', 'enrollment_hiv_status')
