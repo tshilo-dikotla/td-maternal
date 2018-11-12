@@ -2,10 +2,11 @@ from django.contrib import admin
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalUltraSoundInitialForm
 from ..models import MaternalUltraSoundInitial
+from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(MaternalUltraSoundInitial, site=td_maternal_admin)
-class MaternalUltraSoundInitialAdmin(admin.ModelAdmin):
+class MaternalUltraSoundInitialAdmin(admin.ModelAdmin, ModelAdminMixin):
 
     form = MaternalUltraSoundInitialForm
 

@@ -2,10 +2,11 @@ from django.contrib import admin
 from ..admin_site import td_maternal_admin
 from ..models import MaternalRando
 from ..forms import MaternalRandomizationForm
+from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(MaternalRando, site=td_maternal_admin)
-class MartenalRandoAdmin(admin.ModelAdmin):
+class MartenalRandoAdmin(admin.ModelAdmin, ModelAdminMixin):
 
     form = MaternalRandomizationForm
 

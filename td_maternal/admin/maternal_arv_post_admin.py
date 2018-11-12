@@ -4,7 +4,7 @@ from ..admin_site import td_maternal_admin
 from ..forms import (MaternalArvPostForm,
                      MaternalArvPostMedForm, MaternalArvPostAdhForm)
 from ..models import MaternalArvPost, MaternalArvPostMed, MaternalArvPostAdh
-from .modeladmin_mixins import CrfModelAdminMixin
+from .modeladmin_mixins import CrfModelAdminMixin, ModelAdminMixin
 
 
 class MaternalArvPostMedInlineAdmin(TabularInlineMixin, admin.TabularInline):
@@ -15,7 +15,7 @@ class MaternalArvPostMedInlineAdmin(TabularInlineMixin, admin.TabularInline):
 
 
 @admin.register(MaternalArvPostMed, site=td_maternal_admin)
-class MaternalArvPostMedAdmin(admin.ModelAdmin):
+class MaternalArvPostMedAdmin(admin.ModelAdmin, ModelAdminMixin):
 
     form = MaternalArvPostMedForm
     list_display = ('maternal_arv_post', 'arv_code',

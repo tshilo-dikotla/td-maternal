@@ -2,10 +2,11 @@ from django.contrib import admin
 from ..admin_site import td_maternal_admin
 from ..models import MaternalContact
 from ..forms import MaternalContactForm
+from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(MaternalContact, site=td_maternal_admin)
-class MaternalContactAdmin(admin.ModelAdmin):
+class MaternalContactAdmin(admin.ModelAdmin, ModelAdminMixin):
 
     form = MaternalContactForm
 

@@ -5,10 +5,11 @@ from edc_consent.actions import (
 
 from ..forms import SpecimenConsentForm
 from ..models import SpecimenConsent
+from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(SpecimenConsent, site=td_maternal_admin)
-class SpecimenConsentAdmin(admin.ModelAdmin):
+class SpecimenConsentAdmin(admin.ModelAdmin, ModelAdminMixin):
 
     form = SpecimenConsentForm
 

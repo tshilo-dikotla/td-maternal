@@ -5,10 +5,11 @@ from edc_consent.actions import (
 from ..admin_site import td_maternal_admin
 from ..forms import SubjectConsentForm
 from ..models import SubjectConsent, MaternalEligibility
+from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(SubjectConsent, site=td_maternal_admin)
-class SubjectConsentAdmin(admin.ModelAdmin):
+class SubjectConsentAdmin(admin.ModelAdmin, ModelAdminMixin):
 
     form = SubjectConsentForm
 
