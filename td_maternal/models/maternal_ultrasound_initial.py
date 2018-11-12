@@ -7,9 +7,10 @@ from ..choices import GESTATIONS_NUMBER, ZERO_ONE
 from ..validators import validate_ga_by_ultrasound, validate_fetal_weight
 
 from .model_mixins import UltraSoundModelMixin
+from edc_base.model_mixins.base_uuid_model import BaseUuidModel
 
 
-class MaternalUltraSoundInitial(UltraSoundModelMixin):
+class MaternalUltraSoundInitial(UltraSoundModelMixin, BaseUuidModel):
 
     """ The initial ultra sound model that influences mother's
     enrollment in to study.
