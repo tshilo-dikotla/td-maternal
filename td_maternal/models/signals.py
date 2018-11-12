@@ -7,7 +7,7 @@ from edc_registration.models import RegisteredSubject
 from edc_appointment.models import Appointment
 from edc_constants.constants import (
     FEMALE, SCREENED, CONSENTED, FAILED_ELIGIBILITY, ALIVE, OFF_STUDY, ON_STUDY)
-from .maternal_consent import SubjectConsent
+from td_maternal.models.subject_consent import SubjectConsent
 from .maternal_ultrasound_initial import MaternalUltraSoundInitial
 from .antenatal_enrollment import AntenatalEnrollment
 from .maternal_eligibility import MaternalEligibility

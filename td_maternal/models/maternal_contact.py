@@ -10,7 +10,7 @@ from edc_protocol.validators import datetime_not_before_study_start
 from edc_registration.models import RegisteredSubject
 
 from ..maternal_choices import CALL_REASON, CONTACT_TYPE
-from .maternal_consent import SubjectConsent
+from td_maternal.models.subject_consent import SubjectConsent
 
 
 class MaternalContactManager(models.Manager):

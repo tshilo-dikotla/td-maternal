@@ -8,7 +8,7 @@ from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import datetime_not_before_study_start
 
 
-from .maternal_consent import SubjectConsent
+from td_maternal.models.subject_consent import SubjectConsent
 
 
 class AntenatalVisitMembership(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):

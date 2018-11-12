@@ -10,7 +10,7 @@ from .maternal_arv_preg import MaternalArv
 from .maternal_arv_preg import MaternalArvPreg
 from .maternal_clinical_measurements_one import MaternalClinicalMeasurementsOne
 from .maternal_clinical_measurements_two import MaternalClinicalMeasurementsTwo
-from .maternal_consent import SubjectConsent
+from td_maternal.models.subject_consent import SubjectConsent
 from .maternal_contact import MaternalContact
 from .maternal_contraception import MaternalContraception
 from .maternal_demographics import MaternalDemographics
