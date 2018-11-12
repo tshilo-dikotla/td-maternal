@@ -12,7 +12,6 @@ from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 from edc_search.model_mixins import SearchSlugManager, SearchSlugModelMixin
 
 import re
-from uuid import uuid4
 
 from .eligibility import Eligibility
 
@@ -42,7 +41,7 @@ class SubjectIdentifierModelMixin(NonUniqueSubjectIdentifierModelMixin,
         abstract = True
 
 
-class MaternalEligibility(SubjectIdentifierModelMixin,
+class SubjectScreening(SubjectIdentifierModelMixin,
                           SiteModelMixin, BaseUuidModel):
     """ A model completed by the user to test and capture the result of
     the pre-consent eligibility checks.
@@ -50,7 +49,7 @@ class MaternalEligibility(SubjectIdentifierModelMixin,
     This model has no PII.
     """
 
-    eligibility_id = models.CharField(
+    screening_identifier = models.CharField(
         verbose_name="Eligibility Identifier",
         max_length=36,
         unique=True,
@@ -102,10 +101,10 @@ class MaternalEligibility(SubjectIdentifierModelMixin,
         self.set_uuid_for_eligibility_if_none()
         self.is_eligible = eligibility_criteria.is_eligible
         self.ineligibility = eligibility_criteria.error_message
-        super(MaternalEligibility, self).save(*args, **kwargs)
+        super(SubjectScreening, self).save(*args, **kwargs)
 
     def natural_key(self):
-        return self.eligibility_id
+        return self.screening_identifier
 
     @property
     def maternal_eligibility_loss(self):
@@ -117,7 +116,3 @@ class MaternalEligibility(SubjectIdentifierModelMixin,
         except MaternalEligibilityLoss.DoesNotExist:
             maternal_eligibility_loss = None
         return maternal_eligibility_loss
-
-    def set_uuid_for_eligibility_if_none(self):
-        if not self.eligibility_id:
-            self.eligibility_id = str(uuid4())

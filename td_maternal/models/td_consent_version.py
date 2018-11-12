@@ -4,7 +4,7 @@ from django.db.models.deletion import PROTECT
 from edc_base.model_mixins import BaseUuidModel
 from edc_protocol.validators import date_not_before_study_start
 from edc_base.model_validators import date_not_future
-from .maternal_eligibility import MaternalEligibility
+from td_maternal.models.subject_screening import MaternalEligibility
 
 
 CONSENT_VERSION = (

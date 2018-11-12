@@ -15,7 +15,7 @@ from .maternal_contact import MaternalContact
 from .maternal_contraception import MaternalContraception
 from .maternal_demographics import MaternalDemographics
 from .maternal_diagnoses import MaternalDiagnoses
-from .maternal_eligibility import MaternalEligibility
+from td_maternal.models.subject_screening import MaternalEligibility
 from .maternal_eligibility_loss import MaternalEligibilityLoss
 from .maternal_hiv_interim_hx import MaternalHivInterimHx
 from .maternal_interim_idcc_data import MaternalInterimIdcc

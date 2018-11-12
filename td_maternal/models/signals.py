@@ -10,7 +10,7 @@ from edc_constants.constants import (
 from td_maternal.models.subject_consent import SubjectConsent
 from .maternal_ultrasound_initial import MaternalUltraSoundInitial
 from .antenatal_enrollment import AntenatalEnrollment
-from .maternal_eligibility import MaternalEligibility
+from td_maternal.models.subject_screening import MaternalEligibility
 from .maternal_eligibility_loss import MaternalEligibilityLoss
 from .maternal_visit import MaternalVisit
 from .maternal_labour_del import MaternalLabourDel
