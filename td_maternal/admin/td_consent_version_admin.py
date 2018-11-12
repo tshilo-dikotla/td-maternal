@@ -6,7 +6,7 @@ from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(TdConsentVersion, site=td_maternal_admin)
-class TdConsentVersionAdmin(admin.ModelAdmin, ModelAdminMixin):
+class TdConsentVersionAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = TdConsentVersionForm
 

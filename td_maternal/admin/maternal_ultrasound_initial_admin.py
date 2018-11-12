@@ -6,7 +6,7 @@ from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(MaternalUltraSoundInitial, site=td_maternal_admin)
-class MaternalUltraSoundInitialAdmin(admin.ModelAdmin, ModelAdminMixin):
+class MaternalUltraSoundInitialAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalUltraSoundInitialForm
 

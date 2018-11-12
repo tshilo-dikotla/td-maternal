@@ -6,7 +6,7 @@ from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(AntenatalEnrollment, site=td_maternal_admin)
-class AntenatalEnrollmentAdmin(admin.ModelAdmin, ModelAdminMixin):
+class AntenatalEnrollmentAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = AntenatalEnrollmentForm
 

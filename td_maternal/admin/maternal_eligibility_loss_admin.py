@@ -6,7 +6,7 @@ from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(MaternalEligibilityLoss, site=td_maternal_admin)
-class MaternalEligibilityLossAdmin(admin.ModelAdmin, ModelAdminMixin):
+class MaternalEligibilityLossAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalEligibilityLossForm
 

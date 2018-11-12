@@ -9,7 +9,7 @@ from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(SpecimenConsent, site=td_maternal_admin)
-class SpecimenConsentAdmin(admin.ModelAdmin, ModelAdminMixin):
+class SpecimenConsentAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = SpecimenConsentForm
 

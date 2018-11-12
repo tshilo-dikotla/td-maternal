@@ -6,7 +6,7 @@ from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(MaternalRando, site=td_maternal_admin)
-class MartenalRandoAdmin(admin.ModelAdmin, ModelAdminMixin):
+class MartenalRandoAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalRandomizationForm
 

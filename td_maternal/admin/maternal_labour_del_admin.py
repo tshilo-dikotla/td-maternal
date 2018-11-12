@@ -6,7 +6,7 @@ from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(MaternalLabourDel, site=td_maternal_admin)
-class MaternalLabourDelAdmin(admin.ModelAdmin, ModelAdminMixin):
+class MaternalLabourDelAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     dashboard_type = 'maternal'
     form = MaternalLabourDelForm
@@ -31,7 +31,7 @@ class MaternalLabourDelAdmin(admin.ModelAdmin, ModelAdminMixin):
 
 
 @admin.register(MaternalHivInterimHx, site=td_maternal_admin)
-class MaternalHivInterimHxAdmin(admin.ModelAdmin, ModelAdminMixin):
+class MaternalHivInterimHxAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalHivInterimHxForm
 
