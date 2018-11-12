@@ -14,6 +14,7 @@ from edc_search.model_mixins import SearchSlugManager, SearchSlugModelMixin
 import re
 
 from .eligibility import Eligibility
+from ..identifiers import ScreeningIdentifier
 
 
 class SubjectScreeningManager(SearchSlugManager, models.Manager):
@@ -41,13 +42,14 @@ class SubjectIdentifierModelMixin(NonUniqueSubjectIdentifierModelMixin,
         abstract = True
 
 
-class SubjectScreening(SubjectIdentifierModelMixin,
-                          SiteModelMixin, BaseUuidModel):
+class SubjectScreening(SubjectIdentifierModelMixin, SiteModelMixin,
+                       BaseUuidModel):
     """ A model completed by the user to test and capture the result of
     the pre-consent eligibility checks.
 
     This model has no PII.
     """
+    identifier_cls = ScreeningIdentifier
 
     screening_identifier = models.CharField(
         verbose_name="Eligibility Identifier",
@@ -101,6 +103,8 @@ class SubjectScreening(SubjectIdentifierModelMixin,
         self.set_uuid_for_eligibility_if_none()
         self.is_eligible = eligibility_criteria.is_eligible
         self.ineligibility = eligibility_criteria.error_message
+        if not self.id:
+            self.screening_identifier = self.identifier_cls().identifier
         super(SubjectScreening, self).save(*args, **kwargs)
 
     def natural_key(self):
