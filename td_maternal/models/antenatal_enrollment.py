@@ -1,21 +1,18 @@
 from django.db import models
-from django.db.models.deletion import PROTECT
 
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import date_not_future
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NO, YES
+from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import date_not_before_study_start
-from edc_registration.models import RegisteredSubject
 
 from .enrollment_mixin import EnrollmentMixin
 
 
-class AntenatalEnrollment(EnrollmentMixin, BaseUuidModel):
+class AntenatalEnrollment(UniqueSubjectIdentifierFieldMixin, EnrollmentMixin, BaseUuidModel):
 
-    registered_subject = models.OneToOneField(
-        RegisteredSubject, on_delete=PROTECT, null=True)
 
     knows_lmp = models.CharField(
         verbose_name="Does the mother know the approximate date "

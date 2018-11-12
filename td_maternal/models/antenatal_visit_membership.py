@@ -1,22 +1,20 @@
 from django.db import models
-from django.db.models.deletion import PROTECT
-from edc_base.model_mixins import BaseUuidModel
+
 from edc_base.model_managers import HistoricalRecords
+from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import datetime_not_future
-from edc_protocol.validators import datetime_not_before_study_start
 from edc_constants.choices import YES_NO
-from edc_registration.models import RegisteredSubject
+from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
+from edc_protocol.validators import datetime_not_before_study_start
 
 
 from .maternal_consent import SubjectConsent
 
 
-class AntenatalVisitMembership(BaseUuidModel):
+class AntenatalVisitMembership(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
 
     consent_model = SubjectConsent
 
-    registered_subject = models.OneToOneField(
-        RegisteredSubject, on_delete=PROTECT, null=True)
 
     report_datetime = models.DateTimeField(
         verbose_name="Report date",

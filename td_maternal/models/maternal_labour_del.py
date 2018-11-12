@@ -1,13 +1,12 @@
 from django.db import models
-from django.db.models.deletion import PROTECT
 
 from edc_base.model_fields import OtherCharField
-from edc_base.model_mixins import BaseUuidModel
-from edc_protocol.validators import datetime_not_before_study_start
-from edc_base.model_validators import datetime_not_future
 from edc_base.model_managers import HistoricalRecords
+from edc_base.model_mixins import BaseUuidModel
+from edc_base.model_validators import datetime_not_future
 from edc_constants.choices import YES_NO, YES_NO_NA
-from edc_registration.models import RegisteredSubject
+from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
+from edc_protocol.validators import datetime_not_before_study_start
 
 
 from ..maternal_choices import (
@@ -16,14 +15,11 @@ from ..maternal_choices import (
 from .list_models import DeliveryComplications
 
 
-class MaternalLabourDel(BaseUuidModel):
+class MaternalLabourDel(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
 
     """ A model completed by the user on Maternal Labor and Delivery which "
     "triggers registration of infants.
     """
-
-    registered_subject = models.OneToOneField(
-        RegisteredSubject, on_delete=PROTECT, null=True)
 
     report_datetime = models.DateTimeField(
         verbose_name="Report date",

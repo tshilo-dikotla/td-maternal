@@ -52,9 +52,6 @@ class MaternalEligibility(SubjectIdentifierModelMixin,
     This model has no PII.
     """
 
-    registered_subject = models.OneToOneField(
-        RegisteredSubject, on_delete=PROTECT, null=True)
-
     eligibility_id = models.CharField(
         verbose_name="Eligibility Identifier",
         max_length=36,
