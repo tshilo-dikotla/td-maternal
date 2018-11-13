@@ -19,6 +19,7 @@ from edc_base.model_fields import OtherCharField
 
 from ..maternal_choices import RECRUIT_SOURCE, RECRUIT_CLINIC
 from .model_mixins import SearchSlugModelMixin
+from .subject_screening import SubjectScreening
 
 
 class SubjectConsentManager(SearchSlugManager, models.Manager):
@@ -37,7 +38,7 @@ class SubjectConsent(
 
     """ A model completed by the user on the mother's consent. """
 
-    maternal_eligibility_model = 'td_maternal.screeningeligibility'
+    subject_screening_model = 'td_maternal.subjectscreening'
 
     screening_identifier = models.CharField(
         verbose_name='Screening identifier',
@@ -88,7 +89,7 @@ class SubjectConsent(
         return model_cls.objects.get(
             screening_identifier=self.screening_identifier)
 
-    class Meta:
+    class Meta(ConsentModelMixin.Meta):
         app_label = 'td_maternal'
         verbose_name = 'Maternal Consent'
         unique_together = (('subject_identifier', 'version'),

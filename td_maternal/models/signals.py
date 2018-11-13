@@ -1,3 +1,5 @@
+from django.apps import apps as django_apps
+from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -7,13 +9,12 @@ from edc_constants.constants import (
     FEMALE, SCREENED, CONSENTED, FAILED_ELIGIBILITY, ALIVE, OFF_STUDY, ON_STUDY)
 from edc_registration.models import RegisteredSubject
 
-from td_maternal.models.subject_consent import SubjectConsent
-from td_maternal.models.subject_screening import SubjectScreening
-
 from .antenatal_enrollment import AntenatalEnrollment
 from .maternal_labour_del import MaternalLabourDel
 from .maternal_ultrasound_initial import MaternalUltraSoundInitial
 from .maternal_visit import MaternalVisit
+from .subject_consent import SubjectConsent
+from .subject_screening import SubjectScreening
 
 
 def create_maternal_registered_subject(instance):
@@ -46,37 +47,16 @@ def maternal_consent_on_post_save(sender, instance, raw, created, using, **kwarg
     """Update maternal_eligibility consented flag and consent fields on registered subject."""
     if not raw:
         if isinstance(instance, SubjectConsent):
-            maternal_eligibility = instance.maternal_eligibility
-            if not maternal_eligibility.is_consented:
-                maternal_eligibility.is_consented = True
-                maternal_eligibility.save(update_fields=['is_consented'])
-                maternal_eligibility.registered_subject.registration_datetime = instance.consent_datetime
-                maternal_eligibility.registered_subject.registration_status = CONSENTED
-                maternal_eligibility.registered_subject.subject_identifier = instance.subject_identifier
-                maternal_eligibility.registered_subject.initials = instance.initials
-                maternal_eligibility.registered_subject.first_name = instance.first_name
-                maternal_eligibility.registered_subject.last_name = instance.last_name
-                maternal_eligibility.registered_subject.identity = instance.identity
-                maternal_eligibility.registered_subject.dob = instance.dob
-                maternal_eligibility.registered_subject.subject_consent_id = instance.id
-                maternal_eligibility.registered_subject.subject_consent_id = instance.pk
-                maternal_eligibility.registered_subject.save()
-            if instance.version == '3':
-                try:
-                    maternal_labour_del = MaternalLabourDel.objects.get(
-                        registered_subject=instance.maternal_eligibility.registered_subject)
-                except MaternalLabourDel.DoesNotExist:
-                    pass
-                else:
-                    maternal_labour_del.save()
-#                     from td_infant.models import InfantBirth
-#                     try:
-#                         infant_birth = InfantBirth.objects.get(
-#                             maternal_labour_del=maternal_labour_del)
-#                     except InfantBirth.DoesNotExist:
-#                         pass
-#                     else:
-#                         infant_birth.save()
+            try:
+                subject_screening = SubjectScreening.objects.get(
+                    screening_identifier=instance.screening_identifier)
+            except SubjectScreening.DoesNotExist:
+                raise ValidationError(
+                    'Subject Consent cannot be created without Subject Screening.')
+            else:
+                if not subject_screening.is_consented:
+                    subject_screening.is_consented = True
+                    subject_screening.save(update_fields=['is_consented'])
 
 #
 # @receiver(post_save, weak=False, dispatch_uid="ineligible_take_off_study")
