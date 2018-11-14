@@ -6,6 +6,7 @@ from edc_consent.actions import (
 from ..forms import SpecimenConsentForm
 from ..models import SpecimenConsent
 from .modeladmin_mixins import ModelAdminMixin
+from edc_model_admin import audit_fieldset_tuple
 
 
 @admin.register(SpecimenConsent, site=td_maternal_admin)
@@ -13,14 +14,18 @@ class SpecimenConsentAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = SpecimenConsentForm
 
-    fields = ('consent_datetime',
-              'language',
-              'may_store_samples',
-              'is_literate',
-              'witness_name',
-              'purpose_explained',
-              'purpose_understood',
-              )
+    fieldsets = (
+        (None, {
+            'fields': [
+                'consent_datetime',
+                'language',
+                'may_store_samples',
+                'is_literate',
+                'witness_name',
+                'purpose_explained',
+                'purpose_understood']}
+         ), audit_fieldset_tuple)
+
     radio_fields = {'language': admin.VERTICAL,
                     'may_store_samples': admin.VERTICAL,
                     'is_literate': admin.VERTICAL, }
