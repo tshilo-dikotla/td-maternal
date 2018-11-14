@@ -26,17 +26,23 @@ class MaternalDemographicsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
             'fields': [
                 'maternal_visit',
                 'marital_status',
+                'marital_status_other',
                 'ethnicity',
+                'ethnicity_other',
                 'highest_education',
                 'current_occupation',
+                'current_occupation_other',
                 'provides_money',
                 'money_earned',
+                'money_earned_other',
                 'own_phone',
                 'water_source',
                 'house_electrified',
                 'house_fridge',
                 'cooking_method',
                 'toilet_facility',
+                'toilet_facility_other',
+                'house_people_number',
                 'house_type']}
          ), audit_fieldset_tuple)
 
