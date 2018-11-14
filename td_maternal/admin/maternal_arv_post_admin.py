@@ -5,6 +5,7 @@ from ..forms import (MaternalArvPostForm,
                      MaternalArvPostMedForm, MaternalArvPostAdhForm)
 from ..models import MaternalArvPost, MaternalArvPostMed, MaternalArvPostAdh
 from .modeladmin_mixins import CrfModelAdminMixin, ModelAdminMixin
+from edc_model_admin import audit_fieldset_tuple
 
 
 class MaternalArvPostMedInlineAdmin(TabularInlineMixin, admin.TabularInline):
@@ -20,6 +21,15 @@ class MaternalArvPostMedAdmin(admin.ModelAdmin, ModelAdminMixin):
     form = MaternalArvPostMedForm
     list_display = ('maternal_arv_post', 'arv_code',
                     'dose_status', 'modification_date', 'modification_code')
+    fieldsets = (
+        (None, {
+            'fields': [
+                'maternal_visit',
+                'arv_code',
+                'dose_status',
+                'modification_date',
+                'modification_code']}
+         ), audit_fieldset_tuple)
 
     radio_fields = {
         "arv_code": admin.VERTICAL,
@@ -33,12 +43,15 @@ class MaternalArvPostAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalArvPostForm
 
-    fields = (
-        "maternal_visit",
-        "on_arv_since",
-        "on_arv_reason",
-        "on_arv_reason_other",
-        "arv_status")
+    fieldsets = (
+        (None, {
+            'fields': [
+                'maternal_visit',
+                'on_arv_since',
+                'on_arv_reason',
+                'on_arv_reason_other',
+                'arv_status']}
+         ), audit_fieldset_tuple)
 
     radio_fields = {
         "on_arv_since": admin.VERTICAL,
@@ -51,9 +64,12 @@ class MaternalArvPostAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 class MaternalArvPostAdhAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalArvPostAdhForm
-    fields = (
-        "maternal_visit",
-        "missed_doses",
-        "missed_days",
-        "missed_days_discnt",
-        "comment")
+    fieldsets = (
+        (None, {
+            'fields': [
+                'maternal_visit',
+                'missed_doses',
+                'missed_days',
+                'missed_days_discnt',
+                'comment']}
+         ), audit_fieldset_tuple)
