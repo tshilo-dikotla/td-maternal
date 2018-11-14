@@ -3,6 +3,7 @@ from ..admin_site import td_maternal_admin
 from ..models import MaternalContact
 from ..forms import MaternalContactForm
 from .modeladmin_mixins import ModelAdminMixin
+from edc_model_admin import audit_fieldset_tuple
 
 
 @admin.register(MaternalContact, site=td_maternal_admin)
@@ -10,15 +11,18 @@ class MaternalContactAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalContactForm
 
-    fields = [
-        'registered_subject',
-        'report_datetime',
-        'contact_type',
-        'contact_datetime',
-        'call_reason',
-        'call_reason_other',
-        'contact_success',
-        'contact_comment']
+    fieldsets = (
+        (None, {
+            'fields': [
+                'report_datetime',
+                'registered_subject',
+                'contact_type',
+                'contact_datetime',
+                'call_reason',
+                'call_reason_other',
+                'contact_success',
+                'contact_comment']}
+         ), audit_fieldset_tuple)
 
     list_display = [
         'registered_subject', 'contact_type',
