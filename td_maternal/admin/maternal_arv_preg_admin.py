@@ -4,6 +4,7 @@ from ..admin_site import td_maternal_admin
 from ..forms import MaternalArvPregForm, MaternalArvForm
 from ..models import MaternalArvPreg, MaternalArv
 from .modeladmin_mixins import CrfModelAdminMixin, ModelAdminMixin
+from edc_model_admin import audit_fieldset_tuple
 
 
 class MaternalArvInlineAdmin(TabularInlineMixin, admin.TabularInline):
@@ -24,6 +25,15 @@ class MaternalArvPregAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     inlines = [MaternalArvInlineAdmin, ]
     list_display = ('maternal_visit', 'took_arv',)
     list_filter = ('took_arv',)
+
+    fieldsets = (
+        (None, {
+            'fields': [
+                'maternal_visit',
+                'took_arv',
+                'is_interrupt',
+                'interrupt']}
+         ), audit_fieldset_tuple)
 
     radio_fields = {'took_arv': admin.VERTICAL,
                     'is_interrupt': admin.VERTICAL,
