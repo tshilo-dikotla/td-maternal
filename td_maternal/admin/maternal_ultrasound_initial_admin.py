@@ -3,6 +3,7 @@ from ..admin_site import td_maternal_admin
 from ..forms import MaternalUltraSoundInitialForm
 from ..models import MaternalUltraSoundInitial
 from .modeladmin_mixins import ModelAdminMixin
+from edc_model_admin import audit_fieldset_tuple
 
 
 @admin.register(MaternalUltraSoundInitial, site=td_maternal_admin)
@@ -10,20 +11,19 @@ class MaternalUltraSoundInitialAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalUltraSoundInitialForm
 
-    fields = (
-        'number_of_gestations',
-        'bpd',
-        'hc',
-        'ac',
-        'fl',
-        'ga_by_lmp',
-        'ga_by_ultrasound_wks',
-        'ga_by_ultrasound_days',
-        'ga_confirmed',
-        'est_fetal_weight',
-        'est_edd_ultrasound',
-        'edd_confirmed',
-        'amniotic_fluid_volume')
+    fieldsets = (
+        (None, {
+            'fields': [
+                'number_of_gestations',
+                'ga_by_lmp',
+                'ga_by_ultrasound_wks',
+                'ga_by_ultrasound_days',
+                'est_fetal_weight',
+                'est_edd_ultrasound',
+                'edd_confirmed',
+                'ga_confirmed',
+                'ga_confrimation_method']}
+         ), audit_fieldset_tuple)
 
     readonly_fields = ('edd_confirmed', 'ga_confirmed', 'ga_by_lmp')
 
