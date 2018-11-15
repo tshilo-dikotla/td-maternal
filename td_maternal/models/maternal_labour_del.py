@@ -127,3 +127,4 @@ class MaternalLabourDel(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
     class Meta:
         app_label = 'td_maternal'
         verbose_name = "Delivery"
+        verbose_name_plural = "Deliveries"

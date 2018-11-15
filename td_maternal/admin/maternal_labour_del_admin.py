@@ -23,7 +23,6 @@ class MaternalLabourDelAdmin(ModelAdminMixin, admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': [
-                'maternal_visit',
                 'report_datetime',
                 'delivery_datetime',
                 'delivery_time_estimated',
