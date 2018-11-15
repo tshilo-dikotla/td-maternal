@@ -5,7 +5,7 @@ from edc_constants.constants import YES, NO
 from faker import Faker
 from model_mommy.recipe import Recipe, seq
 
-from .models import SubjectConsent
+from .models import SubjectConsent, SubjectScreening
 
 
 fake = Faker()
@@ -32,3 +32,9 @@ subjectconsent = Recipe(
     study_questions=YES,
     site=Site.objects.get_current(),
     subject_identifier=None)
+
+subjectscreening = Recipe(
+    SubjectScreening,
+    report_datetime=get_utcnow(),
+    age_in_years=28,
+    has_omang=YES)
