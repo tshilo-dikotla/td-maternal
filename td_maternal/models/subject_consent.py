@@ -1,6 +1,5 @@
 from django.apps import apps as django_apps
 from django.db import models
-from django.db.models.deletion import PROTECT
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.sites.site_model_mixin import SiteModelMixin
@@ -19,7 +18,6 @@ from edc_base.model_fields import OtherCharField
 
 from ..maternal_choices import RECRUIT_SOURCE, RECRUIT_CLINIC
 from .model_mixins import SearchSlugModelMixin
-from .subject_screening import SubjectScreening
 
 
 class SubjectConsentManager(SearchSlugManager, models.Manager):
