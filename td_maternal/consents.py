@@ -17,7 +17,7 @@ v1 = Consent(
     'td_maternal.subjectconsent',
     version='1',
     start=arrow.get(
-        datetime(2016, 4, 1, 0, 0, 0), tzinfo=tzinfo).to('UTC').datetime,
+        datetime(2016, 12, 31, 0, 0, 0), tzinfo=tzinfo).to('UTC').datetime,
     end=arrow.get(
         datetime(2018, 1, 30, 23, 59, 59), tzinfo=tzinfo).to('UTC').datetime,
     age_min=18,

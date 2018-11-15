@@ -3,6 +3,7 @@ from ..admin_site import td_maternal_admin
 from ..forms import AntenatalEnrollmentForm
 from ..models import AntenatalEnrollment
 from .modeladmin_mixins import ModelAdminMixin
+from edc_model_admin.model_admin_audit_fields_mixin import audit_fieldset_tuple
 
 
 @admin.register(AntenatalEnrollment, site=td_maternal_admin)
@@ -12,26 +13,31 @@ class AntenatalEnrollmentAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     search_fields = ['subject_identifier']
 
-    fields = ('report_datetime',
-              'knows_lmp',
-              'last_period_date',
-              'edd_by_lmp',
-              'ga_lmp_enrollment_wks',
-              'ga_lmp_anc_wks',
-              'is_diabetic',
-              'will_breastfeed',
-              'will_remain_onstudy',
-              'current_hiv_status',
-              'evidence_hiv_status',
-              'week32_test',
-              'week32_test_date',
-              'week32_result',
-              'evidence_32wk_hiv_status',
-              'will_get_arvs',
-              'rapid_test_done',
-              'rapid_test_date',
-              'rapid_test_result',
-              'enrollment_hiv_status')
+    fieldsets = (
+        (None, {
+            'fields': ('report_datetime',
+                       'knows_lmp',
+                       'last_period_date',
+                       'edd_by_lmp',
+                       'ga_lmp_enrollment_wks',
+                       'ga_lmp_anc_wks',
+                       'is_diabetic',
+                       'will_breastfeed',
+                       'will_remain_onstudy',
+                       'current_hiv_status',
+                       'evidence_hiv_status',
+                       'week32_test',
+                       'week32_test_date',
+                       'week32_result',
+                       'evidence_32wk_hiv_status',
+                       'will_get_arvs',
+                       'rapid_test_done',
+                       'rapid_test_date',
+                       'rapid_test_result',
+                       'enrollment_hiv_status')},
+         ),
+        audit_fieldset_tuple
+    )
     readonly_fields = (
         'edd_by_lmp', 'ga_lmp_enrollment_wks', 'enrollment_hiv_status')
     radio_fields = {'is_diabetic': admin.VERTICAL,

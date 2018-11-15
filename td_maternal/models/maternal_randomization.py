@@ -37,10 +37,7 @@ class MaternalRando (CrfModelMixin):
     >>> else:
     >>>     print "Error"
     """
-    site = models.CharField(
-        verbose_name='Site',
-        max_length=15)
-
+    # TODO: Site brought in by the Site Model Mixin.
     sid = models.IntegerField(
         verbose_name='SID',
         unique=True)

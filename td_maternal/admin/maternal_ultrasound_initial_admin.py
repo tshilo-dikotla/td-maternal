@@ -1,6 +1,5 @@
 from django.contrib import admin
 from edc_model_admin import audit_fieldset_tuple
-
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalUltraSoundInitialForm
 from ..models import MaternalUltraSoundInitial
