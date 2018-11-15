@@ -5,10 +5,12 @@ from .maternal_arv_post_admin import MaternalArvPostAdhAdmin
 from .maternal_arv_post_admin import MaternalArvPostAdmin
 from .maternal_arv_post_admin import MaternalArvPostMedAdmin
 from .maternal_arv_post_admin import MaternalArvPostMedInlineAdmin
-from .maternal_arv_preg_admin import MaternalArvAdmin
+from .maternal_arv_admin import MaternalArvAdmin
 from .maternal_arv_preg_admin import MaternalArvPregAdmin
-from .maternal_clinical_measurements_admin import (
-    MaternalClinicalMeasurementsOneAdmin, MaternalClinicalMeasurementsTwoAdmin)
+from .maternal_clinical_measurements_one_admin import (
+    MaternalClinicalMeasurementsOneAdmin)
+from .maternal_clinical_measurements_two_admin import (
+    MaternalClinicalMeasurementsTwoAdmin)
 from .subject_consent_admin import SubjectConsentAdmin
 from .maternal_contact_admin import MaternalContactAdmin
 from .maternal_contraception_admin import MaternalContraception

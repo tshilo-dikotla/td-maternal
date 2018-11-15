@@ -6,7 +6,7 @@ from .maternal_arv_history import MaternalLifetimeArvHistory
 from .maternal_arv_post import MaternalArvPost
 from .maternal_arv_post import MaternalArvPostAdh
 from .maternal_arv_post import MaternalArvPostMed
-from .maternal_arv_preg import MaternalArv
+from .maternal_arv import MaternalArv
 from .maternal_arv_preg import MaternalArvPreg
 from .maternal_clinical_measurements_one import MaternalClinicalMeasurementsOne
 from .maternal_clinical_measurements_two import MaternalClinicalMeasurementsTwo

@@ -1,28 +1,23 @@
 from django.contrib import admin
-from edc_model_admin import TabularInlineMixin
+# from edc_model_admin import TabularInlineMixin
 from ..admin_site import td_maternal_admin
-from ..forms import MaternalArvPregForm, MaternalArvForm
-from ..models import MaternalArvPreg, MaternalArv
-from .modeladmin_mixins import CrfModelAdminMixin, ModelAdminMixin
+from ..forms import MaternalArvPregForm
+from ..models import MaternalArvPreg
+from .modeladmin_mixins import CrfModelAdminMixin
 from edc_model_admin import audit_fieldset_tuple
 
 
-class MaternalArvInlineAdmin(TabularInlineMixin, admin.TabularInline):
-    model = MaternalArv
-    form = MaternalArvForm
-    extra = 1
-    min_num = 3
-
-
-@admin.register(MaternalArv, site=td_maternal_admin)
-class MaternalArvAdmin(admin.ModelAdmin, ModelAdminMixin):
-    form = MaternalArvForm
+# class MaternalArvInlineAdmin(TabularInlineMixin, admin.TabularInline):
+#     model = MaternalArv
+#     form = MaternalArvForm
+#     extra = 1
+#     min_num = 3
 
 
 @admin.register(MaternalArvPreg, site=td_maternal_admin)
 class MaternalArvPregAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     form = MaternalArvPregForm
-    inlines = [MaternalArvInlineAdmin, ]
+#     inlines = [MaternalArvInlineAdmin, ]
     list_display = ('maternal_visit', 'took_arv',)
     list_filter = ('took_arv',)
 
