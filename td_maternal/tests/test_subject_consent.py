@@ -1,10 +1,10 @@
 import re
 from django.test import TestCase
 from edc_base.utils import get_utcnow
-from edc_constants.constants import UUID_PATTERN
 from model_mommy import mommy
 
 from ..models import SubjectConsent
+subject_identifier = '092\-[0-9\-]+'
 
 
 class TestSubjectConsent(TestCase):
@@ -23,5 +23,5 @@ class TestSubjectConsent(TestCase):
         mommy.make_recipe('td_maternal.subjectconsent', **options)
         self.assertFalse(
             re.match(
-                UUID_PATTERN,
+                subject_identifier,
                 SubjectConsent.objects.all()[0].subject_identifier))
