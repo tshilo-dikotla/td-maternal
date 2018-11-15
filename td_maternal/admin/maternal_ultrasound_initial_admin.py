@@ -1,4 +1,6 @@
 from django.contrib import admin
+from edc_model_admin import audit_fieldset_tuple
+
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalUltraSoundInitialForm
 from ..models import MaternalUltraSoundInitial
@@ -10,20 +12,23 @@ class MaternalUltraSoundInitialAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalUltraSoundInitialForm
 
-    fields = (
-        'number_of_gestations',
-        'bpd',
-        'hc',
-        'ac',
-        'fl',
-        'ga_by_lmp',
-        'ga_by_ultrasound_wks',
-        'ga_by_ultrasound_days',
-        'ga_confirmed',
-        'est_fetal_weight',
-        'est_edd_ultrasound',
-        'edd_confirmed',
-        'amniotic_fluid_volume')
+    fieldsets = (
+        (None, {
+            'Fields': [
+                'number_of_gestations',
+                'bpd',
+                'hc',
+                'ac',
+                'fl',
+                'ga_by_lmp',
+                'ga_by_ultrasound_wks',
+                'ga_by_ultrasound_days',
+                'ga_confirmed',
+                'est_fetal_weight',
+                'est_edd_ultrasound',
+                'edd_confirmed',
+                'amniotic_fluid_volume']}
+         ), audit_fieldset_tuple)
 
     readonly_fields = ('edd_confirmed', 'ga_confirmed', 'ga_by_lmp')
 
