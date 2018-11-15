@@ -74,3 +74,4 @@ class MaternalLifetimeArvHistory(CrfModelMixin):
     class Meta(CrfModelMixin.Meta):
         app_label = 'td_maternal'
         verbose_name = "Maternal ARV Lifetime History"
+        verbose_name_plural = "Maternal ARV Lifetime History"
