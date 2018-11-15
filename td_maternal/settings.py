@@ -5,7 +5,7 @@ import sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP_NAME = 'td_maternal'
 SITE_ID = 40
-REVIEWER_SITE_ID = 40
+REVIEWER_SITE_ID = 41
 ETC_DIR = os.path.join(BASE_DIR, 'etc')
 
 # RANDOMIZATION_LIST_PATH=os.path.join(BASE_DIR,'test_randomization_list.csv')
@@ -36,7 +36,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'edc_device.apps.AppConfig',
+    'edc_consent.apps.AppConfig',
     'edc_action_item.apps.AppConfig',
+    'edc_identifier.apps.AppConfig',
     'edc_fieldsets.apps.AppConfig',
     'edc_locator.apps.AppConfig',
     'edc_registration.apps.AppConfig',

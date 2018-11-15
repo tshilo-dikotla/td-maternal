@@ -1,6 +1,5 @@
 import re
-from django.test import TestCase, tag
-from django.test.utils import override_settings
+from django.test import TestCase
 from edc_base.utils import get_utcnow
 from edc_constants.constants import UUID_PATTERN
 from model_mommy import mommy
@@ -14,7 +13,6 @@ class TestSubjectConsent(TestCase):
         self.subject_screening = mommy.make_recipe(
             'td_maternal.subjectscreening')
 
-    @tag('tdm')
     def test_allocated_subject_identifier(self):
         """Test consent successfully allocates subject identifier on
         save.

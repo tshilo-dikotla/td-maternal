@@ -4,6 +4,7 @@ from edc_base.utils import get_utcnow
 from edc_constants.constants import YES, NO
 from faker import Faker
 from model_mommy.recipe import Recipe, seq
+from datetime import datetime
 
 from .models import SubjectConsent, SubjectScreening
 
@@ -16,9 +17,9 @@ subjectconsent = Recipe(
     assessment_score=YES,
     confirm_identity=seq('12315678'),
     consent_copy=YES,
-    consent_datetime=get_utcnow(),
+    consent_datetime=datetime.now(),
     consent_reviewed=YES,
-    dob=get_utcnow() - relativedelta(years=25),
+    dob=datetime.now() - relativedelta(years=25),
     first_name=fake.first_name,
     gender='F',
     identity=seq('12315678'),
@@ -35,6 +36,6 @@ subjectconsent = Recipe(
 
 subjectscreening = Recipe(
     SubjectScreening,
-    report_datetime=get_utcnow(),
-    age_in_years=28,
+    report_datetime=datetime.now(),
+    age_in_years=25,
     has_omang=YES)
