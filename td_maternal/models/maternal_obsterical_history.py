@@ -58,3 +58,4 @@ class MaternalObstericalHistory(CrfModelMixin):
     class Meta(CrfModelMixin.Meta):
         app_label = 'td_maternal'
         verbose_name = 'Maternal Obsterical History'
+        verbose_name_plural = 'Maternal Obsterical History'

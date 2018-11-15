@@ -64,3 +64,4 @@ class MaternalSubstanceUsePriorPreg(CrfModelMixin):
     class Meta(CrfModelMixin.Meta):
         app_label = 'td_maternal'
         verbose_name = 'Substance Use Prior to Pregnancy'
+        verbose_name_plural = 'Substance Use Prior to Pregnancy'
