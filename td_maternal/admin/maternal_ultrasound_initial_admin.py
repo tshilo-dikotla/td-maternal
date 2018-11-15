@@ -13,7 +13,7 @@ class MaternalUltraSoundInitialAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'Fields': [
+            'fields': [
                 'number_of_gestations',
                 'bpd',
                 'hc',

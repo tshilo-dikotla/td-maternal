@@ -1,7 +1,6 @@
 from django.db import models
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NOT_APPLICABLE
-
 from ..choices import ARV_INTERRUPTION_REASON
 from .model_mixins import CrfModelMixin
 
