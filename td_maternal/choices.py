@@ -1,15 +1,27 @@
-from edc_constants.constants import NOT_APPLICABLE, UNKNOWN, OTHER
+from td_maternal.constants import NO_MODIFICATIONS, START
+
 from edc_constants.constants import (
     OFF_STUDY, ON_STUDY, FAILED_ELIGIBILITY, PARTICIPANT)
-
+from edc_constants.constants import NOT_APPLICABLE, UNKNOWN, OTHER
 from edc_visit_tracking.constants import MISSED_VISIT, COMPLETED_PROTOCOL_VISIT
 from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
+
 from .constants import BREASTFEED_ONLY, NEVER_STARTED, MODIFIED
-from td_maternal.constants import NO_MODIFICATIONS, START
+
 
 STUDY_SITES = (
     ('40', 'Gaborone'),
     ('10', 'Molepolole'),
+)
+
+
+IDENTITY_TYPE = (
+    ('country_id', 'Country ID number'),
+    ('drivers', 'Driver\'s license'),
+    ('passport', 'Passport'),
+    ('hospital_no', 'Hospital number'),
+    ('country_id_rcpt', 'Country ID receipt'),
+    (OTHER, 'Other'),
 )
 
 VISIT_INFO_SOURCE = [
