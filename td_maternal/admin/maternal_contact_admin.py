@@ -15,7 +15,6 @@ class MaternalContactAdmin(ModelAdminMixin, admin.ModelAdmin):
         (None, {
             'fields': [
                 'report_datetime',
-                'registered_subject',
                 'contact_type',
                 'contact_datetime',
                 'call_reason',
@@ -25,7 +24,7 @@ class MaternalContactAdmin(ModelAdminMixin, admin.ModelAdmin):
          ), audit_fieldset_tuple)
 
     list_display = [
-        'registered_subject', 'contact_type',
+        'contact_type',
         'contact_datetime', 'call_reason', 'contact_success']
 
     list_filter = ['contact_type', 'call_reason', 'contact_success']

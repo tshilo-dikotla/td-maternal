@@ -59,11 +59,11 @@ class AntenatalEnrollment(UniqueSubjectIdentifierFieldMixin, EnrollmentMixin, Ba
         super(AntenatalEnrollment, self).save(*args, **kwargs)
 
     def __str__(self):
-        return f"antenatal: {self.registered_subject.subject_identifier}"
+        return f'antenatal: {self.subject_identifier}'
 
-    def natural_key(self):
-        return self.registered_subject.natural_key()
-    natural_key.dependencies = ['edc_registration.registeredsubject']
+#     def natural_key(self):
+#         return self.registered_subject.natural_key()
+#     natural_key.dependencies = ['edc_registration.registeredsubject']
 
     def unenrolled_error_messages(self):
         """Returns a tuple (True, None) if mother is eligible otherwise

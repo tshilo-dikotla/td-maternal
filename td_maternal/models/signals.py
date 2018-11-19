@@ -1,8 +1,12 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from edc_visit_schedule.site_visit_schedules import site_visit_schedules
 from .subject_consent import SubjectConsent
 from .subject_screening import SubjectScreening
+from .antenatal_enrollment import AntenatalEnrollment
+from .antenatal_visit_membership import AntenatalVisitMembership
+from .maternal_labour_del import MaternalLabourDel
 
 
 @receiver(post_save, weak=False, sender=SubjectConsent,
@@ -18,3 +22,67 @@ def subject_consent_on_post_save(sender, instance, raw, created, **kwargs):
             subject_screening.consented = True
             subject_screening.save_base(
                 update_fields=['subject_identifier', 'consented'])
+
+@receiver(post_save, weak=False, sender=AntenatalEnrollment,
+          dispatch_uid='antenatal_enrollment_on_post_save')
+def antenatal_enrollment_on_post_save(sender, instance, raw, created, **kwargs):
+    """Creates an onschedule instance for this antenatal enrollment, if
+    it does not exist.
+    """
+    if not raw:
+        if not created:
+            _, schedule = site_visit_schedules.get_by_onschedule_model(
+                'td_maternal.onscheduleantenatalenrollment')
+            schedule.refresh_schedule(
+                subject_identifier=instance.subject_identifier)
+        else:
+            # put subject on schedule
+            print('Here *********************')
+            _, schedule = site_visit_schedules.get_by_onschedule_model(
+                'td_maternal.onscheduleantenatalenrollment')
+            print(schedule, 'Here is the schedule #######################')
+            schedule.put_on_schedule(
+                subject_identifier=instance.subject_identifier,
+                onschedule_datetime=instance.consent_datetime)
+
+
+@receiver(post_save, weak=False, sender=AntenatalVisitMembership,
+          dispatch_uid='antenatal_visit_membership_on_post_save')
+def antenatal_visit_membership_on_post_save(sender, instance, raw, created, **kwargs):
+    """Creates an onschedule instance for this antenatal visit membership, if
+    it does not exist.
+    """
+    if not raw:
+        if not created:
+            _, schedule = site_visit_schedules.get_by_onschedule_model(
+                'td_maternal.onscheduleantenatalvisitmembership')
+            schedule.refresh_schedule(
+                subject_identifier=instance.subject_identifier)
+        else:
+            # put subject on schedule
+            _, schedule = site_visit_schedules.get_by_onschedule_model(
+                'td_maternal.onscheduleantenatalvisitmembership')
+            schedule.put_on_schedule(
+                subject_identifier=instance.subject_identifier,
+                onschedule_datetime=instance.consent_datetime)
+
+
+@receiver(post_save, weak=False, sender=MaternalLabourDel,
+          dispatch_uid='maternal_labour_del_on_post_save')
+def maternal_labour_del_on_post_save(sender, instance, raw, created, **kwargs):
+    """Creates an onschedule instance for this maternal labour delivery, if
+    it does not exist.
+    """
+    if not raw:
+        if not created:
+            _, schedule = site_visit_schedules.get_by_onschedule_model(
+                'td_maternal.onschedulematernallabourdel')
+            schedule.refresh_schedule(
+                subject_identifier=instance.subject_identifier)
+        else:
+            # put subject on schedule
+            _, schedule = site_visit_schedules.get_by_onschedule_model(
+                'td_maternal.onschedulematernallabourdel')
+            schedule.put_on_schedule(
+                subject_identifier=instance.subject_identifier,
+                onschedule_datetime=instance.consent_datetime)

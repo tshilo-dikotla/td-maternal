@@ -6,6 +6,7 @@ from model_mommy import mommy
 from ..models import SubjectConsent
 from edc_registration.models import RegisteredSubject
 from django.core.exceptions import ValidationError
+from td_maternal.models.subject_screening import SubjectScreening
 subject_identifier = '092\-[0-9\-]+'
 
 
@@ -27,6 +28,17 @@ class TestSubjectConsent(TestCase):
             re.match(
                 subject_identifier,
                 SubjectConsent.objects.all()[0].subject_identifier))
+
+    def test_update_subject_identifier_on_screening(self):
+        options = {
+            'screening_identifier': self.subject_screening.screening_identifier,
+            'consent_datetime': get_utcnow, }
+        subject_consent = mommy.make_recipe('td_maternal.subjectconsent', **options)
+        subject_screening = SubjectScreening.objects.get(
+            screening_identifier=self.subject_screening.screening_identifier)
+        self.assertEqual(
+            subject_screening.subject_identifier,
+            subject_consent.subject_identifier)
 
 
     def test_create_registered_subject(self):

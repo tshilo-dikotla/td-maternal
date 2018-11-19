@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.deletion import PROTECT
 from django.utils import timezone
 
 from edc_base.model_managers import HistoricalRecords
@@ -7,7 +6,7 @@ from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import datetime_not_future
 from edc_constants.choices import YES_NO
 from edc_protocol.validators import datetime_not_before_study_start
-from edc_registration.models import RegisteredSubject
+from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 
 from ..maternal_choices import CALL_REASON, CONTACT_TYPE
 from td_maternal.models.subject_consent import SubjectConsent
@@ -15,12 +14,12 @@ from td_maternal.models.subject_consent import SubjectConsent
 
 class MaternalContactManager(models.Manager):
 
-    def get_by_natural_key(self, registered_subject):
+    def get_by_natural_key(self, subject_identifier):
         return self.get(
-            subject_identifier=registered_subject.subject_identifier)
+            subject_identifier=subject_identifier)
 
 
-class MaternalContact(BaseUuidModel, models.Model):
+class MaternalContact(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
 
     consent_model = SubjectConsent
 
@@ -32,9 +31,6 @@ class MaternalContact(BaseUuidModel, models.Model):
         default=timezone.now,
         help_text=('If reporting today, use today\'s date/time, otherwise use '
                    'the date/time this information was reported.'))
-
-    registered_subject = models.ForeignKey(
-        RegisteredSubject, on_delete=PROTECT)
 
     contact_type = models.CharField(
         verbose_name='Type of contact',
@@ -80,8 +76,8 @@ class MaternalContact(BaseUuidModel, models.Model):
     objects = MaternalContactManager()
 
     def natural_key(self):
-        return (self.registered_subject.subject_identifier, )
+        return (self.subject_identifier, )
 
     class Meta:
         app_label = 'td_maternal'
-        unique_together = ('registered_subject', 'contact_datetime')
+        unique_together = ('subject_identifier', 'contact_datetime')

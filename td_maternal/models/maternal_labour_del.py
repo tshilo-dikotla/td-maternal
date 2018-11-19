@@ -118,11 +118,11 @@ class MaternalLabourDel(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
         super(MaternalLabourDel, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "{0}".format(self.registered_subject.subject_identifier)
+        return f'{self.subject_identifier}'
 
-    def natural_key(self):
-        return self.registered_subject.natural_key()
-    natural_key.dependencies = ['edc_registration.registeredsubject']
+#     def natural_key(self):
+#         return self.registered_subject.natural_key()
+#     natural_key.dependencies = ['edc_registration.registeredsubject']
 
     class Meta:
         app_label = 'td_maternal'

@@ -7,7 +7,6 @@ from edc_base.model_validators import datetime_not_future, date_not_future
 from edc_constants.choices import (
     POS_NEG_UNTESTED_REFUSAL, YES_NO_NA, POS_NEG, YES_NO)
 from edc_constants.constants import NO, YES, POS, NEG
-# from edc_registration.models import RegisteredSubject
 
 from .enrollment_helper import EnrollmentHelper
 
@@ -15,8 +14,6 @@ from .enrollment_helper import EnrollmentHelper
 class EnrollmentMixin(models.Model):
 
     """Base Model for antenal enrollment"""
-
-    # registered_subject = models.OneToOneField(RegisteredSubject)
 
     report_datetime = models.DateTimeField(
         verbose_name="Report date",
@@ -151,11 +148,6 @@ class EnrollmentMixin(models.Model):
         null=True,
         editable=False)
 
-    def __str__(self):
-        return "{0} {1}".format(
-            self.registered_subject.subject_identifier,
-            self.registered_subject.first_name)
-
     def save(self, *args, **kwargs):
         enrollment_helper = EnrollmentHelper(instance_antenatal=self)
 #      if not enrollment_helper.validate_rapid_test():
@@ -202,10 +194,9 @@ class EnrollmentMixin(models.Model):
     def ultrasound(self):
         MaternalUltraSoundInitial = apps.get_model(
             'td_maternal', 'MaternalUltraSoundInitial')
-        rs = self.registered_subject
         try:
             return MaternalUltraSoundInitial.objects.get(
-                maternal_visit__appointment__registered_subject=rs)
+                maternal_visit__subject_identifier=self.subject_identifier)
         except MaternalUltraSoundInitial.DoesNotExist:
             return None
 
@@ -214,16 +205,9 @@ class EnrollmentMixin(models.Model):
         MaternalLabourDel = apps.get_model('td_maternal', 'MaternalLabourDel')
         try:
             return MaternalLabourDel.objects.get(
-                registered_subject=self.registered_subject)
+                subject_identifier=self.subject_identifier)
         except MaternalLabourDel.DoesNotExist:
             return None
-
-    @property
-    def subject_identifier(self):
-        return self.registered_subject.subject_identifier
-
-    def get_subject_identifier(self):
-        return self.registered_subject.subject_identifier
 
     class Meta:
         abstract = True
