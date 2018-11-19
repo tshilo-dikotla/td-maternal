@@ -6,7 +6,8 @@ from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 
 
-class SpecimenConsent(UniqueSubjectIdentifierFieldMixin, SampleCollectionFieldsMixin,
+class SpecimenConsent(UniqueSubjectIdentifierFieldMixin,
+                      SampleCollectionFieldsMixin,
                       RequiresConsentFieldsModelMixin, VulnerabilityFieldsMixin,
                       BaseUuidModel):
 

@@ -11,7 +11,8 @@ from edc_protocol.validators import date_not_before_study_start
 from .enrollment_mixin import EnrollmentMixin
 
 
-class AntenatalEnrollment(UniqueSubjectIdentifierFieldMixin, EnrollmentMixin, BaseUuidModel):
+class AntenatalEnrollment(UniqueSubjectIdentifierFieldMixin,
+                          EnrollmentMixin, BaseUuidModel):
 
     knows_lmp = models.CharField(
         verbose_name="Does the mother know the approximate date "

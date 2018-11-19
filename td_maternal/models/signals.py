@@ -1,12 +1,12 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
 from edc_visit_schedule.site_visit_schedules import site_visit_schedules
-from .subject_consent import SubjectConsent
-from .subject_screening import SubjectScreening
+
 from .antenatal_enrollment import AntenatalEnrollment
 from .antenatal_visit_membership import AntenatalVisitMembership
 from .maternal_labour_del import MaternalLabourDel
+from .subject_consent import SubjectConsent
+from .subject_screening import SubjectScreening
 
 
 @receiver(post_save, weak=False, sender=SubjectConsent,
@@ -22,6 +22,7 @@ def subject_consent_on_post_save(sender, instance, raw, created, **kwargs):
             subject_screening.consented = True
             subject_screening.save_base(
                 update_fields=['subject_identifier', 'consented'])
+
 
 @receiver(post_save, weak=False, sender=AntenatalEnrollment,
           dispatch_uid='antenatal_enrollment_on_post_save')
