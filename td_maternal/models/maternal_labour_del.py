@@ -48,7 +48,7 @@ class MaternalLabourDel(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
     delivery_hospital_other = OtherCharField()
 
     labour_hrs = models.CharField(
-        verbose_name="How long prior to to delivery, in HRS, did "
+        verbose_name="How long prior to delivery, in HRS, did "
         "labour begin? ",
         max_length=10)
 
