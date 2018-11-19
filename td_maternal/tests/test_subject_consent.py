@@ -1,12 +1,15 @@
 import re
+from td_maternal.models.subject_screening import SubjectScreening
+
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 from edc_base.utils import get_utcnow
+from edc_registration.models import RegisteredSubject
 from model_mommy import mommy
 
 from ..models import SubjectConsent
-from edc_registration.models import RegisteredSubject
-from django.core.exceptions import ValidationError
-from td_maternal.models.subject_screening import SubjectScreening
+
+
 subject_identifier = '092\-[0-9\-]+'
 
 
@@ -33,13 +36,13 @@ class TestSubjectConsent(TestCase):
         options = {
             'screening_identifier': self.subject_screening.screening_identifier,
             'consent_datetime': get_utcnow, }
-        subject_consent = mommy.make_recipe('td_maternal.subjectconsent', **options)
+        subject_consent = mommy.make_recipe(
+            'td_maternal.subjectconsent', **options)
         subject_screening = SubjectScreening.objects.get(
             screening_identifier=self.subject_screening.screening_identifier)
         self.assertEqual(
             subject_screening.subject_identifier,
             subject_consent.subject_identifier)
-
 
     def test_create_registered_subject(self):
         """Test if registered subject is created.

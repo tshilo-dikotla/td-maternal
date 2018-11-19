@@ -1,14 +1,14 @@
+from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
-from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_consent.field_mixins import (
     SampleCollectionFieldsMixin, VulnerabilityFieldsMixin)
-from edc_base.model_managers import HistoricalRecords
+from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 
 
-class SpecimenConsent(
-    UniqueSubjectIdentifierFieldMixin, SampleCollectionFieldsMixin,
-    RequiresConsentFieldsModelMixin, VulnerabilityFieldsMixin, BaseUuidModel):
+class SpecimenConsent(UniqueSubjectIdentifierFieldMixin, SampleCollectionFieldsMixin,
+                      RequiresConsentFieldsModelMixin, VulnerabilityFieldsMixin,
+                      BaseUuidModel):
 
     """ A model completed by the user when a mother gives consent for specimen
      storage.

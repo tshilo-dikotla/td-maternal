@@ -5,8 +5,8 @@ from edc_constants.constants import YES, NO, POS
 from faker import Faker
 from model_mommy.recipe import Recipe, seq
 
-from .models import (
-    SubjectConsent, SubjectScreening, AntenatalEnrollment, AntenatalVisitMembership)
+from .models import (SubjectConsent, SubjectScreening,
+                     AntenatalEnrollment, AntenatalVisitMembership)
 
 
 fake = Faker()
@@ -67,7 +67,7 @@ antenatalenrollment = Recipe(
     will_remain_onstudy=YES)
 
 
-antenatalvisitmembership= Recipe(
+antenatalvisitmembership = Recipe(
     AntenatalVisitMembership,
     antenatal_visits=YES,
     consent_version='3',
