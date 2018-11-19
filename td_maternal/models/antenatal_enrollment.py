@@ -13,7 +13,6 @@ from .enrollment_mixin import EnrollmentMixin
 
 class AntenatalEnrollment(UniqueSubjectIdentifierFieldMixin, EnrollmentMixin, BaseUuidModel):
 
-
     knows_lmp = models.CharField(
         verbose_name="Does the mother know the approximate date "
         "of the first day her last menstrual period?",
@@ -33,7 +32,7 @@ class AntenatalEnrollment(UniqueSubjectIdentifierFieldMixin, EnrollmentMixin, Ba
 
     ga_lmp_enrollment_wks = models.IntegerField(
         verbose_name="GA by LMP at enrollment.",
-        help_text=" (weeks of gestation at enrollment, LPM). Eligible if"
+        help_text=" (weeks of gestation at enrollment, LMP). Eligible if"
         " >16 and <36 weeks GA",
         null=True,
         blank=True,)
