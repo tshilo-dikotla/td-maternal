@@ -2,6 +2,7 @@ from django.test import TestCase
 from edc_appointment.models.appointment import Appointment
 from edc_base.utils import get_utcnow
 from model_mommy import mommy
+from edc_visit_schedule.site_visit_schedules import site_visit_schedules
 
 
 class TestAntenatalEnrollment(TestCase):
@@ -14,6 +15,7 @@ class TestAntenatalEnrollment(TestCase):
             'consent_datetime': get_utcnow, }
         self.subject_consent = mommy.make_recipe(
             'td_maternal.subjectconsent', **options)
+        print(site_visit_schedules.visit_schedules, '%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 
     def test_create_appointments(self):
         """Test if appointments are created.

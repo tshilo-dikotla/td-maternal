@@ -38,3 +38,4 @@ from .subject_screening import SubjectScreening
 from .onschedule import OnScheduleAntenatalEnrollment
 from .onschedule import OnScheduleAntenatalVisitMembership
 from .onschedule import OnScheduleMaternalLabourDel
+from .maternal_requisition import MaternalRequisition

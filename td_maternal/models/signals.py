@@ -31,15 +31,17 @@ def antenatal_enrollment_on_post_save(sender, instance, raw, created, **kwargs):
     """
     if not raw:
         if not created:
-            _, schedule = site_visit_schedules.get_by_onschedule_model(
-                'td_maternal.onscheduleantenatalenrollment')
+            _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
+                onschedule_model='td_maternal.onscheduleantenatalenrollment',
+                name=instance.schedule_name)
             schedule.refresh_schedule(
                 subject_identifier=instance.subject_identifier)
         else:
             # put subject on schedule
             print('Here *********************')
-            _, schedule = site_visit_schedules.get_by_onschedule_model(
-                'td_maternal.onscheduleantenatalenrollment')
+            _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
+                onschedule_model='td_maternal.onscheduleantenatalenrollment',
+                name=instance.schedule_name)
             print(schedule, 'Here is the schedule #######################')
             schedule.put_on_schedule(
                 subject_identifier=instance.subject_identifier,

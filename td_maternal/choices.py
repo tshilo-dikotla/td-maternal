@@ -1,11 +1,11 @@
 from edc_constants.constants import NOT_APPLICABLE, UNKNOWN, OTHER
 from edc_constants.constants import (
     OFF_STUDY, ON_STUDY, FAILED_ELIGIBILITY, PARTICIPANT)
-
+from edc_metadata.constants import NOT_REQUIRED
 from edc_visit_tracking.constants import MISSED_VISIT, COMPLETED_PROTOCOL_VISIT
 from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
-from .constants import BREASTFEED_ONLY, NEVER_STARTED, MODIFIED
-from td_maternal.constants import NO_MODIFICATIONS, START
+from .constants import (
+    BREASTFEED_ONLY, NEVER_STARTED, MODIFIED, NO_MODIFICATIONS, START)
 
 STUDY_SITES = (
     ('40', 'Gaborone'),
@@ -963,3 +963,12 @@ REASON_ARV_STOP = (
     ('Treatment failure', 'Treatment failure'),
     (OTHER, 'Other, specify:')
 )
+
+REASON_NOT_DRAWN = (
+    (NOT_APPLICABLE, 'Not applicable'),
+    ('collection_failed', 'Tried, but unable to obtain sample from patient'),
+    ('absent', 'Patient did not attend visit'),
+    ('refused', 'Patient refused'),
+    ('no_supplies', 'No supplies'),
+    (NOT_REQUIRED, 'No longer required for this visit'),
+    (OTHER, 'Other'),)
