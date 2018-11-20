@@ -25,6 +25,7 @@ from .maternal_obsterical_history_admin import MaternalObstericalHistoryAdmin
 from .maternal_postpartum_dep_admin import MaternalPostPartumDepAdmin
 from .maternal_postpartum_fu_admin import MaternalPostPartumFuAdmin
 from .maternal_randomization_admin import MartenalRandoAdmin
+from .maternal_requisition_admin import MaternalRequisitionAdmin
 from .maternal_substance_use_during_preg_admin import (
     MaternalSubstanceUseDuringPregAdmin)
 from .maternal_substance_use_prior_preg_admin import (
