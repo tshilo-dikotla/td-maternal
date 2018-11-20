@@ -21,7 +21,7 @@ class MaternalRequisitionAdmin(CrfModelAdminMixin, RequisitionAdminMixin,
 
     form = MaternalRequisitionForm
 
-    ordering = ('requisition_identifier')
+    ordering = ('requisition_identifier', )
 
     fieldsets = (
         (None, {

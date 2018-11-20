@@ -28,5 +28,7 @@ git+https://github.com/botswana-harvard/edc-timepoint.git@develop#egg=edc_timepo
 git+https://github.com/botswana-harvard/django-crypto-fields.git@develop#egg=django_crypto_fields
 git+https://github.com/botswana-harvard/django-revision.git@develop#egg=django_revision
 git+https://github.com/botswana-harvard/edc-label.git
+git+https://github.com/tshilo-dikotla/td-labs.git@develop#egg=td_labs
+git+https://github.com/tshilo-dikotla/td-visit-schedule.git@develop#egg=td_visit_schedule
 django-simple-history
 django-js-reverse
