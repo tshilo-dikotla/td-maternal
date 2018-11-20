@@ -39,3 +39,5 @@ from .onschedule import OnScheduleAntenatalEnrollment
 from .onschedule import OnScheduleAntenatalVisitMembership
 from .onschedule import OnScheduleMaternalLabourDel
 from .maternal_requisition import MaternalRequisition
+from .maternal_off_study import MaternalOffStudy
+from .death_report import DeathReport
