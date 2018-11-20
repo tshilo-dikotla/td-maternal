@@ -12,7 +12,8 @@ from .enrollment_mixin import EnrollmentMixin
 from td_maternal.models.subject_consent import SubjectConsent
 
 
-class AntenatalEnrollment(UniqueSubjectIdentifierFieldMixin, EnrollmentMixin, BaseUuidModel):
+class AntenatalEnrollment(UniqueSubjectIdentifierFieldMixin,
+                          EnrollmentMixin, BaseUuidModel):
 
     knows_lmp = models.CharField(
         verbose_name="Does the mother know the approximate date "
