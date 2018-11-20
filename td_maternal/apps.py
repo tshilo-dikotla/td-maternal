@@ -22,6 +22,7 @@ if settings.APP_NAME == 'td_maternal':
     from edc_appointment.apps import AppConfig as BaseEdcAppointmentAppConfig
     from edc_constants.constants import FAILED_ELIGIBILITY
     from edc_facility.apps import AppConfig as BaseEdcFacilityAppConfig
+    from edc_lab.apps import AppConfig as BaseEdcLabAppConfig
     from edc_metadata.apps import AppConfig as BaseEdcMetadataAppConfig
     from edc_protocol.apps import AppConfig as BaseEdcProtocolAppConfig
     from edc_visit_tracking.apps import (
@@ -50,6 +51,19 @@ if settings.APP_NAME == 'td_maternal':
                 model='edc_appointment.appointment',
                 related_visit_model='td_maternal.maternalvisit')
         ]
+
+    class EdcLabAppConfig(BaseEdcLabAppConfig):
+        base_template_name = 'tshilo_dikotla/base.html'
+        requisition_model = 'td_maternal.maternalrequisition'
+        result_model = 'edc_lab.result'
+
+        @property
+        def site_name(self):
+            return 'Gaborone'
+
+        @property
+        def site_code(self):
+            return '40'
 
     class EdcMetadataAppConfig(BaseEdcMetadataAppConfig):
         reason_field = {'td_maternal.maternalvisit': 'reason'}

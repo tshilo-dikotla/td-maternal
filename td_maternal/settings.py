@@ -45,11 +45,13 @@ INSTALLED_APPS = [
     'edc_timepoint.apps.AppConfig',
     'edc_visit_schedule.apps.AppConfig',
     'td_visit_schedule.apps.AppConfig',
+    'td_labs.apps.AppConfig',
     'td_maternal.apps.EdcFacilityAppConfig',
     'td_maternal.apps.EdcVisitTrackingAppConfig',
     'td_maternal.apps.EdcProtocolAppConfig',
     'td_maternal.apps.EdcAppointmentAppConfig',
     'td_maternal.apps.EdcMetadataAppConfig',
+    'td_maternal.apps.EdcLabAppConfig',
     'td_maternal.apps.AppConfig',
 ]
 

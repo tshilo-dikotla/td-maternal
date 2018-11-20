@@ -39,14 +39,12 @@ def antenatal_enrollment_on_post_save(sender, instance, raw, created, **kwargs):
                 subject_identifier=instance.subject_identifier)
         else:
             # put subject on schedule
-            print('Here *********************')
             _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
                 onschedule_model='td_maternal.onscheduleantenatalenrollment',
                 name=instance.schedule_name)
-            print(schedule, 'Here is the schedule #######################')
             schedule.put_on_schedule(
                 subject_identifier=instance.subject_identifier,
-                onschedule_datetime=instance.consent_datetime)
+                onschedule_datetime=instance.report_datetime)
 
 
 @receiver(post_save, weak=False, sender=AntenatalVisitMembership,

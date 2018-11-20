@@ -7,7 +7,7 @@ from edc_visit_tracking.constants import MISSED_VISIT, COMPLETED_PROTOCOL_VISIT
 from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
 from edc_metadata.constants import NOT_REQUIRED
 
-from .constants import BREASTFEED_ONLY, NEVER_STARTED, MODIFIED
+from .constants import BREASTFEED_ONLY, NEVER_STARTED, MODIFIED, TUBERCULOSIS
 
 
 STUDY_SITES = (
@@ -985,3 +985,25 @@ REASON_NOT_DRAWN = (
     ('no_supplies', 'No supplies'),
     (NOT_REQUIRED, 'No longer required for this visit'),
     (OTHER, 'Other'),)
+
+CAUSE_OF_DEATH = (
+    ('cryptococcal_meningitis', 'Cryptococcal meningitis'),
+    ('Cryptococcal_meningitis_relapse_IRIS',
+     'Cryptococcal meningitis relapse/IRIS'),
+    (TUBERCULOSIS, 'TB'),
+    ('bacteraemia', 'Bacteraemia'),
+    ('bacterial_pneumonia', 'Bacterial pneumonia'),
+    ('malignancy', 'Malignancy'),
+    ('art_toxicity', 'ART toxicity'),
+    ('IRIS_non_CM', 'IRIS non-CM'),
+    ('diarrhea_wasting', 'Diarrhea/wasting'),
+    (UNKNOWN, 'Unknown'),
+    (OTHER, 'Other'),
+)
+
+TB_SITE_DEATH = (
+    ('meningitis', 'Meningitis'),
+    ('pulmonary', 'Pulmonary'),
+    ('disseminated', 'Disseminated'),
+    (NOT_APPLICABLE, 'Not applicable')
+)
