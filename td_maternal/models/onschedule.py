@@ -15,6 +15,9 @@ class OnScheduleAntenatalEnrollment(OnScheduleModelMixin, BaseUuidModel):
 
     history = HistoricalRecords()
 
+    def put_on_schedule(self):
+        pass
+
 
 class OnScheduleAntenatalVisitMembership(OnScheduleModelMixin, BaseUuidModel):
 
@@ -26,6 +29,9 @@ class OnScheduleAntenatalVisitMembership(OnScheduleModelMixin, BaseUuidModel):
 
     history = HistoricalRecords()
 
+    def put_on_schedule(self):
+        pass
+
 
 class OnScheduleMaternalLabourDel(OnScheduleModelMixin, BaseUuidModel):
 
@@ -36,3 +42,6 @@ class OnScheduleMaternalLabourDel(OnScheduleModelMixin, BaseUuidModel):
     objects = SubjectIdentifierManager()
 
     history = HistoricalRecords()
+
+    def put_on_schedule(self):
+        pass
