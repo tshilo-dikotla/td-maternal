@@ -1,9 +1,41 @@
 from django.contrib import admin
+from django.urls.base import reverse
+from django.urls.exceptions import NoReverseMatch
+
+from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
+from edc_model_admin import (
+    ModelAdminFormAutoNumberMixin, ModelAdminInstitutionMixin,
+    audit_fieldset_tuple, ModelAdminNextUrlRedirectMixin,
+    ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin)
+
 from ..admin_site import td_maternal_admin
 from ..forms import AntenatalEnrollmentForm
 from ..models import AntenatalEnrollment
-from .modeladmin_mixins import ModelAdminMixin
-from edc_model_admin.model_admin_audit_fields_mixin import audit_fieldset_tuple
+
+
+class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMixin,
+                      ModelAdminRevisionMixin, ModelAdminReplaceLabelTextMixin,
+                      ModelAdminInstitutionMixin):
+
+    list_per_page = 10
+    date_hierarchy = 'modified'
+    empty_value_display = '-'
+
+    def redirect_url(self, request, obj, post_url_continue=None):
+        redirect_url = super().redirect_url(
+            request, obj, post_url_continue=post_url_continue)
+        if request.GET.dict().get('next'):
+            url_name = request.GET.dict().get('next').split(',')[0]
+            attrs = request.GET.dict().get('next').split(',')[1:]
+            options = {k: request.GET.dict().get(k)
+                       for k in attrs if request.GET.dict().get(k)}
+            options.update(subject_identifier=obj.subject_identifier)
+            try:
+                redirect_url = reverse(url_name, kwargs=options)
+            except NoReverseMatch as e:
+                raise ModelAdminNextUrlRedirectError(
+                    f'{e}. Got url_name={url_name}, kwargs={options}.')
+        return redirect_url
 
 
 @admin.register(AntenatalEnrollment, site=td_maternal_admin)
@@ -15,7 +47,8 @@ class AntenatalEnrollmentAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('report_datetime',
+            'fields': ('subject_identifier',
+                       'report_datetime',
                        'knows_lmp',
                        'last_period_date',
                        'edd_by_lmp',
@@ -39,7 +72,7 @@ class AntenatalEnrollmentAdmin(ModelAdminMixin, admin.ModelAdmin):
         audit_fieldset_tuple
     )
     readonly_fields = (
-        'edd_by_lmp', 'ga_lmp_enrollment_wks', 'enrollment_hiv_status')
+        'subject_identifier', 'edd_by_lmp', 'ga_lmp_enrollment_wks', 'enrollment_hiv_status')
     radio_fields = {'is_diabetic': admin.VERTICAL,
                     'will_breastfeed': admin.VERTICAL,
                     'will_remain_onstudy': admin.VERTICAL,

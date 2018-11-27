@@ -12,13 +12,14 @@ class SubjectScreeningAdmin(ModelAdminMixin, admin.ModelAdmin):
     form = SubjectScreeningForm
 
     fields = ('screening_identifier',
+              'subject_identifier',
               'report_datetime',
               'age_in_years',
               'has_omang')
 
     radio_fields = {'has_omang': admin.VERTICAL}
 
-    readonly_fields = ('screening_identifier',)
+    readonly_fields = ('screening_identifier', 'subject_identifier')
 
     list_display = (
         'report_datetime', 'age_in_years', 'is_eligible', 'is_consented')
