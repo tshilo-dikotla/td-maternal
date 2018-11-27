@@ -24,7 +24,6 @@ class MaternalArvPostMedAdmin(admin.ModelAdmin, ModelAdminMixin):
     fieldsets = (
         (None, {
             'fields': [
-                'maternal_visit',
                 'arv_code',
                 'dose_status',
                 'modification_date',

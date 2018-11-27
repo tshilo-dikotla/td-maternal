@@ -19,9 +19,9 @@ def subject_consent_on_post_save(sender, instance, raw, created, **kwargs):
             subject_screening = SubjectScreening.objects.get(
                 screening_identifier=instance.screening_identifier)
             subject_screening.subject_identifier = instance.subject_identifier
-            subject_screening.consented = True
+            subject_screening.is_consented = True
             subject_screening.save_base(
-                update_fields=['subject_identifier', 'consented'])
+                update_fields=['subject_identifier', 'is_consented'])
 
 
 @receiver(post_save, weak=False, sender=AntenatalEnrollment,

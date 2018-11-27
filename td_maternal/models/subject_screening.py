@@ -1,5 +1,3 @@
-import re
-
 from django.apps import apps
 from django.db import models
 from edc_base.model_managers import HistoricalRecords
@@ -7,7 +5,6 @@ from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import datetime_not_future
 from edc_base.sites import SiteModelMixin
 from edc_constants.choices import YES_NO
-from edc_constants.constants import UUID_PATTERN
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 from edc_protocol.validators import datetime_not_before_study_start
 from edc_search.model_mixins import SearchSlugManager, SearchSlugModelMixin
@@ -22,27 +19,8 @@ class SubjectScreeningManager(SearchSlugManager, models.Manager):
         return self.get(screening_identifier=eligibility_identifier)
 
 
-class SubjectIdentifierModelMixin(NonUniqueSubjectIdentifierModelMixin,
-                                  SearchSlugModelMixin, models.Model):
-
-    def update_subject_identifier_on_save(self):
-        """Overridden to not set the subject identifier on save.
-        """
-        if not self.subject_identifier:
-            self.subject_identifier = self.subject_identifier_as_pk.hex
-        elif re.match(UUID_PATTERN, self.subject_identifier):
-            pass
-        return self.subject_identifier
-
-    def make_new_identifier(self):
-        return self.subject_identifier_as_pk.hex
-
-    class Meta:
-        abstract = True
-
-
-class SubjectScreening(SubjectIdentifierModelMixin, SiteModelMixin,
-                       BaseUuidModel):
+class SubjectScreening(NonUniqueSubjectIdentifierModelMixin, SiteModelMixin,
+                       SearchSlugModelMixin, BaseUuidModel):
     """ A model completed by the user to test and capture the result of
     the pre-consent eligibility checks.
 
