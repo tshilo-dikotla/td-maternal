@@ -16,7 +16,7 @@ class MaternalArvPostMedInlineAdmin(TabularInlineMixin, admin.TabularInline):
 
 
 @admin.register(MaternalArvPostMed, site=td_maternal_admin)
-class MaternalArvPostMedAdmin(admin.ModelAdmin, ModelAdminMixin):
+class MaternalArvPostMedAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalArvPostMedForm
     list_display = ('maternal_arv_post', 'arv_code',
