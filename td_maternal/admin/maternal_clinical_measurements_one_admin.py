@@ -18,6 +18,7 @@ class MaternalClinicalMeasurementsOneAdmin(
     fieldsets = (
         (None, {
             'fields': [
+                'report_datetime',
                 'maternal_visit',
                 'weight_kg',
                 'height',

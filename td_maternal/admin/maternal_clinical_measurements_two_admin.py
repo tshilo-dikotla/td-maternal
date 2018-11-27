@@ -18,6 +18,8 @@ class MaternalClinicalMeasurementsTwoAdmin(
     fieldsets = (
         (None, {
             'fields': [
+                'report_datetime',
+                'maternal_visit',
                 'weight_kg',
                 'systolic_bp',
                 'diastolic_bp']}
