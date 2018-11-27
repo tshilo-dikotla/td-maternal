@@ -3,7 +3,7 @@ from django.db import models
 from edc_base.model_fields import OtherCharField
 from edc_constants.choices import YES_NO_DWTA
 
-from .contraceptives import Contraceptives
+from .list_models import Contraceptives
 
 from ..maternal_choices import REASON_UNSEEN_AT_CLINIC, REASON_CONTRACEPTIVE_NOT_INITIATED
 

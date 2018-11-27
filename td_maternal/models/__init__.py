@@ -42,7 +42,7 @@ from .subject_consent import SubjectConsent
 from .subject_screening import SubjectScreening
 from .death_report import DeathReport
 from .maternalsrh import MaternalSrh
-from .contraceptives import Contraceptives
+from .list_models import Contraceptives
 
 
 # from .death_report import DeathReport
