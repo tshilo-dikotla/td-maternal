@@ -4,7 +4,7 @@ from edc_metadata.managers import CrfMetadataManager
 from edc_base.model_mixins import BaseUuidModel
 from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_export.model_mixins import ExportTrackingFieldsModelMixin
-from edc_offstudy.models import OffStudyMixin
+from edc_offstudy.model_mixins import OffstudyModelMixin
 from edc_visit_tracking.model_mixins import CrfModelMixin
 
 # from ..managers import VisitCrfModelManager
@@ -14,7 +14,7 @@ from .maternal_visit import MaternalVisit
 
 
 class MaternalCrfModel(CrfModelMixin, ExportTrackingFieldsModelMixin,
-                       OffStudyMixin, RequiresConsentFieldsModelMixin, BaseUuidModel):
+                       OffstudyModelMixin, RequiresConsentFieldsModelMixin, BaseUuidModel):
 
     """ Base model for all scheduled models
     s(adds key to :class:`MaternalVisit`). """
