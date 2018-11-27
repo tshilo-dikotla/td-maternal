@@ -1,6 +1,6 @@
 from django.db import models
 
-from edc_meta_data.managers import CrfMetaDataManager
+from edc_metadata.managers import CrfMetadataManager
 from edc_base.model_mixins import BaseUuidModel
 from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_export.model_mixins import ExportTrackingFieldsModelMixin
@@ -30,7 +30,7 @@ class MaternalCrfModel(CrfModelMixin, ExportTrackingFieldsModelMixin,
 
 #     objects = VisitCrfModelManager()
 
-    entry_meta_data_manager = CrfMetaDataManager(MaternalVisit)
+    entry_meta_data_manager = CrfMetadataManager()
 
     def __str__(self):
         return "{}: {}".format(self.__class__._meta.model_name,
