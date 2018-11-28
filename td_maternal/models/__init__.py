@@ -40,6 +40,9 @@ from .signals import subject_consent_on_post_save
 from .specimen_consent import SpecimenConsent
 from .subject_consent import SubjectConsent
 from .subject_screening import SubjectScreening
+from .death_report import DeathReport
+from .maternalsrh import MaternalSrh
+from .list_models import Contraceptives
 
 
 # from .death_report import DeathReport

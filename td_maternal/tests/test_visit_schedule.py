@@ -1,6 +1,5 @@
-from django.test import TestCase
-from edc_visit_schedule.site_visit_schedules import site_visit_schedules
-from django.test.utils import tag
+from edc_visit_schedule import site_visit_schedules
+from django.test import TestCase, tag
 
 
 @tag('vs')
