@@ -39,7 +39,6 @@ class MaternalSrh(CrfModelMixin):
 
     contr = models.ManyToManyField(
         Contraceptives,
-        null=True,
         blank=True,
         verbose_name='If yes, which method did you select? ',
         help_text='Tell us all that apply')
