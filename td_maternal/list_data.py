@@ -60,7 +60,7 @@ list_data = {
         (OTHER, 'Other, specify'),
         (NOT_APPLICABLE, 'Not Applicable')
     ],
-    'td_maternal.maternaldiagnoses': [
+    'td_maternal.maternaldiagnoseslist': [
         ('pneumonia', 'Pneumonia'),
         ('chlamydia', 'Chlamydia'),
         ('tuberculosis', 'Tuberculosis'),
