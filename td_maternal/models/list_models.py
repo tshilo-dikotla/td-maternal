@@ -46,11 +46,6 @@ class Malformations(ListModelMixin, BaseUuidModel):
     pass
 
 
-class MaternalDiagnoses(ListModelMixin, BaseUuidModel):
-
-    pass
-
-
 class MaternalDiagnosesList(ListModelMixin, BaseUuidModel):
 
     pass
