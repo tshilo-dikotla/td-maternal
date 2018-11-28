@@ -72,6 +72,7 @@ class MaternalLabourDel(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
         DeliveryComplications,
         verbose_name="Were any of the following complications present "
         "at delivery? ",
+        blank=False,
         help_text="If 'OTHER', specify below")
 
     delivery_complications_other = OtherCharField()

@@ -66,6 +66,7 @@ class MaternalMedicalHistory(CrfModelMixin):
         MaternalMedications,
         verbose_name='Does the mother currently take any of the above '
         'medications. Tick all that apply',
+        blank=True
     )
 
     mother_medications_other = OtherCharField(

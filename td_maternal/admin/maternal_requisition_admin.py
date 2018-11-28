@@ -39,6 +39,6 @@ class MaternalRequisitionAdmin(CrfModelAdminMixin, RequisitionAdminMixin,
     }
 
     def get_readonly_fields(self, request, obj=None):
-        return (super().get_readonly_fields(request, obj) +
-                requisition_identifier_fields +
-                requisition_verify_fields)
+        return (super().get_readonly_fields(request, obj)
+                + requisition_identifier_fields
+                + requisition_verify_fields)

@@ -1,9 +1,10 @@
 from django.contrib import admin
+from edc_model_admin import audit_fieldset_tuple
+
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalLabourDelForm, MaternalHivInterimHxForm
 from ..models import MaternalLabourDel, MaternalHivInterimHx
 from .modeladmin_mixins import ModelAdminMixin
-from edc_model_admin import audit_fieldset_tuple
 
 
 @admin.register(MaternalLabourDel, site=td_maternal_admin)
@@ -23,6 +24,7 @@ class MaternalLabourDelAdmin(ModelAdminMixin, admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': [
+                'subject_identifier',
                 'report_datetime',
                 'delivery_datetime',
                 'delivery_time_estimated',

@@ -1,5 +1,7 @@
+from edc_constants.constants import NOT_APPLICABLE, OTHER
+
 from edc_list_data import PreloadData
-from edc_constants.constants import NOT_APPLICABLE, OTHER, NONE
+
 
 list_data = {
     'td_maternal.chronicconditions': [
@@ -38,7 +40,6 @@ list_data = {
         ('placental_abruption', 'Placental abruption'),
         ('chorioamnioitis', 'Chorioamnioitis or sus. chorioamnionitis'),
         ('intrapartum_fever', 'Intrapartum fever'),
-        (NONE, 'None'),
         (OTHER, 'Other')
     ],
     'td_maternal.foods': [
@@ -46,7 +47,8 @@ list_data = {
         ('eggs', 'Eggs'),
         ('legumes_and_nuts', 'Legumes and nuts'),
         ('diary_products', 'Dairy products (milk, yogurt, cheese)'),
-        ('flesh_foods', 'Flesh foods (meat, fish, poultry and liver/organ meat)'),
+        ('flesh_foods',
+         'Flesh foods (meat, fish, poultry and liver/organ meat)'),
         ('vitamin_a_fruits_vegetables',
          'Vitamin A rich fruits and vegetables (carrots)'),
         ('grains_roots_tubers', 'Grains, roots and tubers'),
@@ -88,7 +90,6 @@ list_data = {
         ('traditional_medications', 'Traditional medications'),
         ('hypertensive_medications', 'Hypertensive medications'),
         ('prenatal_vitamins', 'Prenatal Vitamins'),
-        (NONE, 'None'),
         (NOT_APPLICABLE, 'Not Applicable')
     ],
     'td_maternal.maternalrelatives': [
@@ -130,5 +131,4 @@ list_data = {
 }
 
 preload_data = PreloadData(
-    list_data=list_data
-)
+    list_data=list_data)

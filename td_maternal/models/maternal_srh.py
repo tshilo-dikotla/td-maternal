@@ -1,22 +1,21 @@
 from django.db import models
-
 from edc_base.model_fields import OtherCharField
 from edc_constants.choices import YES_NO_DWTA
 
-from .list_models import Contraceptives
-
 from ..maternal_choices import REASON_UNSEEN_AT_CLINIC, REASON_CONTRACEPTIVE_NOT_INITIATED
+from .list_models import Contraceptives
 from .model_mixins import CrfModelMixin
 
 
 class MaternalSrh(CrfModelMixin):
 
-    """ A model completed by the user on the mother's use of sexual reproductive health services. """
+    """ A model completed by the user on the mother's use of sexual
+     reproductive health services. """
 
     seen_at_clinic = models.CharField(
-        verbose_name=('At the last visit, you had asked to be referred to the Sexual'
-                      ' Reproductive Health Clinic.  Have you been seen in that clinic'
-                      ' since your last visit with us?'),
+        verbose_name=('At the last visit, you had asked to be referred to'
+                      ' the Sexual Reproductive Health Clinic.  Have you been'
+                      ' seen in that clinic since your last visit with us?'),
         max_length=15,
         choices=YES_NO_DWTA)
 
@@ -31,7 +30,8 @@ class MaternalSrh(CrfModelMixin):
         verbose_name='If Other, describe')
 
     is_contraceptive_initiated = models.CharField(
-        verbose_name='If you did attend, did you initiate a contraceptive method?',
+        verbose_name=(
+            'If you did attend, did you initiate a contraceptive method?'),
         max_length=15,
         choices=YES_NO_DWTA,
         null=True,
@@ -45,14 +45,15 @@ class MaternalSrh(CrfModelMixin):
 
     contr_other = OtherCharField(
         max_length=35,
-        verbose_name="If Other enter text description of other contraceptive method being used",
+        verbose_name=('If Other enter text description of other contraceptive'
+                      ' method being used'),
         blank=True,
         null=True)
 
     reason_not_initiated = models.CharField(
-        verbose_name=('If you have not initiated a contraceptive method after attending'
-                      ' a SRH clinic, please share with use the reason why you have not'
-                      ' initiated a method'),
+        verbose_name=('If you have not initiated a contraceptive method after'
+                      ' attending a SRH clinic, please share with use the'
+                      ' reason why you have not initiated a method'),
         max_length=45,
         choices=REASON_CONTRACEPTIVE_NOT_INITIATED,
         blank=True,
