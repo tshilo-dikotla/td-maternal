@@ -106,7 +106,6 @@ class AntenatalEnrollment(UniqueSubjectIdentifierFieldMixin,
         """Return a visit schedule name.
         """
         schedule_name = None
-        print(self.subject_identifier, 'self.subject_identifier @@@@@@@@@@@@@@@')
         subject_consent = SubjectConsent.objects.filter(
             subject_identifier=self.subject_identifier).order_by('version').last()
         if subject_consent.version == '1':

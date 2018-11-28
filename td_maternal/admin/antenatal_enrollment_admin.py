@@ -72,7 +72,7 @@ class AntenatalEnrollmentAdmin(ModelAdminMixin, admin.ModelAdmin):
         audit_fieldset_tuple
     )
     readonly_fields = (
-        'subject_identifier', 'edd_by_lmp', 'ga_lmp_enrollment_wks', 'enrollment_hiv_status')
+        'edd_by_lmp', 'ga_lmp_enrollment_wks', 'enrollment_hiv_status')
     radio_fields = {'is_diabetic': admin.VERTICAL,
                     'will_breastfeed': admin.VERTICAL,
                     'will_remain_onstudy': admin.VERTICAL,

@@ -34,3 +34,4 @@ from .maternal_ultrasound_initial_admin import MaternalUltraSoundInitialAdmin
 from .maternal_visit_admin import MaternalVisitAdmin
 from .rapid_test_result_admin import RapidTestResultAdmin
 from .specimen_consent_admin import SpecimenConsentAdmin
+from .maternal_off_study_admin import MaternalOffStudyAdmin
