@@ -46,7 +46,8 @@ list_data = {
         ('eggs', 'Eggs'),
         ('legumes_and_nuts', 'Legumes and nuts'),
         ('diary_products', 'Dairy products (milk, yogurt, cheese)'),
-        ('flesh_foods', 'Flesh foods (meat, fish, poultry and liver/organ meat)'),
+        ('flesh_foods',
+         'Flesh foods (meat, fish, poultry and liver/organ meat)'),
         ('vitamin_a_fruits_vegetables',
          'Vitamin A rich fruits and vegetables (carrots)'),
         ('grains_roots_tubers', 'Grains, roots and tubers'),
@@ -88,7 +89,6 @@ list_data = {
         ('traditional_medications', 'Traditional medications'),
         ('hypertensive_medications', 'Hypertensive medications'),
         ('prenatal_vitamins', 'Prenatal Vitamins'),
-        (NONE, 'None'),
         (NOT_APPLICABLE, 'Not Applicable')
     ],
     'td_maternal.maternalrelatives': [
@@ -128,3 +128,6 @@ list_data = {
         (OTHER, 'Other')
     ]
 }
+
+preload_data = PreloadData(
+    list_data=list_data)
