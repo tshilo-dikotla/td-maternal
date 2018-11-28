@@ -14,6 +14,7 @@ class MaternalArvAdmin(ModelAdminMixin, admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': [
+                'maternal_arv_preg',
                 'arv_code',
                 'start_date',
                 'stop_date',
