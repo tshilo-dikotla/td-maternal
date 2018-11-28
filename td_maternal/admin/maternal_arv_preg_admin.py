@@ -25,8 +25,8 @@ class MaternalArvPregAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': [
-                'report_datetime',
                 'maternal_visit',
+                'report_datetime',
                 'took_arv',
                 'is_interrupt',
                 'interrupt']}

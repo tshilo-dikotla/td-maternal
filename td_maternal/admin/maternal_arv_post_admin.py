@@ -1,11 +1,12 @@
 from django.contrib import admin
 from edc_model_admin import TabularInlineMixin
+from edc_model_admin import audit_fieldset_tuple
+
 from ..admin_site import td_maternal_admin
 from ..forms import (MaternalArvPostForm,
                      MaternalArvPostMedForm, MaternalArvPostAdhForm)
 from ..models import MaternalArvPost, MaternalArvPostMed, MaternalArvPostAdh
 from .modeladmin_mixins import CrfModelAdminMixin, ModelAdminMixin
-from edc_model_admin import audit_fieldset_tuple
 
 
 class MaternalArvPostMedInlineAdmin(TabularInlineMixin, admin.TabularInline):
@@ -46,6 +47,7 @@ class MaternalArvPostAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         (None, {
             'fields': [
                 'maternal_visit',
+                'report_datetime',
                 'on_arv_since',
                 'on_arv_reason',
                 'on_arv_reason_other',

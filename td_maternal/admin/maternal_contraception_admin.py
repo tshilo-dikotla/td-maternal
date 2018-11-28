@@ -1,9 +1,10 @@
 from django.contrib import admin
-from ..admin_site import td_maternal_admin
-from ..models import MaternalContraception
-from ..forms import MaternalContraceptionForm
-from .modeladmin_mixins import CrfModelAdminMixin
 from edc_model_admin import audit_fieldset_tuple
+
+from ..admin_site import td_maternal_admin
+from ..forms import MaternalContraceptionForm
+from ..models import MaternalContraception
+from .modeladmin_mixins import CrfModelAdminMixin
 
 
 @admin.register(MaternalContraception, site=td_maternal_admin)
