@@ -1,5 +1,5 @@
 from edc_list_data import PreloadData
-from .constants import NOT_APPLICABLE, OTHER, NONE
+from edc_constants.constants import NOT_APPLICABLE, OTHER, NONE
 
 list_data = {
     'td_maternal.chronicconditions': [
@@ -128,3 +128,7 @@ list_data = {
         (OTHER, 'Other')
     ]
 }
+
+preload_data = PreloadData(
+    list_data=list_data
+)
