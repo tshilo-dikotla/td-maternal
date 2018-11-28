@@ -6,11 +6,10 @@ from edc_constants.choices import YES_NO_DWTA
 from .list_models import Contraceptives
 
 from ..maternal_choices import REASON_UNSEEN_AT_CLINIC, REASON_CONTRACEPTIVE_NOT_INITIATED
+from .model_mixins import CrfModelMixin
 
-from .maternal_crf_model import MaternalCrfModel
 
-
-class MaternalSrh(MaternalCrfModel):
+class MaternalSrh(CrfModelMixin):
 
     """ A model completed by the user on the mother's use of sexual reproductive health services. """
 

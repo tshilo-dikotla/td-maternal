@@ -41,8 +41,5 @@ from .specimen_consent import SpecimenConsent
 from .subject_consent import SubjectConsent
 from .subject_screening import SubjectScreening
 from .death_report import DeathReport
-from .maternalsrh import MaternalSrh
+from td_maternal.models.maternal_srh import MaternalSrh
 from .list_models import Contraceptives
-
-
-# from .death_report import DeathReport
