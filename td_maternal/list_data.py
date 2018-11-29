@@ -127,7 +127,14 @@ list_data = {
         ('infant_formula', 'Infant Formula'),
         ('tsabana', 'Tsabana'),
         (OTHER, 'Other')
-    ]
+    ],
+    'td_maternal.wcsdxadult': [
+        ('asymptomatic', 'Asymptomatic'),
+        ('persistent_generalized_lymphadeno',
+         'Persistent generalized lymphadeno'),
+        ('unexplained_moderate_weight_loss',
+         'Unexplained moderate weight loss'),
+    ],
 }
 
 preload_data = PreloadData(
