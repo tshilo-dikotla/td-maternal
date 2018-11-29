@@ -23,6 +23,7 @@ class MaternalMedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         (None, {
             'fields': [
                 'maternal_visit',
+                'report_datetime',
                 'chronic_since',
                 'who_diagnosis',
                 'who',
