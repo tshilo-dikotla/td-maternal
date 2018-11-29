@@ -14,10 +14,16 @@ class MaternalPostPartumFuAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         (None, {
             'fields': [
                 'maternal_visit',
+                'report_datetime',
+                'new_diagnoses',
+                'diagnoses',
+                'diagnoses_other',
                 'hospitalized',
                 'hospitalization_reason',
                 'hospitalization_reason_other',
-                'hospitalization_days']}
+                'hospitalization_days',
+                'has_who_dx',
+                'who']}
          ), audit_fieldset_tuple)
 
     list_display = ('maternal_visit', 'new_diagnoses', 'has_who_dx')
