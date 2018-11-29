@@ -21,6 +21,7 @@ class MaternalInterimIdccAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         (None, {
             'fields': [
                 'maternal_visit',
+                'report_datetime',
                 'info_since_lastvisit',
                 'recent_cd4',
                 'recent_cd4_date',
