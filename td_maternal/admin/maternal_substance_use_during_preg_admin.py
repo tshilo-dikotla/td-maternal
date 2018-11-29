@@ -25,6 +25,7 @@ class MaternalSubstanceUseDuringPregAdmin(
         (None, {
             'fields': [
                 'maternal_visit',
+                'report_datetime',
                 'smoked_during_pregnancy',
                 'smoking_during_preg_freq',
                 'alcohol_during_pregnancy',
