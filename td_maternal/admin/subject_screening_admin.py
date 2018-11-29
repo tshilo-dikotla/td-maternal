@@ -10,6 +10,7 @@ from .modeladmin_mixins import ModelAdminMixin
 class SubjectScreeningAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = SubjectScreeningForm
+    search_fields = ['subject_identifier']
 
     fields = ('screening_identifier',
               'subject_identifier',

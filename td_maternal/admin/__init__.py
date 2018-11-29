@@ -18,7 +18,7 @@ from .maternal_demographics_admin import MaternalDemographicsAdmin
 from .maternal_diagnoses_admin import MaternalDiagnosesAdmin
 from .subject_screening_admin import SubjectScreeningAdmin
 from .maternal_interim_idcc_admin import MaternalInterimIdccAdmin
-from .maternal_labour_del_admin import MaternalHivInterimHxAdmin
+from .maternal_hiv_interim_hx import MaternalHivInterimHxAdmin
 from .maternal_labour_del_admin import MaternalLabourDelAdmin
 from .maternal_medical_history_admin import MaternalMedicalHistoryAdmin
 from .maternal_obsterical_history_admin import MaternalObstericalHistoryAdmin
