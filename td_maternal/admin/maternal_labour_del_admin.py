@@ -2,8 +2,8 @@ from django.contrib import admin
 from edc_model_admin import audit_fieldset_tuple
 
 from ..admin_site import td_maternal_admin
-from ..forms import MaternalLabourDelForm, MaternalHivInterimHxForm
-from ..models import MaternalLabourDel, MaternalHivInterimHx
+from ..forms import MaternalLabourDelForm
+from ..models import MaternalLabourDel
 from .modeladmin_mixins import ModelAdminMixin
 
 
@@ -54,25 +54,3 @@ class MaternalLabourDelAdmin(ModelAdminMixin, admin.ModelAdmin):
                     'csection_reason': admin.VERTICAL,
                     'csection_reason': admin.VERTICAL, }
     filter_horizontal = ('delivery_complications',)
-
-
-@admin.register(MaternalHivInterimHx, site=td_maternal_admin)
-class MaternalHivInterimHxAdmin(ModelAdminMixin, admin.ModelAdmin):
-
-    form = MaternalHivInterimHxForm
-    fieldsets = (
-        (None, {
-            'fields': [
-                'has_cd4',
-                'cd4_date',
-                'cd4_result',
-                'has_vl',
-                'vl_date',
-                'vl_detectable',
-                'vl_result',
-                'comment']}
-         ), audit_fieldset_tuple)
-
-    radio_fields = {'has_cd4': admin.VERTICAL,
-                    'has_vl': admin.VERTICAL,
-                    'vl_detectable': admin.VERTICAL}

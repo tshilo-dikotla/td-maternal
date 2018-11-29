@@ -14,6 +14,7 @@ class MaternalObstericalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         (None, {
             'fields': [
                 'maternal_visit',
+                'report_datetime',
                 'prev_pregnancies',
                 'pregs_24wks_or_more',
                 'lost_before_24wks',

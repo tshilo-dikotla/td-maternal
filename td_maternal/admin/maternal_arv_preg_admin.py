@@ -29,7 +29,8 @@ class MaternalArvPregAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'report_datetime',
                 'took_arv',
                 'is_interrupt',
-                'interrupt']}
+                'interrupt',
+                'interrupt_other']}
          ), audit_fieldset_tuple)
 
     radio_fields = {'took_arv': admin.VERTICAL,

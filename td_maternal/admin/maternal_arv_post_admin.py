@@ -69,6 +69,7 @@ class MaternalArvPostAdhAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         (None, {
             'fields': [
                 'maternal_visit',
+                'report_datetime',
                 'missed_doses',
                 'missed_days',
                 'missed_days_discnt',
