@@ -51,7 +51,7 @@ class MaternalMedicalHistory(CrfModelMixin):
 
     father_chronic = models.ManyToManyField(
         ChronicConditions,
-        related_name='fathe',
+        related_name='father',
         verbose_name='Does the father of the infant or the mother\'s '
         'other children have any of the above. Tick all that apply',
     )
