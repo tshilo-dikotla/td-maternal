@@ -16,6 +16,7 @@ class MaternalPostPartumDepAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         (None, {
             'fields': [
                 'maternal_visit',
+                'report_datetime',
                 'laugh',
                 'enjoyment',
                 'blame',
@@ -25,7 +26,8 @@ class MaternalPostPartumDepAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'unhappy',
                 'sad',
                 'crying',
-                'self_harm']}
+                'self_harm',
+                'total_score']}
          ), audit_fieldset_tuple)
 
     radio_fields = {'laugh': admin.VERTICAL,

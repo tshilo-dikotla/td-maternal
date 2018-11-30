@@ -11,9 +11,12 @@ class MaternalContactAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalContactForm
 
+    search_fields = ['subject_identifier']
+
     fieldsets = (
         (None, {
             'fields': [
+                'subject_identifier',
                 'report_datetime',
                 'contact_type',
                 'contact_datetime',
