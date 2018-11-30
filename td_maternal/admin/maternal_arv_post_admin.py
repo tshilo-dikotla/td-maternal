@@ -15,6 +15,15 @@ class MaternalArvPostMedInlineAdmin(TabularInlineMixin, admin.TabularInline):
     form = MaternalArvPostMedForm
     extra = 1
 
+    fieldsets = (
+        (None, {
+            'fields': [
+                'arv_code',
+                'dose_status',
+                'modification_date',
+                'modification_code']}
+         ),)
+
 
 @admin.register(MaternalArvPostMed, site=td_maternal_admin)
 class MaternalArvPostMedAdmin(ModelAdminMixin, admin.ModelAdmin):
