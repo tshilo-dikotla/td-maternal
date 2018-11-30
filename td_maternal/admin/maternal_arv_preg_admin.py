@@ -12,7 +12,6 @@ class MaternalArvInlineAdmin(TabularInlineMixin, admin.TabularInline):
     model = MaternalArv
     form = MaternalArvForm
     extra = 1
-    min_num = 3
 
     fieldsets = (
         (None, {
