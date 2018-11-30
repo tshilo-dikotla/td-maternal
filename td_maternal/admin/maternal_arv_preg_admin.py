@@ -14,6 +14,17 @@ class MaternalArvInlineAdmin(TabularInlineMixin, admin.TabularInline):
     extra = 1
     min_num = 3
 
+    fieldsets = (
+        (None, {
+            'fields': [
+                'maternal_arv_preg',
+                'arv_code',
+                'start_date',
+                'stop_date',
+                'reason_for_stop',
+                'reason_for_stop_other']}
+         ),)
+
 
 @admin.register(MaternalArvPreg, site=td_maternal_admin)
 class MaternalArvPregAdmin(CrfModelAdminMixin, admin.ModelAdmin):
