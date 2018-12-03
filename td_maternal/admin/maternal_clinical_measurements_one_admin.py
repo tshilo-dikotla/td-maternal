@@ -21,7 +21,7 @@ class MaternalClinicalMeasurementsOneAdmin(
                 'maternal_visit',
                 'report_datetime',
                 'weight_kg',
-                'height',
                 'systolic_bp',
-                'diastolic_bp']}
+                'diastolic_bp',
+                'height']}
          ), audit_fieldset_tuple)
