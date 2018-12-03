@@ -28,6 +28,7 @@ from .maternal_substance_during_preg_form import (
     MaternalSubstanceUseDuringPregForm)
 from .maternal_substance_use_prior_preg_form import (
     MaternalSubstanceUsePriorPregForm)
+from .maternal_ultrasound_fu_form import MaternalUltraSoundFuForm
 from .maternal_ultrasound_initial_form import MaternalUltraSoundInitialForm
 from .maternal_visit_form import MaternalVisitForm
 from .rapid_test_result_form import RapidTestResultForm
