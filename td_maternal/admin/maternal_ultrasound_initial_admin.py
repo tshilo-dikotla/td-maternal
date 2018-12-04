@@ -16,20 +16,19 @@ class MaternalUltraSoundInitialAdmin(ModelAdminMixin, admin.ModelAdmin):
             'fields': [
                 'maternal_visit',
                 'report_datetime',
+                'number_of_gestations',
                 'bpd',
                 'hc',
                 'ac',
                 'fl',
-                'amniotic_fluid_volume',
-                'number_of_gestations',
                 'ga_by_lmp',
                 'ga_by_ultrasound_wks',
                 'ga_by_ultrasound_days',
+                'ga_confirmed',
                 'est_fetal_weight',
                 'est_edd_ultrasound',
                 'edd_confirmed',
-                'ga_confirmed',
-                'ga_confrimation_method']}
+                'amniotic_fluid_volume', ]}
          ), audit_fieldset_tuple)
 
     readonly_fields = ('edd_confirmed', 'ga_confirmed', 'ga_by_lmp')
