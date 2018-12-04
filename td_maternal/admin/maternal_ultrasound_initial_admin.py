@@ -14,6 +14,8 @@ class MaternalUltraSoundInitialAdmin(ModelAdminMixin, admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': [
+                'maternal_visit',
+                'report_datetime',
                 'number_of_gestations',
                 'bpd',
                 'hc',
@@ -26,7 +28,7 @@ class MaternalUltraSoundInitialAdmin(ModelAdminMixin, admin.ModelAdmin):
                 'est_fetal_weight',
                 'est_edd_ultrasound',
                 'edd_confirmed',
-                'amniotic_fluid_volume']}
+                'amniotic_fluid_volume', ]}
          ), audit_fieldset_tuple)
 
     readonly_fields = ('edd_confirmed', 'ga_confirmed', 'ga_by_lmp')

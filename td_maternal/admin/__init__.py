@@ -1,5 +1,6 @@
 from .antenatal_enrollment_admin import AntenatalEnrollmentAdmin
 from .antenatal_visit_membership_admin import AntenataVisitMembershipAdmin
+from .death_report_admin import DeathReportAdmin
 from .maternal_arv_admin import MaternalArvAdmin
 from .maternal_arv_history_admin import MaternalLifetimeArvHistoryAdmin
 from .maternal_arv_post_admin import MaternalArvPostAdhAdmin
@@ -13,12 +14,13 @@ from .maternal_clinical_measurements_two_admin import (
     MaternalClinicalMeasurementsTwoAdmin)
 from .maternal_contact_admin import MaternalContactAdmin
 from .maternal_contraception_admin import MaternalContraception
-from .death_report_admin import DeathReportAdmin
 from .maternal_demographics_admin import MaternalDemographicsAdmin
 from .maternal_diagnoses_admin import MaternalDiagnosesAdmin
+from .maternal_eligibility_loss_admin import MaternalEligibilityLossAdmin
 from .maternal_hiv_interim_hx import MaternalHivInterimHxAdmin
 from .maternal_interim_idcc_admin import MaternalInterimIdccAdmin
 from .maternal_labour_del_admin import MaternalLabourDelAdmin
+from .maternal_locator_admin import MaternalLocatorAdmin
 from .maternal_medical_history_admin import MaternalMedicalHistoryAdmin
 from .maternal_obsterical_history_admin import MaternalObstericalHistoryAdmin
 from .maternal_off_study_admin import MaternalOffStudyAdmin
@@ -39,4 +41,3 @@ from .specimen_consent_admin import SpecimenConsentAdmin
 from .subject_consent_admin import SubjectConsentAdmin
 from .subject_screening_admin import SubjectScreeningAdmin
 from .td_consent_version_admin import TdConsentVersionAdmin
-from .maternal_eligibility_loss_admin import MaternalEligibilityLossAdmin
