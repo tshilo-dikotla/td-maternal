@@ -13,6 +13,7 @@ from .maternal_arv_post_form import MaternalArvPostMedForm
 from .maternal_arv_preg_form import MaternalArvPregForm
 from .maternal_contact_form import MaternalContactForm
 from .maternal_contraception_form import MaternalContraceptionForm
+from .maternal_death_report_form import MaternalDeathReportForm
 from .maternal_demographics_form import MaternalDemographicsForm
 from .maternal_diagnoses_form import MaternalDiagnosesForm
 from .maternal_hiv_interim_hx_form import MaternalHivInterimHxForm

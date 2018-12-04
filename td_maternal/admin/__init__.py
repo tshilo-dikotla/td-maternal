@@ -13,6 +13,7 @@ from .maternal_clinical_measurements_two_admin import (
     MaternalClinicalMeasurementsTwoAdmin)
 from .maternal_contact_admin import MaternalContactAdmin
 from .maternal_contraception_admin import MaternalContraception
+from .maternal_death_report_admin import MaternalDeathReportAdmin
 from .maternal_demographics_admin import MaternalDemographicsAdmin
 from .maternal_diagnoses_admin import MaternalDiagnosesAdmin
 from .maternal_hiv_interim_hx import MaternalHivInterimHxAdmin

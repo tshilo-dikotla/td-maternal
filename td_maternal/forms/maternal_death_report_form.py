@@ -1,9 +1,9 @@
-# from django import forms
-# from ..models import MaternalDeathReport
-#
-#
-# class MaternalDeathReportForm(forms.ModelForm):
-#
-#     class Meta:
-#         model = MaternalDeathReport
-#         fields = '__all__'
+from django import forms
+from ..models import DeathReport
+
+
+class MaternalDeathReportForm(forms.ModelForm):
+
+    class Meta:
+        model = DeathReport
+        fields = '__all__'
