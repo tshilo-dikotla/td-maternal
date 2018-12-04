@@ -23,6 +23,8 @@ class MaternalUltraSoundFuAdmin(ModelAdminMixin, admin.ModelAdmin):
                 'amniotic_fluid_volume']}
          ), audit_fieldset_tuple)
 
+    radio_fields = {'amniotic_fluid_volume': admin.VERTICAL, }
+
     list_display = ('maternal_visit', 'report_datetime')
 
     list_filter = ('report_datetime',)
