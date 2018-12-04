@@ -1,7 +1,7 @@
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
-from edc_identifier.model_mixins import TrackingIdentifierModelMixin
 from edc_identifier.managers import SubjectIdentifierManager
+from edc_identifier.model_mixins import TrackingIdentifierModelMixin
 from edc_visit_schedule.model_mixins import OffScheduleModelMixin
 
 
@@ -21,4 +21,4 @@ class MaternalOffStudy(OffScheduleModelMixin,
 
     class Meta:
         verbose_name = 'Maternal Off Study'
-        verbose_name_plural = 'Study Terminations'
+        verbose_name_plural = 'Maternal Off Studies'
