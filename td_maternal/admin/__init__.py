@@ -30,6 +30,7 @@ from .maternal_substance_use_during_preg_admin import (
     MaternalSubstanceUseDuringPregAdmin)
 from .maternal_substance_use_prior_preg_admin import (
     MaternalSubstanceUsePriorPregAdmin)
+from .maternal_ultrasound_fu_admin import MaternalUltraSoundFuAdmin
 from .maternal_ultrasound_initial_admin import MaternalUltraSoundInitialAdmin
 from .maternal_visit_admin import MaternalVisitAdmin
 from .rapid_test_result_admin import RapidTestResultAdmin

@@ -27,6 +27,7 @@ from .maternal_randomization import MaternalRando
 from .maternal_requisition import MaternalRequisition
 from .maternal_substance_during_preg import MaternalSubstanceUseDuringPreg
 from .maternal_substance_prior_preg import MaternalSubstanceUsePriorPreg
+from .maternal_ultrasound_fu import MaternalUltraSoundFu
 from .maternal_ultrasound_initial import MaternalUltraSoundInitial
 from .maternal_visit import MaternalVisit
 from .onschedule import OnScheduleAntenatalEnrollment
