@@ -174,6 +174,11 @@ CARDIOVASCULAR_DISORDER = (
     (OTHER, 'Other cardiovascular malformation, specify'),
 )
 
+CONSENT_VERSION = (
+    ('1', 'Consent version 1'),
+    ('3', 'Consent version 3')
+)
+
 CLEFT_DISORDER = (
     ('None', 'None'),
     ('Cleft lip without cleft palate', 'Cleft lip without cleft palate'),

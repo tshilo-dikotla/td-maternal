@@ -34,3 +34,4 @@ from .rapid_test_result_form import RapidTestResultForm
 from .specimen_consent_form import SpecimenConsentForm
 from .maternal_hiv_interim_hx_form import MaternalHivInterimHxForm
 from .maternal_off_study_form import MaternalOffStudyForm
+from .td_consent_version_form import TdConsentVersionForm
