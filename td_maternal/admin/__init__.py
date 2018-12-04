@@ -37,3 +37,4 @@ from .rapid_test_result_admin import RapidTestResultAdmin
 from .specimen_consent_admin import SpecimenConsentAdmin
 from .maternal_off_study_admin import MaternalOffStudyAdmin
 from .td_consent_version_admin import TdConsentVersionAdmin
+from .maternal_eligibility_loss_admin import MaternalEligibilityLossAdmin
