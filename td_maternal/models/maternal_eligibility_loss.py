@@ -1,5 +1,4 @@
 from django.db import models
-from datetime import timezone
 
 # from edc_base.audit_trail import AuditTrail
 from edc_base.model_mixins import BaseUuidModel
