@@ -1,39 +1,26 @@
 from django.contrib import admin
+from edc_model_admin import audit_fieldset_tuple
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalDeathReportForm
-from ..models import MaternalDeathReport
+from ..models import DeathReport
 from .modeladmin_mixins import CrfModelAdminMixin
 
 
-@admin.register(MaternalDeathReport, site=td_maternal_admin)
+@admin.register(DeathReport, site=td_maternal_admin)
 class MaternalDeathReportAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalDeathReportForm
 
-    fields = (
-        "maternal_visit",
-        "report_datetime",
-        "death_date",
-        "cause",
-        "cause_other",
-        "perform_autopsy",
-        "death_cause",
-        "cause_category",
-        "cause_category_other",
-        "diagnosis_code",
-        "diagnosis_code_other",
-        "illness_duration",
-        "medical_responsibility",
-        "participant_hospitalized",
-        "reason_hospitalized",
-        "reason_hospitalized_other",
-        "days_hospitalized",
-        "comment")
-    radio_fields = {
-        "cause": admin.VERTICAL,
-        "perform_autopsy": admin.VERTICAL,
-        "participant_hospitalized": admin.VERTICAL,
-        "cause_category": admin.VERTICAL,
-        "diagnosis_code": admin.VERTICAL,
-        "medical_responsibility": admin.VERTICAL,
-        "reason_hospitalized": admin.VERTICAL}
+    fieldsets = (
+        (None, {
+            'fields': [
+                'maternal_visit',
+                'report_datetime',
+                'death_datetime',
+                'study_day',
+                'death_as_inpatient',
+                'cause_of_death',
+                'cause_of_death_other',
+                'tb_site',
+                'narrative']}
+         ), audit_fieldset_tuple)

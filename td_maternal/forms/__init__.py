@@ -13,6 +13,7 @@ from td_maternal.forms.maternal_clinical_measurements_two_form import (
 from .subject_consent_form import SubjectConsentForm
 from .maternal_contact_form import MaternalContactForm
 from .maternal_contraception_form import MaternalContraceptionForm
+from .maternal_death_report_form import MaternalDeathReportForm
 from .maternal_demographics_form import MaternalDemographicsForm
 from .maternal_diagnoses_form import MaternalDiagnosesForm
 from .subject_screening_form import SubjectScreeningForm
