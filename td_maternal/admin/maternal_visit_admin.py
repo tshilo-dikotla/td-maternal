@@ -1,4 +1,3 @@
-from copy import copy
 from django.contrib import admin
 from edc_model_admin import audit_fieldset_tuple
 from edc_visit_schedule.fieldsets import visit_schedule_fieldset_tuple
@@ -11,8 +10,8 @@ from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(MaternalVisit, site=td_maternal_admin)
-class MaternalVisitAdmin(ModelAdminMixin,
-                         VisitModelAdminMixin, admin.ModelAdmin):
+class MaternalVisitAdmin(VisitModelAdminMixin,
+                         ModelAdminMixin, admin.ModelAdmin):
 
     visit_attr = 'maternal_visit'
     dashboard_type = 'maternal'

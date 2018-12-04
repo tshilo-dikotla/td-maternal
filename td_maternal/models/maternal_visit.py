@@ -14,8 +14,9 @@ from ..choices import VISIT_UNSCHEDULED_REASON, VISIT_REASON, VISIT_INFO_SOURCE
 
 
 class MaternalVisit(
-    VisitModelMixin, ReferenceModelMixin, CreatesMetadataModelMixin,
-        SiteModelMixin, RequiresConsentFieldsModelMixin, BaseUuidModel):
+        VisitModelMixin, CreatesMetadataModelMixin,
+        ReferenceModelMixin, RequiresConsentFieldsModelMixin,
+        SiteModelMixin, BaseUuidModel):
 
     """ Maternal visit form that links all antenatal/ postnatal follow-up forms
     """
