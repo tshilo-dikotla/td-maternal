@@ -13,7 +13,7 @@ from .maternal_clinical_measurements_two_admin import (
     MaternalClinicalMeasurementsTwoAdmin)
 from .maternal_contact_admin import MaternalContactAdmin
 from .maternal_contraception_admin import MaternalContraception
-from .maternal_death_report_admin import MaternalDeathReportAdmin
+from .death_report_admin import DeathReportAdmin
 from .maternal_demographics_admin import MaternalDemographicsAdmin
 from .maternal_diagnoses_admin import MaternalDiagnosesAdmin
 from .maternal_hiv_interim_hx import MaternalHivInterimHxAdmin
@@ -39,3 +39,4 @@ from .specimen_consent_admin import SpecimenConsentAdmin
 from .subject_consent_admin import SubjectConsentAdmin
 from .subject_screening_admin import SubjectScreeningAdmin
 from .td_consent_version_admin import TdConsentVersionAdmin
+from .maternal_eligibility_loss_admin import MaternalEligibilityLossAdmin

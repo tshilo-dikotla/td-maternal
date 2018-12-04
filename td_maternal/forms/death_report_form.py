@@ -2,7 +2,7 @@ from django import forms
 from ..models import DeathReport
 
 
-class MaternalDeathReportForm(forms.ModelForm):
+class DeathReportForm(forms.ModelForm):
 
     class Meta:
         model = DeathReport

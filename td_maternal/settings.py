@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'edc_base.apps.AppConfig',
+    'edc_model_admin.apps.AppConfig',
     'edc_device.apps.AppConfig',
     'edc_consent.apps.AppConfig',
     'edc_action_item.apps.AppConfig',

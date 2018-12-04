@@ -45,3 +45,4 @@ from .death_report import DeathReport
 from td_maternal.models.maternal_srh import MaternalSrh
 from .list_models import Contraceptives
 from .td_consent_version import TdConsentVersion
+from .maternal_eligibility_loss import MaternalEligibilityLoss

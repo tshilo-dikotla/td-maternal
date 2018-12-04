@@ -1,15 +1,15 @@
 from django.contrib import admin
 from edc_model_admin import audit_fieldset_tuple
 from ..admin_site import td_maternal_admin
-from ..forms import MaternalDeathReportForm
+from ..forms import DeathReportForm
 from ..models import DeathReport
 from .modeladmin_mixins import CrfModelAdminMixin
 
 
 @admin.register(DeathReport, site=td_maternal_admin)
-class MaternalDeathReportAdmin(CrfModelAdminMixin, admin.ModelAdmin):
+class DeathReportAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
-    form = MaternalDeathReportForm
+    form = DeathReportForm
 
     fieldsets = (
         (None, {
