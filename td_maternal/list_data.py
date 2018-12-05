@@ -216,7 +216,7 @@ list_data = {
         ('anaemia_or_neutropaenia_or_thrombocytopa',
          'anaemia/neutropaenia/thrombocytopa'),
         ('unexp_sev_wasting/stunting/mulnutrition',
-         'unexp sev wasting/stunting/mulnutrition'), ()
+         'unexp sev wasting/stunting/mulnutrition'),
         ('pneumocystis_pneumonia', 'Pneumocystis pneumonia'),
         ('recurr_severe_bacterial_infections',
          'Recurrent severe bacterial infections'),
