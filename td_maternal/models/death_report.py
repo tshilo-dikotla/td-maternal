@@ -1,8 +1,7 @@
 from django.db import models
-
+from edc_base.model_fields import OtherCharField
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_validators import datetime_not_future
-from edc_base.model_fields import OtherCharField
 from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO
 from edc_identifier.managers import SubjectIdentifierManager
@@ -26,7 +25,9 @@ class DeathReport(CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
 
     death_date = models.DateField(
         validators=[datetime_not_future],
-        verbose_name='Date of Death:')
+        verbose_name='Date of Death:',
+        help_text=('If reporting today, use today\'s date/time, otherwise use'
+                   ' the date/time this information was reported.'))
 
     comment = models.TextField(
         max_length=500,
@@ -64,7 +65,7 @@ class DeathReport(CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
     cause_category = models.CharField(
         max_length=50,
         choices=CAUSE_OF_DEATH_CAT,
-        verbose_name='based on the narrative above, what category best defines'
+        verbose_name='based on the description above, what category best defines'
         ' the major cause of death?')
 
     cause_category_other = OtherCharField(
@@ -116,6 +117,8 @@ class DeathReport(CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
             'Describe the major cause of death (including pertinent autopsy information '
             'if available), starting with the first noticeable illness thought to be '
             'related to death, continuing to time of death.'),
+        blank=True,
+        null=True,
         help_text=(
             'Note: Cardiac and pulmonary arrest are not major reasons and should not '
             'be used to describe major cause'))
