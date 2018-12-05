@@ -3,6 +3,7 @@ from django.db import models
 
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_validators import datetime_not_future
+from edc_base.model_fields import OtherCharField
 from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NOT_APPLICABLE
@@ -10,7 +11,9 @@ from edc_identifier.managers import SubjectIdentifierManager
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import datetime_not_before_study_start
 
-from ..choices import CAUSE_OF_DEATH, TB_SITE_DEATH
+from ..choices import (CAUSE_OF_DEATH, TB_SITE_DEATH,
+                       SOURCE_OF_DEATH_INFO, CAUSE_OF_DEATH_CAT, MED_RESPONSIBILITY,
+                       HOSPITILIZATION_REASONS)
 from .model_mixins import CrfModelMixin
 
 
@@ -36,18 +39,41 @@ class DeathReport(CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
         max_length=5,
         verbose_name='Death as inpatient')
 
+    primary_source = models.CharField(
+        max_length=100,
+        choices=SOURCE_OF_DEATH_INFO,
+        verbose_name='what is the primary source of'
+        ' cause of death information?')
+
+    primary_source_other = OtherCharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        verbose_name='If "Other" above, please specify')
+
     cause_of_death = models.CharField(
         max_length=50,
         choices=CAUSE_OF_DEATH,
         verbose_name=('Main cause of death'),
         help_text=('Main cause of death in the opinion of the '
-                   'local study doctor and local PI'))
+                   ' local study doctor and local PI'))
 
-    cause_of_death_other = models.CharField(
+    cause_of_death_other = OtherCharField(
         max_length=100,
         blank=True,
         null=True,
         verbose_name='If "Other" above, please specify')
+
+    cause_category = models.CharField(
+        max_length=50,
+        choices=CAUSE_OF_DEATH_CAT,
+        verbose_name='based on the narrative, what category best defines'
+        ' the major cause of death?')
+
+    cause_category_other = OtherCharField(
+        verbose_name='If "Other" above, please specify',
+        blank=True,
+        null=True)
 
     tb_site = models.CharField(
         verbose_name='If cause of death is TB, specify site of TB disease',
@@ -55,8 +81,53 @@ class DeathReport(CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
         choices=TB_SITE_DEATH,
         default=NOT_APPLICABLE)
 
+    perform_autopsy = models.CharField(
+        max_length=3,
+        choices=YES_NO,
+        verbose_name='Will an autopsy be performed later')
+
+    medical_responsibility = models.CharField(
+        choices=MED_RESPONSIBILITY,
+        max_length=50,
+        verbose_name='Who was responsible for primary medical care of the '
+        'participant during the month prior to death?',
+        help_text="")
+
+    participant_hospitalized = models.CharField(
+        max_length=3,
+        choices=YES_NO,
+        verbose_name="Was the participant hospitalised before death?")
+
+    reason_hospitalized = models.CharField(
+        choices=HOSPITILIZATION_REASONS,
+        max_length=50,
+        verbose_name="if yes, hospitalized, what was the primary reason for hospitalisation? ",
+        help_text="",
+        blank=True,
+        null=True)
+
+    reason_hospitalized_other = models.TextField(
+        verbose_name='if other illness or pathogen specify or non '
+        'infectious reason, please specify below:',
+        max_length=250,
+        blank=True,
+        null=True)
+
+    days_hospitalized = models.IntegerField(
+        verbose_name=(
+            'For how many days was the participant hospitalised during '
+            'the illness immediately before death? '),
+        help_text="in days",
+        default=0)
+
     narrative = models.TextField(
-        verbose_name='Narrative')
+        verbose_name=(
+            'Describe the major cause of death (including pertinent autopsy information '
+            'if available), starting with the first noticeable illness thought to be '
+            'related to death, continuing to time of death.'),
+        help_text=(
+            'Note: Cardiac and pulmonary arrest are not major reasons and should not '
+            'be used to describe major cause'))
 
     objects = SubjectIdentifierManager()
 

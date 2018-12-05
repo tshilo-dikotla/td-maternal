@@ -19,8 +19,30 @@ class DeathReportAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'death_datetime',
                 'study_day',
                 'death_as_inpatient',
+                'primary_source',
+                'primary_source_other',
+                'perform_autopsy',
+                'narrative',
+                'cause_category',
+                'cause_category_other',
                 'cause_of_death',
                 'cause_of_death_other',
-                'tb_site',
-                'narrative']}
+                'medical_responsibility',
+                'participant_hospitalized',
+                'reason_hospitalized',
+                'reason_hospitalized_other',
+                'days_hospitalized',
+                'tb_site', ]}
          ), audit_fieldset_tuple)
+
+    radio_fields = {
+        'death_as_inpatient': admin.VERTICAL,
+        'cause_of_death': admin.VERTICAL,
+        'primary_source': admin.VERTICAL,
+        'cause_of_death': admin.VERTICAL,
+        'cause_category': admin.VERTICAL,
+        'tb_site': admin.VERTICAL,
+        'perform_autopsy': admin.VERTICAL,
+        'medical_responsibility': admin.VERTICAL,
+        'participant_hospitalized': admin.VERTICAL,
+        'reason_hospitalized': admin.VERTICAL}
