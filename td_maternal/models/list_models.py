@@ -76,11 +76,6 @@ class ObComp(ListModelMixin):
     pass
 
 
-class WcsDxAdult(ListModelMixin, BaseUuidModel):
-
-    pass
-
-
 class MaternalRelatives(ListModelMixin, BaseUuidModel):
 
     pass
@@ -102,5 +97,15 @@ class Rations (ListModelMixin, BaseUuidModel):
 
 
 class Supplements (ListModelMixin, BaseUuidModel):
+
+    pass
+
+
+class WcsDxAdult(ListModelMixin, BaseUuidModel):
+
+    pass
+
+
+class WcsDxPed(ListModelMixin, BaseUuidModel):
 
     pass

@@ -1,9 +1,10 @@
 from django.contrib import admin
+from edc_model_admin import audit_fieldset_tuple
+
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalSubstanceUsePriorPregForm
 from ..models import MaternalSubstanceUsePriorPreg
 from .modeladmin_mixins import CrfModelAdminMixin
-from edc_model_admin import audit_fieldset_tuple
 
 
 @admin.register(MaternalSubstanceUsePriorPreg, site=td_maternal_admin)
@@ -24,6 +25,7 @@ class MaternalSubstanceUsePriorPregAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         (None, {
             'fields': [
                 'maternal_visit',
+                'report_datetime',
                 'smoked_prior_to_preg',
                 'smoking_prior_preg_freq',
                 'alcohol_prior_pregnancy',
