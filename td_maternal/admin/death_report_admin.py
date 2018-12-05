@@ -23,8 +23,6 @@ class DeathReportAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'narrative',
                 'cause_category',
                 'cause_category_other',
-                'cause_of_death',
-                'cause_of_death_other',
                 'illness_duration',
                 'medical_responsibility',
                 'participant_hospitalized',

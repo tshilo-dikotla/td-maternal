@@ -49,19 +49,6 @@ class DeathReport(CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
         null=True,
         verbose_name='If "Other" above, please specify')
 
-    cause_of_death = models.CharField(
-        max_length=50,
-        choices=CAUSE_OF_DEATH,
-        verbose_name=('Main cause of death'),
-        help_text=('Main cause of death in the opinion of the '
-                   ' local study doctor and local PI'))
-
-    cause_of_death_other = OtherCharField(
-        max_length=100,
-        blank=True,
-        null=True,
-        verbose_name='If "Other" above, please specify')
-
     cause_category = models.CharField(
         max_length=50,
         choices=CAUSE_OF_DEATH_CAT,
