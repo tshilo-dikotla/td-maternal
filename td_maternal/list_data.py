@@ -178,7 +178,8 @@ list_data = {
         ('atypical_disseminated_leishmaniasis',
          'Atypical disseminated leishmaniasis'),
         ('sympt_nephropathy_or_cardiomyopathy',
-         'Sympt nephropathy/cardiomyopathy')
+         'Sympt nephropathy/cardiomyopathy'),
+        (NOT_APPLICABLE, 'Not Applicable')
     ],
     'td_maternal.wcsdxped': [
         ('asymptomatic', 'Asymptomatic'),
@@ -240,7 +241,8 @@ list_data = {
          'Prog multifocal leukoencephalopathy'),
         ('sympt_nephropathy_or_cardiomyopathy',
          'Sympt nephropathy/cardiomyopathy'),
-        ('CS99999', 'CS99999')]
+        ('CS99999', 'CS99999'),
+        (NOT_APPLICABLE, 'Not Applicable')]
 }
 
 preload_data = PreloadData(
