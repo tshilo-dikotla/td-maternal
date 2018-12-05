@@ -1,19 +1,19 @@
-from django.contrib import admin
 from django.conf import settings
-
+from django.contrib import admin
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
+from edc_base.sites.admin import ModelAdminSiteMixin
+from edc_metadata import NextFormGetter
 from edc_model_admin import (
     ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructionsMixin,
     ModelAdminFormAutoNumberMixin, ModelAdminAuditFieldsMixin,
     ModelAdminReadOnlyMixin, ModelAdminInstitutionMixin,
     ModelAdminRedirectOnDeleteMixin)
-from edc_metadata import NextFormGetter
+from edc_model_admin import audit_fieldset_tuple
 from edc_subject_dashboard import ModelAdminSubjectDashboardMixin
-from edc_base.sites.admin import ModelAdminSiteMixin
 
 from ..admin_site import td_maternal_admin
-from ..models import MaternalOffStudy
 from ..forms import MaternalOffStudyForm
+from ..models import MaternalOffStudy
 
 
 class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructionsMixin,
@@ -39,3 +39,18 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructions
 class MaternalOffStudyAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalOffStudyForm
+
+    fieldsets = (
+        (None, {
+            'fields': [
+                'maternal_visit',
+                'report_datetime',
+                'seen_at_clinic',
+                'reason_unseen_clinic',
+                'reason_unseen_clinic_other',
+                'is_contraceptive_initiated',
+                'contr',
+                'contr_other',
+                'reason_not_initiated',
+                'reason_not_initiated_other']}
+         ), audit_fieldset_tuple)
