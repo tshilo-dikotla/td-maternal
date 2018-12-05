@@ -37,8 +37,7 @@ class SpecimenConsent(ConsentModelMixin, UniqueSubjectIdentifierFieldMixin,
         choices=YES_NO,
         validators=[eligible_if_yes, ],
         null=True,
-        blank=False,
-        help_text='If no, participant is not eligible.')
+        blank=False)
 
     assessment_score = models.CharField(
         verbose_name=(
@@ -48,8 +47,7 @@ class SpecimenConsent(ConsentModelMixin, UniqueSubjectIdentifierFieldMixin,
         choices=YES_NO,
         validators=[eligible_if_yes, ],
         null=True,
-        blank=False,
-        help_text='If no, participant is not eligible.')
+        blank=False)
 
     consent_copy = models.CharField(
         verbose_name=(
