@@ -1,4 +1,3 @@
-from django.core.validators import MinValueValidator
 from django.db import models
 
 from edc_base.model_managers import HistoricalRecords
@@ -6,13 +5,12 @@ from edc_base.model_validators import datetime_not_future
 from edc_base.model_fields import OtherCharField
 from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO
-from edc_constants.constants import NOT_APPLICABLE
 from edc_identifier.managers import SubjectIdentifierManager
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import datetime_not_before_study_start
 
-from ..choices import (CAUSE_OF_DEATH, TB_SITE_DEATH,
-                       SOURCE_OF_DEATH_INFO, CAUSE_OF_DEATH_CAT, MED_RESPONSIBILITY,
+from ..choices import (CAUSE_OF_DEATH, SOURCE_OF_DEATH_INFO,
+                       CAUSE_OF_DEATH_CAT, MED_RESPONSIBILITY,
                        HOSPITILIZATION_REASONS)
 from .model_mixins import CrfModelMixin
 
@@ -26,24 +24,23 @@ class DeathReport(CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
             datetime_not_future],
         default=get_utcnow)
 
-    death_datetime = models.DateTimeField(
+    death_date = models.DateField(
         validators=[datetime_not_future],
-        verbose_name='Date and Time of Death')
+        verbose_name='Date of Death:')
 
-    study_day = models.IntegerField(
-        validators=[MinValueValidator(1), ],
-        verbose_name='Study day')
-
-    death_as_inpatient = models.CharField(
-        choices=YES_NO,
-        max_length=5,
-        verbose_name='Death as inpatient')
+    comment = models.TextField(
+        max_length=500,
+        verbose_name="Comments",
+        blank=True,
+        null=True)
 
     primary_source = models.CharField(
         max_length=100,
         choices=SOURCE_OF_DEATH_INFO,
-        verbose_name='what is the primary source of'
-        ' cause of death information?')
+        verbose_name=('what is the primary source of '
+                      ' cause of death information? '
+                      '(if multiple source of information, '
+                      'list one with the smallest number closest to the top of the list)'))
 
     primary_source_other = OtherCharField(
         max_length=100,
@@ -67,19 +64,13 @@ class DeathReport(CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
     cause_category = models.CharField(
         max_length=50,
         choices=CAUSE_OF_DEATH_CAT,
-        verbose_name='based on the narrative, what category best defines'
+        verbose_name='based on the narrative above, what category best defines'
         ' the major cause of death?')
 
     cause_category_other = OtherCharField(
         verbose_name='If "Other" above, please specify',
         blank=True,
         null=True)
-
-    tb_site = models.CharField(
-        verbose_name='If cause of death is TB, specify site of TB disease',
-        max_length=25,
-        choices=TB_SITE_DEATH,
-        default=NOT_APPLICABLE)
 
     perform_autopsy = models.CharField(
         max_length=3,
@@ -101,7 +92,7 @@ class DeathReport(CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
     reason_hospitalized = models.CharField(
         choices=HOSPITILIZATION_REASONS,
         max_length=50,
-        verbose_name="if yes, hospitalized, what was the primary reason for hospitalisation? ",
+        verbose_name='if yes, hospitalized, what was the primary reason for hospitalisation? ',
         help_text="",
         blank=True,
         null=True)
@@ -128,6 +119,10 @@ class DeathReport(CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
         help_text=(
             'Note: Cardiac and pulmonary arrest are not major reasons and should not '
             'be used to describe major cause'))
+
+    illness_duration = models.IntegerField(
+        verbose_name='Duration of acute illness directly causing death   ',
+        help_text='in days (If unknown enter -1)')
 
     objects = SubjectIdentifierManager()
 
