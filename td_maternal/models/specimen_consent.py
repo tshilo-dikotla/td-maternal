@@ -1,6 +1,7 @@
 from django.db import models
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
+from edc_base.model_validators import datetime_not_future
 from edc_base.sites.site_model_mixin import SiteModelMixin
 from edc_consent.field_mixins import (
     SampleCollectionFieldsMixin, VulnerabilityFieldsMixin)
@@ -10,6 +11,7 @@ from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_consent.validators import eligible_if_yes, eligible_if_yes_or_declined
 from edc_constants.choices import YES_NO, YES_NO_DECLINED
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
+from edc_protocol.validators import datetime_not_before_study_start
 
 
 class SpecimenConsent(ConsentModelMixin, UniqueSubjectIdentifierFieldMixin,
@@ -20,6 +22,13 @@ class SpecimenConsent(ConsentModelMixin, UniqueSubjectIdentifierFieldMixin,
     """ A model completed by the user when a mother gives consent for specimen
      storage.
      """
+    consent_datetime = models.DateTimeField(
+        verbose_name='Consent date and time',
+        validators=[
+            datetime_not_before_study_start,
+            datetime_not_future],
+        help_text=('If reporting today, use today\'s date/time, otherwise use'
+                   ' the date/time this information was reported.'))
 
     consent_reviewed = models.CharField(
         verbose_name=('I have explained the purpose of the specimen'
