@@ -1,16 +1,14 @@
 from django.db import models
-
 from edc_base.model_fields import OtherCharField
 from edc_constants.choices import YES_NO_DWTA
 
 from ..maternal_choices import (
+    PAP_SMEAR, NORMAL_ABNORMAL_DWTA, PAP_SMEAR_ESTIMATE)
+from ..maternal_choices import (
     YES_NO_DNT_DWTA, NEXT_CHILD_PLAN, YES_NO_NO_PARTNER_DWTA)
 from ..maternal_choices import INFLUENTIAL_IN_DECISION_MAKING
-from ..maternal_choices import (
-    PAP_SMEAR, NORMAL_ABNORMAL_DWTA, PAP_SMEAR_ESTIMATE)
-
-from .model_mixins import CrfModelMixin
 from .list_models import Contraceptives, MaternalRelatives
+from .model_mixins import CrfModelMixin
 
 
 class MaternalContraception(CrfModelMixin):

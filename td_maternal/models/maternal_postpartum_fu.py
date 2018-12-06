@@ -3,8 +3,9 @@ from django.db import models
 from edc_base.model_fields import OtherCharField
 from edc_constants.choices import YES_NO
 
-from .model_mixins import DiagnosesMixin, CrfModelMixin
 from .list_models import MaternalHospitalization
+
+from .model_mixins import DiagnosesMixin, CrfModelMixin
 
 
 class MaternalPostPartumFu(CrfModelMixin, DiagnosesMixin):

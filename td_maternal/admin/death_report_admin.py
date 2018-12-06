@@ -33,9 +33,7 @@ class DeathReportAdmin(CrfModelAdminMixin, admin.ModelAdmin):
          ), audit_fieldset_tuple)
 
     radio_fields = {
-        'cause_of_death': admin.VERTICAL,
         'primary_source': admin.VERTICAL,
-        'cause_of_death': admin.VERTICAL,
         'cause_category': admin.VERTICAL,
         'perform_autopsy': admin.VERTICAL,
         'medical_responsibility': admin.VERTICAL,

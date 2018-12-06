@@ -1,11 +1,11 @@
-from django.db import models
 from django.core.validators import MinValueValidator
+from django.db import models
 from edc_base.model_fields import IsDateEstimatedField, OtherCharField
 from edc_constants.choices import YES_NO, YES_NO_NA
 
 from ..maternal_choices import PRIOR_PREG_HAART_STATUS
-from .model_mixins import CrfModelMixin
 from .list_models import PriorArv
+from .model_mixins import CrfModelMixin
 
 
 class MaternalLifetimeArvHistory(CrfModelMixin):
