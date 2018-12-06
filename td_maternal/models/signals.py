@@ -65,7 +65,7 @@ def antenatal_visit_membership_on_post_save(sender, instance, raw, created, **kw
                 'td_maternal.onscheduleantenatalvisitmembership')
             schedule.put_on_schedule(
                 subject_identifier=instance.subject_identifier,
-                onschedule_datetime=instance.consent_datetime)
+                onschedule_datetime=instance.report_datetime)
 
 
 @receiver(post_save, weak=False, sender=MaternalLabourDel,
@@ -86,4 +86,4 @@ def maternal_labour_del_on_post_save(sender, instance, raw, created, **kwargs):
                 'td_maternal.onschedulematernallabourdel')
             schedule.put_on_schedule(
                 subject_identifier=instance.subject_identifier,
-                onschedule_datetime=instance.consent_datetime)
+                onschedule_datetime=instance.report_datetime)
