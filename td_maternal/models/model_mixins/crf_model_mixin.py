@@ -23,7 +23,7 @@ class CrfModelMixin(BaseCrfModelMixin, SubjectScheduleCrfModelMixin,
     maternal_visit = models.OneToOneField(MaternalVisit, on_delete=PROTECT)
 
     def natural_key(self):
-        return self.subject_visit.natural_key()
+        return self.maternal_visit.natural_key()
     natural_key.dependencies = ['td_maternal.maternalvisit']
 
     class Meta:
