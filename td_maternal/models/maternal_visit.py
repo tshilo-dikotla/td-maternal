@@ -32,6 +32,8 @@ class MaternalVisit(
         verbose_name=(
             'If \'Unscheduled\' above, provide reason for '
             'the unscheduled visit'),
+        blank=True,
+        null=True,
         max_length=25,
         choices=VISIT_UNSCHEDULED_REASON,
         default=NOT_APPLICABLE)
