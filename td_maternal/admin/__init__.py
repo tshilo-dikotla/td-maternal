@@ -16,7 +16,6 @@ from .maternal_contact_admin import MaternalContactAdmin
 from .maternal_contraception_admin import MaternalContraception
 from .maternal_demographics_admin import MaternalDemographicsAdmin
 from .maternal_diagnoses_admin import MaternalDiagnosesAdmin
-from .maternal_eligibility_loss_admin import MaternalEligibilityLossAdmin
 from .maternal_hiv_interim_hx import MaternalHivInterimHxAdmin
 from .maternal_interim_idcc_admin import MaternalInterimIdccAdmin
 from .maternal_labour_del_admin import MaternalLabourDelAdmin

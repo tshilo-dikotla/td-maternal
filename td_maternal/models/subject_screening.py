@@ -85,14 +85,3 @@ class SubjectScreening(NonUniqueSubjectIdentifierModelMixin, SiteModelMixin,
 
     def natural_key(self):
         return self.screening_identifier
-
-    @property
-    def maternal_eligibility_loss(self):
-        MaternalEligibilityLoss = apps.get_model(
-            'td_maternal', 'MaternalEligibilityLoss')
-        try:
-            maternal_eligibility_loss = MaternalEligibilityLoss.objects.get(
-                maternal_eligibility_id=self.id)
-        except MaternalEligibilityLoss.DoesNotExist:
-            maternal_eligibility_loss = None
-        return maternal_eligibility_loss
