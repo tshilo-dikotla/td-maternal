@@ -8,7 +8,7 @@ from edc_identifier.managers import SubjectIdentifierManager
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import datetime_not_before_study_start
 
-from ..choices import (CAUSE_OF_DEATH, SOURCE_OF_DEATH_INFO,
+from ..choices import (SOURCE_OF_DEATH_INFO,
                        CAUSE_OF_DEATH_CAT, MED_RESPONSIBILITY,
                        HOSPITILIZATION_REASONS)
 from .model_mixins import CrfModelMixin

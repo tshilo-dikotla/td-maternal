@@ -1,7 +1,9 @@
 from django.contrib import admin
+from edc_model_admin import audit_fieldset_tuple
+
 from ..admin_site import td_maternal_admin
-from ..models import MaternalRando
 from ..forms import MaternalRandomizationForm
+from ..models import MaternalRando
 from .modeladmin_mixins import ModelAdminMixin
 
 
@@ -10,13 +12,21 @@ class MartenalRandoAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalRandomizationForm
 
-    fields = (
-        'maternal_visit', 'dispensed',
-        'comment', 'subject_identifier',
-        'initials', 'site', 'randomization_datetime',
-        'delivery_clinic')
+    fieldsets = (
+        (None, {
+            'fields': [
+                'maternal_visit',
+                'dispensed',
+                'comment',
+                'subject_identifier',
+                'initials',
+                'site',
+                'randomization_datetime',
+                'delivery_clinic']}
+         ), audit_fieldset_tuple)
 
     list_filter = ('randomization_datetime', 'site')
+
     readonly_fields = (
         'sid',
         'subject_identifier',
@@ -24,4 +34,6 @@ class MartenalRandoAdmin(ModelAdminMixin, admin.ModelAdmin):
         'rx',
         'site',
         'randomization_datetime')
-    radio_fields = {"delivery_clinic": admin.VERTICAL, }
+
+    radio_fields = {'delivery_clinic': admin.VERTICAL,
+                    'dispensed': admin.VERTICAL}

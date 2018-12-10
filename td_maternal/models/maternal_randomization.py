@@ -3,12 +3,13 @@ from django.db import models
 from django_crypto_fields.fields import EncryptedCharField
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NO
+from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 
 from ..maternal_choices import DELIVERY_HEALTH_FACILITY
 from .model_mixins import CrfModelMixin
 
 
-class MaternalRando (CrfModelMixin):
+class MaternalRando (CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
     """ Stores a prepared infant randomization list.
 
     If you need to undo a randomization, here is an example of how::
@@ -44,10 +45,6 @@ class MaternalRando (CrfModelMixin):
 
     rx = EncryptedCharField(
         verbose_name="Treatment Assignment")
-
-    subject_identifier = models.CharField(
-        verbose_name="Subject Identifier",
-        max_length=16)
 
     randomization_datetime = models.DateTimeField(
         verbose_name='Randomization Datetime')
