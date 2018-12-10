@@ -43,14 +43,11 @@ class MaternalOffStudyAdmin(ModelAdminMixin, admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': [
-                'maternal_visit',
-                'report_datetime',
-                'seen_at_clinic',
-                'reason_unseen_clinic',
-                'reason_unseen_clinic_other',
-                'is_contraceptive_initiated',
-                'contr',
-                'contr_other',
-                'reason_not_initiated',
-                'reason_not_initiated_other']}
+                'subject_identifier',
+                'offstudy_date',
+                'reason',
+                'reason_other',
+                'comment']}
          ), audit_fieldset_tuple)
+
+    radio_fields = {'reason': admin.VERTICAL}
