@@ -10,11 +10,8 @@ from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(MaternalVisit, site=td_maternal_admin)
-class MaternalVisitAdmin(VisitModelAdminMixin,
-                         ModelAdminMixin, admin.ModelAdmin):
-
-    visit_attr = 'maternal_visit'
-    dashboard_type = 'maternal'
+class MaternalVisitAdmin(
+        ModelAdminMixin, VisitModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalVisitForm
 
@@ -44,9 +41,3 @@ class MaternalVisitAdmin(VisitModelAdminMixin,
         'info_source': admin.VERTICAL,
         'is_present': admin.VERTICAL,
         'survival_status': admin.VERTICAL}
-
-#     def get_fieldsets(self, request, obj=None):
-#         fields = copy(self.fields)
-#         fields.remove('information_provider')
-#         fields.remove('information_provider_other')
-#         return [(None, {'fields': fields})]
