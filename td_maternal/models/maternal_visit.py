@@ -2,6 +2,7 @@ from django.db import models
 from edc_appointment.models import Appointment
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
+from edc_base.sites import CurrentSiteManager as BaseCurrentSiteManager
 from edc_base.sites.site_model_mixin import SiteModelMixin
 from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_constants.constants import NOT_APPLICABLE
@@ -13,10 +14,13 @@ from edc_visit_tracking.model_mixins import VisitModelMixin
 from ..choices import VISIT_UNSCHEDULED_REASON, VISIT_REASON, VISIT_INFO_SOURCE
 
 
+class CurrentSiteManager(VisitModelManager, BaseCurrentSiteManager):
+    pass
+
+
 class MaternalVisit(
-        VisitModelMixin, CreatesMetadataModelMixin,
-        ReferenceModelMixin, RequiresConsentFieldsModelMixin,
-        SiteModelMixin, BaseUuidModel):
+        VisitModelMixin, ReferenceModelMixin, CreatesMetadataModelMixin,
+        SiteModelMixin, RequiresConsentFieldsModelMixin, BaseUuidModel):
 
     """ Maternal visit form that links all antenatal/ postnatal follow-up forms
     """
@@ -42,6 +46,8 @@ class MaternalVisit(
         verbose_name='What is the main source of this information?',
         max_length=25,
         choices=VISIT_INFO_SOURCE)
+
+    on_site = CurrentSiteManager()
 
     objects = VisitModelManager()
 
