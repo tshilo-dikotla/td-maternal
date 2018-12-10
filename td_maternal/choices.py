@@ -3,9 +3,9 @@ from td_maternal.constants import NO_MODIFICATIONS, START
 from edc_constants.constants import (
     OFF_STUDY, ON_STUDY, FAILED_ELIGIBILITY, PARTICIPANT)
 from edc_constants.constants import NOT_APPLICABLE, UNKNOWN, OTHER
+from edc_metadata.constants import NOT_REQUIRED
 from edc_visit_tracking.constants import MISSED_VISIT, COMPLETED_PROTOCOL_VISIT
 from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
-from edc_metadata.constants import NOT_REQUIRED
 
 from .constants import BREASTFEED_ONLY, NEVER_STARTED, MODIFIED, TUBERCULOSIS
 
@@ -14,7 +14,6 @@ STUDY_SITES = (
     ('40', 'Gaborone'),
     ('10', 'Molepolole'),
 )
-
 
 IDENTITY_TYPE = (
     ('country_id', 'Country ID number'),
@@ -1014,7 +1013,8 @@ SOURCE_OF_DEATH_INFO = (
     ('health_care_provider',
      'Contact with other (non-study) physician/nurse/other health care provider'),
     ('death_certificate', 'Death Certificate'),
-    ('relatives_friends', 'Information from participant\'s relatives or friends'),
+    ('relatives_friends',
+     'Information from participant\'s relatives or friends'),
     ('obituary', 'Obituary'),
     ('pending_information', 'Information requested, still pending'),
     ('no_info', 'No information will ever be available'),
@@ -1038,7 +1038,8 @@ MED_RESPONSIBILITY = (
 
 HOSPITILIZATION_REASONS = (
     ('respiratory illness(unspecified)', 'Respiratory Illness(unspecified)'),
-    ('respiratory illness, cxr confirmed', 'Respiratory Illness, CXR confirmed'),
+    ('respiratory illness, cxr confirmed',
+     'Respiratory Illness, CXR confirmed'),
     ('respiratory illness, cxr confirmed, bacterial pathogen, specify',
      'Respiratory Illness, CXR confirmed, bacterial pathogen, specify'),
     ('respiratory illness, cxr confirmed, tb or probable tb',
@@ -1047,7 +1048,8 @@ HOSPITILIZATION_REASONS = (
     ('diarrhea illness, viral or bacterial pathogen, specify',
      'Diarrhea Illness, viral or bacterial pathogen, specify'),
     ('sepsis(unspecified)', 'Sepsis(unspecified)'),
-    ('sepsis, pathogen specified, specify', 'Sepsis, pathogen specified, specify'),
+    ('sepsis, pathogen specified, specify',
+     'Sepsis, pathogen specified, specify'),
     ('mengitis(unspecified)', 'Mengitis(unspecified)'),
     ('mengitis, pathogen specified, specify',
      'Mengitis, pathogen specified, specify'),

@@ -24,11 +24,14 @@ class MaternalVisitAdmin(VisitModelAdminMixin,
                 'appointment',
                 'report_datetime',
                 'reason',
-                'reason_unscheduled',
-                'reason_unscheduled_other',
+                'reason_missed',
+                'study_status',
+                'require_crfs',
                 'info_source',
                 'info_source_other',
-                'comments'
+                'is_present',
+                'survival_status',
+                'last_alive_date'
             ]}),
         visit_schedule_fieldset_tuple,
         audit_fieldset_tuple
@@ -36,8 +39,11 @@ class MaternalVisitAdmin(VisitModelAdminMixin,
 
     radio_fields = {
         'reason': admin.VERTICAL,
-        'reason_unscheduled': admin.VERTICAL,
-        'info_source': admin.VERTICAL}
+        'study_status': admin.VERTICAL,
+        'require_crfs': admin.VERTICAL,
+        'info_source': admin.VERTICAL,
+        'is_present': admin.VERTICAL,
+        'survival_status': admin.VERTICAL}
 
 #     def get_fieldsets(self, request, obj=None):
 #         fields = copy(self.fields)
