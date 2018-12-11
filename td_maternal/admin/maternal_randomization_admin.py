@@ -22,7 +22,8 @@ class MartenalRandoAdmin(ModelAdminMixin, admin.ModelAdmin):
                 'initials',
                 'site',
                 'randomization_datetime',
-                'delivery_clinic']}
+                'delivery_clinic',
+                'delivery_clinic_other']}
          ), audit_fieldset_tuple)
 
     list_filter = ('randomization_datetime', 'site')
