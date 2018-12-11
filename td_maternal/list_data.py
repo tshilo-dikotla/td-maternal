@@ -1,4 +1,4 @@
-from edc_constants.constants import NOT_APPLICABLE, OTHER
+from edc_constants.constants import NOT_APPLICABLE, OTHER, NONE
 
 from edc_list_data import PreloadData
 
@@ -40,7 +40,8 @@ list_data = {
         ('placental_abruption', 'Placental abruption'),
         ('chorioamnioitis', 'Chorioamnioitis or sus. chorioamnionitis'),
         ('intrapartum_fever', 'Intrapartum fever'),
-        (OTHER, 'Other')
+        (OTHER, 'Other'),
+        (NONE, 'None')
     ],
     'td_maternal.foods': [
         ('other_fruits_vegetables', 'Other fruits and vegetables'),
