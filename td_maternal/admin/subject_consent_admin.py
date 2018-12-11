@@ -2,13 +2,13 @@ from django.contrib import admin
 from django.urls.base import reverse
 from django.urls.exceptions import NoReverseMatch
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
+from edc_consent.actions import (
+    flag_as_verified_against_paper, unflag_as_verified_against_paper)
+from edc_consent.modeladmin_mixins import ModelAdminConsentMixin
 from edc_model_admin import (
     ModelAdminFormAutoNumberMixin, ModelAdminInstitutionMixin,
     audit_fieldset_tuple, audit_fields, ModelAdminNextUrlRedirectMixin,
     ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin)
-from edc_consent.actions import (
-    flag_as_verified_against_paper, unflag_as_verified_against_paper)
-from edc_consent.modeladmin_mixins import ModelAdminConsentMixin
 from simple_history.admin import SimpleHistoryAdmin
 
 from ..admin_site import td_maternal_admin
@@ -33,7 +33,6 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMi
             attrs = request.GET.dict().get('next').split(',')[1:]
             options = {k: request.GET.dict().get(k)
                        for k in attrs if request.GET.dict().get(k)}
-            options.update(subject_identifier=obj.subject_identifier)
             try:
                 redirect_url = reverse(url_name, kwargs=options)
             except NoReverseMatch as e:

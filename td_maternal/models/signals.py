@@ -55,14 +55,16 @@ def antenatal_visit_membership_on_post_save(sender, instance, raw, created, **kw
     """
     if not raw:
         if not created:
-            _, schedule = site_visit_schedules.get_by_onschedule_model(
-                'td_maternal.onscheduleantenatalvisitmembership')
+            _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
+                'td_maternal.onscheduleantenatalvisitmembership',
+                name=instance.schedule_name)
             schedule.refresh_schedule(
                 subject_identifier=instance.subject_identifier)
         else:
             # put subject on schedule
-            _, schedule = site_visit_schedules.get_by_onschedule_model(
-                'td_maternal.onscheduleantenatalvisitmembership')
+            _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
+                'td_maternal.onscheduleantenatalvisitmembership',
+                name=instance.schedule_name)
             schedule.put_on_schedule(
                 subject_identifier=instance.subject_identifier,
                 onschedule_datetime=instance.report_datetime)
@@ -76,14 +78,16 @@ def maternal_labour_del_on_post_save(sender, instance, raw, created, **kwargs):
     """
     if not raw:
         if not created:
-            _, schedule = site_visit_schedules.get_by_onschedule_model(
-                'td_maternal.onschedulematernallabourdel')
+            _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
+                'td_maternal.onschedulematernallabourdel',
+                name=instance.schedule_name)
             schedule.refresh_schedule(
                 subject_identifier=instance.subject_identifier)
         else:
             # put subject on schedule
-            _, schedule = site_visit_schedules.get_by_onschedule_model(
-                'td_maternal.onschedulematernallabourdel')
+            _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
+                'td_maternal.onschedulematernallabourdel',
+                name=instance.schedule_name)
             schedule.put_on_schedule(
                 subject_identifier=instance.subject_identifier,
                 onschedule_datetime=instance.report_datetime)

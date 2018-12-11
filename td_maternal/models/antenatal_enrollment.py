@@ -1,5 +1,4 @@
 from django.db import models
-
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import date_not_future
@@ -8,8 +7,8 @@ from edc_constants.constants import NO, YES
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import date_not_before_study_start
 
+from ..models.subject_consent import SubjectConsent
 from .enrollment_mixin import EnrollmentMixin
-from td_maternal.models.subject_consent import SubjectConsent
 
 
 class AntenatalEnrollment(UniqueSubjectIdentifierFieldMixin,

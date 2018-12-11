@@ -11,7 +11,7 @@ from edc_protocol.validators import datetime_not_before_study_start
 
 from ..maternal_choices import (
     DELIVERY_HEALTH_FACILITY, DELIVERY_MODE, CSECTION_REASON)
-
+from ..models.subject_consent import SubjectConsent
 from .list_models import DeliveryComplications
 
 
@@ -114,6 +114,19 @@ class MaternalLabourDel(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
         null=True)
 
     history = HistoricalRecords()
+
+    @property
+    def schedule_name(self):
+        """Return a visit schedule name.
+        """
+        schedule_name = None
+        subject_consent = SubjectConsent.objects.filter(
+            subject_identifier=self.subject_identifier).order_by('version').last()
+        if subject_consent.version == '1':
+            schedule_name = 'mld_schedule_1'
+        elif subject_consent.version == '3':
+            schedule_name = 'mld_schedule_3'
+        return schedule_name
 
     def save(self, *args, **kwargs):
         super(MaternalLabourDel, self).save(*args, **kwargs)
