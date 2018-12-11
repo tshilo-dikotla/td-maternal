@@ -28,7 +28,8 @@ class MaternalVisitAdmin(
                 'info_source_other',
                 'is_present',
                 'survival_status',
-                'last_alive_date'
+                'last_alive_date',
+                'comments'
             ]}),
         visit_schedule_fieldset_tuple,
         audit_fieldset_tuple
