@@ -14,7 +14,7 @@ class MaternalLocatorAdmin(ModelAdminMixin, admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': [
-                'maternal_visit',
+                'subject_identifier',
                 'report_datetime',
                 'locator_date',
                 'mail_address',

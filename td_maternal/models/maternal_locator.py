@@ -1,14 +1,17 @@
 from django.db import models
+from django.utils.safestring import mark_safe
 from django_crypto_fields.fields import EncryptedCharField
+from edc_action_item.model_mixins import ActionModelMixin
 from edc_base.model_managers import HistoricalRecords
+from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import CellNumber, TelephoneNumber
 from edc_constants.choices import YES_NO
-from edc_locator.models import SubjectLocator
+from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
+from edc_locator.model_mixins import LocatorModelMixin
 
-from .model_mixins import CrfModelMixin
 
-
-class MaternalLocator(SubjectLocator, CrfModelMixin):
+class MaternalLocator(LocatorModelMixin, ActionModelMixin,
+                      NonUniqueSubjectIdentifierModelMixin, BaseUuidModel):
 
     locator_date = models.DateField(
         verbose_name='Date Locator Form signed')
@@ -20,11 +23,26 @@ class MaternalLocator(SubjectLocator, CrfModelMixin):
         blank=True,
         null=True)
 
+    may_call = models.CharField(
+        max_length=25,
+        choices=YES_NO,
+        verbose_name=mark_safe(
+            'Has the participant given his/her permission for study '
+            'staff to call her for follow-up purposes during the study?'))
+
+    may_visit_home = models.CharField(
+        max_length=25,
+        choices=YES_NO,
+        verbose_name=mark_safe(
+            'Has the participant given permission for study staff <b>to '
+            'make home visits</b> for follow-up purposes during the study??'))
+
     has_caretaker = models.CharField(
         verbose_name=(
             "Has the participant identified someone who will be "
-            "responsible for the care of the baby in case of her death, to whom the "
-            "study team could share information about her baby's health?"),
+            "responsible for the care of the baby in case of her death, to "
+            "whom the study team could share information about her baby's "
+            "health?"),
         max_length=25,
         choices=YES_NO,
         help_text="")
@@ -35,6 +53,13 @@ class MaternalLocator(SubjectLocator, CrfModelMixin):
         help_text="include firstname and surname",
         blank=True,
         null=True)
+
+    may_call_work = models.CharField(
+        max_length=25,
+        choices=YES_NO,
+        verbose_name=mark_safe(
+            'Has the participant given his/her permission for study staff '
+            'to contact her at work for follow up purposes during the study?'))
 
     caretaker_cell = EncryptedCharField(
         verbose_name="Cell number",
