@@ -3,18 +3,18 @@ from edc_model_admin import audit_fieldset_tuple
 from ..admin_site import td_maternal_admin
 from ..forms import DeathReportForm
 from ..models import DeathReport
-from .modeladmin_mixins import CrfModelAdminMixin
+from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(DeathReport, site=td_maternal_admin)
-class DeathReportAdmin(CrfModelAdminMixin, admin.ModelAdmin):
+class DeathReportAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = DeathReportForm
 
     fieldsets = (
         (None, {
             'fields': [
-                'maternal_visit',
+                'subject_identifier',
                 'report_datetime',
                 'death_date',
                 'primary_source',
