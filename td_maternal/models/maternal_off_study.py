@@ -21,6 +21,8 @@ class MaternalOffStudy(OffScheduleModelMixin,
 
     offstudy_date = models.DateField(
         verbose_name="Off-study Date",
+        null=True,
+        default=get_utcnow,
         validators=[
             date_not_before_study_start,
             date_not_future])
@@ -30,6 +32,7 @@ class MaternalOffStudy(OffScheduleModelMixin,
         validators=[
             datetime_not_before_study_start,
             datetime_not_future],
+        null=True,
         default=get_utcnow,
         help_text=('If reporting today, use today\'s date/time, otherwise use '
                    'the date/time this information was reported.'))
@@ -37,7 +40,8 @@ class MaternalOffStudy(OffScheduleModelMixin,
     reason = models.CharField(
         verbose_name="Please code the primary reason participant taken off-study",
         max_length=115,
-        choices=OFF_STUDY_REASON)
+        choices=OFF_STUDY_REASON,
+        null=True)
 
     reason_other = OtherCharField()
 
