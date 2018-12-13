@@ -4,6 +4,7 @@ from django.apps import apps
 from edc_protocol.validators import datetime_not_before_study_start
 from edc_protocol.validators import date_not_before_study_start
 from edc_base.model_validators import datetime_not_future, date_not_future
+from edc_base.utils import get_utcnow
 from edc_constants.choices import (
     POS_NEG_UNTESTED_REFUSAL, YES_NO_NA, POS_NEG, YES_NO)
 from edc_constants.constants import NO, YES, POS, NEG
@@ -17,6 +18,7 @@ class EnrollmentMixin(models.Model):
 
     report_datetime = models.DateTimeField(
         verbose_name="Report date",
+        default=get_utcnow,
         validators=[
             datetime_not_before_study_start,
             datetime_not_future, ],
