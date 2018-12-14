@@ -1,3 +1,5 @@
+from django.apps import apps
+from django.apps import apps as django_apps
 from django.db import models
 
 from ...choices import AMNIOTIC_FLUID
@@ -41,6 +43,13 @@ class UltraSoundModelMixin(models.Model):
         max_length=10,
         choices=AMNIOTIC_FLUID,
         help_text='')
+
+    @property
+    def antenatal_enrollment(self):
+        AntenatalEnrollment = django_apps.get_model(
+            'td_maternal.antenatalenrollment')
+        return AntenatalEnrollment.objects.get(
+            subject_identifier=self.maternal_visit.subject_identifier)
 
     class Meta:
         abstract = True
