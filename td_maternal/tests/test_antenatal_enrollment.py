@@ -5,6 +5,8 @@ from edc_appointment.models.appointment import Appointment
 from edc_base.utils import get_utcnow
 from edc_facility.import_holidays import import_holidays
 
+from ..models import AntenatalEnrollmentEligibility
+
 
 class TestAntenatalEnrollment(TestCase):
 
@@ -23,10 +25,15 @@ class TestAntenatalEnrollment(TestCase):
         """
         options = {
             'subject_identifier': self.subject_consent.subject_identifier}
-        print(self.subject_consent.version, 'self.subject_consent.version &&&&&&&&&&&&')
+        print(self.subject_consent.version,
+              'self.subject_consent.version &&&&&&&&&&&&')
         mommy.make_recipe(
             'td_maternal.antenatalenrollment', **options)
         appointments = Appointment.objects.filter(
             subject_identifier=self.subject_consent.subject_identifier)
         for ap in appointments:
             print(ap.schedule_name, ap.subject_identifier, ap)
+
+    def test_antenatal_enrollment_eligibility(self):
+        antenatal_eligibility = AntenatalEnrollmentEligibility()
+        pass

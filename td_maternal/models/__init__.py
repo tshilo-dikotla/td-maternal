@@ -3,7 +3,7 @@ from td_maternal.models.maternal_srh import MaternalSrh
 from .antenatal_enrollment import AntenatalEnrollment
 from .antenatal_visit_membership import AntenatalVisitMembership
 from .death_report import DeathReport
-from .eligibility import Eligibility
+from .eligibility import Eligibility, AntenatalEnrollmentEligibility
 from .enrollment_helper import EnrollmentHelper
 from .enrollment_mixin import EnrollmentMixin
 from .list_models import Contraceptives

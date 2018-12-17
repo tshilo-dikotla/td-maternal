@@ -3,9 +3,31 @@ from edc_constants.constants import NO
 from ..constants import (MAX_AGE_OF_CONSENT, MIN_AGE_OF_CONSENT)
 
 
+class AntenatalEnrollmentEligibility:
+
+    def __init__(self, is_diabetic=None, will_breastfeed=None,
+                 will_remain_onstudy=None):
+        self.is_diabetic = is_diabetic
+        self.will_breastfeed = will_breastfeed
+        self.reasons = []
+        self.will_remain_onstudy = will_remain_onstudy
+        self.eligible = None
+        if not self.is_diabetic and self.will_breastfeed \
+                and self.will_remain_onstudy:
+            self.eligible = True
+        if self.is_diabetic:
+            self.reasons.append('Participant is diabetic')
+        if not self.will_breastfeed:
+            self.reasons.append(
+                'Participant is not willing to breastfeed')
+        if not self.will_remain_onstudy:
+            self.reasons.append(
+                'Participant is not willing to remain on study')
+
+
 class Eligibility:
 
-    def __init__(self, age_in_years=None, has_omang=None):
+    def __init__(self, age_in_years=None, has_omang=None, **kwargs):
         """checks if mother is eligible otherwise'
         ' error message is the reason for'
         ' eligibility test failed."""
