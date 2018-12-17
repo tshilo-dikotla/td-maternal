@@ -59,7 +59,7 @@ class MaternalRequisition(
             edc_protocol_app_config = django_apps.get_app_config(
                 'edc_protocol')
             self.protocol_number = edc_protocol_app_config.protocol_number
-        self.subject_identifier = self.subject_visit.subject_identifier
+        self.subject_identifier = self.maternal_visit.subject_identifier
         super().save(*args, **kwargs)
 
     def get_search_slug_fields(self):
