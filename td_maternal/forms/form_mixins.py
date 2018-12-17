@@ -30,7 +30,7 @@ class PreviousAppointmentFormMixin:
         if not self._previous_appointment:
             cleaned_data = self.cleaned_data
             self._previous_appointment = cleaned_data.get(
-                'subject_visit').appointment.previous_by_timepoint
+                'maternal_visit').appointment.previous_by_timepoint
         return self._previous_appointment
 
     @property
