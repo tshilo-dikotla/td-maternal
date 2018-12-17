@@ -988,12 +988,10 @@ REASON_ARV_STOP = (
 )
 
 REASON_NOT_DRAWN = (
-    (NOT_APPLICABLE, 'Not applicable'),
     ('collection_failed', 'Tried, but unable to obtain sample from patient'),
     ('absent', 'Patient did not attend visit'),
     ('refused', 'Patient refused'),
     ('no_supplies', 'No supplies'),
-    (NOT_REQUIRED, 'No longer required for this visit'),
     (OTHER, 'Other'),)
 
 CAUSE_OF_DEATH = (
