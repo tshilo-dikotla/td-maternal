@@ -34,7 +34,7 @@ class MaternalLocator(LocatorModelMixin, ActionModelMixin,
         max_length=25,
         choices=YES_NO,
         verbose_name=mark_safe(
-            'Has the participant given permission for study staff <b>to '
+            'Has the participant given his/her permission for study staff <b>to '
             'make home visits</b> for follow-up purposes during the study??'))
 
     has_caretaker = models.CharField(
