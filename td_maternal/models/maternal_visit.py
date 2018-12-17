@@ -54,7 +54,7 @@ class MaternalVisit(
         null=True,
         default=ALIVE)
 
-    information_provider = models.CharField(
+    info_source = models.CharField(
         verbose_name='Source of information?',
         default=PARTICIPANT,
         max_length=25,
