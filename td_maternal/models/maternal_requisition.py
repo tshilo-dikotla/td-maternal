@@ -1,4 +1,5 @@
 from django.apps import apps as django_apps
+from django.conf import settings
 from django.db import models
 from django.db.models.deletion import PROTECT
 from edc_base.model_managers import HistoricalRecords
@@ -6,19 +7,21 @@ from edc_base.model_mixins import BaseUuidModel
 from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_constants.constants import NOT_APPLICABLE
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
+from edc_lab.choices import PRIORITY
 from edc_lab.models import RequisitionIdentifierMixin
 from edc_lab.models import RequisitionModelMixin, RequisitionStatusMixin
 from edc_metadata.model_mixins.updates import UpdatesRequisitionMetadataModelMixin
 from edc_reference.model_mixins import RequisitionReferenceModelMixin
 from edc_search.model_mixins import SearchSlugManager
 from edc_visit_schedule.model_mixins import SubjectScheduleCrfModelMixin
+
 from edc_visit_tracking.managers import CrfModelManager as VisitTrackingCrfModelManager
 from edc_visit_tracking.model_mixins import CrfModelMixin as VisitTrackingCrfModelMixin
 from edc_visit_tracking.model_mixins import PreviousVisitModelMixin
 
-from ..choices import REASON_NOT_DRAWN
-from .model_mixins import SearchSlugModelMixin
+from ..choices import REASON_NOT_DRAWN, STUDY_SITES
 from .maternal_visit import MaternalVisit
+from .model_mixins import SearchSlugModelMixin
 
 
 class Manager(VisitTrackingCrfModelManager, SearchSlugManager):
@@ -42,6 +45,40 @@ class MaternalRequisition(
         max_length=25,
         default=NOT_APPLICABLE,
         choices=REASON_NOT_DRAWN)
+
+    reason_not_drawn = models.CharField(
+        verbose_name='If not drawn, please explain',
+        max_length=25,
+        default=NOT_APPLICABLE,
+        choices=REASON_NOT_DRAWN,
+        null=True,
+        blank=True)
+
+    study_site = models.CharField(
+        verbose_name='Study site',
+        max_length=25,
+        choices=STUDY_SITES,
+        default=settings.DEFAULT_STUDY_SITE)
+
+    estimated_volume = models.DecimalField(
+        verbose_name='Estimated volume in mL',
+        max_digits=7,
+        decimal_places=2,
+        help_text=(
+            'If applicable, estimated volume of sample for this test/order. '
+            'This is the total volume if number of "tubes" above is greater than 1'))
+
+    item_count = models.IntegerField(
+        verbose_name='Total number of items',
+        help_text=(
+            'Number of tubes, samples, cards, etc being sent for this test/order only. '
+            'Determines number of labels to print'))
+
+    priority = models.CharField(
+        verbose_name='Priority',
+        max_length=25,
+        choices=PRIORITY,
+        default='normal',)
 
 #     on_site = CurrentSiteManager()
 
