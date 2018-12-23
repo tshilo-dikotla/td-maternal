@@ -101,6 +101,11 @@ class Supplements (ListModelMixin, BaseUuidModel):
     pass
 
 
+class TestCode (ListModelMixin, BaseUuidModel):
+
+    pass
+
+
 class WcsDxAdult(ListModelMixin, BaseUuidModel):
 
     pass
