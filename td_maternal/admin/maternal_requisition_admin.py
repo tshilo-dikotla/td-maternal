@@ -17,7 +17,9 @@ class MaternalRequisitionAdmin(ModelAdminMixin, RequisitionAdminMixin,
 
     form = MaternalRequisitionForm
 
-    ordering = ('requisition_identifier', )
+    ordering = ('requisition_identifier',)
+
+    filter_horizontal = ('test_code',)
 
     fieldsets = (
         (None, {
