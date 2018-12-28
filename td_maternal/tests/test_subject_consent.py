@@ -1,5 +1,4 @@
 import re
-from td_maternal.models.subject_screening import SubjectScreening
 
 from django.core.exceptions import ValidationError
 from django.test import TestCase
@@ -7,7 +6,7 @@ from edc_base.utils import get_utcnow
 from edc_registration.models import RegisteredSubject
 from model_mommy import mommy
 
-from ..models import SubjectConsent
+from ..models import SubjectConsent, SubjectScreening
 
 
 subject_identifier = '092\-[0-9\-]+'

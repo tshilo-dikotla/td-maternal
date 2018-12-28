@@ -14,7 +14,6 @@ from simple_history.admin import SimpleHistoryAdmin
 from ..admin_site import td_maternal_admin
 from ..forms import SubjectConsentForm
 from ..models import SubjectConsent
-from .modeladmin_mixins import ModelAdminMixin
 
 
 class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMixin,
