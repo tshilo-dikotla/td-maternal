@@ -9,12 +9,13 @@ from edc_identifier.managers import SubjectIdentifierManager
 from edc_identifier.model_mixins import TrackingIdentifierModelMixin
 from edc_protocol.validators import date_not_before_study_start
 from edc_protocol.validators import datetime_not_before_study_start
+from edc_reference.model_mixins import ReferenceModelMixin
 from edc_visit_schedule.model_mixins import OffScheduleModelMixin
 
 from ..choices import OFF_STUDY_REASON
 
 
-class MaternalOffStudy(OffScheduleModelMixin,
+class MaternalOffStudy(OffScheduleModelMixin, ReferenceModelMixin,
                        TrackingIdentifierModelMixin, BaseUuidModel):
 
     tracking_identifier_prefix = 'ST'

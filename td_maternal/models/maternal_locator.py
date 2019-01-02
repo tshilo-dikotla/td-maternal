@@ -8,9 +8,10 @@ from edc_base.model_validators import CellNumber, TelephoneNumber
 from edc_constants.choices import YES_NO, YES_NO_DOESNT_WORK
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 from edc_locator.model_mixins import LocatorModelMixin
+from edc_reference.model_mixins import ReferenceModelMixin
 
 
-class MaternalLocator(LocatorModelMixin, ActionModelMixin,
+class MaternalLocator(LocatorModelMixin, ActionModelMixin, ReferenceModelMixin,
                       NonUniqueSubjectIdentifierModelMixin, BaseUuidModel):
 
     locator_date = models.DateField(
