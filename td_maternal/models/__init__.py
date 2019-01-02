@@ -4,7 +4,7 @@ from .antenatal_enrollment import AntenatalEnrollment
 from .antenatal_visit_membership import AntenatalVisitMembership
 from .death_report import DeathReport
 from .eligibility import Eligibility
-from .enrollment_helper import EnrollmentHelper
+from td_maternal.helper_classes.enrollment_helper import EnrollmentHelper
 from .enrollment_mixin import EnrollmentMixin
 from .list_models import Contraceptives
 from .maternal_arv import MaternalArv

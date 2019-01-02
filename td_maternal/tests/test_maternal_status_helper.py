@@ -7,7 +7,7 @@ from edc_base.utils import get_utcnow
 from edc_constants.constants import (
     POS, YES, NO, NEG, NOT_APPLICABLE, UNK, IND)
 
-from ..maternal_status_helper import MaternalStatusHelper
+from ..helper_classes import MaternalStatusHelper
 from .base_test_case import BaseTestCase
 
 

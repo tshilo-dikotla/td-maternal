@@ -1,5 +1,10 @@
+from django.db import transaction
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
+
+from edc_identifier.infant_identifier import InfantIdentifier
+from edc_registration.models import RegisteredSubject
 from edc_visit_schedule.site_visit_schedules import site_visit_schedules
 
 from .antenatal_enrollment import AntenatalEnrollment
@@ -7,6 +12,11 @@ from .antenatal_visit_membership import AntenatalVisitMembership
 from .maternal_labour_del import MaternalLabourDel
 from .subject_consent import SubjectConsent
 from .subject_screening import SubjectScreening
+from .maternal_ultrasound_initial import MaternalUltraSoundInitial
+from django.core.exceptions import ValidationError
+
+
+INFANT = 'infant'
 
 
 @receiver(post_save, weak=False, sender=SubjectConsent,
@@ -91,3 +101,37 @@ def maternal_labour_del_on_post_save(sender, instance, raw, created, **kwargs):
             schedule.put_on_schedule(
                 subject_identifier=instance.subject_identifier,
                 onschedule_datetime=instance.report_datetime)
+
+        #  Create infant registered subject
+        if isinstance(instance, MaternalLabourDel):
+            if instance.live_infants_to_register == 1:
+                maternal_consent = SubjectConsent.objects.filter(
+                    subject_identifier=instance.subject_identifier).order_by('version').last()
+                try:
+                    maternal_ultrasound = MaternalUltraSoundInitial.objects.get(
+                        maternal_visit__appointment__registered_subject=instance.registered_subject)
+                except MaternalUltraSoundInitial.DoesNotExist:
+                    raise ValidationError(
+                        f'Maternal Ultrasound Initial must exist for {instance.subject_identifier}')
+                else:
+                    with transaction.atomic():
+                        infant_identifier = InfantIdentifier(
+                            maternal_identifier=instance.subject_identifier,
+                            study_site=maternal_consent.study_site,
+                            birth_order=0,
+                            live_infants=int(
+                                maternal_ultrasound.number_of_gestations),
+                            live_infants_to_register=instance.live_infants_to_register,
+                            user=instance.user_created)
+
+                        RegisteredSubject.objects.create(
+                            subject_identifier=infant_identifier.get_identifier(),
+                            registration_datetime=instance.delivery_datetime,
+                            subject_type=INFANT,
+                            user_created=instance.user_created,
+                            created=timezone.now(),
+                            first_name='No Name',
+                            initials=None,
+                            registration_status='DELIVERED',
+                            relative_identifier=maternal_consent.subject_identifier,
+                            study_site=maternal_consent.study_site)

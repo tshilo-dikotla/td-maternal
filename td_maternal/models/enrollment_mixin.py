@@ -9,7 +9,7 @@ from edc_constants.choices import (
     POS_NEG_UNTESTED_REFUSAL, YES_NO_NA, POS_NEG, YES_NO)
 from edc_constants.constants import NO, YES, POS, NEG
 
-from .enrollment_helper import EnrollmentHelper
+from ..helper_classes import EnrollmentHelper
 
 
 class EnrollmentMixin(models.Model):
