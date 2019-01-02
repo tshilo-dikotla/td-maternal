@@ -1,8 +1,7 @@
 from dateutil.relativedelta import relativedelta
+from django.apps import apps as django_apps
 
 from edc_constants.constants import POS, NEG, UNK, IND
-
-from .models import AntenatalEnrollment, RapidTestResult, MaternalInterimIdcc
 
 
 class MaternalStatusHelper(object):
@@ -12,13 +11,17 @@ class MaternalStatusHelper(object):
 
     @property
     def hiv_status(self):
+        """Return an HIV status.
+        """
+        rapid_test_result_cls = django_apps.get_model(
+            'td_maternal.rapidtestresult')
         if not self.maternal_visit:
             return ''
         for visit in self.previous_visits:
             rapid_test_result = None
             try:
-                rapid_test_result = RapidTestResult.objects.get(maternal_visit=visit)
-            except RapidTestResult.DoesNotExist:
+                rapid_test_result = rapid_test_result_cls.objects.get(maternal_visit=visit)
+            except rapid_test_result_cls.DoesNotExist:
                 pass
             else:
                 status = self._evaluate_status_from_rapid_tests(
@@ -27,8 +30,9 @@ class MaternalStatusHelper(object):
                     return status
 
         # If we have exhausted all visits without a concrete status then use enrollment.
-        antenatal_enrollment = AntenatalEnrollment.objects.get(
-            subject_identifier=self.maternal_visit.subject_identifier)
+        antenatal_enrollment = django_apps.get_model(
+            'td_maternal.antenatalenrollment').objects.get(
+                subject_identifier=self.maternal_visit.subject_identifier)
 
         status = self._evaluate_status_from_rapid_tests(
             (antenatal_enrollment, 'enrollment_hiv_status', 'rapid_test_date'))
@@ -44,23 +48,27 @@ class MaternalStatusHelper(object):
     def enrollment_hiv_status(self):
         """Return enrollment hiv status.
         """
-
+        antenatal_enrollment_cls = django_apps.get_model(
+            'td_maternal.antenatalenrollment')
         try:
-            antenatal_enrollment = AntenatalEnrollment.objects.get(
+            antenatal_enrollment = antenatal_enrollment_cls.objects.get(
                 subject_identifier=self.maternal_visit.subject_identifier)
-        except AntenatalEnrollment.DoesNotExist:
+        except antenatal_enrollment_cls.DoesNotExist:
             return ''
         else:
             return antenatal_enrollment.enrollment_hiv_status
 
     @property
     def eligible_for_cd4(self):
+        """Return True is one is eligible for cd4.
+        """
+        maternal_interim_idcc_cls = django_apps.get_model('td_maternal.maternalinterimidcc')
         latest_interim_idcc = None
         latest_visit = self.previous_visits.first()
         try:
-            latest_interim_idcc = MaternalInterimIdcc.objects.get(
+            latest_interim_idcc = maternal_interim_idcc_cls.objects.get(
                 maternal_visit=latest_visit)
-        except MaternalInterimIdcc.DoesNotExist:
+        except maternal_interim_idcc_cls.DoesNotExist:
             pass
         else:
             three_month_back = latest_visit.report_datetime.date() - relativedelta(months=3)

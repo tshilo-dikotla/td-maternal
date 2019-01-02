@@ -108,8 +108,8 @@ def maternal_labour_del_on_post_save(sender, instance, raw, created, **kwargs):
                 maternal_consent = SubjectConsent.objects.filter(
                     subject_identifier=instance.subject_identifier).order_by('version').last()
                 try:
-                    maternal_ultrasound = MaternalUltraSoundInitial.objects.get(
-                        maternal_visit__appointment__registered_subject=instance.registered_subject)
+                    maternal_ultrasound = MaternalUltraSoundInitial.objects.filter(
+                        maternal_visit__subject_identifier=instance.subject_identifier).order_by('report_datetime').last()
                 except MaternalUltraSoundInitial.DoesNotExist:
                     raise ValidationError(
                         f'Maternal Ultrasound Initial must exist for {instance.subject_identifier}')
@@ -117,21 +117,23 @@ def maternal_labour_del_on_post_save(sender, instance, raw, created, **kwargs):
                     with transaction.atomic():
                         infant_identifier = InfantIdentifier(
                             maternal_identifier=instance.subject_identifier,
-                            study_site=maternal_consent.study_site,
-                            birth_order=0,
+                            birth_order=1,
                             live_infants=int(
                                 maternal_ultrasound.number_of_gestations),
-                            live_infants_to_register=instance.live_infants_to_register,
-                            user=instance.user_created)
-
-                        RegisteredSubject.objects.create(
-                            subject_identifier=infant_identifier.get_identifier(),
-                            registration_datetime=instance.delivery_datetime,
-                            subject_type=INFANT,
-                            user_created=instance.user_created,
-                            created=timezone.now(),
-                            first_name='No Name',
-                            initials=None,
                             registration_status='DELIVERED',
-                            relative_identifier=maternal_consent.subject_identifier,
-                            study_site=maternal_consent.study_site)
+                            registration_datetime=instance.delivery_datetime,
+                            subject_type=INFANT)
+                        try:
+                            RegisteredSubject.objects.get(subject_identifier=infant_identifier.identifier)
+                        except RegisteredSubject.DoesNotExist:
+                            RegisteredSubject.objects.create(
+                                subject_identifier=infant_identifier.identifier,
+                                registration_datetime=instance.delivery_datetime,
+                                subject_type=INFANT,
+                                user_created=instance.user_created,
+                                created=timezone.now(),
+                                first_name='No Name',
+                                initials=None,
+                                registration_status='DELIVERED',
+                                relative_identifier=maternal_consent.subject_identifier,
+                                site=maternal_consent.site)
