@@ -13,16 +13,14 @@ class MaternalInterimIdcc(CrfModelMixin):
         max_length=25,
         verbose_name="Is there new laboratory information available on the "
         "mother since last visit",
-        choices=YES_NO,
-        help_text="",)
+        choices=YES_NO)
 
     recent_cd4 = models.DecimalField(
         max_digits=8,
         decimal_places=2,
         blank=True,
         null=True,
-        verbose_name="Most recent CD4 available",
-        help_text="",)
+        verbose_name="Most recent CD4 available")
 
     recent_cd4_date = models.DateField(
         verbose_name="Date of recent CD4",
@@ -42,8 +40,7 @@ class MaternalInterimIdcc(CrfModelMixin):
         decimal_places=2,
         blank=True,
         null=True,
-        verbose_name="Value of VL ",
-        help_text="",)
+        verbose_name="Value of VL ")
 
     recent_vl_date = models.DateField(
         verbose_name="Date of recent VL",

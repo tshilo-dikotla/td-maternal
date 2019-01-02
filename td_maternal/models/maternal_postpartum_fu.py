@@ -15,7 +15,6 @@ class MaternalPostPartumFu(CrfModelMixin, DiagnosesMixin):
         verbose_name="Has the mother been hospitalized since the last"
         " study visit?",
         choices=YES_NO,
-        help_text="",
     )
 
     hospitalization_reason = models.ManyToManyField(
@@ -23,7 +22,6 @@ class MaternalPostPartumFu(CrfModelMixin, DiagnosesMixin):
         verbose_name="Was the hospitalization for any of the following "
         "reasons?",
         blank=True,
-        help_text="",
     )
 
     hospitalization_reason_other = OtherCharField(
@@ -38,7 +36,6 @@ class MaternalPostPartumFu(CrfModelMixin, DiagnosesMixin):
         validators=[MinValueValidator(1)],
         blank=True,
         null=True,
-        help_text=""
     )
 
     class Meta(CrfModelMixin.Meta):
