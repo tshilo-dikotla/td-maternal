@@ -1,13 +1,12 @@
-from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-
+from django.db import models
 from edc_base.model_fields import OtherCharField
 from edc_constants.choices import YES_NO
 
-from ..maternal_choices import MARITAL_STATUS, ETHNICITY, HIGHEST_EDUCATION
-from ..maternal_choices import CURRENT_OCCUPATION, MONEY_PROVIDER, MONEY_EARNED
 from ..maternal_choices import (
     WATER_SOURCE, COOKING_METHOD, TOILET_FACILITY, HOUSE_TYPE)
+from ..maternal_choices import CURRENT_OCCUPATION, MONEY_PROVIDER, MONEY_EARNED
+from ..maternal_choices import MARITAL_STATUS, ETHNICITY, HIGHEST_EDUCATION
 from .model_mixins import CrfModelMixin
 
 
@@ -19,8 +18,7 @@ class MaternalDemographics(CrfModelMixin):
     marital_status = models.CharField(
         max_length=25,
         verbose_name="Current Marital status ",
-        choices=MARITAL_STATUS,
-        help_text="",)
+        choices=MARITAL_STATUS)
     marital_status_other = OtherCharField(
         max_length=35,
         verbose_name="if other specify...",
@@ -30,8 +28,7 @@ class MaternalDemographics(CrfModelMixin):
     ethnicity = models.CharField(
         max_length=25,
         verbose_name="Ethnicity ",
-        choices=ETHNICITY,
-        help_text="",)
+        choices=ETHNICITY)
     ethnicity_other = OtherCharField(
         max_length=35,
         verbose_name="if other specify...",
@@ -41,14 +38,12 @@ class MaternalDemographics(CrfModelMixin):
     highest_education = models.CharField(
         max_length=25,
         verbose_name="Highest educational level completed ",
-        choices=HIGHEST_EDUCATION,
-        help_text="",)
+        choices=HIGHEST_EDUCATION)
 
     current_occupation = models.CharField(
         max_length=75,
         verbose_name="Current occupation",
-        choices=CURRENT_OCCUPATION,
-        help_text="",)
+        choices=CURRENT_OCCUPATION)
     current_occupation_other = OtherCharField(
         max_length=35,
         verbose_name="if other specify...",
@@ -58,8 +53,7 @@ class MaternalDemographics(CrfModelMixin):
     provides_money = models.CharField(
         max_length=50,
         verbose_name="Who provides most of your money?",
-        choices=MONEY_PROVIDER,
-        help_text="",)
+        choices=MONEY_PROVIDER)
     provides_money_other = OtherCharField(
         max_length=35,
         verbose_name="if other specify...",
@@ -69,8 +63,7 @@ class MaternalDemographics(CrfModelMixin):
     money_earned = models.CharField(
         max_length=50,
         verbose_name="How much money do you personally earn? ",
-        choices=MONEY_EARNED,
-        help_text="",)
+        choices=MONEY_EARNED)
     money_earned_other = OtherCharField(
         max_length=35,
         verbose_name="if other specify...",
@@ -80,8 +73,7 @@ class MaternalDemographics(CrfModelMixin):
     own_phone = models.CharField(
         max_length=25,
         choices=YES_NO,
-        verbose_name="Do you have your own cell phone that you use regularly?",
-        help_text="",)
+        verbose_name="Do you have your own cell phone that you use regularly?")
 
     water_source = models.CharField(
         max_length=50,
@@ -95,30 +87,26 @@ class MaternalDemographics(CrfModelMixin):
     house_electrified = models.CharField(
         max_length=25,
         choices=YES_NO,
-        verbose_name="Is there electricity in this house / compound? ",
-        help_text="",)
+        verbose_name="Is there electricity in this house / compound? ")
 
     house_fridge = models.CharField(
         max_length=25,
         choices=YES_NO,
         verbose_name="Is there a refrigerator being used in this house "
-        "/ compound?  ",
-        help_text="",)
+        "/ compound?  ")
 
     cooking_method = models.CharField(
         max_length=50,
         verbose_name="What is the primary method of cooking in this house "
         "/ compound?",
-        choices=COOKING_METHOD,
-        help_text="",)
+        choices=COOKING_METHOD)
 
     toilet_facility = models.CharField(
         max_length=50,
         verbose_name=("Which of the following types of toilet facilities do "
                       "you most often use"
                       " at this house / compound? "),
-        choices=TOILET_FACILITY,
-        help_text="",)
+        choices=TOILET_FACILITY)
     toilet_facility_other = OtherCharField(
         max_length=35,
         verbose_name="if other specify...",
@@ -129,7 +117,6 @@ class MaternalDemographics(CrfModelMixin):
         verbose_name=("How many people, including yourself, stay in this home "
                       "/ compound most"
                       " of the time?"),
-        help_text="",
         validators=[
             MinValueValidator(1),
             MaxValueValidator(100), ])
