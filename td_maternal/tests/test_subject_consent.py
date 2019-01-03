@@ -56,3 +56,4 @@ class TestSubjectConsent(TestCase):
                 subject_identifier=subject_consent.subject_identifier)
         except RegisteredSubject.DoesNotExist:
             raise ValidationError('Registered subject is expected.')
+        self.assertEqual(RegisteredSubject.objects.all().count(), 1)
