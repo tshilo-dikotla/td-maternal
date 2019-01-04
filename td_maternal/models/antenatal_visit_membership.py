@@ -34,10 +34,6 @@ class AntenatalVisitMembership(UniqueSubjectIdentifierFieldMixin, BaseUuidModel)
     def __str__(self):
         return f"{self.subject_identifier}"
 
-#     def natural_key(self):
-#         return self.registered_subject.natural_key()
-#     natural_key.dependencies = ['edc_registration.registeredsubject']
-
     @property
     def schedule_name(self):
         """Return a visit schedule name.
