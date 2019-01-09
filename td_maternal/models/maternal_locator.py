@@ -61,6 +61,11 @@ class MaternalLocator(LocatorModelMixin, ActionModelMixin,
             'Has the participant given his/her permission for study staff '
             'to contact her at work for follow up purposes during the study?'))
 
+    subject_work_phone = EncryptedCharField(
+        verbose_name='Work contact number',
+        blank=True,
+        null=True)
+
     caretaker_cell = EncryptedCharField(
         verbose_name="Cell number",
         max_length=8,
