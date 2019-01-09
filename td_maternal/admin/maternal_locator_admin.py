@@ -29,7 +29,6 @@ class MaternalLocatorAdmin(ModelAdminMixin, admin.ModelAdmin):
                 'may_call_work',
                 'subject_work_place',
                 'subject_work_phone',
-                'subject_work_cell',
                 'may_contact_indirectly',
                 'indirect_contact_name',
                 'indirect_contact_relation',
