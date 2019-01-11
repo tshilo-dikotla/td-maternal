@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'td_labs.apps.AppConfig',
     'edc_reference.apps.AppConfig',
     'td_reference.apps.AppConfig',
+    'td_maternal_validators.apps.AppConfig',
     'td_maternal.apps.EdcFacilityAppConfig',
     'td_maternal.apps.EdcVisitTrackingAppConfig',
     'td_maternal.apps.EdcProtocolAppConfig',

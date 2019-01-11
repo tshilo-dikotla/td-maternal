@@ -4,6 +4,7 @@ from edc_base.sites import SiteModelFormMixin
 from edc_consent.modelform_mixins import ConsentModelFormMixin
 from edc_constants.constants import FEMALE
 from edc_form_validators import FormValidatorMixin
+from td_maternal_validators.form_validators import MaternalConsentFormValidator
 
 from ..choices import STUDY_SITES
 from ..models import SubjectConsent
@@ -12,6 +13,8 @@ from ..models import SubjectConsent
 class SubjectConsentForm(
         SiteModelFormMixin, FormValidatorMixin, ConsentModelFormMixin,
         forms.ModelForm):
+
+    form_validator_cls = MaternalConsentFormValidator
 
     screening_identifier = forms.CharField(
         label='Screening Identifier',
