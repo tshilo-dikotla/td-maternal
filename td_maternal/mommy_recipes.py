@@ -10,7 +10,8 @@ from .constants import NOT_APPLICABLE
 from .models import (
     SubjectConsent, SubjectScreening, AntenatalEnrollment,
     AntenatalVisitMembership, MaternalLabourDel, MaternalUltraSoundInitial,
-    MaternalVisit, MaternalRando, RapidTestResult, MaternalContraception)
+    MaternalVisit, MaternalRando, RapidTestResult, MaternalContraception,
+    MaternalPostPartumDep)
 
 
 fake = Faker()
@@ -136,4 +137,18 @@ maternalcontraception = Recipe(
     another_pregnancy=YES,
     pap_smear=YES,
     srh_referral=YES,
+)
+
+maternalpostpartumdep = Recipe(
+    MaternalPostPartumDep,
+    laugh='Not at all',
+    enjoyment='As much as I ever did',
+    blame='No, never',
+    anxious='Yes, very often',
+    panick='No, not at all',
+    top='No, I have been coping as well as ever',
+    unhappy='Yes, some of the time',
+    sad='No, never',
+    crying='No, never',
+    self_harm='Never'
 )

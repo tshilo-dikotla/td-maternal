@@ -130,7 +130,17 @@ class TestMaternalRuleGroup(BaseTestCase):
 
         self.assertEqual(
             self.maternal_ultrasound_initial.number_of_gestations, 1)
-        self.maternal_ultrasound_initial.save()
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternalobstericalhistory',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='1000M').entry_status, REQUIRED)
+
+    def test_maternal_obsterical_history_not_required(self):
+        self.create_mother(self.hiv_pos_mother_options())
+
+        self.assertEqual(
+            self.maternal_ultrasound_initial.number_of_gestations, 0)
         self.assertEqual(
             CrfMetadata.objects.get(
                 model='td_maternal.maternalobstericalhistory',
@@ -142,7 +152,17 @@ class TestMaternalRuleGroup(BaseTestCase):
 
         self.assertEqual(
             self.maternal_ultrasound_initial.number_of_gestations, 1)
-        self.maternal_ultrasound_initial.save()
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternalmedicalhistory',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='1000M').entry_status, REQUIRED)
+
+    def test_maternal_medical_history__not_required(self):
+        self.create_mother(self.hiv_pos_mother_options())
+
+        self.assertEqual(
+            self.maternal_ultrasound_initial.number_of_gestations, 2)
         self.assertEqual(
             CrfMetadata.objects.get(
                 model='td_maternal.maternalmedicalhistory',
@@ -202,3 +222,86 @@ class TestMaternalRuleGroup(BaseTestCase):
                 model='td_maternal.maternalrando',
                 subject_identifier=self.subject_consent.subject_identifier,
                 visit_code='1010M').entry_status, NOT_REQUIRED)
+
+    @tag('1')
+    def test_maternal_post_partum_dep_not_required(self):
+        self.create_mother()
+        mommy.make_recipe(
+            'td_maternal.maternallabourdel',
+            subject_identifier=self.subject_consent.subject_identifier,
+            report_datetime=get_utcnow())
+
+        appointment_2000 = Appointment.objects.get(
+            subject_identifier=self.subject_consent.subject_identifier,
+            visit_code='2000M')
+        mommy.make_recipe(
+            'td_maternal.maternalvisit',
+            subject_identifier=self.subject_consent.subject_identifier,
+            report_datetime=get_utcnow(),
+            appointment=appointment_2000)
+
+        appointment_2010 = Appointment.objects.get(
+            subject_identifier=self.subject_consent.subject_identifier,
+            visit_code='2010M')
+        maternalvisit = mommy.make_recipe(
+            'td_maternal.maternalvisit',
+            subject_identifier=self.subject_consent.subject_identifier,
+            report_datetime=get_utcnow(),
+            appointment=appointment_2010)
+        mommy.make_recipe(
+            'td_maternal.maternalpostpartumdep',
+            report_datetime=get_utcnow(),
+            maternal_visit=maternalvisit)
+        appointment_2020 = Appointment.objects.get(
+            subject_identifier=self.subject_consent.subject_identifier,
+            visit_code='2020M')
+        mommy.make_recipe(
+            'td_maternal.maternalvisit',
+            subject_identifier=self.subject_consent.subject_identifier,
+            report_datetime=get_utcnow(),
+            appointment=appointment_2020)
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternalpostpartumdep',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='2020M').entry_status, NOT_REQUIRED)
+
+    @tag('1')
+    def test_maternal_post_partum_dep_required(self):
+        self.create_mother()
+        mommy.make_recipe(
+            'td_maternal.maternallabourdel',
+            subject_identifier=self.subject_consent.subject_identifier,
+            report_datetime=get_utcnow())
+
+        appointment_2000 = Appointment.objects.get(
+            subject_identifier=self.subject_consent.subject_identifier,
+            visit_code='2000M')
+        mommy.make_recipe(
+            'td_maternal.maternalvisit',
+            subject_identifier=self.subject_consent.subject_identifier,
+            report_datetime=get_utcnow(),
+            appointment=appointment_2000)
+
+        appointment_2010 = Appointment.objects.get(
+            subject_identifier=self.subject_consent.subject_identifier,
+            visit_code='2010M')
+        mommy.make_recipe(
+            'td_maternal.maternalvisit',
+            subject_identifier=self.subject_consent.subject_identifier,
+            report_datetime=get_utcnow(),
+            appointment=appointment_2010)
+
+        appointment_2020 = Appointment.objects.get(
+            subject_identifier=self.subject_consent.subject_identifier,
+            visit_code='2020M')
+        mommy.make_recipe(
+            'td_maternal.maternalvisit',
+            subject_identifier=self.subject_consent.subject_identifier,
+            report_datetime=get_utcnow(),
+            appointment=appointment_2020)
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternalpostpartumdep',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='2020M').entry_status, REQUIRED)
