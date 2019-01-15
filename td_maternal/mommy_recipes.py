@@ -1,17 +1,16 @@
 from dateutil.relativedelta import relativedelta
 from django.contrib.sites.models import Site
-from faker import Faker
-from model_mommy.recipe import Recipe, seq
-
 from edc_base.utils import get_utcnow
 from edc_constants.constants import YES, NO, POS, ON_STUDY, ALIVE, PARTICIPANT
 from edc_visit_tracking.constants import SCHEDULED
+from faker import Faker
+from model_mommy.recipe import Recipe, seq
 
+from .constants import NOT_APPLICABLE
 from .models import (
     SubjectConsent, SubjectScreening, AntenatalEnrollment,
     AntenatalVisitMembership, MaternalLabourDel, MaternalUltraSoundInitial,
-    MaternalVisit, MaternalRando, RapidTestResult)
-from .constants import NOT_APPLICABLE
+    MaternalVisit, MaternalRando, RapidTestResult, MaternalContraception)
 
 
 fake = Faker()
@@ -127,3 +126,14 @@ rapidtestresult = Recipe(
     rapid_test_done=YES,
     result_date=get_utcnow().date(),
     result=POS)
+
+maternalcontraception = Recipe(
+    MaternalContraception,
+    more_children=YES,
+    contraceptive_partner=NO,
+    influential_decision_making='independent_decision',
+    uses_contraceptive=YES,
+    another_pregnancy=YES,
+    pap_smear=YES,
+    srh_referral=YES,
+)
