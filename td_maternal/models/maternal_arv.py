@@ -1,12 +1,12 @@
 from django.db import models
 from edc_base.model_validators import date_not_future
 from ..choices import ARV_DRUG_LIST, REASON_ARV_STOP
-from .model_mixins import CrfModelMixin
 from django.db.models.deletion import PROTECT
 from .maternal_arv_preg import MaternalArvPreg
+from edc_base.model_mixins import BaseUuidModel
 
 
-class MaternalArv(CrfModelMixin):
+class MaternalArv(BaseUuidModel):
 
     """ Inline ARV table to indicate ARV medication taken by mother """
 
@@ -45,7 +45,7 @@ class MaternalArv(CrfModelMixin):
         blank=True,
         null=True)
 
-    class Meta(CrfModelMixin.Meta):
+    class Meta:
         app_label = 'td_maternal'
         verbose_name = 'Maternal ARV'
         verbose_name_plural = 'Maternal ARV'
