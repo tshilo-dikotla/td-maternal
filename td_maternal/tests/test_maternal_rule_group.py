@@ -11,6 +11,7 @@ from model_mommy import mommy
 from .base_test_case import BaseTestCase
 
 
+@tag('m_rule')
 class TestMaternalRuleGroup(BaseTestCase):
 
     def setUp(self):
@@ -79,16 +80,27 @@ class TestMaternalRuleGroup(BaseTestCase):
                 subject_identifier=self.subject_consent.subject_identifier,
                 visit_code='2020M').entry_status, REQUIRED)
 
-    @tag('1')
     def test_maternal_obsterical_history_required(self):
         self.create_mother(self.hiv_pos_mother_options())
 
         self.assertEqual(
             self.maternal_ultrasound_initial.number_of_gestations, 1)
-
+        self.maternal_ultrasound_initial.save()
         self.assertEqual(
             CrfMetadata.objects.get(
                 model='td_maternal.maternalobstericalhistory',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='1000M').entry_status, REQUIRED)
+
+    def test_maternal_medical_history_required(self):
+        self.create_mother(self.hiv_pos_mother_options())
+
+        self.assertEqual(
+            self.maternal_ultrasound_initial.number_of_gestations, 1)
+        self.maternal_ultrasound_initial.save()
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternalmedicalhistory',
                 subject_identifier=self.subject_consent.subject_identifier,
                 visit_code='1000M').entry_status, REQUIRED)
 

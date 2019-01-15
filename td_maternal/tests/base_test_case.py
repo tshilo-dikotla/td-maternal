@@ -1,17 +1,14 @@
-from django.test.testcases import TestCase
-
-from dateutil.relativedelta import relativedelta
-from django.utils import timezone
 from datetime import date
 
-from model_mommy import mommy
-
+from dateutil.relativedelta import relativedelta
+from django.test.testcases import TestCase
+from django.utils import timezone
+from edc_appointment.models import Appointment
 from edc_base.utils import get_utcnow
-from edc_facility.import_holidays import import_holidays
-
 from edc_constants.constants import (
     YES, NEG, NOT_APPLICABLE, POS, NO)
-from edc_appointment.models import Appointment
+from edc_facility.import_holidays import import_holidays
+from model_mommy import mommy
 
 
 class BaseTestCase(TestCase):
