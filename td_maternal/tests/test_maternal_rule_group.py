@@ -7,7 +7,6 @@ from edc_metadata.constants import REQUIRED, NOT_REQUIRED
 from edc_metadata.models import CrfMetadata
 from model_mommy import mommy
 
-from td_maternal.tests.test_subject_consent import subject_identifier
 
 from .base_test_case import BaseTestCase
 
@@ -35,7 +34,6 @@ class TestMaternalRuleGroup(BaseTestCase):
                 subject_identifier=self.subject_consent.subject_identifier,
                 visit_code='1000M').entry_status, NOT_REQUIRED)
 
-    @tag('m_rule')
     def test_maternalsrh_required(self):
         self.create_mother()
         mommy.make_recipe(
@@ -80,3 +78,70 @@ class TestMaternalRuleGroup(BaseTestCase):
                 model='td_maternal.maternalsrh',
                 subject_identifier=self.subject_consent.subject_identifier,
                 visit_code='2020M').entry_status, REQUIRED)
+
+    @tag('1')
+    def test_maternal_obsterical_history_required(self):
+        self.create_mother(self.hiv_pos_mother_options())
+
+        self.assertEqual(
+            self.maternal_ultrasound_initial.number_of_gestations, 1)
+
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternalobstericalhistory',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='1000M').entry_status, REQUIRED)
+
+    def test_maternallifetimearvhistory_required(self):
+        self.create_mother(self.hiv_pos_mother_options())
+
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternallifetimearvhistory',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='1000M').entry_status, REQUIRED)
+
+    def test_maternallifetimearvhistory_not_required(self):
+        self.create_mother(self.hiv_neg_mother_options())
+
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternallifetimearvhistory',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='1000M').entry_status, NOT_REQUIRED)
+
+    def test_maternalrando_required(self):
+        self.create_mother(self.hiv_pos_mother_options())
+
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternalrando',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='1010M').entry_status, REQUIRED)
+
+    def test_maternalrando_not_required(self):
+        self.create_mother(self.hiv_neg_mother_options())
+
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternalrando',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='1010M').entry_status, NOT_REQUIRED)
+
+    def test_maternal_interim_idcc_required(self):
+        self.create_mother(self.hiv_pos_mother_options())
+
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternalrando',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='1010M').entry_status, REQUIRED)
+
+    def test_maternal_interim_idcc_not_required(self):
+        self.create_mother(self.hiv_neg_mother_options())
+
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternalrando',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='1010M').entry_status, NOT_REQUIRED)
