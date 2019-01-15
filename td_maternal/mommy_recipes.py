@@ -11,7 +11,7 @@ from .models import (
     SubjectConsent, SubjectScreening, AntenatalEnrollment,
     AntenatalVisitMembership, MaternalLabourDel, MaternalUltraSoundInitial,
     MaternalVisit, MaternalRando, RapidTestResult, MaternalContraception,
-    MaternalPostPartumDep)
+    MaternalPostPartumDep, MaternalInterimIdcc)
 
 
 fake = Faker()
@@ -151,4 +151,14 @@ maternalpostpartumdep = Recipe(
     sad='No, never',
     crying='No, never',
     self_harm='Never'
+)
+
+maternalinterimidcc = Recipe(
+    MaternalInterimIdcc,
+    info_since_lastvisit=YES,
+    recent_cd4=200.0,
+    recent_cd4_date=get_utcnow().date(),
+    value_vl_size='equal',
+    value_vl=800,
+    recent_vl_date=get_utcnow().date(),
 )
