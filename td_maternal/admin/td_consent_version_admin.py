@@ -8,19 +8,18 @@ from ..forms import TdConsentVersionForm
 from ..models import TdConsentVersion
 
 
-# from td_maternal.models.model_mixins.crf_model_mixin import CrfModelMixin
 @admin.register(TdConsentVersion, site=td_maternal_admin)
 class TdConsentVersionAdmin(ModelAdminMixin, admin.ModelAdmin):
     form = TdConsentVersionForm
-#     search_fields = ['subject_identifier']
 
     fieldsets = (
         (None, {
             'fields': [
-                'subjectscreening',
+                'screening_identifier',
                 'report_datetime',
                 'version']}
          ), audit_fieldset_tuple)
 
     radio_fields = {'version': admin.VERTICAL}
+#     readonly_fields = ('screening_identifier', 'subject_identifier')
     list_display = ('version',)
