@@ -5,7 +5,7 @@ from dateutil.tz import gettz
 from django.apps import apps as django_apps
 from edc_consent.consent import Consent
 from edc_consent.site_consents import site_consents
-from edc_constants.constants import MALE, FEMALE
+from edc_constants.constants import FEMALE
 
 
 app_config = django_apps.get_app_config('edc_protocol')
@@ -23,7 +23,7 @@ v1 = Consent(
     age_min=18,
     age_is_adult=18,
     age_max=64,
-    gender=[MALE, FEMALE])
+    gender=[FEMALE])
 
 v3 = Consent(
     'td_maternal.subjectconsent',
@@ -35,7 +35,7 @@ v3 = Consent(
     age_min=18,
     age_is_adult=18,
     age_max=64,
-    gender=[MALE, FEMALE])
+    gender=[FEMALE])
 
 site_consents.register(v1)
 site_consents.register(v3)

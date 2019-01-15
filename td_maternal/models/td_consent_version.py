@@ -1,15 +1,18 @@
 from django.db import models
-
-# from edc_base.model_mixins import BaseUuidModel
-from edc_base.model_validators import date_not_future
-from edc_protocol.validators import date_not_before_study_start
-from .subject_screening import SubjectScreening
-from ..choices import CONSENT_VERSION
 from django.db.models.deletion import PROTECT
-from td_maternal.models.model_mixins.crf_model_mixin import CrfModelMixin
+from edc_base.model_mixins import BaseUuidModel
+from edc_base.model_validators import date_not_future
+from edc_base.sites import SiteModelMixin
+from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
+from edc_protocol.validators import date_not_before_study_start
+from edc_search.model_mixins import SearchSlugModelMixin
+
+from ..choices import CONSENT_VERSION
+from .subject_screening import SubjectScreening
 
 
-class TdConsentVersion(CrfModelMixin):
+class TdConsentVersion(UniqueSubjectIdentifierFieldMixin, SiteModelMixin,
+                       SearchSlugModelMixin, BaseUuidModel):
 
     subjectscreening = models.ForeignKey(
         SubjectScreening, null=True, on_delete=PROTECT)
