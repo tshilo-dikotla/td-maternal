@@ -55,11 +55,6 @@ class MaternalRequisition(
         null=True,
         blank=True)
 
-    test_code = models.ManyToManyField(
-        TestCode,
-        verbose_name='Additional tests',
-        blank=True)
-
     study_site = models.CharField(
         verbose_name='Study site',
         max_length=25,
