@@ -20,7 +20,8 @@ class MaternalStatusHelper(object):
         for visit in self.previous_visits:
             rapid_test_result = None
             try:
-                rapid_test_result = rapid_test_result_cls.objects.get(maternal_visit=visit)
+                rapid_test_result = rapid_test_result_cls.objects.get(
+                    maternal_visit=visit)
             except rapid_test_result_cls.DoesNotExist:
                 pass
             else:
@@ -29,7 +30,8 @@ class MaternalStatusHelper(object):
                 if status in [POS, NEG, UNK, IND]:
                     return status
 
-        # If we have exhausted all visits without a concrete status then use enrollment.
+        # If we have exhausted all visits without a concrete status then use
+        # enrollment.
         antenatal_enrollment = django_apps.get_model(
             'td_maternal.antenatalenrollment').objects.get(
                 subject_identifier=self.maternal_visit.subject_identifier)
@@ -41,7 +43,7 @@ class MaternalStatusHelper(object):
             status = self._evaluate_status_from_rapid_tests(
                 (antenatal_enrollment, 'enrollment_hiv_status', 'week32_test_date'))
         if status in [POS, NEG, UNK]:
-                return status
+            return status
         return status
 
     @property
@@ -62,7 +64,8 @@ class MaternalStatusHelper(object):
     def eligible_for_cd4(self):
         """Return True is one is eligible for cd4.
         """
-        maternal_interim_idcc_cls = django_apps.get_model('td_maternal.maternalinterimidcc')
+        maternal_interim_idcc_cls = django_apps.get_model(
+            'td_maternal.maternalinterimidcc')
         latest_interim_idcc = None
         latest_visit = self.previous_visits.first()
         try:
@@ -74,7 +77,7 @@ class MaternalStatusHelper(object):
             three_month_back = latest_visit.report_datetime.date() - relativedelta(months=3)
             if latest_interim_idcc.recent_cd4_date:
                 if (three_month_back
-                    > latest_interim_idcc.recent_cd4_dat
+                    > latest_interim_idcc.recent_cd4_date
                         and self.hiv_status == POS):
                     return True
                 else:
