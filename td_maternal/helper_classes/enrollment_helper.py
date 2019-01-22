@@ -1,5 +1,5 @@
 from dateutil.relativedelta import relativedelta
-from django.core.exceptions import ValidationError
+from django import forms
 from edc_constants.constants import NO, YES, POS, NEG
 
 
@@ -58,7 +58,7 @@ class EnrollmentHelper(object):
             return POS
         else:
             # Case neg and pos OR not neg and not pos
-            raise ValidationError(
+            raise forms.ValidationError(
                 'Unable to determine maternal hiv status at enrollment. '
                 'Got current_hiv_status={}, evidence_hiv_status={}, '
                 'rapid_test_done={}, rapid_test_result={}'.format(
