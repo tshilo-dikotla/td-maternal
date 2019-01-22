@@ -20,7 +20,6 @@ from edc_visit_tracking.model_mixins import CrfModelMixin as VisitTrackingCrfMod
 from edc_visit_tracking.model_mixins import PreviousVisitModelMixin
 
 from ..choices import REASON_NOT_DRAWN, STUDY_SITES
-from .list_models import TestCode
 from .maternal_visit import MaternalVisit
 from .model_mixins import SearchSlugModelMixin
 
@@ -53,11 +52,6 @@ class MaternalRequisition(
         default=NOT_APPLICABLE,
         choices=REASON_NOT_DRAWN,
         null=True,
-        blank=True)
-
-    test_code = models.ManyToManyField(
-        TestCode,
-        verbose_name='Additional tests',
         blank=True)
 
     study_site = models.CharField(
