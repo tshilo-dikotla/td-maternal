@@ -23,7 +23,7 @@ class MaternalClinicalMeasurementsMixin(models.Model):
     diastolic_bp = models.IntegerField(
         verbose_name="Mother's diastolic blood pressure?",
         validators=[MinValueValidator(35), MaxValueValidator(150), ],
-        help_text="in hg e.g. 80, should be between 35 and 130.")
+        help_text="in hg e.g. 80, should be between 35 and 150.")
 
     class Meta:
         abstract = True
