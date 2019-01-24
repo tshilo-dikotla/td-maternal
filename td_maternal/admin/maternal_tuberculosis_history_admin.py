@@ -15,27 +15,27 @@ class MaternalTuberculosisHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
             'fields': [
                 'maternal_visit',
                 'coughing',
-                'coughing_relation',
-                'other_coughing_relation',
+                'coughing_rel',
+                'other_coughing_rel',
                 'diagnosis',
-                'diagnosis_relation',
-                'other_diagnosis_relation',
-                'tuberculosis_treatment',
-                'tuberculosis_treatment_relation',
-                'other_treatment_relation'
+                'diagnosis_rel',
+                'other_diagnosis_rel',
+                'tb_treatment',
+                'tb_treatment_rel',
+                'other_treatment_rel'
             ]}
          ), audit_fieldset_tuple)
 
     radio_fields = {
         'coughing': admin.VERTICAL,
-        'coughing_relation': admin.VERTICAL,
+        'coughing_rel': admin.VERTICAL,
         'diagnosis': admin.VERTICAL,
-        'diagnosis_relation': admin.VERTICAL,
-        'tuberculosis_treatment': admin.VERTICAL,
-        'tuberculosis_treatment_relation': admin.VERTICAL
+        'diagnosis_rel': admin.VERTICAL,
+        'tb_treatment': admin.VERTICAL,
+        'tb_treatment_rel': admin.VERTICAL
     }
 
     list_display = (
-        'other_coughing_relation',
-        'other_diagnosis_relation',
-        'other_treatment_relation')
+        'other_coughing_rel',
+        'other_diagnosis_rel',
+        'other_treatment_rel')

@@ -19,7 +19,7 @@ class MaternalTuberculosisHistory(CrfModelMixin):
         choices=YES_NO_DONT_KNOW
     )
 
-    coughing_relation = models.CharField(
+    coughing_rel = models.CharField(
         verbose_name=('If yes to question 2, please indicate the relationship'
                       ' of this individual or individuals to your infant'
                       ),
@@ -27,7 +27,7 @@ class MaternalTuberculosisHistory(CrfModelMixin):
         choices=FAMILY_RELATION
     )
 
-    other_coughing_relation = models.CharField(
+    other_coughing_rel = models.CharField(
         verbose_name=('Other'),
         max_length=255,
         help_text='Indicate Relationship',
@@ -43,14 +43,14 @@ class MaternalTuberculosisHistory(CrfModelMixin):
         choices=YES_NO_DONT_KNOW
     )
 
-    diagnosis_relation = models.CharField(
+    diagnosis_rel = models.CharField(
         verbose_name=('If yes to question 5, please indicate the relationship'
                       ' of this individual or individuals to your infant:'),
         max_length=3,
         choices=FAMILY_RELATION
     )
 
-    other_diagnosis_relation = models.CharField(
+    other_diagnosis_rel = models.CharField(
         verbose_name=('Other'),
         max_length=255,
         help_text='Indicate Relationship',
@@ -58,7 +58,7 @@ class MaternalTuberculosisHistory(CrfModelMixin):
         blank=True
     )
 
-    tuberculosis_treatment = models.CharField(
+    tb_treatment = models.CharField(
         verbose_name=('Since the last scheduled visit, has any member of the'
                       ' household where your infant has stayed been treated '
                       'for tuberculosis?'),
@@ -66,14 +66,14 @@ class MaternalTuberculosisHistory(CrfModelMixin):
         choices=YES_NO_DONT_KNOW
     )
 
-    tuberculosis_treatment_relation = models.CharField(
+    tb_treatment_rel = models.CharField(
         verbose_name=('If yes to question 8, please indicate the relationship'
                       ' of this individual or individuals to your infant:'),
         max_length=3,
         choices=FAMILY_RELATION
     )
 
-    other_treatment_relation = models.CharField(
+    other_treatment_rel = models.CharField(
         verbose_name=('Other'),
         max_length=255,
         help_text='Indicate Relationship',
