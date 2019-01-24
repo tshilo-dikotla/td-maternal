@@ -13,7 +13,8 @@ class TdConsentVersion(SiteModelMixin,
 
     screening_identifier = models.CharField(
         verbose_name='Screening identifier',
-        max_length=50)
+        max_length=50,
+        unique=True)
 
     version = models.CharField(
         verbose_name="Which version of the consent would you like to be consented with.",
