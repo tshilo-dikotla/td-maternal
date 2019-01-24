@@ -138,6 +138,7 @@ def maternal_labour_del_on_post_save(sender, instance, raw, created, **kwargs):
                                     registration_status='DELIVERED',
                                     relative_identifier=maternal_consent.subject_identifier,
                                     site=maternal_consent.site)
+                            # Create infant dummy consent
                             infant_consent_model_cls = django_apps.get_model('td_infant.infantdummysubjectconsent')
                             try:
                                 infant_consent_model_cls.objects.get(

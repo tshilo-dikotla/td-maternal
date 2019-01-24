@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
@@ -41,6 +42,7 @@ class AntenatalEnrollment(UniqueSubjectIdentifierFieldMixin,
     ga_lmp_anc_wks = models.IntegerField(
         verbose_name="What is the mother's gestational age according to"
         " ANC records?",
+        validators=[MinValueValidator(1), MaxValueValidator(40)],
         null=True,
         blank=True,
         help_text=" (weeks of gestation at enrollment, ANC)",)

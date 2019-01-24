@@ -19,8 +19,6 @@ class MaternalRequisitionAdmin(CrfModelAdminMixin, RequisitionAdminMixin,
 
     ordering = ('requisition_identifier',)
 
-    filter_horizontal = ('test_code',)
-
     fieldsets = (
         (None, {
             'fields': (
@@ -32,7 +30,6 @@ class MaternalRequisitionAdmin(CrfModelAdminMixin, RequisitionAdminMixin,
                 'drawn_datetime',
                 'study_site',
                 'panel',
-                'test_code',
                 'specimen_type',
                 'item_type',
                 'item_count',

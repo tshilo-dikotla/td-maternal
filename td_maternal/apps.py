@@ -32,7 +32,8 @@ if settings.APP_NAME == 'td_maternal':
 
     class EdcVisitTrackingAppConfig(BaseEdcVisitTrackingAppConfig):
         visit_models = {
-            'td_maternal': ('maternal_visit', 'td_maternal.maternalvisit')}
+            'td_maternal': ('maternal_visit', 'td_maternal.maternalvisit'),
+            'td_infant': ('infant_visit', 'td_infant.infantvisit')}
 
     class EdcProtocolAppConfig(BaseEdcProtocolAppConfig):
         protocol = 'BHP085'
