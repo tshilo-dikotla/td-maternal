@@ -20,7 +20,7 @@ class MaternalTuberculosisHistory(CrfModelMixin):
     )
 
     coughing_relation = models.CharField(
-        verbose_name=('If yes to question 1, please indicate the relationship'
+        verbose_name=('If yes to question 2, please indicate the relationship'
                       ' of this individual or individuals to your infant'
                       ),
         max_length=25,
@@ -28,8 +28,9 @@ class MaternalTuberculosisHistory(CrfModelMixin):
     )
 
     other_coughing_relation = models.CharField(
-        verbose_name=('Other (Indicate Relationship:)'),
+        verbose_name=('Other'),
         max_length=255,
+        help_text='Indicate Relationship',
         null=True,
         blank=True
     )
@@ -43,15 +44,16 @@ class MaternalTuberculosisHistory(CrfModelMixin):
     )
 
     diagnosis_relation = models.CharField(
-        verbose_name=('If yes to question 3, please indicate the relationship'
+        verbose_name=('If yes to question 5, please indicate the relationship'
                       ' of this individual or individuals to your infant:'),
         max_length=3,
         choices=FAMILY_RELATION
     )
 
     other_diagnosis_relation = models.CharField(
-        verbose_name=('Other (Indicate Relationship:)'),
+        verbose_name=('Other'),
         max_length=255,
+        help_text='Indicate Relationship',
         null=True,
         blank=True
     )
@@ -65,15 +67,16 @@ class MaternalTuberculosisHistory(CrfModelMixin):
     )
 
     tuberculosis_treatment_relation = models.CharField(
-        verbose_name=('If yes to question 5, please indicate the relationship'
+        verbose_name=('If yes to question 8, please indicate the relationship'
                       ' of this individual or individuals to your infant:'),
         max_length=3,
         choices=FAMILY_RELATION
     )
 
     other_treatment_relation = models.CharField(
-        verbose_name=('Other (Indicate Relationship:)'),
+        verbose_name=('Other'),
         max_length=255,
+        help_text='Indicate Relationship',
         null=True,
         blank=True
     )

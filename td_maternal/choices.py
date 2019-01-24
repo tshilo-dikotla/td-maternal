@@ -1070,12 +1070,12 @@ TB_SITE_DEATH = (
 
 FAMILY_RELATION = (
 
-    ('Me', 'me'),
-    ('Father', 'father'),
-    ('Sibling', 'sibling'),
-    ('Grandmother', 'grandmother'),
-    ('Grandfather', 'grandfather'),
-    ('Aunt', 'aunt'),
-    ('Uncle', 'uncle'),
-    ('Not applicable', 'not applicable'),
+    ('me', 'Me'),
+    ('father', 'Father'),
+    ('sibling', 'Sibling'),
+    ('grandmother', 'Grandmother'),
+    ('grandfather', 'Grandfather'),
+    ('aunt', 'Aunt'),
+    ('uncle', 'Uncle'),
+    (NOT_APPLICABLE, 'Not applicable'),
 )
