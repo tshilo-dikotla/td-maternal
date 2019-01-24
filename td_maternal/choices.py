@@ -1067,3 +1067,15 @@ TB_SITE_DEATH = (
     ('disseminated', 'Disseminated'),
     (NOT_APPLICABLE, 'Not applicable')
 )
+
+FAMILY_RELATION = (
+
+    ('me', 'Me'),
+    ('father', 'Father'),
+    ('sibling', 'Sibling'),
+    ('grandmother', 'Grandmother'),
+    ('grandfather', 'Grandfather'),
+    ('aunt', 'Aunt'),
+    ('uncle', 'Uncle'),
+    (NOT_APPLICABLE, 'Not applicable'),
+)
