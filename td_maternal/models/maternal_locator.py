@@ -5,7 +5,7 @@ from edc_action_item.model_mixins import ActionModelMixin
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import CellNumber, TelephoneNumber
-from edc_constants.choices import YES_NO
+from edc_constants.choices import YES_NO, YES_NO_DOESNT_WORK
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 from edc_locator.model_mixins import LocatorModelMixin
 
@@ -56,7 +56,7 @@ class MaternalLocator(LocatorModelMixin, ActionModelMixin,
 
     may_call_work = models.CharField(
         max_length=25,
-        choices=YES_NO,
+        choices=YES_NO_DOESNT_WORK,
         verbose_name=mark_safe(
             'Has the participant given his/her permission for study staff '
             'to contact her at work for follow up purposes during the study?'))

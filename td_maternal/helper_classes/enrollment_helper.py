@@ -148,6 +148,9 @@ class EnrollmentHelper(object):
 
     @property
     def pending(self):
+        """Returns True is Maternal Ultra Sound Initial exists and last mestrual date
+        is not known.
+        """
         if ((not self.instance_antenatal.ultrasound) and
                 (NO in self.instance_antenatal.knows_lmp)):
             return True

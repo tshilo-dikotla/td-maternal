@@ -1,4 +1,5 @@
 from django.db import models
+
 from edc_base.model_fields import OtherCharField
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
@@ -9,6 +10,7 @@ from edc_constants.choices import YES_NO
 from edc_identifier.managers import SubjectIdentifierManager
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import datetime_not_before_study_start
+from edc_reference.model_mixins import ReferenceModelMixin
 from edc_search.model_mixins import SearchSlugModelMixin
 
 from ..choices import (SOURCE_OF_DEATH_INFO,
@@ -16,8 +18,8 @@ from ..choices import (SOURCE_OF_DEATH_INFO,
                        HOSPITILIZATION_REASONS)
 
 
-class DeathReport(UniqueSubjectIdentifierFieldMixin, SiteModelMixin,
-                  SearchSlugModelMixin, BaseUuidModel):
+class DeathReport(ReferenceModelMixin, UniqueSubjectIdentifierFieldMixin,
+                  SiteModelMixin, SearchSlugModelMixin, BaseUuidModel):
 
     report_datetime = models.DateTimeField(
         verbose_name='Report Date',
@@ -84,7 +86,6 @@ class DeathReport(UniqueSubjectIdentifierFieldMixin, SiteModelMixin,
         choices=HOSPITILIZATION_REASONS,
         max_length=50,
         verbose_name='if yes, hospitalized, what was the primary reason for hospitalisation? ',
-        help_text="",
         blank=True,
         null=True)
 
@@ -126,4 +127,4 @@ class DeathReport(UniqueSubjectIdentifierFieldMixin, SiteModelMixin,
     natural_key.dependencies = ['sites.Site']
 
     class Meta:
-        verbose_name = 'Maternal Death Report'
+        verbose_name = 'Death Report'

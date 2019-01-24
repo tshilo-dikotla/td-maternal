@@ -5,7 +5,7 @@ from edc_base.model_validators import datetime_not_future
 from edc_base.sites import SiteModelMixin
 from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO
-from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
+from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import datetime_not_before_study_start
 from edc_search.model_mixins import SearchSlugManager, SearchSlugModelMixin
 
@@ -19,7 +19,7 @@ class SubjectScreeningManager(SearchSlugManager, models.Manager):
         return self.get(screening_identifier=eligibility_identifier)
 
 
-class SubjectScreening(NonUniqueSubjectIdentifierModelMixin, SiteModelMixin,
+class SubjectScreening(UniqueSubjectIdentifierFieldMixin, SiteModelMixin,
                        SearchSlugModelMixin, BaseUuidModel):
     """ A model completed by the user to test and capture the result of
     the pre-consent eligibility checks.

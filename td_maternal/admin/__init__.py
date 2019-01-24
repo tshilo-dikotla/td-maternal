@@ -40,3 +40,6 @@ from .specimen_consent_admin import SpecimenConsentAdmin
 from .subject_consent_admin import SubjectConsentAdmin
 from .subject_screening_admin import SubjectScreeningAdmin
 from .td_consent_version_admin import TdConsentVersionAdmin
+from .maternal_tuberculosis_history_admin import (
+    MaternalTuberculosisHistoryAdmin
+)

@@ -1,5 +1,11 @@
+from django.apps import apps as django_apps
+from django.db import transaction
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
+
+from edc_identifier.infant_identifier import InfantIdentifier
+from edc_registration.models import RegisteredSubject
 from edc_visit_schedule.site_visit_schedules import site_visit_schedules
 
 from .antenatal_enrollment import AntenatalEnrollment
@@ -7,6 +13,11 @@ from .antenatal_visit_membership import AntenatalVisitMembership
 from .maternal_labour_del import MaternalLabourDel
 from .subject_consent import SubjectConsent
 from .subject_screening import SubjectScreening
+from .maternal_ultrasound_initial import MaternalUltraSoundInitial
+from django.core.exceptions import ValidationError
+
+
+INFANT = 'infant'
 
 
 @receiver(post_save, weak=False, sender=SubjectConsent,
@@ -91,3 +102,49 @@ def maternal_labour_del_on_post_save(sender, instance, raw, created, **kwargs):
             schedule.put_on_schedule(
                 subject_identifier=instance.subject_identifier,
                 onschedule_datetime=instance.report_datetime)
+
+            #  Create infant registered subject
+            if isinstance(instance, MaternalLabourDel):
+                if instance.live_infants_to_register == 1:
+                    maternal_consent = SubjectConsent.objects.filter(
+                        subject_identifier=instance.subject_identifier).order_by('version').last()
+                    try:
+                        maternal_ultrasound = MaternalUltraSoundInitial.objects.filter(
+                            maternal_visit__subject_identifier=instance.subject_identifier).order_by('report_datetime').last()
+                    except MaternalUltraSoundInitial.DoesNotExist:
+                        raise ValidationError(
+                            f'Maternal Ultrasound Initial must exist for {instance.subject_identifier}')
+                    else:
+                        with transaction.atomic():
+                            infant_identifier = InfantIdentifier(
+                                maternal_identifier=instance.subject_identifier,
+                                birth_order=1,
+                                live_infants=int(
+                                    maternal_ultrasound.number_of_gestations),
+                                registration_status='DELIVERED',
+                                registration_datetime=instance.delivery_datetime,
+                                subject_type=INFANT)
+                            try:
+                                registered_subject = RegisteredSubject.objects.get(subject_identifier=infant_identifier.identifier)
+                            except RegisteredSubject.DoesNotExist:
+                                registered_subject = RegisteredSubject.objects.create(
+                                    subject_identifier=infant_identifier.identifier,
+                                    registration_datetime=instance.delivery_datetime,
+                                    subject_type=INFANT,
+                                    user_created=instance.user_created,
+                                    created=timezone.now(),
+                                    first_name='No Name',
+                                    initials=None,
+                                    registration_status='DELIVERED',
+                                    relative_identifier=maternal_consent.subject_identifier,
+                                    site=maternal_consent.site)
+                            infant_consent_model_cls = django_apps.get_model('td_infant.infantdummysubjectconsent')
+                            try:
+                                infant_consent_model_cls.objects.get(
+                                    subject_identifier=registered_subject.subject_identifier)
+                            except infant_consent_model_cls.DoesNotExist:
+                                infant_consent_model_cls.objects.create(
+                                    subject_identifier=registered_subject.subject_identifier,
+                                    version=maternal_consent.version,
+                                    report_datetime=instance.report_datetime,
+                                    consent_datetime=timezone.now())

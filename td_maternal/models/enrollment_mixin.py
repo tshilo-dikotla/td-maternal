@@ -1,5 +1,5 @@
 from django.db import models
-from django.apps import apps
+from django.apps import apps as django_apps
 
 from edc_protocol.validators import datetime_not_before_study_start
 from edc_protocol.validators import date_not_before_study_start
@@ -9,7 +9,7 @@ from edc_constants.choices import (
     POS_NEG_UNTESTED_REFUSAL, YES_NO_NA, POS_NEG, YES_NO)
 from edc_constants.constants import NO, YES, POS, NEG
 
-from .enrollment_helper import EnrollmentHelper
+from ..helper_classes import EnrollmentHelper
 
 
 class EnrollmentMixin(models.Model):
@@ -166,7 +166,8 @@ class EnrollmentMixin(models.Model):
         super(EnrollmentMixin, self).save(*args, **kwargs)
 
     def antenatal_criteria(self, enrollment_helper):
-        """Returns True if basic criteria is met for enrollment."""
+        """Returns True if basic criteria is met for enrollment.
+        """
         if self.pending_ultrasound:
             basic_criteria = False
         else:
@@ -194,22 +195,26 @@ class EnrollmentMixin(models.Model):
 
     @property
     def ultrasound(self):
-        MaternalUltraSoundInitial = apps.get_model(
-            'td_maternal', 'MaternalUltraSoundInitial')
+        MaternalUltraSoundInitial = django_apps.get_model(
+            'td_maternal.maternalultrasoundinitial')
         try:
-            return MaternalUltraSoundInitial.objects.get(
+            maternal_ultra_sount_initial = MaternalUltraSoundInitial.objects.get(
                 maternal_visit__subject_identifier=self.subject_identifier)
         except MaternalUltraSoundInitial.DoesNotExist:
             return None
+        else:
+            return maternal_ultra_sount_initial
 
     @property
     def delivery(self):
-        MaternalLabourDel = apps.get_model('td_maternal', 'MaternalLabourDel')
+        MaternalLabourDel = django_apps.get_model('td_maternal.maternallabourdel')
         try:
-            return MaternalLabourDel.objects.get(
+            maternal_lab_del = MaternalLabourDel.objects.get(
                 subject_identifier=self.subject_identifier)
         except MaternalLabourDel.DoesNotExist:
             return None
+        else:
+            return maternal_lab_del
 
     class Meta:
         abstract = True

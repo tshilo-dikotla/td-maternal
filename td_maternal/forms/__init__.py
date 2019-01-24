@@ -40,3 +40,4 @@ from .specimen_consent_form import SpecimenConsentForm
 from .subject_consent_form import SubjectConsentForm
 from .subject_screening_form import SubjectScreeningForm
 from .td_consent_version_form import TdConsentVersionForm
+from .maternal_tuberculosis_history_form import MaternalTuberculosisHistoryForm

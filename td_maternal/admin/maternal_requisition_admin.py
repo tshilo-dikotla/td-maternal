@@ -8,16 +8,18 @@ from edc_model_admin import audit_fieldset_tuple
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalRequisitionForm
 from ..models import MaternalRequisition
-from .modeladmin_mixins import ModelAdminMixin
+from .modeladmin_mixins import CrfModelAdminMixin
 
 
 @admin.register(MaternalRequisition, site=td_maternal_admin)
-class MaternalRequisitionAdmin(ModelAdminMixin, RequisitionAdminMixin,
+class MaternalRequisitionAdmin(CrfModelAdminMixin, RequisitionAdminMixin,
                                admin.ModelAdmin):
 
     form = MaternalRequisitionForm
 
-    ordering = ('requisition_identifier', )
+    ordering = ('requisition_identifier',)
+
+    filter_horizontal = ('test_code',)
 
     fieldsets = (
         (None, {
@@ -30,6 +32,8 @@ class MaternalRequisitionAdmin(ModelAdminMixin, RequisitionAdminMixin,
                 'drawn_datetime',
                 'study_site',
                 'panel',
+                'test_code',
+                'specimen_type',
                 'item_type',
                 'item_count',
                 'estimated_volume',

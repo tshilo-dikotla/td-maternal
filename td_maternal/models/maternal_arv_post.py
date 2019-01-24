@@ -28,8 +28,7 @@ class MaternalArvPost (CrfModelMixin):
         verbose_name="Reason for triple ARVs ",
         max_length=25,
         choices=REASON_FOR_HAART,
-        default=NOT_APPLICABLE,
-        help_text="",)
+        default=NOT_APPLICABLE)
 
     on_arv_reason_other = models.TextField(
         max_length=35,

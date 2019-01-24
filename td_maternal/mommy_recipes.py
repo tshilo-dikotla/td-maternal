@@ -1,12 +1,17 @@
 from dateutil.relativedelta import relativedelta
 from django.contrib.sites.models import Site
-from edc_base.utils import get_utcnow
-from edc_constants.constants import YES, NO, POS
 from faker import Faker
 from model_mommy.recipe import Recipe, seq
 
-from .models import (SubjectConsent, SubjectScreening,
-                     AntenatalEnrollment, AntenatalVisitMembership)
+from edc_base.utils import get_utcnow
+from edc_constants.constants import YES, NO, POS, ON_STUDY, ALIVE, PARTICIPANT
+from edc_visit_tracking.constants import SCHEDULED
+
+from .models import (
+    SubjectConsent, SubjectScreening, AntenatalEnrollment,
+    AntenatalVisitMembership, MaternalLabourDel, MaternalUltraSoundInitial,
+    MaternalVisit, MaternalRando, RapidTestResult)
+from .constants import NOT_APPLICABLE
 
 
 fake = Faker()
@@ -70,5 +75,55 @@ antenatalenrollment = Recipe(
 antenatalvisitmembership = Recipe(
     AntenatalVisitMembership,
     antenatal_visits=YES,
-    consent_version='3',
     report_datetime=get_utcnow())
+
+maternalvisit = Recipe(
+    MaternalVisit,
+    report_datetime=get_utcnow(),
+    reason=SCHEDULED,
+    study_status=ON_STUDY,
+    survival_status=ALIVE,
+    info_source=PARTICIPANT)
+
+maternalultrasoundinitial = Recipe(
+    MaternalUltraSoundInitial,
+    report_datetime=get_utcnow(),
+    number_of_gestations=1,
+    bpd=200,
+    hc=200,
+    ac=200,
+    fl=200,
+    ga_by_lmp=100,
+    ga_by_ultrasound_wks=7,
+    ga_by_ultrasound_days=5,
+    est_fetal_weight=700,
+    est_edd_ultrasound=get_utcnow().date() + relativedelta(days=90),
+    edd_confirmed=get_utcnow() + relativedelta(days=90),
+    ga_confirmed=7)
+
+maternallabourdel = Recipe(
+    MaternalLabourDel,
+    report_datetime=get_utcnow(),
+    delivery_datetime=get_utcnow(),
+    delivery_time_estimated=NO,
+    labour_hrs='3',
+    delivery_hospital='Lesirane',
+    mode_delivery='spontaneous vaginal',
+    csection_reason=NOT_APPLICABLE,
+    live_infants_to_register=1,
+    valid_regiment_duration=YES)
+
+maternalrando = Recipe(
+    MaternalRando,
+    report_datetime=get_utcnow(),
+    sid=1,
+    rx='NVP',
+    randomization_datetime=get_utcnow(),
+    initials='IN')
+
+rapidtestresult = Recipe(
+    RapidTestResult,
+    report_datetime=get_utcnow(),
+    rapid_test_done=YES,
+    result_date=get_utcnow().date(),
+    result=POS)

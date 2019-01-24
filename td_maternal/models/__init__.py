@@ -3,8 +3,8 @@ from td_maternal.models.maternal_srh import MaternalSrh
 from .antenatal_enrollment import AntenatalEnrollment
 from .antenatal_visit_membership import AntenatalVisitMembership
 from .death_report import DeathReport
-from .eligibility import Eligibility, AntenatalEnrollmentEligibility
-from .enrollment_helper import EnrollmentHelper
+from .eligibility import Eligibility
+from td_maternal.helper_classes.enrollment_helper import EnrollmentHelper
 from .enrollment_mixin import EnrollmentMixin
 from .list_models import Contraceptives
 from .maternal_arv import MaternalArv
@@ -47,3 +47,4 @@ from .specimen_consent import SpecimenConsent
 from .subject_consent import SubjectConsent
 from .subject_screening import SubjectScreening
 from .td_consent_version import TdConsentVersion
+from .maternal_tuberculosis_history import MaternalTuberculosisHistory
