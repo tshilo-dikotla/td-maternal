@@ -207,7 +207,8 @@ class EnrollmentMixin(models.Model):
 
     @property
     def delivery(self):
-        MaternalLabourDel = django_apps.get_model('td_maternal.maternallabourdel')
+        MaternalLabourDel = django_apps.get_model(
+            'td_maternal.maternallabourdel')
         try:
             maternal_lab_del = MaternalLabourDel.objects.get(
                 subject_identifier=self.subject_identifier)

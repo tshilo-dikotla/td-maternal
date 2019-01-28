@@ -53,9 +53,10 @@ def antenatal_enrollment_on_post_save(sender, instance, raw, created, **kwargs):
             _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
                 onschedule_model='td_maternal.onscheduleantenatalenrollment',
                 name=instance.schedule_name)
-            schedule.put_on_schedule(
-                subject_identifier=instance.subject_identifier,
-                onschedule_datetime=instance.report_datetime)
+            if instance.is_eligible:
+                schedule.put_on_schedule(
+                    subject_identifier=instance.subject_identifier,
+                    onschedule_datetime=instance.report_datetime)
 
 
 @receiver(post_save, weak=False, sender=AntenatalVisitMembership,
@@ -125,7 +126,8 @@ def maternal_labour_del_on_post_save(sender, instance, raw, created, **kwargs):
                                 registration_datetime=instance.delivery_datetime,
                                 subject_type=INFANT)
                             try:
-                                registered_subject = RegisteredSubject.objects.get(subject_identifier=infant_identifier.identifier)
+                                registered_subject = RegisteredSubject.objects.get(
+                                    subject_identifier=infant_identifier.identifier)
                             except RegisteredSubject.DoesNotExist:
                                 registered_subject = RegisteredSubject.objects.create(
                                     subject_identifier=infant_identifier.identifier,
@@ -139,7 +141,8 @@ def maternal_labour_del_on_post_save(sender, instance, raw, created, **kwargs):
                                     relative_identifier=maternal_consent.subject_identifier,
                                     site=maternal_consent.site)
                             # Create infant dummy consent
-                            infant_consent_model_cls = django_apps.get_model('td_infant.infantdummysubjectconsent')
+                            infant_consent_model_cls = django_apps.get_model(
+                                'td_infant.infantdummysubjectconsent')
                             try:
                                 infant_consent_model_cls.objects.get(
                                     subject_identifier=registered_subject.subject_identifier)
