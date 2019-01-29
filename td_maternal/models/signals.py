@@ -1,4 +1,5 @@
 from django.apps import apps as django_apps
+from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -14,7 +15,7 @@ from .maternal_labour_del import MaternalLabourDel
 from .subject_consent import SubjectConsent
 from .subject_screening import SubjectScreening
 from .maternal_ultrasound_initial import MaternalUltraSoundInitial
-from django.core.exceptions import ValidationError
+from .onschedule import OnScheduleAntenatalEnrollment
 
 
 INFANT = 'infant'
@@ -46,8 +47,18 @@ def antenatal_enrollment_on_post_save(sender, instance, raw, created, **kwargs):
             _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
                 onschedule_model='td_maternal.onscheduleantenatalenrollment',
                 name=instance.schedule_name)
-            schedule.refresh_schedule(
-                subject_identifier=instance.subject_identifier)
+            if instance.is_eligible:
+                try:
+                    OnScheduleAntenatalEnrollment.objects.get(
+                        subject_identifier=instance.subject_identifier)
+
+                    schedule.refresh_schedule(
+                        subject_identifier=instance.subject_identifier)
+                except OnScheduleAntenatalEnrollment.DoesNotExist:
+
+                    schedule.put_on_schedule(
+                        subject_identifier=instance.subject_identifier,
+                        onschedule_datetime=instance.report_datetime)
         else:
             # put subject on schedule
             _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
