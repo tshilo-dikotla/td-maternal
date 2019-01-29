@@ -2,7 +2,6 @@ from td_maternal.forms.maternal_clinical_measurements_one_form import (
     MaternalClinicalMeasurementsOneForm)
 from td_maternal.forms.maternal_clinical_measurements_two_form import (
     MaternalClinicalMeasurementsTwoForm)
-
 from .antenatal_enrollment_form import AntenatalEnrollmentForm
 from .antenatal_visit_membership_form import AntenatalVisitMembershipForm
 from .death_report_form import DeathReportForm
@@ -40,3 +39,4 @@ from .specimen_consent_form import SpecimenConsentForm
 from .subject_consent_form import SubjectConsentForm
 from .subject_screening_form import SubjectScreeningForm
 from .td_consent_version_form import TdConsentVersionForm
+from .maternal_tuberculosis_history_form import MaternalTuberculosisHistoryForm
