@@ -1,13 +1,12 @@
-from django.db import models
 from django.apps import apps as django_apps
-
-from edc_protocol.validators import datetime_not_before_study_start
-from edc_protocol.validators import date_not_before_study_start
+from django.db import models
 from edc_base.model_validators import datetime_not_future, date_not_future
 from edc_base.utils import get_utcnow
 from edc_constants.choices import (
     POS_NEG_UNTESTED_REFUSAL, YES_NO_NA, POS_NEG, YES_NO)
 from edc_constants.constants import NO, YES, POS, NEG
+from edc_protocol.validators import date_not_before_study_start
+from edc_protocol.validators import datetime_not_before_study_start
 
 from ..helper_classes import EnrollmentHelper
 
@@ -85,6 +84,7 @@ class EnrollmentMixin(models.Model):
 
     week32_test_date = models.DateField(
         verbose_name="Date of HIV Test",
+        validators=[datetime_not_future, ],
         null=True,
         blank=True)
 
@@ -207,7 +207,8 @@ class EnrollmentMixin(models.Model):
 
     @property
     def delivery(self):
-        MaternalLabourDel = django_apps.get_model('td_maternal.maternallabourdel')
+        MaternalLabourDel = django_apps.get_model(
+            'td_maternal.maternallabourdel')
         try:
             maternal_lab_del = MaternalLabourDel.objects.get(
                 subject_identifier=self.subject_identifier)
