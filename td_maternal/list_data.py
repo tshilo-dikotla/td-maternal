@@ -91,7 +91,8 @@ list_data = {
         ('traditional_medications', 'Traditional medications'),
         ('hypertensive_medications', 'Hypertensive medications'),
         ('prenatal_vitamins', 'Prenatal Vitamins'),
-        (NOT_APPLICABLE, 'Not Applicable')
+        (NOT_APPLICABLE, 'Not Applicable'),
+        (OTHER, 'Other, specify')
     ],
     'td_maternal.maternalrelatives': [
         ('your_mother', 'Your mother'),
