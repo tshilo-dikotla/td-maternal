@@ -6,7 +6,6 @@ from edc_base.sites.site_model_mixin import SiteModelMixin
 from edc_consent.field_mixins import (
     SampleCollectionFieldsMixin, VulnerabilityFieldsMixin)
 from edc_consent.field_mixins import ReviewFieldsMixin
-from edc_consent.model_mixins import ConsentModelMixin
 from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_consent.validators import eligible_if_yes, eligible_if_yes_or_declined
 from edc_constants.choices import YES_NO, YES_NO_DECLINED
@@ -14,7 +13,7 @@ from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import datetime_not_before_study_start
 
 
-class SpecimenConsent(ConsentModelMixin, UniqueSubjectIdentifierFieldMixin,
+class SpecimenConsent(UniqueSubjectIdentifierFieldMixin,
                       SampleCollectionFieldsMixin, ReviewFieldsMixin,
                       RequiresConsentFieldsModelMixin, VulnerabilityFieldsMixin,
                       SiteModelMixin, BaseUuidModel):
@@ -37,7 +36,8 @@ class SpecimenConsent(ConsentModelMixin, UniqueSubjectIdentifierFieldMixin,
         choices=YES_NO,
         validators=[eligible_if_yes, ],
         null=True,
-        blank=False)
+        blank=False,
+        help_text='If No the participant is not eligible.')
 
     assessment_score = models.CharField(
         verbose_name=(
