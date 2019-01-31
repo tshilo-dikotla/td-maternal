@@ -44,12 +44,6 @@ class MaternalRequisition(
         verbose_name='If not drawn, please explain',
         max_length=25,
         default=NOT_APPLICABLE,
-        choices=REASON_NOT_DRAWN)
-
-    reason_not_drawn = models.CharField(
-        verbose_name='If not drawn, please explain',
-        max_length=25,
-        default=NOT_APPLICABLE,
         choices=REASON_NOT_DRAWN,
         null=True,
         blank=True)
