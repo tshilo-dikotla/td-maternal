@@ -84,7 +84,7 @@ class EnrollmentMixin(models.Model):
 
     week32_test_date = models.DateField(
         verbose_name="Date of HIV Test",
-        validators=[datetime_not_future, ],
+        validators=[date_not_future, ],
         null=True,
         blank=True)
 
