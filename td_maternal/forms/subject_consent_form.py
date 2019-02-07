@@ -9,7 +9,6 @@ from edc_form_validators import FormValidatorMixin
 
 from td_maternal_validators.form_validators import SubjectConsentFormValidator
 
-from ..choices import STUDY_SITES
 from ..models import SubjectConsent
 
 
@@ -22,12 +21,6 @@ class SubjectConsentForm(
     screening_identifier = forms.CharField(
         label='Screening Identifier',
         widget=forms.TextInput(attrs={'readonly': 'readonly'}))
-
-    study_site = forms.ChoiceField(
-        label='Study site',
-        choices=STUDY_SITES,
-        initial=settings.DEFAULT_STUDY_SITE,
-        widget=forms.RadioSelect)
 
     @property
     def consent_config(self):
@@ -46,6 +39,7 @@ class SubjectConsentForm(
 
     def clean(self):
         self.cleaned_data['gender'] = FEMALE
+        self.cleaned_data['study_site'] = settings.DEFAULT_STUDY_SITE
         super().clean()
 
     class Meta:
