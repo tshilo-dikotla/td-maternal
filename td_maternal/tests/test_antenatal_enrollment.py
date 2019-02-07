@@ -1,10 +1,9 @@
 from django.test import TestCase
-from model_mommy import mommy
-
 from edc_appointment.models.appointment import Appointment
 from edc_base.utils import get_utcnow
 from edc_constants.constants import NO
 from edc_facility.import_holidays import import_holidays
+from model_mommy import mommy
 
 from ..models import AntenatalEnrollmentEligibility
 
@@ -36,7 +35,7 @@ class TestAntenatalEnrollment(TestCase):
             print(ap.schedule_name, ap.subject_identifier, ap)
 
     def test_antenatal_enrollment_eligibility(self):
-        antenatal_eligibility = AntenatalEnrollmentEligibility()
+        AntenatalEnrollmentEligibility()
         pass
 
     def test_participant_ineligible(self):

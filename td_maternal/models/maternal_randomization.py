@@ -1,4 +1,3 @@
-from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 from django_crypto_fields.fields import EncryptedCharField
@@ -8,7 +7,7 @@ from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 
 from ..maternal_choices import DELIVERY_HEALTH_FACILITY
 from .model_mixins import CrfModelMixin
-#from .td_rando import Randomization
+# from .td_rando import Randomization
 
 
 class MaternalRando (CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
@@ -92,7 +91,7 @@ class MaternalRando (CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
     #      (self.site, self.sid, self.rx, self.subject_identifier,
     #      self.randomization_datetime, self.initials
     #     ) = randomization_helper.randomize()
-    #super(MaternalRando, self).save(*args, **kwargs)
+    # super(MaternalRando, self).save(*args, **kwargs)
 
     class Meta(CrfModelMixin.Meta):
         app_label = "td_maternal"
