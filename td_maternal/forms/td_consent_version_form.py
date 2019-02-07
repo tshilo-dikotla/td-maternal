@@ -1,11 +1,13 @@
 from td_maternal.forms.form_mixins import SubjectModelFormMixin
-
 from django import forms
+from td_maternal_validators.form_validators import TDConsentFormValidator
 
 from ..models import TdConsentVersion
 
 
 class TdConsentVersionForm(SubjectModelFormMixin, forms.ModelForm):
+
+    form_validator_cls = TDConsentFormValidator
 
     screening_identifier = forms.CharField(
         label='Screening Identifier',

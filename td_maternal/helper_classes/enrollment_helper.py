@@ -60,12 +60,9 @@ class EnrollmentHelper(object):
             # Case neg and pos OR not neg and not pos
             raise forms.ValidationError(
                 'Unable to determine maternal hiv status at enrollment. '
-                'Got current_hiv_status={}, evidence_hiv_status={}, '
-                'rapid_test_done={}, rapid_test_result={}'.format(
-                    self.instance_antenatal.current_hiv_status,
-                    self.instance_antenatal.evidence_hiv_status,
-                    self.instance_antenatal.rapid_test_done,
-                    self.instance_antenatal.rapid_test_result))
+                f'Got current_hiv_status={self.instance_antenatal.current_hiv_status},'
+                f'evidence_hiv_status={self.instance_antenatal.evidence_hiv_status},'
+                f'rapid_test_done={self.instance_antenatal.rapid_test_done}')
 
     def known_hiv_pos_with_evidence(self):
         """"""
@@ -142,7 +139,7 @@ class EnrollmentHelper(object):
         if (not self.validate_rapid_test and
             self.instance_antenatal.rapid_test_done != YES and
                 self.instance_antenatal.rapid_test_result not in [POS, NEG] and
-                not self.tested_neg_previously_result_within_3_months):
+                not self.tested_neg_previously_result_within_3_months()):
             raise self.exception_cls(
                 'A rapid test with a valid result of either POS or NEG '
                 'is required. Ensure this is the case.')
