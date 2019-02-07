@@ -1,8 +1,8 @@
 from django.db import models
 from edc_base.model_mixins import BaseUuidModel
-from edc_base.model_validators import date_not_future
+from edc_base.model_validators import datetime_not_future
 from edc_base.sites import SiteModelMixin
-from edc_protocol.validators import date_not_before_study_start
+from edc_protocol.validators import datetime_not_before_study_start
 from edc_search.model_mixins import SearchSlugModelMixin
 
 from ..choices import CONSENT_VERSION
@@ -24,8 +24,8 @@ class TdConsentVersion(SiteModelMixin,
     report_datetime = models.DateTimeField(
         verbose_name="Report datetime.",
         validators=[
-            date_not_before_study_start,
-            date_not_future, ],
+            datetime_not_before_study_start,
+            datetime_not_future, ],
         null=True,
         blank=True)
 
