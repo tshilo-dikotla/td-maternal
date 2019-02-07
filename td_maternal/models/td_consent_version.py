@@ -21,7 +21,7 @@ class TdConsentVersion(SiteModelMixin,
         choices=CONSENT_VERSION,
         max_length=3)
 
-    report_datetime = models.DateField(
+    report_datetime = models.DateTimeField(
         verbose_name="Report datetime.",
         validators=[
             date_not_before_study_start,
