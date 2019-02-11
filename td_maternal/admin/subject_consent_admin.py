@@ -55,7 +55,6 @@ class SubjectConsentAdmin(ModelAdminConsentMixin, ModelAdminMixin, SimpleHistory
                 'last_name',
                 'initials',
                 'language',
-                'study_site',
                 'recruit_source',
                 'recruit_source_other',
                 'recruitment_clinic',
