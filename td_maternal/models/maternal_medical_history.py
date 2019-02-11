@@ -1,5 +1,6 @@
 from django.db import models
 from edc_base.model_fields import OtherCharField
+from edc_base.model_validators import date_not_future
 from edc_constants.choices import YES_NO, YES_NO_NA
 
 from ..maternal_choices import (
@@ -17,7 +18,7 @@ class MaternalMedicalHistory(CrfModelMixin):
         choices=YES_NO,
         verbose_name=(
             'Does the mother have any significant chronic condition(s) that'
-            'were diagnosed prior to the current pregnancy and that '
+            ' were diagnosed prior to the current pregnancy and that '
             'remain ongoing?')
     )
 
@@ -83,9 +84,10 @@ class MaternalMedicalHistory(CrfModelMixin):
     date_hiv_diagnosis = models.DateField(
         verbose_name='If HIV sero-posetive, what is the approximate date '
         'of diagnosis?',
-        help_text='EDD Confirmed. Derived variable, see AntenatalEnrollment.',
+        validators=[date_not_future, ],
         blank=True,
-        null=True)
+        null=True,
+        help_text='EDD Confirmed. Derived variable, see AntenatalEnrollment.',)
 
     perinataly_infected = models.CharField(
         max_length=25,
