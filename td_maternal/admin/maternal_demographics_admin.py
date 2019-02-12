@@ -1,9 +1,10 @@
 from django.contrib import admin
+from edc_model_admin import audit_fieldset_tuple
+
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalDemographicsForm
 from ..models import MaternalDemographics
 from .modeladmin_mixins import CrfModelAdminMixin
-from edc_model_admin import audit_fieldset_tuple
 
 
 @admin.register(MaternalDemographics, site=td_maternal_admin)
@@ -34,6 +35,7 @@ class MaternalDemographicsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'current_occupation',
                 'current_occupation_other',
                 'provides_money',
+                'provides_money_other'
                 'money_earned',
                 'money_earned_other',
                 'own_phone',
