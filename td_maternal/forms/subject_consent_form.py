@@ -7,9 +7,8 @@ from edc_consent.site_consents import site_consents, SiteConsentError
 from edc_constants.constants import FEMALE
 from edc_form_validators import FormValidatorMixin
 
-from td_maternal_validators.form_validators import MaternalConsentFormValidator
+from td_maternal_validators.form_validators import SubjectConsentFormValidator
 
-from ..choices import STUDY_SITES
 from ..models import SubjectConsent
 
 
@@ -17,17 +16,11 @@ class SubjectConsentForm(
         SiteModelFormMixin, FormValidatorMixin, ConsentModelFormMixin,
         forms.ModelForm):
 
-    form_validator_cls = MaternalConsentFormValidator
+    form_validator_cls = SubjectConsentFormValidator
 
     screening_identifier = forms.CharField(
         label='Screening Identifier',
         widget=forms.TextInput(attrs={'readonly': 'readonly'}))
-
-    study_site = forms.ChoiceField(
-        label='Study site',
-        choices=STUDY_SITES,
-        initial=settings.DEFAULT_STUDY_SITE,
-        widget=forms.RadioSelect)
 
     @property
     def consent_config(self):
@@ -46,6 +39,7 @@ class SubjectConsentForm(
 
     def clean(self):
         self.cleaned_data['gender'] = FEMALE
+        self.cleaned_data['study_site'] = settings.DEFAULT_STUDY_SITE
         super().clean()
 
     class Meta:

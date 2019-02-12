@@ -19,6 +19,7 @@ class MaternalDemographics(CrfModelMixin):
         max_length=25,
         verbose_name="Current Marital status ",
         choices=MARITAL_STATUS)
+
     marital_status_other = OtherCharField(
         max_length=35,
         verbose_name="if other specify...",
@@ -29,6 +30,7 @@ class MaternalDemographics(CrfModelMixin):
         max_length=25,
         verbose_name="Ethnicity ",
         choices=ETHNICITY)
+
     ethnicity_other = OtherCharField(
         max_length=35,
         verbose_name="if other specify...",
@@ -44,6 +46,7 @@ class MaternalDemographics(CrfModelMixin):
         max_length=75,
         verbose_name="Current occupation",
         choices=CURRENT_OCCUPATION)
+
     current_occupation_other = OtherCharField(
         max_length=35,
         verbose_name="if other specify...",
@@ -54,6 +57,7 @@ class MaternalDemographics(CrfModelMixin):
         max_length=50,
         verbose_name="Who provides most of your money?",
         choices=MONEY_PROVIDER)
+
     provides_money_other = OtherCharField(
         max_length=35,
         verbose_name="if other specify...",
@@ -64,6 +68,7 @@ class MaternalDemographics(CrfModelMixin):
         max_length=50,
         verbose_name="How much money do you personally earn? ",
         choices=MONEY_EARNED)
+
     money_earned_other = OtherCharField(
         max_length=35,
         verbose_name="if other specify...",
