@@ -4,10 +4,14 @@ from edc_base.sites import SiteModelFormMixin
 from edc_form_validators import FormValidatorMixin
 
 from ..models import SpecimenConsent
+from td_maternal_validators.form_validators import (
+    SpecimenConsentFormValidator)
 
 
 class SpecimenConsentForm(SiteModelFormMixin, FormValidatorMixin,
                           forms.ModelForm):
+
+    form_validator_cls = SpecimenConsentFormValidator
 
     class Meta:
         model = SpecimenConsent
