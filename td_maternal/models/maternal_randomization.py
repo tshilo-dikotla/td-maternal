@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 from django_crypto_fields.fields import EncryptedCharField
@@ -5,12 +6,13 @@ from edc_constants.choices import YES_NO
 from edc_constants.constants import NO
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 
+from td_rando.randomization import Randomization
+
 from ..maternal_choices import DELIVERY_HEALTH_FACILITY
 from .model_mixins import CrfModelMixin
-# from .td_rando import Randomization
 
 
-class MaternalRando (CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
+class MaternalRando(CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
     """ Stores a prepared infant randomization list.
 
     If you need to undo a randomization, here is an example of how::
@@ -80,18 +82,15 @@ class MaternalRando (CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
         blank=True,
         null=True, )
 
-    # objects = MaternalRandoManager()
+    def __str__(self):
+        return '{}'.format(self.sid, self.subject_identifier)
 
-    # def __str__(self):
-    #    return '{}'.format(self.sid, self.subject_identifier)
-
-    # def save(self, *args, **kwargs):
-    #    if not self.id:
-    #       randomization_helper = Randomization(self, ValidationError)
-    #      (self.site, self.sid, self.rx, self.subject_identifier,
-    #      self.randomization_datetime, self.initials
-    #     ) = randomization_helper.randomize()
-    # super(MaternalRando, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if not self.id:
+            randomization_helper = Randomization(self, ValidationError)
+            (self.site, self.sid, self.rx, self.subject_identifier,
+             self.randomization_datetime, self.initials) = randomization_helper.randomize()
+        super(MaternalRando, self).save(*args, **kwargs)
 
     class Meta(CrfModelMixin.Meta):
         app_label = "td_maternal"
