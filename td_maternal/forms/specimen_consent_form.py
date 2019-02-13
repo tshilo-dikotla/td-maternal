@@ -6,6 +6,8 @@ from edc_form_validators import FormValidatorMixin
 from td_maternal_validators.form_validators import SpecimenConsentFormValidator
 
 from ..models import SpecimenConsent
+from td_maternal_validators.form_validators import (
+    SpecimenConsentFormValidator)
 
 
 class SpecimenConsentForm(SiteModelFormMixin, FormValidatorMixin,

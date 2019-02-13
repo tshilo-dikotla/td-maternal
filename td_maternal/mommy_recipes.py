@@ -116,10 +116,10 @@ maternallabourdel = Recipe(
 maternalrando = Recipe(
     MaternalRando,
     report_datetime=get_utcnow(),
-    sid=1,
-    rx='NVP',
     randomization_datetime=get_utcnow(),
-    initials='IN')
+    dispensed=YES,
+    initials='IN',
+    delivery_clinic='PMH')
 
 rapidtestresult = Recipe(
     RapidTestResult,

@@ -8,7 +8,6 @@ from edc_constants.choices import YES_NO, YES_NO_NA
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import datetime_not_before_study_start
 
-
 from ..maternal_choices import (
     DELIVERY_HEALTH_FACILITY, DELIVERY_MODE, CSECTION_REASON)
 from ..models.subject_consent import SubjectConsent
