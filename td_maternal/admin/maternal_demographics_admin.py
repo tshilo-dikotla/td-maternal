@@ -25,8 +25,8 @@ class MaternalDemographicsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': [
-                'report_datetime',
                 'maternal_visit',
+                'report_datetime',
                 'marital_status',
                 'marital_status_other',
                 'ethnicity',
