@@ -15,8 +15,8 @@ class MaternalDiagnosesAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': [
-                'report_datetime',
                 'maternal_visit',
+                'report_datetime',
                 'new_diagnoses',
                 'diagnoses',
                 'diagnoses_other',
