@@ -1,8 +1,10 @@
 import arrow
-
 from django import forms
+from django.core.exceptions import ValidationError
 from edc_base.sites import SiteModelFormMixin
 from edc_form_validators import FormValidatorMixin
+from edc_visit_tracking.crf_date_validator import (
+    CrfDateValidator, CrfReportDateAllowanceError)
 
 from ..models import MaternalVisit
 
@@ -11,6 +13,19 @@ class SubjectModelFormMixin(
         SiteModelFormMixin, FormValidatorMixin, forms.ModelForm):
 
     visit_model = MaternalVisit
+
+    crf_date_validator_cls = CrfDateValidator
+
+    def clean(self):
+        try:
+            self.crf_date_validator_cls(
+                report_datetime=self.cleaned_data.get('report_datetime'),
+                visit_report_datetime=self.cleaned_data.get(
+                    'maternal_visit').report_datetime,
+                created=self.cleaned_data.get('created'),
+                modified=self.cleaned_data.get('modified'))
+        except CrfReportDateAllowanceError as e:
+            raise ValidationError({'report_datetime': e})
 
 
 class InlineSubjectModelFormMixin(FormValidatorMixin, forms.ModelForm):
