@@ -4,7 +4,7 @@ from .antenatal_visit_membership import AntenatalVisitMembership
 from .death_report import DeathReport
 from .eligibility import Eligibility
 from .enrollment_mixin import EnrollmentMixin
-from .karabo_tb_history import MaternalTuberculosisHistory
+from .karabo_tb_history import KaraboTuberculosisHistory
 from .list_models import Contraceptives
 from .maternal_arv import MaternalArv
 from .maternal_arv_history import MaternalLifetimeArvHistory

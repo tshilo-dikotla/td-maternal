@@ -5,7 +5,7 @@ from ..choices import FAMILY_RELATION
 from .model_mixins import CrfModelMixin
 
 
-class MaternalTuberculosisHistory(CrfModelMixin):
+class KaraboTuberculosisHistory(CrfModelMixin):
     """
     crf model about tuberculosis treatment history in family
     members relating to the infant

@@ -1,14 +1,15 @@
 from django.contrib import admin
-from ..admin_site import td_maternal_admin
-from ..forms import MaternalTuberculosisHistoryForm
-from ..models import MaternalTuberculosisHistory
-from .modeladmin_mixins import CrfModelAdminMixin
 from edc_model_admin import audit_fieldset_tuple
 
+from ..admin_site import td_maternal_admin
+from ..forms import KaraboTuberculosisHistoryForm
+from ..models import KaraboTuberculosisHistory
+from .modeladmin_mixins import CrfModelAdminMixin
 
-@admin.register(MaternalTuberculosisHistory, site=td_maternal_admin)
-class MaternalTuberculosisHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
-    form = MaternalTuberculosisHistoryForm
+
+@admin.register(KaraboTuberculosisHistory, site=td_maternal_admin)
+class KaraboTuberculosisHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
+    form = KaraboTuberculosisHistoryForm
 
     fieldsets = (
         (None, {
