@@ -1,11 +1,10 @@
-from td_maternal.models.maternal_srh import MaternalSrh
-
+from ..helper_classes.enrollment_helper import EnrollmentHelper
 from .antenatal_enrollment import AntenatalEnrollment
 from .antenatal_visit_membership import AntenatalVisitMembership
 from .death_report import DeathReport
 from .eligibility import Eligibility
-from td_maternal.helper_classes.enrollment_helper import EnrollmentHelper
 from .enrollment_mixin import EnrollmentMixin
+from .karabo_tb_history import MaternalTuberculosisHistory
 from .list_models import Contraceptives
 from .maternal_arv import MaternalArv
 from .maternal_arv_history import MaternalLifetimeArvHistory
@@ -30,6 +29,7 @@ from .maternal_postpartum_dep import MaternalPostPartumDep
 from .maternal_postpartum_fu import MaternalPostPartumFu
 from .maternal_randomization import MaternalRando
 from .maternal_requisition import MaternalRequisition
+from .maternal_srh import MaternalSrh
 from .maternal_substance_during_preg import MaternalSubstanceUseDuringPreg
 from .maternal_substance_prior_preg import MaternalSubstanceUsePriorPreg
 from .maternal_ultrasound_fu import MaternalUltraSoundFu
@@ -47,4 +47,3 @@ from .specimen_consent import SpecimenConsent
 from .subject_consent import SubjectConsent
 from .subject_screening import SubjectScreening
 from .td_consent_version import TdConsentVersion
-from .maternal_tuberculosis_history import MaternalTuberculosisHistory
