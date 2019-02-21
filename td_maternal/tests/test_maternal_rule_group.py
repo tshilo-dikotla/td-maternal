@@ -40,11 +40,6 @@ class TestMaternalRuleGroup(BaseTestCase):
             report_datetime=get_utcnow(),
             appointment=appointement_1020)
 
-        crf = CrfMetadata.objects.filter(
-            subject_identifier=self.subject_consent.subject_identifier)
-
-        for x in crf:
-            print('>>>>>>>', x.model, x.visit_code)
         self.assertEqual(
             CrfMetadata.objects.get(
                 model='td_maternal.maternalarvpreg',
