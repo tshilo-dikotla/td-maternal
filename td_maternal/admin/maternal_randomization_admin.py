@@ -21,6 +21,7 @@ class MartenalRandoAdmin(ModelAdminMixin, admin.ModelAdmin):
                 'comment',
                 'subject_identifier',
                 'initials',
+                'rx',
                 'site',
                 'randomization_datetime',
                 'delivery_clinic',
