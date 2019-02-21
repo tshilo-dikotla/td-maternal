@@ -1,6 +1,6 @@
 from django.db import models
-
 from edc_base.model_fields import OtherCharField
+from edc_base.model_validators.date import date_not_future
 from edc_constants.choices import YES_NO
 
 from ..maternal_choices import SIZE_CHECK
@@ -24,6 +24,7 @@ class MaternalInterimIdcc(CrfModelMixin):
 
     recent_cd4_date = models.DateField(
         verbose_name="Date of recent CD4",
+        validators=[date_not_future],
         blank=True,
         null=True)
 
@@ -44,6 +45,7 @@ class MaternalInterimIdcc(CrfModelMixin):
 
     recent_vl_date = models.DateField(
         verbose_name="Date of recent VL",
+        validators=[date_not_future],
         blank=True,
         null=True)
 

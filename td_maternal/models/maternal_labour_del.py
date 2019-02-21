@@ -4,6 +4,7 @@ from edc_base.model_fields import OtherCharField
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import datetime_not_future
+from edc_base.model_validators.date import date_not_future
 from edc_constants.choices import YES_NO, YES_NO_NA
 from edc_constants.constants import YES, POS
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
@@ -97,6 +98,7 @@ class MaternalLabourDel(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
     arv_initiation_date = models.DateField(
         verbose_name="(Interviewer) If on ART, when did the participant "
         "initiate therapy for this pregnancy?",
+        validators=[date_not_future],
         null=True,
         blank=True)
 

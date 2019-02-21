@@ -1,6 +1,7 @@
 from django.db import models
-
+from edc_base.model_validators.date import date_not_future
 from edc_constants.choices import YES_NO
+from edc_protocol.validators import date_not_before_study_start
 
 from ..maternal_choices import POS_NEG_IND
 from .model_mixins import CrfModelMixin
@@ -17,6 +18,9 @@ class RapidTestResult(CrfModelMixin):
         max_length=3)
 
     result_date = models.DateField(
+        validators=[
+            date_not_before_study_start,
+            date_not_future, ],
         verbose_name="Date of rapid test")
 
     result = models.CharField(
