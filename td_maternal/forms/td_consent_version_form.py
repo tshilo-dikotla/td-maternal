@@ -1,11 +1,14 @@
-from td_maternal.forms.form_mixins import SubjectModelFormMixin
 from django import forms
+from edc_base.sites import SiteModelFormMixin
+from edc_form_validators import FormValidatorMixin
+
 from td_maternal_validators.form_validators import TDConsentVersionFormValidator
 
 from ..models import TdConsentVersion
 
 
-class TdConsentVersionForm(SubjectModelFormMixin, forms.ModelForm):
+class TdConsentVersionForm(SiteModelFormMixin, FormValidatorMixin,
+                           forms.ModelForm):
 
     form_validator_cls = TDConsentVersionFormValidator
 
