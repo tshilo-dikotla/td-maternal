@@ -14,7 +14,7 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
         cleaned_data = super().clean()
         maternal_arv = self.data.get(
             'maternalarv_set-0-arv_code')
-        if cleaned_data.get('took_arv') == YES:
+        if cleaned_data.get('took_arv') and cleaned_data.get('took_arv') == YES:
             if not maternal_arv:
                 raise forms.ValidationError(
                     {'took_arv': 'Please complete the maternal arv table.'})
