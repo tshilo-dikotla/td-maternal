@@ -22,7 +22,7 @@ def validate_ac(value):
 def validate_fl(value):
     if value < 1 or value > 200:
         raise ValidationError(
-            f'AC has to be between 1 and 200. You entered {value}')
+            f'FL has to be between 1 and 200. You entered {value}')
 
 
 def validate_hl(value):

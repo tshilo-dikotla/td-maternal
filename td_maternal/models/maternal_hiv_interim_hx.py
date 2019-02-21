@@ -1,5 +1,5 @@
 from django.db import models
-
+from edc_base.model_validators import date_not_future
 from edc_constants.choices import YES_NO, YES_NO_NA
 from edc_constants.constants import NOT_APPLICABLE
 from .model_mixins import CrfModelMixin
@@ -21,6 +21,7 @@ class MaternalHivInterimHx(CrfModelMixin):
 
     cd4_date = models.DateField(
         verbose_name="Date of most recent CD4 test? ",
+        validators=[date_not_future, ],
         blank=True,
         null=True)
 
@@ -39,6 +40,7 @@ class MaternalHivInterimHx(CrfModelMixin):
 
     vl_date = models.DateField(
         verbose_name="If yes, Date of most recent VL test? ",
+        validators=[date_not_future, ],
         blank=True,
         null=True)
 

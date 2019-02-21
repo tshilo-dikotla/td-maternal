@@ -35,7 +35,7 @@ class MaternalDemographicsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'current_occupation',
                 'current_occupation_other',
                 'provides_money',
-                'provides_money_other'
+                'provides_money_other',
                 'money_earned',
                 'money_earned_other',
                 'own_phone',

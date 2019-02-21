@@ -1,5 +1,6 @@
 from .antenatal_enrollment_admin import AntenatalEnrollmentAdmin
 from .antenatal_visit_membership_admin import AntenataVisitMembershipAdmin
+from .karabo_tb_history_admin import KaraboTuberculosisHistoryAdmin
 from .maternal_arv_admin import MaternalArvAdmin
 from .maternal_arv_history_admin import MaternalLifetimeArvHistoryAdmin
 from .maternal_arv_post_admin import MaternalArvPostAdhAdmin
@@ -7,10 +8,8 @@ from .maternal_arv_post_admin import MaternalArvPostAdmin
 from .maternal_arv_post_admin import MaternalArvPostMedAdmin
 from .maternal_arv_post_admin import MaternalArvPostMedInlineAdmin
 from .maternal_arv_preg_admin import MaternalArvPregAdmin
-from .maternal_clinical_measurements_one_admin import (
-    MaternalClinicalMeasurementsOneAdmin)
-from .maternal_clinical_measurements_two_admin import (
-    MaternalClinicalMeasurementsTwoAdmin)
+from .maternal_clinical_measurements_one_admin import MaternalClinicalMeasurementsOneAdmin
+from .maternal_clinical_measurements_two_admin import MaternalClinicalMeasurementsTwoAdmin
 from .maternal_contact_admin import MaternalContactAdmin
 from .maternal_contraception_admin import MaternalContraception
 from .maternal_demographics_admin import MaternalDemographicsAdmin
@@ -26,10 +25,8 @@ from .maternal_postpartum_fu_admin import MaternalPostPartumFuAdmin
 from .maternal_randomization_admin import MartenalRandoAdmin
 from .maternal_requisition_admin import MaternalRequisitionAdmin
 from .maternal_srh_admin import MaternalSrhAdmin
-from .maternal_substance_use_during_preg_admin import (
-    MaternalSubstanceUseDuringPregAdmin)
-from .maternal_substance_use_prior_preg_admin import (
-    MaternalSubstanceUsePriorPregAdmin)
+from .maternal_substance_use_during_preg_admin import MaternalSubstanceUseDuringPregAdmin
+from .maternal_substance_use_prior_preg_admin import MaternalSubstanceUsePriorPregAdmin
 from .maternal_ultrasound_fu_admin import MaternalUltraSoundFuAdmin
 from .maternal_ultrasound_initial_admin import MaternalUltraSoundInitialAdmin
 from .maternal_visit_admin import MaternalVisitAdmin
@@ -38,6 +35,3 @@ from .specimen_consent_admin import SpecimenConsentAdmin
 from .subject_consent_admin import SubjectConsentAdmin
 from .subject_screening_admin import SubjectScreeningAdmin
 from .td_consent_version_admin import TdConsentVersionAdmin
-from .maternal_tuberculosis_history_admin import (
-    MaternalTuberculosisHistoryAdmin
-)
