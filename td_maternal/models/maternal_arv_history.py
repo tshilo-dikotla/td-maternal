@@ -32,15 +32,10 @@ class MaternalLifetimeArvHistory(CrfModelMixin):
                       "prior pregnancy?"))
 
     haart_start_date = models.DateField(
-        verbose_name="Date of triple antiretrovirals first started",
-        blank=True,
-        null=True)
+        verbose_name="Date of triple antiretrovirals first started",)
 
     is_date_estimated = IsDateEstimatedField(
-        blank=True,
-        null=True,
-        verbose_name=("Is the subject's date of triple antiretrovirals"
-                      " estimated?"))
+        verbose_name=("Is the subject's date of triple antiretrovirals estimated?"))
 
     preg_on_haart = models.CharField(
         max_length=25,
