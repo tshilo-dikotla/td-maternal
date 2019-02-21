@@ -1,6 +1,5 @@
 from .antenatal_enrollment_admin import AntenatalEnrollmentAdmin
 from .antenatal_visit_membership_admin import AntenataVisitMembershipAdmin
-from .death_report_admin import DeathReportAdmin
 from .maternal_arv_admin import MaternalArvAdmin
 from .maternal_arv_history_admin import MaternalLifetimeArvHistoryAdmin
 from .maternal_arv_post_admin import MaternalArvPostAdhAdmin
@@ -22,7 +21,6 @@ from .maternal_labour_del_admin import MaternalLabourDelAdmin
 from .maternal_locator_admin import MaternalLocatorAdmin
 from .maternal_medical_history_admin import MaternalMedicalHistoryAdmin
 from .maternal_obsterical_history_admin import MaternalObstericalHistoryAdmin
-from .maternal_off_study_admin import MaternalOffStudyAdmin
 from .maternal_postpartum_dep_admin import MaternalPostPartumDepAdmin
 from .maternal_postpartum_fu_admin import MaternalPostPartumFuAdmin
 from .maternal_randomization_admin import MartenalRandoAdmin
