@@ -21,12 +21,16 @@ class RapidTestResult(CrfModelMixin):
         validators=[
             date_not_before_study_start,
             date_not_future, ],
-        verbose_name="Date of rapid test")
+        verbose_name="Date of rapid test",
+        blank=True,
+        null=True)
 
     result = models.CharField(
         verbose_name="What is the rapid test result?",
         choices=POS_NEG_IND,
-        max_length=15)
+        max_length=15,
+        blank=True,
+        null=True)
 
     comments = models.CharField(
         verbose_name="Comment",
