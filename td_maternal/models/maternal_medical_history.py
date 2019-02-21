@@ -116,6 +116,7 @@ class MaternalMedicalHistory(CrfModelMixin):
     cd4_date = models.DateField(
         verbose_name='Year/Month of CD4 test ',
         help_text='Format is YYYY-MM-DD. Use 01 for Day',
+        validators=[date_not_future],
         blank=True,
         null=True)
 
