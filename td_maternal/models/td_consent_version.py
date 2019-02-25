@@ -25,9 +25,7 @@ class TdConsentVersion(SiteModelMixin,
         verbose_name="Report datetime.",
         validators=[
             datetime_not_before_study_start,
-            datetime_not_future, ],
-        null=True,
-        blank=True)
+            datetime_not_future, ])
 
     class Meta:
         app_label = 'td_maternal'

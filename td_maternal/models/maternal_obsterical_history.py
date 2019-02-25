@@ -1,5 +1,5 @@
-from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db import models
 
 from .model_mixins import CrfModelMixin
 
@@ -44,13 +44,13 @@ class MaternalObstericalHistory(CrfModelMixin):
     )
 
     children_deliv_before_37wks = models.IntegerField(
-        verbose_name='Number of previous prenancies delivered at < 37'
+        verbose_name='Number of previous pregnancies delivered at < 37'
         ' weeks GA?',
         validators=[MinValueValidator(0), MaxValueValidator(20), ],
     )
 
     children_deliv_aftr_37wks = models.IntegerField(
-        verbose_name='Number of previous prenancies delivered at >= 37'
+        verbose_name='Number of previous pregnancies delivered at >= 37'
         ' weeks GA?',
         validators=[MinValueValidator(0), MaxValueValidator(20), ],
     )

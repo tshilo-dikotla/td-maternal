@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 from edc_base.model_fields import OtherCharField
 from edc_base.model_validators import date_not_future
@@ -107,6 +108,7 @@ class MaternalMedicalHistory(CrfModelMixin):
     cd4_count = models.IntegerField(
         verbose_name=('What was the mother\'s lowest known (nadir) CD4 '
                       'cell count(cells/mm3) at any time in the past?'),
+        validators=[MinValueValidator(1)],
         null=True,
         blank=True,
     )
@@ -114,6 +116,7 @@ class MaternalMedicalHistory(CrfModelMixin):
     cd4_date = models.DateField(
         verbose_name='Year/Month of CD4 test ',
         help_text='Format is YYYY-MM-DD. Use 01 for Day',
+        validators=[date_not_future],
         blank=True,
         null=True)
 

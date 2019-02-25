@@ -1,9 +1,10 @@
 from django.db import models
-from edc_base.model_validators import date_not_future
-from ..choices import ARV_DRUG_LIST, REASON_ARV_STOP
 from django.db.models.deletion import PROTECT
-from .maternal_arv_preg import MaternalArvPreg
 from edc_base.model_mixins import BaseUuidModel
+from edc_base.model_validators import date_not_future
+
+from ..choices import ARV_DRUG_LIST, REASON_ARV_STOP
+from .maternal_arv_preg import MaternalArvPreg
 
 
 class MaternalArv(BaseUuidModel):
@@ -28,6 +29,7 @@ class MaternalArv(BaseUuidModel):
 
     stop_date = models.DateField(
         verbose_name="Date Stopped",
+        validators=[date_not_future],
         null=True,
         blank=True)
 

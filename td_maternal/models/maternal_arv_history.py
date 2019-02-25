@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.db import models
 from edc_base.model_fields import IsDateEstimatedField, OtherCharField
+from edc_base.model_validators.date import date_not_future
 from edc_constants.choices import YES_NO, YES_NO_NA
 
 from ..maternal_choices import PRIOR_PREG_HAART_STATUS
@@ -32,15 +33,12 @@ class MaternalLifetimeArvHistory(CrfModelMixin):
                       "prior pregnancy?"))
 
     haart_start_date = models.DateField(
-        verbose_name="Date of triple antiretrovirals first started",
-        blank=True,
-        null=True)
+        validators=[
+            date_not_future, ],
+        verbose_name="Date of triple antiretrovirals first started",)
 
     is_date_estimated = IsDateEstimatedField(
-        blank=True,
-        null=True,
-        verbose_name=("Is the subject's date of triple antiretrovirals"
-                      " estimated?"))
+        verbose_name=("Is the subject's date of triple antiretrovirals estimated?"))
 
     preg_on_haart = models.CharField(
         max_length=25,

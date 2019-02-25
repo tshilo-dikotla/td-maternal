@@ -1,10 +1,12 @@
+from django.apps import apps as django_apps
 from django.db import models
-
 from edc_base.model_fields import OtherCharField
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import datetime_not_future
+from edc_base.model_validators.date import date_not_future
 from edc_constants.choices import YES_NO, YES_NO_NA
+from edc_constants.constants import YES, POS
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import datetime_not_before_study_start
 
@@ -96,6 +98,7 @@ class MaternalLabourDel(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
     arv_initiation_date = models.DateField(
         verbose_name="(Interviewer) If on ART, when did the participant "
         "initiate therapy for this pregnancy?",
+        validators=[date_not_future],
         null=True,
         blank=True)
 
@@ -133,9 +136,19 @@ class MaternalLabourDel(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
     def __str__(self):
         return f'{self.subject_identifier}'
 
-#     def natural_key(self):
-#         return self.registered_subject.natural_key()
-#     natural_key.dependencies = ['edc_registration.registeredsubject']
+    @property
+    def antenatal_enrollment(self):
+        AntenatalEnrollment = django_apps.get_model(
+            'td_maternal.antenatalenrollment')
+        return AntenatalEnrollment.objects.get(
+            subject_identifier=self.subject_identifier)
+
+    @property
+    def keep_on_study(self):
+        if (self.antenatal_enrollment.enrollment_hiv_status == POS
+                and self.valid_regiment_duration != YES):
+            return False
+        return True
 
     class Meta:
         app_label = 'td_maternal'
