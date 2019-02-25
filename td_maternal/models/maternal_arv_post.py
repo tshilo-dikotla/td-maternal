@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.deletion import PROTECT
-
 from edc_base.model_mixins import BaseUuidModel
+from edc_base.model_validators.date import date_not_future
 from edc_constants.choices import ARV_STATUS_WITH_NEVER
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NOT_APPLICABLE
@@ -75,7 +75,8 @@ class MaternalArvPostMed(BaseUuidModel):
         verbose_name="Dose Status")
 
     modification_date = models.DateField(
-        verbose_name="Date ARV Modified")
+        verbose_name="Date ARV Modified",
+        validators=[date_not_future])
 
     modification_code = models.CharField(
         max_length=50,

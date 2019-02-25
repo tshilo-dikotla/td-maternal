@@ -19,7 +19,7 @@ from edc_visit_tracking.managers import CrfModelManager as VisitTrackingCrfModel
 from edc_visit_tracking.model_mixins import CrfModelMixin as VisitTrackingCrfModelMixin
 from edc_visit_tracking.model_mixins import PreviousVisitModelMixin
 
-from ..choices import REASON_NOT_DRAWN, STUDY_SITES, ITEM_TYPE
+from ..choices import STUDY_SITES, ITEM_TYPE
 from .maternal_visit import MaternalVisit
 from .model_mixins import SearchSlugModelMixin
 
@@ -39,14 +39,6 @@ class MaternalRequisition(
     lab_profile_name = 'td_maternal'
 
     maternal_visit = models.ForeignKey(MaternalVisit, on_delete=PROTECT)
-
-    reason_not_drawn = models.CharField(
-        verbose_name='If not drawn, please explain',
-        max_length=25,
-        default=NOT_APPLICABLE,
-        choices=REASON_NOT_DRAWN,
-        null=True,
-        blank=True)
 
     study_site = models.CharField(
         verbose_name='Study site',

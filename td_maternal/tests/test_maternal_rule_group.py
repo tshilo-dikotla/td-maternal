@@ -26,6 +26,26 @@ class TestMaternalRuleGroup(BaseTestCase):
                 subject_identifier=self.subject_consent.subject_identifier,
                 visit_code='1000M').entry_status, REQUIRED)
 
+    @tag('1020M')
+    def test_maternalarvpreg_required_1020(self):
+        self.create_mother(self.hiv_pos_mother_options())
+
+        appointement_1020 = Appointment.objects.get(
+            subject_identifier=self.subject_consent.subject_identifier,
+            visit_code='1020M')
+
+        mommy.make_recipe(
+            'td_maternal.maternalvisit',
+            subject_identifier=self.subject_consent.subject_identifier,
+            report_datetime=get_utcnow(),
+            appointment=appointement_1020)
+
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternalarvpreg',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='1020M').entry_status, REQUIRED)
+
     def test_maternalarvpreg_not_required(self):
         self.create_mother(self.hiv_neg_mother_options())
 

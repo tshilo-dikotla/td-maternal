@@ -5,6 +5,7 @@ from edc_action_item.model_mixins import ActionModelMixin
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import CellNumber, TelephoneNumber
+from edc_base.model_validators.date import date_not_future
 from edc_base.sites import SiteModelMixin, CurrentSiteManager
 from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_constants.choices import YES_NO, YES_NO_DOESNT_WORK
@@ -24,7 +25,8 @@ class MaternalLocator(LocatorModelMixin, ActionModelMixin,
     on_site = CurrentSiteManager()
 
     locator_date = models.DateField(
-        verbose_name='Date Locator Form signed')
+        verbose_name='Date Locator Form signed',
+        validators=[date_not_future])
 
     health_care_infant = models.CharField(
         verbose_name=('Health clinic where your infant will'

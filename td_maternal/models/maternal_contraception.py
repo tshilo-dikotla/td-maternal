@@ -1,5 +1,6 @@
 from django.db import models
 from edc_base.model_fields import OtherCharField
+from edc_base.model_validators.date import date_not_future
 from edc_constants.choices import YES_NO_DWTA
 
 from ..maternal_choices import (
@@ -80,6 +81,7 @@ class MaternalContraception(CrfModelMixin):
     contraceptive_startdate = models.DateField(
         verbose_name='If yes, what date after delivery did you start'
         ' using this contraceptive method?',
+        validators=[date_not_future],
         null=True,
         blank=True,
         help_text='')
@@ -104,6 +106,7 @@ class MaternalContraception(CrfModelMixin):
 
     pregnancy_date = models.DateField(
         verbose_name='If yes, around what date did you find out?',
+        validators=[date_not_future],
         null=True,
         blank=True,
         help_text='')
