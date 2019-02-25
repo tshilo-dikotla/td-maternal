@@ -17,25 +17,43 @@ class MaternalTuberculosisHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'coughing',
                 'coughing_rel',
                 'other_coughing_rel',
+                'fever',
+                'fever_rel',
+                'other_fever_rel',
+                'weight_loss',
+                'weight_loss_rel',
+                'other_weight_loss',
+                'night_sweats',
+                'night_sweats_rel',
+                'other_night_sweats',
                 'diagnosis',
                 'diagnosis_rel',
                 'other_diagnosis_rel',
-                'tb_treatment',
-                'tb_treatment_rel',
-                'other_treatment_rel'
+                'tb_exposure',
+                'tb_exposure_det'
             ]}
          ), audit_fieldset_tuple)
 
     radio_fields = {
         'coughing': admin.VERTICAL,
         'coughing_rel': admin.VERTICAL,
+        'fever': admin.VERTICAL,
+        'fever_rel': admin.VERTICAL,
+        'weight_loss': admin.VERTICAL,
+        'weight_loss_rel': admin.VERTICAL,
+        'diagnosis': admin.VERTICAL,
+        'night_sweats': admin.VERTICAL,
+        'night_sweats_rel': admin.VERTICAL,
         'diagnosis': admin.VERTICAL,
         'diagnosis_rel': admin.VERTICAL,
-        'tb_treatment': admin.VERTICAL,
-        'tb_treatment_rel': admin.VERTICAL
+        'tb_exposure': admin.VERTICAL,
     }
 
     list_display = (
         'other_coughing_rel',
         'other_diagnosis_rel',
-        'other_treatment_rel')
+        'other_fever_rel',
+        'other_weight_loss',
+        'other_night_sweats',
+        'other_diagnosis_rel',
+        'tb_exposure_det')

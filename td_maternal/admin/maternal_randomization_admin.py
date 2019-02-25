@@ -16,6 +16,7 @@ class MartenalRandoAdmin(ModelAdminMixin, admin.ModelAdmin):
         (None, {
             'fields': [
                 'maternal_visit',
+                'report_datetime',
                 'dispensed',
                 'comment',
                 'subject_identifier',

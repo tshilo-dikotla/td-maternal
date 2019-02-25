@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'td_visit_schedule.apps.AppConfig',
     'td_labs.apps.AppConfig',
     'td_reference.apps.AppConfig',
-    # 'td_rando.apps.AppConfig',
+    'td_rando.apps.AppConfig',
     'td_infant.apps.AppConfig',
     'td_maternal_validators.apps.AppConfig',
     'td_maternal.apps.EdcFacilityAppConfig',

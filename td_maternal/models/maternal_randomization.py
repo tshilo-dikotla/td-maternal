@@ -88,8 +88,8 @@ class MaternalRando(CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
     def save(self, *args, **kwargs):
         if not self.id:
             randomization_helper = Randomization(self, ValidationError)
-            (self.site, self.sid, self.rx, self.subject_identifier,
-             self.randomization_datetime, self.initials) = randomization_helper.randomize()
+            (self.sid, self.rx, self.randomization_datetime,
+             self.initials) = randomization_helper.randomize()
         super(MaternalRando, self).save(*args, **kwargs)
 
     class Meta(CrfModelMixin.Meta):
