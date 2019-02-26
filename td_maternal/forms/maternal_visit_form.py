@@ -4,13 +4,12 @@ from edc_form_validators import FormValidatorMixin
 from edc_visit_tracking.form_validators import VisitFormValidator
 
 from ..models import MaternalVisit
-from td_maternal_validators.form_validators import MaternalVisitFormValidator
 
 
 class MaternalVisitForm(
         SiteModelFormMixin, FormValidatorMixin, forms.ModelForm):
 
-    form_validator_cls = MaternalVisitFormValidator
+    form_validator_cls = VisitFormValidator
 
     class Meta:
         model = MaternalVisit
