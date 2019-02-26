@@ -107,15 +107,16 @@ def maternal_labour_del_on_post_save(sender, instance, raw, created, **kwargs):
             schedule.refresh_schedule(
                 subject_identifier=instance.subject_identifier)
         else:
-            # put subject on schedule
-            _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
-                'td_maternal.onschedulematernallabourdel',
-                name=instance.schedule_name)
-            schedule.put_on_schedule(
-                subject_identifier=instance.subject_identifier,
-                onschedule_datetime=instance.report_datetime)
+            # put subject on schedule if live_infants_to_register is ONLY 1.
+            if instance.live_infants_to_register == 1:
+                _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
+                    'td_maternal.onschedulematernallabourdel',
+                    name=instance.schedule_name)
+                schedule.put_on_schedule(
+                    subject_identifier=instance.subject_identifier,
+                    onschedule_datetime=instance.report_datetime)
 
-            create_registered_infant(instance)
+                create_registered_infant(instance)
 
 
 def create_registered_infant(instance):
