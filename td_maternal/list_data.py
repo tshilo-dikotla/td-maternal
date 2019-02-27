@@ -118,6 +118,7 @@ list_data = {
         ('combivir_azt_3tc', 'Combivir (AZT,3TC)'),
         ('trizivir_azt_3tc_abacavir', 'Trizivir (AZT, 3TC, Abacavir)'),
         ('abacavir', 'Abacavir'),
+        ('Dolutegravir', 'DTG'),
         ('haart_unknown', 'HAART, unknown'),
         (NOT_APPLICABLE, 'Not Applicable'),
         (OTHER, 'Other, specify')
