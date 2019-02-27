@@ -1,7 +1,7 @@
+from td_maternal.action_items import MATERNAL_LOCATOR_ACTION
 from django.db import models
 from django.utils.safestring import mark_safe
 from django_crypto_fields.fields import EncryptedCharField
-from edc_action_item.model_mixins import ActionModelMixin
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import CellNumber, TelephoneNumber
@@ -10,7 +10,7 @@ from edc_base.sites import SiteModelMixin, CurrentSiteManager
 from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_constants.choices import YES_NO, YES_NO_DOESNT_WORK
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
-from edc_locator.action_items import SUBJECT_LOCATOR_ACTION
+from edc_action_item.model_mixins import ActionModelMixin
 from edc_locator.model_mixins import LocatorModelMixin
 
 
@@ -18,7 +18,7 @@ class MaternalLocator(LocatorModelMixin, ActionModelMixin,
                       RequiresConsentFieldsModelMixin, SiteModelMixin,
                       NonUniqueSubjectIdentifierModelMixin, BaseUuidModel):
 
-    action_name = SUBJECT_LOCATOR_ACTION
+    action_name = MATERNAL_LOCATOR_ACTION
 
     tracking_identifier_prefix = 'SL'
 
