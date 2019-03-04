@@ -18,7 +18,17 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
             if not maternal_arv:
                 raise forms.ValidationError(
                     {'took_arv': 'Please complete the maternal arv table.'})
+        self.validate_num_arvs()
         return cleaned_data
+
+    def validate_num_arvs(self):
+        maternal_arv = self.data.get(
+            'maternalarv_set-2-arv_code')
+        if not maternal_arv:
+            message = {'arv_code':
+                       'Patient should have more than 3 arvs'
+                       }
+            raise forms.ValidationError(message)
 
     class Meta:
         model = MaternalArvPreg
