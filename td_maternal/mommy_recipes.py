@@ -12,6 +12,7 @@ from .models import (
     AntenatalVisitMembership, MaternalLabourDel, MaternalUltraSoundInitial,
     MaternalVisit, MaternalRando, RapidTestResult, MaternalContraception,
     MaternalPostPartumDep, MaternalInterimIdcc)
+from .models import TdConsentVersion, SpecimenConsent
 
 
 fake = Faker()
@@ -20,14 +21,14 @@ fake = Faker()
 subjectconsent = Recipe(
     SubjectConsent,
     assessment_score=YES,
-    confirm_identity=seq('12315678'),
+    identity=seq('12325678', increment_by=1),
+    confirm_identity=seq('12325678', increment_by=1),
     consent_copy=YES,
     consent_datetime=get_utcnow(),
     consent_reviewed=YES,
     dob=get_utcnow() - relativedelta(years=25),
     first_name=fake.first_name,
     gender='F',
-    identity=seq('12315678'),
     identity_type='country_id',
     initials='XX',
     is_dob_estimated='-',
@@ -161,4 +162,22 @@ maternalinterimidcc = Recipe(
     value_vl_size='equal',
     value_vl=800,
     recent_vl_date=get_utcnow().date(),
+)
+
+tdconsentversion = Recipe(
+    TdConsentVersion,
+    version='3',
+    report_datetime=get_utcnow()
+)
+
+specimenconsent = Recipe(
+    SpecimenConsent,
+    consent_datetime=get_utcnow(),
+    consent_reviewed=YES,
+    assessment_score=YES,
+    consent_copy=YES,
+    may_store_genetic_samples=YES,
+    may_store_samples=YES,
+    study_questions=YES,
+    consent_signature=YES,
 )

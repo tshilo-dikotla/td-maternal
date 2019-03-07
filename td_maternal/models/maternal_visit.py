@@ -1,16 +1,19 @@
 from django.db import models
+from edc_action_item.model_mixins import ActionModelMixin
 from edc_appointment.models import Appointment
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.sites import CurrentSiteManager as BaseCurrentSiteManager
 from edc_base.sites.site_model_mixin import SiteModelMixin
-from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_constants.constants import ALIVE, PARTICIPANT
 from edc_metadata.model_mixins.creates import CreatesMetadataModelMixin
 from edc_reference.model_mixins import ReferenceModelMixin
 from edc_visit_tracking.managers import VisitModelManager
 from edc_visit_tracking.model_mixins import VisitModelMixin, CaretakerFieldsMixin
 
+from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
+
+from ..action_items import MATERNAL_VISIT_ACTION
 from ..choices import MATERNAL_VISIT_STUDY_STATUS, VISIT_REASON
 from ..choices import VISIT_INFO_SOURCE, ALIVE_DEAD_UNKNOWN
 
@@ -20,12 +23,16 @@ class CurrentSiteManager(VisitModelManager, BaseCurrentSiteManager):
 
 
 class MaternalVisit(
-        VisitModelMixin, CreatesMetadataModelMixin,
+        VisitModelMixin, CreatesMetadataModelMixin, ActionModelMixin,
         ReferenceModelMixin, RequiresConsentFieldsModelMixin,
         CaretakerFieldsMixin, SiteModelMixin, BaseUuidModel):
 
     """ Maternal visit form that links all antenatal/ postnatal follow-up forms
     """
+
+    action_name = MATERNAL_VISIT_ACTION
+
+    tracking_identifier_prefix = 'MV'
 
     appointment = models.OneToOneField(Appointment, on_delete=models.PROTECT)
 
@@ -67,6 +74,10 @@ class MaternalVisit(
     objects = VisitModelManager()
 
     history = HistoricalRecords()
+
+    @property
+    def action_item_reason(self):
+        return self.study_status
 
     class Meta(VisitModelMixin.Meta):
         app_label = 'td_maternal'

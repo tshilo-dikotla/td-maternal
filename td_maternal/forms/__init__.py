@@ -11,6 +11,7 @@ from .maternal_clinical_measurements_one_form import MaternalClinicalMeasurement
 from .maternal_clinical_measurements_two_form import MaternalClinicalMeasurementsTwoForm
 from .maternal_contact_form import MaternalContactForm
 from .maternal_contraception_form import MaternalContraceptionForm
+from .maternal_death_report import MaternalDeathReportForm
 from .maternal_demographics_form import MaternalDemographicsForm
 from .maternal_diagnoses_form import MaternalDiagnosesForm
 from .maternal_hiv_interim_hx_form import MaternalHivInterimHxForm

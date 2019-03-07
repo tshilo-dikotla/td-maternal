@@ -1,4 +1,6 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
+from edc_action_item.model_mixins import ActionModelMixin
 from edc_base.model_fields.custom_fields import OtherCharField
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
@@ -6,19 +8,22 @@ from edc_base.model_validators import date_not_future
 from edc_base.model_validators.date import datetime_not_future
 from edc_base.utils import get_utcnow
 from edc_identifier.managers import SubjectIdentifierManager
-from edc_identifier.model_mixins import TrackingIdentifierModelMixin
 from edc_protocol.validators import date_not_before_study_start
 from edc_protocol.validators import datetime_not_before_study_start
-from edc_reference.model_mixins import ReferenceModelMixin
 from edc_visit_schedule.model_mixins import OffScheduleModelMixin
+from edc_visit_schedule.site_visit_schedules import site_visit_schedules
 
+from ..action_items import MATERNALOFF_STUDY_ACTION
 from ..choices import OFF_STUDY_REASON
+from .onschedule import OnScheduleAntenatalEnrollment
+from .onschedule import OnScheduleAntenatalVisitMembership, OnScheduleMaternalLabourDel
 
 
-class MaternalOffStudy(OffScheduleModelMixin, ReferenceModelMixin,
-                       TrackingIdentifierModelMixin, BaseUuidModel):
+class MaternalOffStudy(OffScheduleModelMixin, ActionModelMixin, BaseUuidModel):
 
     tracking_identifier_prefix = 'ST'
+
+    action_name = MATERNALOFF_STUDY_ACTION
 
     offstudy_date = models.DateField(
         verbose_name="Off-study Date",
@@ -56,10 +61,21 @@ class MaternalOffStudy(OffScheduleModelMixin, ReferenceModelMixin,
 
     history = HistoricalRecords()
 
-    def save(self, *args, **kwargs):
-        if not self.last_study_fu_date:
-            self.last_study_fu_date = self.offschedule_datetime.date()
-        super().save(*args, **kwargs)
+    def take_off_schedule(self):
+        v1_schedules = [OnScheduleMaternalLabourDel, OnScheduleAntenatalVisitMembership,
+                        OnScheduleAntenatalEnrollment]
+
+        for on_schedule in v1_schedules:
+            try:
+                on_schedule.objects.get(
+                    subject_identifier=self.subject_identifier)
+                print('>>>>>>>>>>>>>>>>>>>>>>>>')
+                _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
+                    on_schedule._meta.label_lower, name=on_schedule.schedule_name)
+                print('<><><><><><><><><><><><><><>', schedule)
+                schedule.take_off_schedule(offschedule_model_obj=self)
+            except ObjectDoesNotExist:
+                pass
 
     class Meta:
         verbose_name = 'Maternal Off Study'

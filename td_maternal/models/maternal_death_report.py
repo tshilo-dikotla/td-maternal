@@ -1,5 +1,5 @@
 from django.db import models
-
+from edc_action_item.model_mixins.action_model_mixin import ActionModelMixin
 from edc_base.model_fields import OtherCharField
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
@@ -8,18 +8,22 @@ from edc_base.sites import SiteModelMixin
 from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO
 from edc_identifier.managers import SubjectIdentifierManager
-from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import datetime_not_before_study_start
 from edc_reference.model_mixins import ReferenceModelMixin
 from edc_search.model_mixins import SearchSlugModelMixin
 
+from ..action_items import MATERNAL_DEATH_REPORT_ACTION
 from ..choices import (SOURCE_OF_DEATH_INFO,
                        CAUSE_OF_DEATH_CAT, MED_RESPONSIBILITY,
                        HOSPITILIZATION_REASONS)
 
 
-class DeathReport(ReferenceModelMixin, UniqueSubjectIdentifierFieldMixin,
-                  SiteModelMixin, SearchSlugModelMixin, BaseUuidModel):
+class MaternalDeathReport(ReferenceModelMixin, ActionModelMixin, SiteModelMixin,
+                          SearchSlugModelMixin, BaseUuidModel):
+
+    tracking_identifier_prefix = 'DR'
+
+    action_name = MATERNAL_DEATH_REPORT_ACTION
 
     report_datetime = models.DateTimeField(
         verbose_name='Report Date',

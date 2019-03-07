@@ -1,17 +1,23 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from edc_action_item.model_mixins import ActionModelMixin
 from edc_base.model_validators import date_is_future
 
+from ..action_items import ULTRASOUND_ACTION
 from ..choices import GESTATIONS_NUMBER, ZERO_ONE
 from ..validators import validate_ga_by_ultrasound, validate_fetal_weight
 from .model_mixins import UltraSoundModelMixin, CrfModelMixin
 
 
-class MaternalUltraSoundInitial(UltraSoundModelMixin, CrfModelMixin):
+class MaternalUltraSoundInitial(UltraSoundModelMixin, ActionModelMixin, CrfModelMixin):
 
     """ The initial ultra sound model that influences mother's
     enrollment in to study.
     """
+
+    tracking_identifier_prefix = 'MU'
+
+    action_name = ULTRASOUND_ACTION
 
     number_of_gestations = models.CharField(
         verbose_name="Number of viable gestations seen?",
@@ -72,6 +78,7 @@ class MaternalUltraSoundInitial(UltraSoundModelMixin, CrfModelMixin):
         self.edd_confirmed, ga_c_m = self.evaluate_edd_confirmed()
         self.ga_confrimation_method = ga_c_m
         self.ga_confirmed = self.evaluate_ga_confirmed()
+        self.subject_identifier = self.maternal_visit.appointment.subject_identifier
         super(MaternalUltraSoundInitial, self).save(*args, **kwargs)
 
     @property
@@ -111,6 +118,10 @@ class MaternalUltraSoundInitial(UltraSoundModelMixin, CrfModelMixin):
         return int(
             abs(40 - (
                 (self.edd_confirmed - self.report_datetime.date()).days / 7)))
+
+    @property
+    def action_item_reason(self):
+        return 'Number of gestations is ' + self.number_of_gestations
 
     class Meta:
         app_label = 'td_maternal'
