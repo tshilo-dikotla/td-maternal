@@ -12,7 +12,7 @@ from .models import (
     AntenatalVisitMembership, MaternalLabourDel, MaternalUltraSoundInitial,
     MaternalVisit, MaternalRando, RapidTestResult, MaternalContraception,
     MaternalPostPartumDep, MaternalInterimIdcc)
-from .models import TdConsentVersion, SpecimenConsent
+from .models import TdConsentVersion, SpecimenConsent, MaternalOffStudy
 
 
 fake = Faker()
@@ -180,4 +180,11 @@ specimenconsent = Recipe(
     may_store_samples=YES,
     study_questions=YES,
     consent_signature=YES,
+)
+
+maternaloffstudy = Recipe(
+    MaternalOffStudy,
+    offstudy_date=get_utcnow().date(),
+    report_datetime=get_utcnow(),
+    reason='multiple_vialble_gestations'
 )

@@ -69,10 +69,8 @@ class MaternalOffStudy(OffScheduleModelMixin, ActionModelMixin, BaseUuidModel):
             try:
                 on_schedule.objects.get(
                     subject_identifier=self.subject_identifier)
-                print('>>>>>>>>>>>>>>>>>>>>>>>>')
                 _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
                     on_schedule._meta.label_lower, name=on_schedule.schedule_name)
-                print('<><><><><><><><><><><><><><>', schedule)
                 schedule.take_off_schedule(offschedule_model_obj=self)
             except ObjectDoesNotExist:
                 pass
