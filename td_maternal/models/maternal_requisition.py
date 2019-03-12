@@ -67,7 +67,7 @@ class MaternalRequisition(
         default='normal',)
 
     comments = models.TextField(
-        max_length=1000,
+        max_length=350,
         null=True,
         blank=True)
 
