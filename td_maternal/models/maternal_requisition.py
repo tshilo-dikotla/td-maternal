@@ -19,7 +19,7 @@ from edc_visit_tracking.managers import CrfModelManager as VisitTrackingCrfModel
 from edc_visit_tracking.model_mixins import CrfModelMixin as VisitTrackingCrfModelMixin
 from edc_visit_tracking.model_mixins import PreviousVisitModelMixin
 
-from ..choices import STUDY_SITES, ITEM_TYPE
+from ..choices import STUDY_SITES
 from .maternal_visit import MaternalVisit
 from .model_mixins import SearchSlugModelMixin
 
@@ -65,11 +65,6 @@ class MaternalRequisition(
         max_length=25,
         choices=PRIORITY,
         default='normal',)
-
-    item_type = models.CharField(
-        verbose_name='Item collection type',
-        max_length=25,
-        choices=ITEM_TYPE)
 
 #     on_site = CurrentSiteManager()
 

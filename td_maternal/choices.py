@@ -21,13 +21,6 @@ IDENTITY_TYPE = (
     (OTHER, 'Other'),
 )
 
-ITEM_TYPE = (
-    (TUBE, 'Tube'),
-    ('swab', 'Swab'),
-    ('dbs', 'DBS Card'),
-    (OTHER, 'Other'),
-)
-
 ALIVE_DEAD_UNKNOWN = (
     (ALIVE, 'Alive'),
     (DEAD, 'Dead'),
