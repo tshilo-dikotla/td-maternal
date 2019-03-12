@@ -66,6 +66,11 @@ class MaternalRequisition(
         choices=PRIORITY,
         default='normal',)
 
+    comments = models.TextField(
+        max_length=1000,
+        null=True,
+        blank=True)
+
 #     on_site = CurrentSiteManager()
 
     objects = Manager()
