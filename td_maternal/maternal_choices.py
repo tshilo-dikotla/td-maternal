@@ -266,6 +266,7 @@ ARV_DRUG_LIST = (
     ('Kaletra', 'KAL'),
     ('Aluvia', 'ALU'),
     ('Truvada', 'TRV'),
+    ('Emtricitabine', 'FTC'),
     ('Tenoforvir', 'TDF',),
     ('Zidovudine', 'AZT'),
     ('Lamivudine', '3TC'),
