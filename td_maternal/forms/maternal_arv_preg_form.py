@@ -32,32 +32,26 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
         self.validate_num_arvs_taken()
         self.validate_date_arv_stopped()
         self.validate_arv_date_start_after_enrollment()
-        self.validate_start_date_in_visit_1020()
         return cleaned_data
 
     def validate_num_arvs_taken(self):
-        maternal_arv = self.data.get(
-            'maternalarv_set-0-arv_code')
-        maternal_arv_1 = self.data.get(
-            'maternalarv_set-1-arv_code')
-        maternal_arv_2 = self.data.get(
-            'maternalarv_set-2-arv_code')
-
-        if not (maternal_arv and maternal_arv_1 and maternal_arv_2):
+        maternal_arv_count = self.data.get(
+            'maternalarv_set-TOTAL_FORMS')
+        if int(maternal_arv_count) < 3:
             raise forms.ValidationError(
                 'Patient should have more than 3 arv\'s')
 
     def validate_date_arv_stopped(self):
-        maternal_arv = self.data.get(
-            'maternalarv_set-0-stop_date')
-        maternal_arv_1 = self.data.get(
-            'maternalarv_set-1-stop_date')
-        maternal_arv_2 = self.data.get(
-            'maternalarv_set-2-stop_date')
-        maternal_arv_3 = self.data.get(
-            'maternalarv_set-3-start_date')
-        if maternal_arv or maternal_arv_1 or maternal_arv_2:
-            if not maternal_arv_3:
+        maternal_arv_count = self.data.get(
+            'maternalarv_set-TOTAL_FORMS')
+        arvs_with_stop_date = 0
+        for i in range(int(maternal_arv_count)):
+            maternal_arv = self.data.get(
+                'maternalarv_set-' + str(i) + '-stop_date')
+            if maternal_arv:
+                arvs_with_stop_date = \
+                    arvs_with_stop_date + 1
+        if (int(maternal_arv_count) - arvs_with_stop_date) < 3:
                 raise forms.ValidationError(
                     'Patient should have more than 3 arv\'s in progress')
 
@@ -71,97 +65,19 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                 'Date of HIV test required, complete Antenatal Enrollment'
                 ' form before proceeding.')
         else:
-            if self.data.get('maternalarv_set-0-start_date'):
-                set_0_start_date = self.data.get(
-                    'maternalarv_set-0-start_date')
-                date_time_obj = datetime.datetime.strptime(set_0_start_date,
-                                                           '%Y-%m-%d')
-                if date_time_obj.date() < \
-                        antenatal_enrollment.week32_test_date:
-                    raise forms.ValidationError(
-                        'start date of arv\'s '
-                        'cannot be before date of HIV test.')
-
-            if self.data.get('maternalarv_set-1-start_date'):
-                set_1_start_date = self.data.get(
-                    'maternalarv_set-1-start_date')
-                date_time_obj = datetime.datetime.strptime(set_1_start_date,
-                                                           '%Y-%m-%d')
-                if date_time_obj.date() < \
-                        antenatal_enrollment.week32_test_date:
-                    raise forms.ValidationError(
-                        'start date of arv\'s '
-                        'cannot be before date of HIV test.')
-
-            if self.data.get('maternalarv_set-2-start_date'):
-                set_2_start_date = self.data.get(
-                    'maternalarv_set-2-start_date')
-                date_time_obj = datetime.datetime.strptime(set_2_start_date,
-                                                           '%Y-%m-%d')
-                if date_time_obj.date() < \
-                        antenatal_enrollment.week32_test_date:
-                    raise forms.ValidationError(
-                        'start date of arv\'s '
-                        'cannot be before date of HIV test.')
-
-            if self.data.get('maternalarv_set-3-start_date'):
-                set_3_start_date = self.data.get(
-                    'maternalarv_set-3-start_date')
-                date_time_obj = datetime.datetime.strptime(set_3_start_date,
-                                                           '%Y-%m-%d')
-                if date_time_obj.date() < \
-                        antenatal_enrollment.week32_test_date:
-                    raise forms.ValidationError(
-                        'start date of arv\'s '
-                        'cannot be before date of HIV test.')
-
-    def validate_start_date_in_visit_1020(self):
-        visit_code = self.cleaned_data.get('maternal_visit').appointment.visit_code
-        if visit_code == '1020M':
-            if self.data.get('maternalarv_set-0-start_date'):
-                set_0_start_date = self.data.get(
-                    'maternalarv_set-0-start_date')
-                date_time_obj = datetime.datetime.strptime(set_0_start_date,
-                                                           '%Y-%m-%d')
-                if not (date_time_obj.date() == 
-                        self.cleaned_data.get('report_datetime').date()):
-                    raise forms.ValidationError(
-                        'start date of arv\'s '
-                        'cannot be before date of HIV test.')
-
-            if self.data.get('maternalarv_set-1-start_date'):
-                set_1_start_date = self.data.get(
-                    'maternalarv_set-1-start_date')
-                date_time_obj = datetime.datetime.strptime(set_1_start_date,
-                                                           '%Y-%m-%d')
-                if not (date_time_obj.date() == 
-                        self.cleaned_data.get('report_datetime').date()):
-                    raise forms.ValidationError(
-                        'start date of arv\'s '
-                        'cannot be before date of HIV test.')
-
-            if self.data.get('maternalarv_set-2-start_date'):
-                set_2_start_date = self.data.get(
-                    'maternalarv_set-2-start_date')
-                date_time_obj = datetime.datetime.strptime(set_2_start_date,
-                                                           '%Y-%m-%d')
-                if not (date_time_obj.date() == 
-                        self.cleaned_data.get('report_datetime').date()):
-                    raise forms.ValidationError(
-                        'start date of arv\'s '
-                        'cannot be before date of HIV test.')
-
-            if self.data.get('maternalarv_set-3-start_date'):
-                set_3_start_date = self.data.get(
-                    'maternalarv_set-3-start_date')
-                date_time_obj = datetime.datetime.strptime(set_3_start_date,
-                                                           '%Y-%m-%d')
-                if not (date_time_obj.date() == 
-                        self.cleaned_data.get('report_datetime').date()):
-                    raise forms.ValidationError(
-                        'start date of arv\'s '
-                        'cannot be before date of HIV test.')
-        pass
+            maternal_arv_count = self.data.get(
+                'maternalarv_set-TOTAL_FORMS')
+            for i in range(int(maternal_arv_count)):
+                if self.data.get('maternalarv_set-' + str(i) + '-start_date'):
+                    set_start_date = self.data.get(
+                        'maternalarv_set-' + str(i) + '-start_date')
+                    date_time_obj = datetime.datetime.strptime(set_start_date,
+                                                               '%Y-%m-%d')
+                    if date_time_obj.date() < \
+                            antenatal_enrollment.week32_test_date:
+                        raise forms.ValidationError(
+                            'start date of arv\'s '
+                            'cannot be before date of HIV test.')
 
     class Meta:
         model = MaternalArvPreg
