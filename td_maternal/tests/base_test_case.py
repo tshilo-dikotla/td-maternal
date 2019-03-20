@@ -23,7 +23,8 @@ class BaseTestCase(TestCase):
             'td_maternal.subjectconsent', **options)
         import_holidays()
 
-    def create_mother(self, options=None):
+    def create_mother(self, options=None, report_datetime=None):
+        report_datetime = report_datetime or get_utcnow()
         if options:
             self.antenatal_enrollment = mommy.make_recipe(
                 'td_maternal.antenatalenrollment',
@@ -32,7 +33,8 @@ class BaseTestCase(TestCase):
         else:
             self.antenatal_enrollment = mommy.make_recipe(
                 'td_maternal.antenatalenrollment',
-                subject_identifier=self.subject_consent.subject_identifier)
+                subject_identifier=self.subject_consent.subject_identifier,
+                report_datetime=report_datetime)
 
         self.appointement_1000 = Appointment.objects.get(
             subject_identifier=self.subject_consent.subject_identifier,
@@ -41,7 +43,7 @@ class BaseTestCase(TestCase):
         self.maternal_visit_1000 = mommy.make_recipe(
             'td_maternal.maternalvisit',
             subject_identifier=self.subject_consent.subject_identifier,
-            report_datetime=get_utcnow(),
+            report_datetime=report_datetime,
             appointment=self.appointement_1000)
 
         self.maternal_ultrasound_initial = mommy.make_recipe(
@@ -52,7 +54,8 @@ class BaseTestCase(TestCase):
 
         self.antenatal_visit_membership = mommy.make_recipe(
             'td_maternal.antenatalvisitmembership',
-            subject_identifier=self.subject_consent.subject_identifier)
+            subject_identifier=self.subject_consent.subject_identifier,
+            report_datetime=report_datetime)
 
         self.appointement_1010 = Appointment.objects.get(
             subject_identifier=self.subject_consent.subject_identifier,
@@ -61,7 +64,7 @@ class BaseTestCase(TestCase):
         self.maternal_visit_1010 = mommy.make_recipe(
             'td_maternal.maternalvisit',
             subject_identifier=self.subject_consent.subject_identifier,
-            report_datetime=get_utcnow(),
+            report_datetime=report_datetime,
             appointment=self.appointement_1010)
 
     def hiv_pos_mother_options(self):

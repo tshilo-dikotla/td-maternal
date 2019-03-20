@@ -13,7 +13,8 @@ from .antenatal_enrollment import AntenatalEnrollment
 from .antenatal_visit_membership import AntenatalVisitMembership
 from .maternal_labour_del import MaternalLabourDel
 from .maternal_ultrasound_initial import MaternalUltraSoundInitial
-from .onschedule import OnScheduleAntenatalEnrollment
+from .onschedule import OnScheduleAntenatalEnrollment, OnScheduleMaternalLabourDel
+from .onschedule import OnScheduleAntenatalVisitMembership
 from .subject_consent import SubjectConsent
 from .subject_screening import SubjectScreening
 
@@ -51,20 +52,23 @@ def antenatal_enrollment_on_post_save(sender, instance, raw, created, **kwargs):
                 try:
                     OnScheduleAntenatalEnrollment.objects.get(
                         subject_identifier=instance.subject_identifier)
-
-                    schedule.refresh_schedule(
-                        subject_identifier=instance.subject_identifier)
                 except OnScheduleAntenatalEnrollment.DoesNotExist:
-
                     schedule.put_on_schedule(
                         subject_identifier=instance.subject_identifier,
                         onschedule_datetime=instance.report_datetime)
+                    add_schedule_name(model_obj=OnScheduleAntenatalEnrollment,
+                                      instance=instance)
+                else:
+                    schedule.refresh_schedule(
+                        subject_identifier=instance.subject_identifier)
         else:
             # put subject on schedule
             if instance.is_eligible:
                 schedule.put_on_schedule(
                     subject_identifier=instance.subject_identifier,
                     onschedule_datetime=instance.report_datetime)
+                add_schedule_name(model_obj=OnScheduleAntenatalEnrollment,
+                                  instance=instance)
 
 
 @receiver(post_save, weak=False, sender=AntenatalVisitMembership,
@@ -88,6 +92,9 @@ def antenatal_visit_membership_on_post_save(sender, instance, raw, created, **kw
                     schedule.put_on_schedule(
                         subject_identifier=instance.subject_identifier,
                         onschedule_datetime=instance.report_datetime)
+
+                    add_schedule_name(model_obj=OnScheduleAntenatalVisitMembership,
+                                      instance=instance)
             else:
                 schedule.refresh_schedule(
                     subject_identifier=instance.subject_identifier)
@@ -113,6 +120,8 @@ def maternal_labour_del_on_post_save(sender, instance, raw, created, **kwargs):
                 schedule.put_on_schedule(
                     subject_identifier=instance.subject_identifier,
                     onschedule_datetime=instance.report_datetime)
+                add_schedule_name(model_obj=OnScheduleMaternalLabourDel,
+                                  instance=instance)
                 create_registered_infant(instance)
 
 
@@ -169,3 +178,14 @@ def create_registered_infant(instance):
                             version=maternal_consent.version,
                             report_datetime=instance.report_datetime,
                             consent_datetime=timezone.now())
+
+
+def add_schedule_name(model_obj=None, instance=None):
+    try:
+        onschedule_antenatal = model_obj.objects.get(
+            subject_identifier=instance.subject_identifier)
+    except model_obj.DoesNotExist:
+        pass
+    else:
+        onschedule_antenatal.schedule_name = instance.schedule_name
+        onschedule_antenatal.save()
