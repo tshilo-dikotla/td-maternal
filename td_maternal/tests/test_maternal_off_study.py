@@ -11,13 +11,6 @@ class TestTDOffStudy(BaseTestCase):
 
     def setUp(self):
         super(TestTDOffStudy, self).setUp()
-        options = {
-            'screening_identifier': '12345',
-            'consent_datetime': get_utcnow,
-            'subject_identifier': '123456789'}
-
-        self.subject_consent = mommy.make_recipe(
-            'td_maternal.subjectconsent', **options)
 
         options = {**self.hiv_pos_mother_options(),
                    'report_datetime': get_utcnow() - relativedelta(days=3)}
