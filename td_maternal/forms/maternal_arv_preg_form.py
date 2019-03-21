@@ -48,6 +48,7 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
         self.validate_date_arv_stopped()
         self.validate_arv_date_start_after_enrollment()
         self.validate_previous_maternal_arv_preg_arv_start_dates()
+        self.validate_repeating_arvs()
         return cleaned_data
 
     def validate_num_arvs_taken(self):
@@ -145,16 +146,30 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                     for index in range(int(arv_count)):
                         start_date = self.data.get(
                             'maternalarv_set-' + str(index) + '-start_date')
-                        start_date = datetime.datetime.strptime(
-                            start_date, '%Y-%m-%d')
+                        if start_date:
+                            start_date = datetime.datetime.strptime(
+                                start_date, '%Y-%m-%d')
+                            if start_date.date() != previous_arv_preg.start_date:
+                                raise forms.ValidationError(
+                                    "ARV's were not stopped in this pregnancy,"
+                                    " most recent ARV date was "
+                                    "{}, dates must match, got {}.".format(
+                                        previous_arv_preg.start_date,
+                                        start_date.date()))
 
-                        if start_date.date() != previous_arv_preg.start_date:
-                            raise forms.ValidationError(
-                                "ARV's were not stopped in this pregnancy,"
-                                " most recent ARV date was "
-                                "{}, dates must match, got {}.".format(
-                                    previous_arv_preg.start_date,
-                                    start_date.date()))
+    def validate_repeating_arvs(self):
+        arv_count = int(self.data.get('maternalarv_set-TOTAL_FORMS'))
+        unique_arvs = []
+        for index in range(arv_count):
+            arv_code = self.data.get(
+                'maternalarv_set-' + str(index) + '-arv_code')
+            if arv_code and arv_code in unique_arvs:
+                raise forms.ValidationError(
+                    "ARV's cannot be duplicated,"
+                    " Please correct arv's in the table below "
+                )
+            else:
+                unique_arvs.append(arv_code)
 
     class Meta:
         model = MaternalArvPreg
