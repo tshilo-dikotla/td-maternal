@@ -1,5 +1,6 @@
 from .antenatal_enrollment_form import AntenatalEnrollmentForm
 from .antenatal_visit_membership_form import AntenatalVisitMembershipForm
+from .appointment_form import AppointmentForm
 from .karabo_tb_history_form import KaraboTuberculosisHistoryForm
 from .maternal_arv_form import MaternalArvForm
 from .maternal_arv_history_form import MaternalLifetimeArvHistoryForm
