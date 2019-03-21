@@ -158,14 +158,13 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                                     raise forms.ValidationError(
                                         "Got new ARV start date(s) {},"
                                         " Should be same as ARV stop date(s) {}"
-                                        " at {} visit.".format(
+                                        " at 1020 visit.".format(
                                             start_date.date(),
-                                            current_arv_stop_date,
-                                            previous_visit.visit_code))
+                                            current_arv_stop_date))
                                 elif not current_arv_stop_date:
                                     raise forms.ValidationError(
                                         "Please enter ARV date(s) same as "
-                                        "{},ARV date(s) at {} visit."
+                                        "{}, ARV date(s) at {} visit."
                                         .format(previous_arv_preg.start_date,
                                                 previous_visit.visit_code))
 
@@ -195,10 +194,11 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                 'maternalarv_set-' + str(index) + '-stop_date')
             arv_stop_dates.append(arv_stop_date)
 
-        if arv_stop_dates:
+        if arv_stop_dates and max(arv_stop_dates):
             stop_date = datetime.datetime.strptime(
                 max(arv_stop_dates), '%Y-%m-%d').date()
-            return stop_date
+            if stop_date:
+                    return stop_date
 
         return None
 
