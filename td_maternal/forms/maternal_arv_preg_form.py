@@ -14,6 +14,21 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
     form_validator_cls = MaternalArvPregFormValidator
 
     antenatal_enrollment_model = 'td_maternal.antenatalenrollment'
+    appointment = 'edc_appointment.appointment'
+    maternal_arv = 'td_maternal.maternalarv'
+    maternal_preg = 'td_maternal.maternalarvpreg'
+
+    @property
+    def appointment_cls(self):
+        return django_apps.get_model(self.appointment)
+
+    @property
+    def maternal_arv_cls(self):
+        return django_apps.get_model(self.maternal_arv)
+
+    @property
+    def maternal_preg_cls(self):
+        return django_apps.get_model(self.maternal_preg)
 
     @property
     def antenatal_enrollment_cls(self):
