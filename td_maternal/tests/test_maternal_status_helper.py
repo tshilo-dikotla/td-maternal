@@ -1,11 +1,13 @@
 from dateutil.relativedelta import relativedelta
 from django.utils import timezone
-from model_mommy import mommy
-
 from edc_appointment.models import Appointment
 from edc_base.utils import get_utcnow
 from edc_constants.constants import (
     POS, YES, NO, NEG, NOT_APPLICABLE, UNK, IND)
+from model_mommy import mommy
+
+from td_rando.import_randomization_list import import_randomization_list
+from td_rando.tests.create_test_list import create_test_list
 
 from ..helper_classes import MaternalStatusHelper
 from .base_test_case import BaseTestCase
@@ -16,11 +18,15 @@ class TestMaternalStatusHelper(BaseTestCase):
     def setUp(self):
         super(TestMaternalStatusHelper, self).setUp()
 
+    def populate_list(self):
+        path = create_test_list(first_sid=1)
+        import_randomization_list(path=path, overwrite=True)
+
     def test_pos_status_from_enrollment(self):
         """test that we can figure out a positive status
         with just the enrollment status.
         """
-
+        self.populate_list()
         self.create_mother()
         mommy.make_recipe(
             'td_maternal.maternalrando',
@@ -248,7 +254,8 @@ class TestMaternalStatusHelper(BaseTestCase):
         maternal_visit_2020M = mommy.make_recipe(
             'td_maternal.maternalvisit',
             subject_identifier=self.subject_consent.subject_identifier,
-            report_datetime=rapid_test.report_datetime + relativedelta(months=1),
+            report_datetime=rapid_test.report_datetime +
+            relativedelta(months=1),
             appointment=appointement_2020)
 
         status_helper = MaternalStatusHelper(maternal_visit_2020M)

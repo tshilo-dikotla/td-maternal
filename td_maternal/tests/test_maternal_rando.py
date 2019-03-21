@@ -34,9 +34,6 @@ class TestMaternalRuleGroup(BaseTestCase):
         self.create_mother(self.hiv_pos_mother_options())
         rando_list = RandomizationList.objects.all().order_by('sid')
 
-        for x in rando_list:
-            print(x.sid, x.drug_assignment)
-
         maternalrando = mommy.make_recipe(
             'td_maternal.maternalrando',
             maternal_visit=self.maternal_visit_1010,

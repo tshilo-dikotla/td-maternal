@@ -69,7 +69,7 @@ if settings.APP_NAME == 'td_maternal':
     class EdcMetadataAppConfig(BaseEdcMetadataAppConfig):
         reason_field = {'td_maternal.maternalvisit': 'reason'}
         create_on_reasons = [SCHEDULED, UNSCHEDULED]
-        delete_on_reasons = [LOST_VISIT, FAILED_ELIGIBILITY, MISSED_VISIT]
+        delete_on_reasons = [LOST_VISIT, FAILED_ELIGIBILITY]
 
     class EdcFacilityAppConfig(BaseEdcFacilityAppConfig):
         country = 'botswana'

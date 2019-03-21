@@ -62,18 +62,21 @@ class MaternalOffStudy(OffScheduleModelMixin, ActionModelMixin, BaseUuidModel):
     history = HistoricalRecords()
 
     def take_off_schedule(self):
-        v1_schedules = [OnScheduleMaternalLabourDel, OnScheduleAntenatalVisitMembership,
-                        OnScheduleAntenatalEnrollment]
+        maternal_schedules = [OnScheduleMaternalLabourDel,
+                              OnScheduleAntenatalVisitMembership,
+                              OnScheduleAntenatalEnrollment]
 
-        for on_schedule in v1_schedules:
+        for on_schedule in maternal_schedules:
             try:
-                on_schedule.objects.get(
+                on_schedule_obj = on_schedule.objects.get(
                     subject_identifier=self.subject_identifier)
-                _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
-                    on_schedule._meta.label_lower, name=on_schedule.schedule_name)
-                schedule.take_off_schedule(offschedule_model_obj=self)
-            except ObjectDoesNotExist:
+            except on_schedule.DoesNotExist:
                 pass
+            else:
+                _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
+                    onschedule_model=on_schedule._meta.label_lower,
+                    name=on_schedule_obj.schedule_name)
+                schedule.take_off_schedule(offschedule_model_obj=self)
 
     class Meta:
         verbose_name = 'Maternal Off Study'
