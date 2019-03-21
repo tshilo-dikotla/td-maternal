@@ -161,7 +161,7 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                                         " at 1020 visit.".format(
                                             start_date.date(),
                                             current_arv_stop_date))
-                                else:
+                                elif not current_arv_stop_date:
                                     raise forms.ValidationError(
                                         "Please enter ARV date(s) same as "
                                         "{},ARV date(s) at {} visit."
