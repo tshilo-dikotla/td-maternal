@@ -150,12 +150,23 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                             start_date = datetime.datetime.strptime(
                                 start_date, '%Y-%m-%d')
                             if start_date.date() != previous_arv_preg.start_date:
-                                raise forms.ValidationError(
-                                    "ARV's were not stopped in this pregnancy,"
-                                    " most recent ARV date was "
-                                    "{}, dates must match, got {}.".format(
-                                        previous_arv_preg.start_date,
-                                        start_date.date()))
+                                current_arv_stop_date = \
+                                    self.get_current_stopped_arv_date()
+
+                                if current_arv_stop_date and \
+                                        (start_date.date() != current_arv_stop_date):
+                                    raise forms.ValidationError(
+                                        "Got new ARV start date(s) {},"
+                                        " Should be same as ARV stop date(s) {}"
+                                        " at 1020 visit.".format(
+                                            start_date.date(),
+                                            current_arv_stop_date))
+                                else:
+                                    raise forms.ValidationError(
+                                        "Please enter ARV date(s) same as "
+                                        "{},ARV date(s) at {} visit."
+                                        .format(previous_arv_preg.start_date,
+                                                previous_visit.visit_code))
 
     def validate_repeating_arvs(self):
         arv_count = int(self.data.get('maternalarv_set-TOTAL_FORMS'))
@@ -170,6 +181,25 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                 )
             else:
                 unique_arvs.append(arv_code)
+
+    def get_current_stopped_arv_date(self):
+        """
+        function that checks the most recent arv stop date and returns it
+        """
+        arv_count = int(self.data.get('maternalarv_set-TOTAL_FORMS'))
+        arv_stop_dates = []
+
+        for index in range(arv_count):
+            arv_stop_date = self.data.get(
+                'maternalarv_set-' + str(index) + '-stop_date')
+            arv_stop_dates.append(arv_stop_date)
+
+        if arv_stop_dates:
+            stop_date = datetime.datetime.strptime(
+                max(arv_stop_dates), '%Y-%m-%d').date()
+            return stop_date
+
+        return None
 
     class Meta:
         model = MaternalArvPreg
