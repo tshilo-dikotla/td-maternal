@@ -1,16 +1,14 @@
 from dateutil.relativedelta import relativedelta
-from django.test import tag
 from edc_appointment.constants import IN_PROGRESS_APPT
 from edc_appointment.models.appointment import Appointment
 from edc_base.utils import get_utcnow
 from edc_metadata.constants import REQUIRED
-from edc_metadata.models import CrfMetadata, RequisitionMetadata
+from edc_metadata.models import CrfMetadata
 from model_mommy import mommy
 
 from .base_test_case import BaseTestCase
 
 
-@tag('offstudy')
 class TestTDOffStudy(BaseTestCase):
 
     def setUp(self):
