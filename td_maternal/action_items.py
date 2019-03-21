@@ -28,8 +28,14 @@ class MaternalUltrasoundAction(Action):
 
     def get_next_actions(self):
         actions = []
+
+        # resave visit to update metadata
+        self.reference_model_obj.maternal_visit.save()
+
         if self.reference_model_obj.number_of_gestations != '1':
             actions = [MaternalOffStudyAction]
+        else:
+            self.delete_if_new(MaternalOffStudyAction)
         return actions
 
 
