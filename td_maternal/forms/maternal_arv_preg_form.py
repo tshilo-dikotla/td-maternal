@@ -158,9 +158,10 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                                     raise forms.ValidationError(
                                         "Got new ARV start date(s) {},"
                                         " Should be same as ARV stop date(s) {}"
-                                        " at 1020 visit.".format(
+                                        " at {} visit.".format(
                                             start_date.date(),
-                                            current_arv_stop_date))
+                                            current_arv_stop_date,
+                                            previous_visit.visit_code))
                                 elif not current_arv_stop_date:
                                     raise forms.ValidationError(
                                         "Please enter ARV date(s) same as "
