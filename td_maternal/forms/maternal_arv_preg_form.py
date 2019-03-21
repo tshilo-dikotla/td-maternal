@@ -141,16 +141,20 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
             if previous_arv_preg:
                 if previous_arv_preg.start_date:
                     arv_count = self.data.get('maternalarv_set-TOTAL_FORMS')
-                    for index in range(arv_count):
+
+                    for index in range(int(arv_count)):
                         start_date = self.data.get(
                             'maternalarv_set-' + str(index) + '-start_date')
+                        start_date = datetime.datetime.strptime(
+                            start_date, '%Y-%m-%d')
 
-                        if start_date != previous_arv_preg.start_date:
+                        if start_date.date() != previous_arv_preg.start_date:
                             raise forms.ValidationError(
                                 "ARV's were not stopped in this pregnancy,"
-                                " most recent ARV date was"
+                                " most recent ARV date was "
                                 "{}, dates must match, got {}.".format(
-                                    previous_arv_preg.start_date, start_date))
+                                    previous_arv_preg.start_date,
+                                    start_date.date()))
 
     class Meta:
         model = MaternalArvPreg
