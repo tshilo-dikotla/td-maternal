@@ -166,7 +166,7 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
             if arv_code and arv_code in unique_arvs:
                 raise forms.ValidationError(
                     "ARV's cannot be duplicated,"
-                    " Please correct arv's in the table below "
+                    " Please enter different arv's"
                 )
             else:
                 unique_arvs.append(arv_code)
