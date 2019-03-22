@@ -50,8 +50,6 @@ class MaternalUltraSoundInitial(UltraSoundModelMixin, ActionModelMixin, CrfModel
 
     est_edd_ultrasound = models.DateField(
         verbose_name="Estimated date of delivery by ultrasound",
-        validators=[
-            date_is_future],
         help_text='EDD')
 
     edd_confirmed = models.DateField(
