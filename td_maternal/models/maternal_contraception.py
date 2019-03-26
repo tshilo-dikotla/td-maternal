@@ -58,7 +58,7 @@ class MaternalContraception(CrfModelMixin):
         ' have discussed your contraceptive method')
 
     influential_decision_making = models.CharField(
-        verbose_name='Of the following individuals listed in questions 3-6, '
+        verbose_name='Of the following individuals listed in questions 4-6, '
                      'please indicate who has influenced you the most in '
                      'making the decision',
         max_length=50,
