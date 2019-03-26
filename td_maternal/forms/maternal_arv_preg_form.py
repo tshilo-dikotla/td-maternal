@@ -137,7 +137,7 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
             previous_arv_preg = self.maternal_arv_cls.objects.filter(
                 maternal_arv_preg__maternal_visit__appointment__subject_identifier=\
                 subject_identifier,
-                stop_date__isnull=True).order_by('-start_date').first()
+                stop_date__isnull=True).order_by('-start_date').last()
 
             if previous_arv_preg:
                 if previous_arv_preg.start_date:
@@ -201,6 +201,9 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                     return stop_date
 
         return None
+
+    def get_100m_arv_stop_dates(self):
+        pass
 
     class Meta:
         model = MaternalArvPreg
