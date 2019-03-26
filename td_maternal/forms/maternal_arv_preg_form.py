@@ -1,12 +1,13 @@
+import datetime
+
 from django import forms
 from django.apps import apps as django_apps
 from edc_constants.constants import YES
+
 from td_maternal_validators.form_validators import MaternalArvPregFormValidator
 
 from ..models import MaternalArvPreg
 from .form_mixins import SubjectModelFormMixin
-
-import datetime
 
 
 class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
@@ -38,8 +39,8 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
         cleaned_data = super().clean()
         maternal_arv = self.data.get(
             'maternalarv_set-0-arv_code')
-        if cleaned_data.get('took_arv') and\
-                cleaned_data.get('took_arv') == YES:
+        if (cleaned_data.get('took_arv') and
+                cleaned_data.get('took_arv') == YES):
             if not maternal_arv:
                 raise forms.ValidationError(
                     {'took_arv': 'Please complete the maternal arv table.'})
@@ -66,11 +67,10 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
             maternal_arv = self.data.get(
                 'maternalarv_set-' + str(i) + '-stop_date')
             if maternal_arv:
-                arvs_with_stop_date = \
-                    arvs_with_stop_date + 1
+                arvs_with_stop_date = arvs_with_stop_date + 1
         if (int(maternal_arv_count) - arvs_with_stop_date) < 3:
-                raise forms.ValidationError(
-                    'Patient should have more than 3 arv\'s in progress')
+            raise forms.ValidationError(
+                'Patient should have more than 3 arv\'s in progress')
 
     def validate_arv_date_start_after_enrollment(self):
         try:
@@ -135,8 +135,7 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
 
         if previous_visit:
             previous_arv_preg = self.maternal_arv_cls.objects.filter(
-                maternal_arv_preg__maternal_visit__appointment__subject_identifier=\
-                subject_identifier,
+                maternal_arv_preg__maternal_visit__appointment__subject_identifier=subject_identifier,
                 stop_date__isnull=True).order_by('-start_date').first()
 
             if previous_arv_preg:
@@ -198,7 +197,7 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
             stop_date = datetime.datetime.strptime(
                 max(arv_stop_dates), '%Y-%m-%d').date()
             if stop_date:
-                    return stop_date
+                return stop_date
 
         return None
 
