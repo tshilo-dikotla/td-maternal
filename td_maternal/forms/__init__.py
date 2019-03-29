@@ -37,3 +37,5 @@ from .specimen_consent_form import SpecimenConsentForm
 from .subject_consent_form import SubjectConsentForm
 from .subject_screening_form import SubjectScreeningForm
 from .td_consent_version_form import TdConsentVersionForm
+from .karabo_subject_screening_form import KaraboSubjectScreeningForm
+from .karabo_subject_consent_form import KaraboSubjectConsentForm

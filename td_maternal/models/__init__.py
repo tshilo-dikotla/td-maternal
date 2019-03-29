@@ -47,3 +47,5 @@ from .specimen_consent import SpecimenConsent
 from .subject_consent import SubjectConsent
 from .subject_screening import SubjectScreening
 from .td_consent_version import TdConsentVersion
+from .karabo_subject_screening import KaraboSubjectScreening
+from .karabo_subject_consent import KaraboSubjectConsent
