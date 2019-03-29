@@ -161,6 +161,9 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                                                 previous_visit.visit_code))
 
     def validate_repeating_arvs(self):
+        """
+        function that checks for repeating arv in in-line form
+        """
         arv_count = int(self.data.get('maternalarv_set-TOTAL_FORMS'))
         unique_arvs = []
         for index in range(arv_count):
