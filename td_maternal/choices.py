@@ -7,6 +7,10 @@ from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
 from .constants import BREASTFEED_ONLY, NEVER_STARTED, MODIFIED, TUBERCULOSIS
 from .constants import NO_MODIFICATIONS, START
 
+ANSWERS = (
+    ('Accepted', 'Yes and the client accepted the signed copy of the consent'),
+    ('Refused', 'Yes and the client refused the signed copy of the consent'),
+)
 
 STUDY_SITES = (
     ('40', 'Gaborone'),
@@ -409,14 +413,12 @@ INFANT_VISIT_STUDY_STATUS = (
      'for last study contact'),
 )
 
-
 MATERNAL_VISIT_STUDY_STATUS = (
     (ON_STUDY, 'On study'),
     (OFF_STUDY,
      'Off study-no further follow-up (including death); use only '
      'for last study contact'),
 )
-
 
 OFF_STUDY_REASON = [
     ('multiple_vialble_gestations',
@@ -627,7 +629,6 @@ RANDOMIZATION_MATERNAL_ART_STATUS = (
     ('ON', 'On Haart'),
     ('OFF', 'Off'),
 )
-
 
 RANDOMIZATION_MATERNAL_FEEDING_CHOICE = (
     ('FF', 'Formula'),

@@ -49,3 +49,4 @@ from .subject_screening import SubjectScreening
 from .td_consent_version import TdConsentVersion
 from .karabo_subject_screening import KaraboSubjectScreening
 from .karabo_subject_consent import KaraboSubjectConsent
+from .karabo_eligibility import KaraboEligibility
