@@ -1,5 +1,6 @@
+from django.core.exceptions import ImproperlyConfigured
 from django.db import models
-from edc_action_item.model_mixins import ActionModelMixin
+from django.db.models.deletion import PROTECT
 from edc_appointment.models import Appointment
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
@@ -14,7 +15,6 @@ from edc_reference.model_mixins import ReferenceModelMixin
 from edc_visit_tracking.managers import VisitModelManager
 from edc_visit_tracking.model_mixins import VisitModelMixin, CaretakerFieldsMixin
 
-from ..action_items import MATERNAL_VISIT_ACTION
 from ..choices import MATERNAL_VISIT_STUDY_STATUS, VISIT_REASON
 from ..choices import VISIT_INFO_SOURCE, ALIVE_DEAD_UNKNOWN
 
@@ -23,17 +23,12 @@ class CurrentSiteManager(VisitModelManager, BaseCurrentSiteManager):
     pass
 
 
-class MaternalVisit(
-        VisitModelMixin, CreatesMetadataModelMixin, ActionModelMixin,
-        ReferenceModelMixin, RequiresConsentFieldsModelMixin,
-        CaretakerFieldsMixin, SiteModelMixin, BaseUuidModel):
+class MaternalVisit(VisitModelMixin, CreatesMetadataModelMixin,
+                    ReferenceModelMixin, RequiresConsentFieldsModelMixin,
+                    CaretakerFieldsMixin, SiteModelMixin, BaseUuidModel):
 
     """ Maternal visit form that links all antenatal/ postnatal follow-up forms
     """
-
-    action_name = MATERNAL_VISIT_ACTION
-
-    tracking_identifier_prefix = 'MV'
 
     appointment = models.OneToOneField(Appointment, on_delete=models.PROTECT)
 

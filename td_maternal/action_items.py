@@ -6,7 +6,6 @@ from edc_locator.action_items import SubjectLocatorAction
 
 MATERNAL_LOCATOR_ACTION = 'submit-maternal-locator'
 MATERNALOFF_STUDY_ACTION = 'submit-maternaloff-study'
-MATERNAL_VISIT_ACTION = 'submit-maternal-visit'
 MATERNAL_DEATH_REPORT_ACTION = 'submit-maternal-death-report'
 ULTRASOUND_ACTION = 'submit-ultrasound'
 MATERNAL_DELIVERY_ACTION = 'submit-maternal-delivery'
@@ -53,12 +52,6 @@ class MaternalLabourDeliveryAction(Action):
         return actions
 
 
-class MaternalVisitAction(Action):
-    name = MATERNAL_VISIT_ACTION
-    reference_model = 'td_maternal.maternalvisit'
-    show_on_dashboard = False
-
-
 class MaternalOffStudyAction(Action):
     name = MATERNALOFF_STUDY_ACTION
     display_name = 'Submit Maternal Offstudy'
@@ -95,5 +88,4 @@ site_action_items.register(MaternalDeathReportAction)
 site_action_items.register(MaternalLabourDeliveryAction)
 site_action_items.register(MaternalLocatorAction)
 site_action_items.register(MaternalOffStudyAction)
-site_action_items.register(MaternalVisitAction)
 site_action_items.register(MaternalUltrasoundAction)
