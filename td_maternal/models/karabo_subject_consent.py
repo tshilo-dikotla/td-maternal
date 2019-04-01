@@ -1,3 +1,4 @@
+from django.apps import apps as django_apps
 from django.conf import settings
 from django.db import models
 from django_crypto_fields.mixins import CryptoMixin
@@ -19,6 +20,16 @@ from ..choices import ANSWERS
 
 
 class KaraboSubjectConsent(CryptoMixin, SiteModelMixin, BaseUuidModel):
+
+    subject_identifier = models.CharField(
+        verbose_name="Subject Identifier",
+        max_length=50)
+
+    subject_screening_model = 'td_maternal.subjectscreening'
+
+    screening_identifier = models.CharField(
+        verbose_name='Screening identifier',
+        max_length=50)
 
     report_datetime = models.DateTimeField(
         verbose_name="Report Date",
@@ -109,6 +120,15 @@ class KaraboSubjectConsent(CryptoMixin, SiteModelMixin, BaseUuidModel):
         ' of the consent form.',
         max_length=25,
         choices=ANSWERS)
+
+    def get_karabo_eligibility(self):
+        """Returns the maternal eligibility model instance.
+           Instance must exist since MaternalEligibility is completed
+           before consent.
+        """
+        model_cls = django_apps.get_model(self.maternal_eligibility_model)
+        return model_cls.objects.get(
+            screening_identifier=self.screening_identifier)
 
     class Meta:
         app_label = 'td_maternal'
