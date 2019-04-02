@@ -1,7 +1,6 @@
 from .antenatal_enrollment_form import AntenatalEnrollmentForm
 from .antenatal_visit_membership_form import AntenatalVisitMembershipForm
 from .appointment_form import AppointmentForm
-from .karabo_tb_history_form import KaraboTuberculosisHistoryForm
 from .maternal_arv_form import MaternalArvForm
 from .maternal_arv_history_form import MaternalLifetimeArvHistoryForm
 from .maternal_arv_post_form import MaternalArvPostAdhForm
@@ -37,5 +36,3 @@ from .specimen_consent_form import SpecimenConsentForm
 from .subject_consent_form import SubjectConsentForm
 from .subject_screening_form import SubjectScreeningForm
 from .td_consent_version_form import TdConsentVersionForm
-from .karabo_subject_screening_form import KaraboSubjectScreeningForm
-from .karabo_subject_consent_form import KaraboSubjectConsentForm

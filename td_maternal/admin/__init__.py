@@ -1,6 +1,5 @@
 from .antenatal_enrollment_admin import AntenatalEnrollmentAdmin
 from .antenatal_visit_membership_admin import AntenataVisitMembershipAdmin
-from .karabo_tb_history_admin import KaraboTuberculosisHistoryAdmin
 from .maternal_arv_admin import MaternalArvAdmin
 from .maternal_arv_history_admin import MaternalLifetimeArvHistoryAdmin
 from .maternal_arv_post_admin import MaternalArvPostAdhAdmin
@@ -37,5 +36,3 @@ from .specimen_consent_admin import SpecimenConsentAdmin
 from .subject_consent_admin import SubjectConsentAdmin
 from .subject_screening_admin import SubjectScreeningAdmin
 from .td_consent_version_admin import TdConsentVersionAdmin
-from .karabo_subject_screening_admin import KaraboSubjectScreeningAdmin
-from .karabo_subject_consent_admin import KaraboSubjectConsentAdmin

@@ -18,7 +18,7 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
                 cleaned_data.get('arv_status') == 'modified'):
             if not maternal_arv_post:
                 raise forms.ValidationError(
-                    {'took_arv': 'Please complete the maternal arv table.'})
+                    {'on_arv_since': 'Please complete the maternal arv table.'})
 
     class Meta:
         model = MaternalArvPost
