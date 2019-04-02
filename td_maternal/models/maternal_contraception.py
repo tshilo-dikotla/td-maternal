@@ -31,21 +31,21 @@ class MaternalContraception(CrfModelMixin):
         choices=NEXT_CHILD_PLAN,
         blank=True,
         null=True,
-        help_text='')
+    )
 
     contraceptive_partner = models.CharField(
         verbose_name='Have you discussed a contraceptive method with '
         'your current partner?',
         max_length=10,
         choices=YES_NO_NO_PARTNER_DWTA,
-        help_text='')
+    )
 
     contraceptive_relative = models.ManyToManyField(
         MaternalRelatives,
         verbose_name='Have you discussed your contraceptive method with any of'
         ' the following individuals? '
                      '(Please select all that apply)',
-        help_text='')
+    )
 
     contraceptive_relative_other = OtherCharField(
         max_length=35,
@@ -63,7 +63,7 @@ class MaternalContraception(CrfModelMixin):
                      'making the decision',
         max_length=50,
         choices=INFLUENTIAL_IN_DECISION_MAKING,
-        help_text='')
+    )
 
     influential_decision_making_other = OtherCharField(
         max_length=35,
@@ -75,21 +75,18 @@ class MaternalContraception(CrfModelMixin):
     uses_contraceptive = models.CharField(
         verbose_name='Are you currently using a contraceptive method?',
         max_length=35,
-        choices=YES_NO_DWTA,
-        help_text='')
+        choices=YES_NO_DWTA)
 
     contraceptive_startdate = models.DateField(
         verbose_name='If yes, what date after delivery did you start'
         ' using this contraceptive method?',
         validators=[date_not_future],
         null=True,
-        blank=True,
-        help_text='')
+        blank=True)
 
     contr = models.ManyToManyField(
         Contraceptives,
-        verbose_name='Please share with us your current contraceptive methods',
-        help_text='')
+        verbose_name='Please share with us your current contraceptive methods')
 
     contr_other = OtherCharField(
         max_length=35,
@@ -101,27 +98,24 @@ class MaternalContraception(CrfModelMixin):
     another_pregnancy = models.CharField(
         verbose_name='Have you become pregnant since you last delivered?',
         max_length=35,
-        choices=YES_NO_DWTA,
-        help_text='')
+        choices=YES_NO_DWTA)
 
     pregnancy_date = models.DateField(
         verbose_name='If yes, around what date did you find out?',
         validators=[date_not_future],
         null=True,
-        blank=True,
-        help_text='')
+        blank=True)
 
     pap_smear = models.CharField(
         verbose_name='Do you know the date of your last Pap smear?',
         max_length=35,
-        choices=PAP_SMEAR,
-        help_text='')
+        choices=PAP_SMEAR)
 
     pap_smear_date = models.DateField(
         verbose_name='Please provide the date of your last Pap smear.',
+        validators=[date_not_future],
         blank=True,
-        null=True,
-        help_text='')
+        null=True)
 
     pap_smear_estimate = models.CharField(
         verbose_name='If you dont know that date of your last Pap Smear, is '
@@ -129,46 +123,40 @@ class MaternalContraception(CrfModelMixin):
         max_length=60,
         choices=PAP_SMEAR_ESTIMATE,
         blank=True,
-        null=True,
-        help_text='')
+        null=True)
 
     pap_smear_result = models.CharField(
         verbose_name='Do you know the result of your last Pap smear',
         max_length=20,
         choices=YES_NO_DWTA,
         blank=True,
-        null=True,
-        help_text='')
+        null=True)
 
     pap_smear_result_status = models.CharField(
         verbose_name='The results of my Pap smear were: ',
         max_length=30,
         choices=NORMAL_ABNORMAL_DWTA,
         blank=True,
-        null=True,
-        help_text='')
+        null=True)
 
     pap_smear_result_abnormal = models.TextField(
         verbose_name='If the results of the Pap Smear were abnormal, can you '
         'please share the results with us: ',
         max_length=50,
         blank=True,
-        null=True,
-        help_text='')
+        null=True)
 
     date_notified = models.DateField(
         verbose_name='When were you notified of these results?',
+        validators=[date_not_future],
         blank=True,
-        null=True,
-        help_text=''
-    )
+        null=True)
 
     srh_referral = models.CharField(
         verbose_name='Would you like to be referred to the Sexual Reproductive'
         ' Health Clinic?',
         max_length=25,
-        choices=YES_NO_DWTA,
-        help_text='')
+        choices=YES_NO_DWTA)
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'td_maternal'
