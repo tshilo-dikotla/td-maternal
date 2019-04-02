@@ -10,6 +10,16 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
 
     form_validator_cls = MarternalArvPostFormValidator
 
+    def clean(self):
+        cleaned_data = super().clean()
+        maternal_arv_post = self.data.get(
+            'maternalarvpostmed_set-0-arv_code')
+        if (cleaned_data.get('arv_status') == 'start' or
+                cleaned_data.get('arv_status') == 'modified'):
+            if not maternal_arv_post:
+                raise forms.ValidationError(
+                    {'took_arv': 'Please complete the maternal arv table.'})
+
     class Meta:
         model = MaternalArvPost
         fields = '__all__'

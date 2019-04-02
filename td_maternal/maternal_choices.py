@@ -283,6 +283,7 @@ ARV_DRUG_LIST = (
     ('Saquinavir,hard capsule', 'INV'),
     ('Kaletra or Aluvia', 'KAL or ALU'),
     ('Atripla', 'ATR'),
+    ('Dolutegravir', 'DTG'),
     ('HAART,unknown', 'HAART,unknown'),
 )
 
