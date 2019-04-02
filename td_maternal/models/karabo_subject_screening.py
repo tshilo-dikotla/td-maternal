@@ -6,7 +6,7 @@ from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO
 from edc_protocol.validators import datetime_not_before_study_start
 
-from ..models import KaraboEligibility
+from .karabo_eligibility import KaraboEligibility
 from ..identifiers import ScreeningIdentifier
 
 
