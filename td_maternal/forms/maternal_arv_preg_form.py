@@ -131,34 +131,38 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                 maternal_arv_preg__maternal_visit__appointment__subject_identifier=\
                 subject_identifier,
                 stop_date__isnull=True).order_by('-start_date').last()
+
             if previous_arv_preg:
-                if previous_arv_preg.start_date:
-                    arv_count = self.data.get('maternalarv_set-TOTAL_FORMS')
+                arv_count = self.data.get('maternalarv_set-TOTAL_FORMS')
 
-                    for index in range(int(arv_count)):
-                        start_date = self.data.get(
-                            'maternalarv_set-' + str(index) + '-start_date')
-                        if start_date:
-                            start_date = datetime.datetime.strptime(
-                                start_date, '%Y-%m-%d')
-                            if start_date.date() != previous_arv_preg.start_date:
-                                current_arv_stop_date = \
-                                    self.get_current_stopped_arv_date()
+                for index in range(int(arv_count)):
+                    arv_start_date = self.data.get(
+                        'maternalarv_set-' + str(index) + '-start_date')
+                    start_date = datetime.datetime.strptime(
+                        arv_start_date, '%Y-%m-%d')
 
-                                if current_arv_stop_date and \
-                                        (start_date.date() != current_arv_stop_date):
-                                    raise forms.ValidationError(
-                                        "Got new ARV start date(s) {},"
-                                        " Should be same as ARV stop date(s) {}"
-                                        " at 1020 visit.".format(
-                                            start_date.date(),
-                                            current_arv_stop_date))
-                                elif not current_arv_stop_date:
-                                    raise forms.ValidationError(
-                                        "Please enter ARV date(s) same as "
-                                        "{}, ARV date(s) at {} visit."
-                                        .format(previous_arv_preg.start_date,
-                                                previous_visit.visit_code))
+                    if start_date.date() != previous_arv_preg.start_date:
+                        current_arv_stop_date = \
+                            self.get_current_stopped_arv_date()
+
+                        if current_arv_stop_date and \
+                                (start_date.date() != current_arv_stop_date):
+                            raise forms.ValidationError(
+                                "Got new ARV start date(s) {},"
+                                " Should be same as ARV stop date(s) {}"
+                                " at 1020 visit.".format(
+                                    start_date.date(),
+                                    current_arv_stop_date))
+
+                        elif not current_arv_stop_date and not \
+                                self.match_prev_arvs(
+                                    subject_identifier):
+
+                            raise forms.ValidationError(
+                                "Please enter ARV date(s) same as "
+                                "{}, ARV date(s) at {} visit."
+                                .format(previous_arv_preg.start_date,
+                                        previous_visit.visit_code))
 
     def validate_repeating_arvs(self):
         """
@@ -196,6 +200,26 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                 return stop_date
 
         return None
+
+    def match_prev_arvs(self, subject_identifier):
+        arv_count = int(self.data.get('maternalarv_set-TOTAL_FORMS'))
+
+        for index in range(arv_count):
+            arv_start_date = self.data.get(
+                'maternalarv_set-' + str(index) + '-start_date')
+            arv_code = self.data.get(
+                'maternalarv_set-' + str(index) + '-arv_code')
+            previous_arv_preg = self.maternal_arv_cls.objects.filter(
+                maternal_arv_preg__maternal_visit__appointment__subject_identifier=\
+                subject_identifier,
+                start_date=arv_start_date,
+                arv_code=arv_code,
+                stop_date__isnull=True)
+
+            if not previous_arv_preg:
+                return False
+
+        return True
 
     class Meta:
         model = MaternalArvPreg
