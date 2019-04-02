@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models.deletion import PROTECT
 from edc_base.model_mixins import BaseUuidModel
@@ -105,18 +106,21 @@ class MaternalArvPostAdh(CrfModelMixin):
 
     missed_doses = models.IntegerField(
         verbose_name=("Since the last attended last scheduled visit, "
-                      "how many doses of triple ARVs were missed? "))
+                      "how many doses of triple ARVs were missed? "),
+        validators=[MinValueValidator(0), ])
 
     missed_days = models.IntegerField(
         verbose_name=("Since the last attended scheduled visit, how many "
                       "entire days were triple ARVS not taken?"),
-        default=0)
+        default=0,
+        validators=[MinValueValidator(0), ])
 
     missed_days_discnt = models.IntegerField(
         verbose_name=("If triple ARVs discontinued by health provider, how"
                       " many days were triple ARVs missed prior to "
                       "discontinuation?"),
-        default=0)
+        default=0,
+        validators=[MinValueValidator(0)])
 
     comment = models.TextField(
         max_length=250,
