@@ -30,7 +30,7 @@ class TestMaternalRuleGroup(BaseTestCase):
     def test_maternalarvpreg_required_1020(self):
         self.create_mother(self.hiv_pos_mother_options())
 
-        appointement_1020 = Appointment.objects.get(
+        appointment_1020 = Appointment.objects.get(
             subject_identifier=self.subject_consent.subject_identifier,
             visit_code='1020M')
 
@@ -38,7 +38,7 @@ class TestMaternalRuleGroup(BaseTestCase):
             'td_maternal.maternalvisit',
             subject_identifier=self.subject_consent.subject_identifier,
             report_datetime=get_utcnow(),
-            appointment=appointement_1020)
+            appointment=appointment_1020)
 
         self.assertEqual(
             CrfMetadata.objects.get(

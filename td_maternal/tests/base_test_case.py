@@ -36,7 +36,7 @@ class BaseTestCase(TestCase):
                 subject_identifier=self.subject_consent.subject_identifier,
                 report_datetime=report_datetime)
 
-        self.appointement_1000 = Appointment.objects.get(
+        self.appointment_1000 = Appointment.objects.get(
             subject_identifier=self.subject_consent.subject_identifier,
             visit_code='1000M')
 
@@ -44,7 +44,7 @@ class BaseTestCase(TestCase):
             'td_maternal.maternalvisit',
             subject_identifier=self.subject_consent.subject_identifier,
             report_datetime=report_datetime,
-            appointment=self.appointement_1000)
+            appointment=self.appointment_1000)
 
         self.maternal_ultrasound_initial = mommy.make_recipe(
             'td_maternal.maternalultrasoundinitial',
@@ -57,7 +57,7 @@ class BaseTestCase(TestCase):
             subject_identifier=self.subject_consent.subject_identifier,
             report_datetime=report_datetime)
 
-        self.appointement_1010 = Appointment.objects.get(
+        self.appointment_1010 = Appointment.objects.get(
             subject_identifier=self.subject_consent.subject_identifier,
             visit_code='1010M')
 
@@ -65,7 +65,7 @@ class BaseTestCase(TestCase):
             'td_maternal.maternalvisit',
             subject_identifier=self.subject_consent.subject_identifier,
             report_datetime=report_datetime,
-            appointment=self.appointement_1010)
+            appointment=self.appointment_1010)
 
     def hiv_pos_mother_options(self):
         options = {'current_hiv_status': POS,
