@@ -16,6 +16,7 @@ class RapidTestResultAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         (None, {
             'fields': [
                 'maternal_visit',
+                'report_datetime',
                 'rapid_test_done',
                 'result_date',
                 'result',

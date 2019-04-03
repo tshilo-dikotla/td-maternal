@@ -16,6 +16,7 @@ class MaternalContraceptionAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         (None, {
             'fields': [
                 'maternal_visit',
+                'report_datetime',
                 'more_children',
                 'next_child',
                 'contraceptive_partner',
