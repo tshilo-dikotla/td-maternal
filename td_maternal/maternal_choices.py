@@ -253,11 +253,11 @@ DX = (
 
 REASON_FOR_HAART = (
     ('maternal masa',
-     '1. HAART for maternal treatment (qualifies by Botswana guidelines)'),
-    ('pmtct bf', '2. HAART for PMTCT while breastfeeding'),
-    ('pp arv tail', '3. Brief postpartum antiretroviral "tail"'),
-    ('unsure', '4. Unsure'),
-    (OTHER, '9. OTHER'),
+     'HAART for maternal treatment (qualifies by Botswana guidelines)'),
+    ('pmtct bf', 'HAART for PMTCT while breastfeeding'),
+    ('pp arv tail', 'Brief postpartum antiretroviral "tail"'),
+    ('unsure', 'Unsure'),
+    (OTHER, 'OTHER'),
     (NOT_APPLICABLE, 'Not applicable'))
 
 # haart modification

@@ -48,7 +48,6 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
         self.validate_date_arv_stopped()
         self.validate_arv_date_start_after_enrollment()
         self.validate_previous_maternal_arv_preg_arv_start_dates()
-        self.validate_repeating_arvs()
         return cleaned_data
 
     def validate_date_arv_stopped(self):
@@ -128,8 +127,7 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
 
         if previous_visit:
             previous_arv_preg = self.maternal_arv_cls.objects.filter(
-                maternal_arv_preg__maternal_visit__appointment__subject_identifier=\
-                subject_identifier,
+                maternal_arv_preg__maternal_visit__appointment__subject_identifier=subject_identifier,
                 stop_date__isnull=True).order_by('-start_date').last()
 
             if previous_arv_preg:
@@ -164,23 +162,6 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                                 .format(previous_arv_preg.start_date,
                                         previous_visit.visit_code))
 
-    def validate_repeating_arvs(self):
-        """
-        function that checks for repeating arv in in-line form
-        """
-        arv_count = int(self.data.get('maternalarv_set-TOTAL_FORMS'))
-        unique_arvs = []
-        for index in range(arv_count):
-            arv_code = self.data.get(
-                'maternalarv_set-' + str(index) + '-arv_code')
-            if arv_code and arv_code in unique_arvs:
-                raise forms.ValidationError(
-                    "ARV's cannot be duplicated,"
-                    " Please enter different arv's"
-                )
-            else:
-                unique_arvs.append(arv_code)
-
     def get_current_stopped_arv_date(self):
         """
         function that checks the most recent arv stop date and returns it
@@ -210,8 +191,7 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
             arv_code = self.data.get(
                 'maternalarv_set-' + str(index) + '-arv_code')
             previous_arv_preg = self.maternal_arv_cls.objects.filter(
-                maternal_arv_preg__maternal_visit__appointment__subject_identifier=\
-                subject_identifier,
+                maternal_arv_preg__maternal_visit__appointment__subject_identifier=subject_identifier,
                 start_date=arv_start_date,
                 arv_code=arv_code,
                 stop_date__isnull=True)
