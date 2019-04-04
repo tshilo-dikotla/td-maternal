@@ -155,7 +155,7 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                                     current_arv_stop_date))
 
                         elif not current_arv_stop_date and not \
-                                self.match_prev_arvs(
+                                self.get_previous_stopped_arv_date(
                                     subject_identifier):
 
                             raise forms.ValidationError(
@@ -201,25 +201,34 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
 
         return None
 
-    def match_prev_arvs(self, subject_identifier):
-        arv_count = int(self.data.get('maternalarv_set-TOTAL_FORMS'))
-
-        for index in range(arv_count):
-            arv_start_date = self.data.get(
-                'maternalarv_set-' + str(index) + '-start_date')
-            arv_code = self.data.get(
-                'maternalarv_set-' + str(index) + '-arv_code')
+    def get_previous_stopped_arv_date(self, subject_identifier):
             previous_arv_preg = self.maternal_arv_cls.objects.filter(
                 maternal_arv_preg__maternal_visit__appointment__subject_identifier=\
                 subject_identifier,
-                start_date=arv_start_date,
-                arv_code=arv_code,
-                stop_date__isnull=True)
+                stop_date__isnull=False).order_by('-stop_date').first()
 
-            if not previous_arv_preg:
-                return False
+            if previous_arv_preg:
+                return previous_arv_preg.stop_date
 
-        return True
+#     def match_prev_arvs(self, subject_identifier):
+#         arv_count = int(self.data.get('maternalarv_set-TOTAL_FORMS'))
+#         for index in range(arv_count):
+#             arv_start_date = self.data.get(
+#                 'maternalarv_set-' + str(index) + '-start_date')
+#             arv_code = self.data.get(
+#                 'maternalarv_set-' + str(index) + '-arv_code')
+#             try:
+#                 previous_arv_preg = self.maternal_arv_cls.objects.filter(
+#                     maternal_arv_preg__maternal_visit__appointment__subject_identifier=\
+#                     subject_identifier,
+#                     start_date=arv_start_date,
+#                     arv_code=arv_code,
+#                     stop_date__isnull=True)
+#             except self.maternal_arv_cls.DoesNotExist:
+#                 pass
+#             if not previous_arv_preg:
+#                 return False
+#         return True
 
     class Meta:
         model = MaternalArvPreg
