@@ -153,15 +153,24 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                                     start_date.date(),
                                     current_arv_stop_date))
 
-                        elif not current_arv_stop_date and not \
+                        elif not current_arv_stop_date:
+                            prev_arv_stop_date = \
                                 self.get_previous_stopped_arv_date(
-                                    subject_identifier):
+                                    subject_identifier)
 
-                            raise forms.ValidationError(
-                                "Please enter ARV date(s) same as "
-                                "{}, ARV date(s) at {} visit."
-                                .format(previous_arv_preg.start_date,
-                                        previous_visit.visit_code))
+                            if prev_arv_stop_date and \
+                                    prev_arv_stop_date != start_date.date():
+                                raise forms.ValidationError(
+                                    "Please enter ARV date(s) same as "
+                                    "{}, ARV date(s) at {} visit."
+                                    .format(prev_arv_stop_date,
+                                            previous_visit.visit_code))
+                            elif not prev_arv_stop_date:
+                                raise forms.ValidationError(
+                                    "Please enter ARV date(s) same as "
+                                    "{}, ARV date(s) at {} visit."
+                                    .format(previous_arv_preg.start_date,
+                                            previous_visit.visit_code))
 
     def get_current_stopped_arv_date(self):
         """
