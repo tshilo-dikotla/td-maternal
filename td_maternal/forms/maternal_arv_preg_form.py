@@ -137,9 +137,10 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                     arv_start_date = self.data.get(
                         'maternalarv_set-' + str(index) + '-start_date')
                     start_date = datetime.datetime.strptime(
-                        arv_start_date, '%Y-%m-%d')
+                        arv_start_date, '%Y-%m-%d') if arv_start_date else None
 
-                    if start_date.date() != previous_arv_preg.start_date:
+                    if start_date and \
+                            start_date.date() != previous_arv_preg.start_date:
                         current_arv_stop_date = \
                             self.get_current_stopped_arv_date()
 
