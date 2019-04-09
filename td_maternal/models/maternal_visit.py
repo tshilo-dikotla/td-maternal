@@ -59,8 +59,6 @@ class MaternalVisit(VisitModelMixin, CreatesMetadataModelMixin,
         verbose_name='Source of information?',
         default=PARTICIPANT,
         max_length=25,
-        blank=True,
-        null=True,
         choices=VISIT_INFO_SOURCE)
 
     last_alive_date = models.DateField(
