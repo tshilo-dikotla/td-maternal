@@ -1,7 +1,9 @@
 from dateutil.relativedelta import relativedelta
+from django.test import tag
 from edc_appointment.constants import IN_PROGRESS_APPT
 from edc_appointment.models.appointment import Appointment
 from edc_base.utils import get_utcnow
+from edc_constants.constants import OFF_STUDY, NO
 from edc_metadata.constants import REQUIRED
 from edc_metadata.models import CrfMetadata
 from model_mommy import mommy
@@ -9,6 +11,7 @@ from model_mommy import mommy
 from .base_test_case import BaseTestCase
 
 
+@tag('offstudy')
 class TestTDOffStudy(BaseTestCase):
 
     def setUp(self):
@@ -46,3 +49,8 @@ class TestTDOffStudy(BaseTestCase):
         for crf in crfs:
             self.assertNotEqual(
                 crf.entry_status, REQUIRED)
+
+    @tag('offstudy1')
+    def test_maternal_visit_offstudy(self):
+        self.maternal_visit_1010.study_status = OFF_STUDY
+        self.maternal_visit_1010.require_crfs = NO
