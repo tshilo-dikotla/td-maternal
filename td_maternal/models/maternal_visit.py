@@ -1,6 +1,4 @@
-from django.core.exceptions import ImproperlyConfigured
 from django.db import models
-from django.db.models.deletion import PROTECT
 from edc_appointment.models import Appointment
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
