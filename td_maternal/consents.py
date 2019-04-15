@@ -1,5 +1,4 @@
 from datetime import datetime
-
 import arrow
 from dateutil.tz import gettz
 from django.apps import apps as django_apps
@@ -7,6 +6,7 @@ from edc_constants.constants import FEMALE
 
 from edc_consent.consent import Consent
 from edc_consent.site_consents import site_consents
+from .consent_object_validator import ConsentObjectValidator
 
 
 app_config = django_apps.get_app_config('edc_protocol')
@@ -38,5 +38,6 @@ v3 = Consent(
     age_max=64,
     gender=[FEMALE])
 
+site_consents.validator_cls = ConsentObjectValidator
 site_consents.register(v1)
 site_consents.register(v3)
