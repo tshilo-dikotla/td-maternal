@@ -1,4 +1,5 @@
 from django.apps import apps as django_apps
+from django.core.exceptions import ValidationError
 from django.db import models
 from edc_action_item.model_mixins.action_model_mixin import ActionModelMixin
 from edc_base.model_fields import OtherCharField
@@ -135,6 +136,7 @@ class MaternalLabourDel(ActionModelMixin, BaseUuidModel):
         return schedule_name
 
     def save(self, *args, **kwargs):
+        self.consent_version = self.get_consent_version()
         super(MaternalLabourDel, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -146,6 +148,28 @@ class MaternalLabourDel(ActionModelMixin, BaseUuidModel):
             'td_maternal.antenatalenrollment')
         return AntenatalEnrollment.objects.get(
             subject_identifier=self.subject_identifier)
+
+    def get_consent_version(self):
+        subject_screening_cls = django_apps.get_model(
+            'td_maternal.subjectscreening')
+        consent_version_cls = django_apps.get_model(
+            'td_maternal.tdconsentversion')
+        try:
+            subject_screening_obj = subject_screening_cls.objects.get(
+                subject_identifier=self.subject_identifier)
+        except subject_screening_cls.DoesNotExist:
+            raise ValidationError(
+                'Missing Subject Screening form. Please complete '
+                'it before proceeding.')
+        else:
+            try:
+                consent_version_obj = consent_version_cls.objects.get(
+                    screening_identifier=subject_screening_obj.screening_identifier)
+            except consent_version_cls.DoesNotExist:
+                raise ValidationError(
+                    'Missing Consent Version form. Please complete '
+                    'it before proceeding.')
+            return consent_version_obj.version
 
     @property
     def keep_on_study(self):

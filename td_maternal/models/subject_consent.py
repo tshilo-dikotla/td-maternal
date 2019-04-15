@@ -1,19 +1,21 @@
 from django.apps import apps as django_apps
+from django.core.exceptions import ValidationError
 from django.db import models
 from edc_base.model_fields import OtherCharField
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.sites.site_model_mixin import SiteModelMixin
+from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
+from edc_registration.model_mixins import (
+    UpdatesOrCreatesRegistrationModelMixin)
+from edc_search.model_mixins import SearchSlugManager
+
 from edc_consent.field_mixins import (
     CitizenFieldsMixin, VulnerabilityFieldsMixin)
 from edc_consent.field_mixins import IdentityFieldsMixin
 from edc_consent.field_mixins import ReviewFieldsMixin, PersonalFieldsMixin
 from edc_consent.managers import ConsentManager
 from edc_consent.model_mixins import ConsentModelMixin
-from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
-from edc_registration.model_mixins import (
-    UpdatesOrCreatesRegistrationModelMixin)
-from edc_search.model_mixins import SearchSlugManager
 
 from ..choices import IDENTITY_TYPE
 from ..maternal_choices import RECRUIT_SOURCE, RECRUIT_CLINIC
@@ -82,15 +84,22 @@ class SubjectConsent(
     def natural_key(self):
         return (self.subject_identifier, self.version)
 
-    def get_maternal_eligibility(self):
-        """Returns the maternal eligibility model instance.
+    def save(self, *args, **kwargs):
+        consent_version_cls = django_apps.get_model(
+            'td_maternal.tdconsentversion')
+        try:
+            consent_version_obj = consent_version_cls.objects.get(
+                screening_identifier=self.screening_identifier)
+        except consent_version_cls.DoesNotExist:
+            raise ValidationError(
+                'Missing Consent Version form. Please complete '
+                'it before proceeding.')
+        self.version = consent_version_obj.version
+        super().save(self, *args, **kwargs)
 
-        Instance must exist since MaternalEligibility is completed
-        before consent.
-        """
-        model_cls = django_apps.get_model(self.maternal_eligibility_model)
-        return model_cls.objects.get(
-            screening_identifier=self.screening_identifier)
+    @property
+    def consent_version(self):
+        return self.version
 
     class Meta(ConsentModelMixin.Meta):
         app_label = 'td_maternal'
