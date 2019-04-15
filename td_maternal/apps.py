@@ -41,7 +41,7 @@ if settings.APP_NAME == 'td_maternal':
         protocol_name = 'Tshilo Dikotla'
         protocol_title = ''
         study_open_datetime = datetime(
-            2016, 12, 31, 0, 0, 0, tzinfo=gettz('UTC'))
+            2016, 4, 1, 0, 0, 0, tzinfo=gettz('UTC'))
         study_close_datetime = datetime(
             2020, 12, 31, 23, 59, 59, tzinfo=gettz('UTC'))
 
