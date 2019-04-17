@@ -18,12 +18,16 @@ class AntenatalEnrollmentForm(
         widget=forms.TextInput(attrs={'readonly': 'readonly'}))
 
     def clean(self):
+        rapid_test_result = self.cleaned_data.get('rapid_test_result')
         rapid_test_date = self.cleaned_data.get('rapid_test_date')
-
+        if self.instance.rapid_test_result and rapid_test_result:
+            if rapid_test_result != self.instance.rapid_test_result:
+                raise ValidationError(
+                    'The rapid test result cannot be changed')
         if self.instance.rapid_test_date and rapid_test_date:
             if rapid_test_date != self.instance.rapid_test_date:
                 raise ValidationError(
-                    'The rapid test result cannot be changed')
+                    'The rapid test result date cannot be changed')
         super().clean()
 
     class Meta:
