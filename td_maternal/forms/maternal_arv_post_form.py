@@ -1,3 +1,4 @@
+from django.apps import apps as django_apps
 from django import forms
 from edc_constants.constants import NEW
 from td_maternal_validators.form_validators import MarternalArvPostFormValidator
@@ -11,6 +12,8 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
 
     form_validator_cls = MarternalArvPostFormValidator
 
+    maternal_arv = 'td_maternal.maternalarv'
+
     def clean(self):
         cleaned_data = super().clean()
         arv_code = self.data.get('maternalarvpostmed_set-0-arv_code')
@@ -20,6 +23,7 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
                         {'arv_status':
                          'Please complete the maternal arv table.'})
         self.validate_arv_modified()
+        self.validate_arv_history()
 
     def validate_arv_modified(self):
         total_arvs = int(self.data.get('maternalarvpostmed_set-TOTAL_FORMS'))
@@ -47,6 +51,43 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
 
             if arv_status == 'Permanently discontinued' and modification_date:
                 return modification_date
+
+    def validate_arv_history(self):
+        arvs = self.get_all_arvs()
+        arv_codes = []
+        total_arvs = int(self.data.get('maternalarvpostmed_set-TOTAL_FORMS'))
+
+        if arvs:
+            for arv in arvs:
+                arv_codes.append(arv.arv_code)
+
+        for i in range(total_arvs):
+            arv_code = self.data.get(
+                'maternalarvpostmed_set-' + str(i) + '-arv_code')
+            arv_status = self.data.get(
+                'maternalarvpostmed_set-' + str(i) + '-dose_status')
+            if arv_code and not (arv_code in arv_codes):
+                if not (arv_status == NEW):
+                    raise forms.ValidationError(
+                        {'arv_status':
+                         'Patient have not taking ARV ' + arv_code})
+
+    def get_all_arvs(self):
+        subject_identifier = self.cleaned_data.get(
+            'maternal_visit').appointment.subject_identifier
+        try:
+            maternal_arvs = self.maternal_arv_cls.objects.filter(
+                maternal_arv_preg__maternal_visit__appointment__subject_identifier=\
+                subject_identifier, stop_date__isnull=True)
+        except self.maternal_arv_cls.DoesNotExist:
+            raise forms.ValidationError(
+                'Participant have not started arv\'s yet')
+        else:
+            return maternal_arvs
+
+    @property
+    def maternal_arv_cls(self):
+        return django_apps.get_model(self.maternal_arv)
 
     class Meta:
         model = MaternalArvPost
