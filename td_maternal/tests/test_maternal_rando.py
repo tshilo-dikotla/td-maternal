@@ -46,6 +46,11 @@ class TestMaternalRuleGroup(BaseTestCase):
 
         self.subject_screening = mommy.make_recipe(
             'td_maternal.subjectscreening')
+
+        self.subject_consent = mommy.make_recipe(
+            'td_maternal.tdconsentversion',
+            screening_identifier=self.subject_screening.screening_identifier)
+
         options = {
             'screening_identifier': self.subject_screening.screening_identifier,
             'consent_datetime': get_utcnow, }

@@ -1,5 +1,3 @@
-from django.apps import apps as django_apps
-from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from edc_base.model_managers import HistoricalRecords
@@ -10,11 +8,13 @@ from edc_constants.constants import NO, YES
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import date_not_before_study_start
 
-from ..models.subject_consent import SubjectConsent
 from .enrollment_mixin import EnrollmentMixin
+from .model_mixins import ConsentVersionModelModelMixin
+from .subject_consent import SubjectConsent
 
 
-class AntenatalEnrollment(UniqueSubjectIdentifierFieldMixin,
+class AntenatalEnrollment(ConsentVersionModelModelMixin,
+                          UniqueSubjectIdentifierFieldMixin,
                           EnrollmentMixin, BaseUuidModel):
 
     knows_lmp = models.CharField(
@@ -59,10 +59,6 @@ class AntenatalEnrollment(UniqueSubjectIdentifierFieldMixin,
 
     history = HistoricalRecords()
 
-    def save(self, *args, **kwargs):
-        self.consent_version = self.get_consent_version()
-        super(AntenatalEnrollment, self).save(*args, **kwargs)
-
     def __str__(self):
         return f'antenatal: {self.subject_identifier}'
 
@@ -104,28 +100,6 @@ class AntenatalEnrollment(UniqueSubjectIdentifierFieldMixin,
         if self.is_diabetic == YES:
             unenrolled_error_message = 'Diabetic'
         return unenrolled_error_message
-
-    def get_consent_version(self):
-        subject_screening_cls = django_apps.get_model(
-            'td_maternal.subjectscreening')
-        consent_version_cls = django_apps.get_model(
-            'td_maternal.tdconsentversion')
-        try:
-            subject_screening_obj = subject_screening_cls.objects.get(
-                subject_identifier=self.subject_identifier)
-        except subject_screening_cls.DoesNotExist:
-            raise ValidationError(
-                'Missing Subject Screening form. Please complete '
-                'it before proceeding.')
-        else:
-            try:
-                consent_version_obj = consent_version_cls.objects.get(
-                    screening_identifier=subject_screening_obj.screening_identifier)
-            except consent_version_cls.DoesNotExist:
-                raise ValidationError(
-                    'Missing Consent Version form. Please complete '
-                    'it before proceeding.')
-            return consent_version_obj.version
 
     @property
     def schedule_name(self):

@@ -14,11 +14,13 @@ from edc_visit_schedule.site_visit_schedules import site_visit_schedules
 
 from ..action_items import MATERNALOFF_STUDY_ACTION
 from ..choices import OFF_STUDY_REASON
+from .model_mixins import ConsentVersionModelModelMixin
 from .onschedule import OnScheduleAntenatalEnrollment
 from .onschedule import OnScheduleAntenatalVisitMembership, OnScheduleMaternalLabourDel
 
 
-class MaternalOffStudy(OffScheduleModelMixin, ActionModelMixin, BaseUuidModel):
+class MaternalOffStudy(ConsentVersionModelModelMixin, OffScheduleModelMixin,
+                       ActionModelMixin, BaseUuidModel):
 
     tracking_identifier_prefix = 'ST'
 

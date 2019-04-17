@@ -18,6 +18,9 @@ class TestSubjectConsent(TestCase):
     def setUp(self):
         self.subject_screening = mommy.make_recipe(
             'td_maternal.subjectscreening')
+        self.subject_consent = mommy.make_recipe(
+            'td_maternal.tdconsentversion',
+            screening_identifier=self.subject_screening.screening_identifier)
 
     def test_allocated_subject_identifier(self):
         """Test consent successfully allocates subject identifier on

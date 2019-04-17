@@ -9,9 +9,11 @@ from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import datetime_not_before_study_start
 
 from ..models.subject_consent import SubjectConsent
+from .model_mixins import ConsentVersionModelModelMixin
 
 
-class AntenatalVisitMembership(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
+class AntenatalVisitMembership(ConsentVersionModelModelMixin,
+                               UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
 
     consent_model = SubjectConsent
 
@@ -30,34 +32,8 @@ class AntenatalVisitMembership(UniqueSubjectIdentifierFieldMixin, BaseUuidModel)
 
     history = HistoricalRecords()
 
-    def save(self, *args, **kwargs):
-        self.consent_version = self.get_consent_version()
-        super(AntenatalVisitMembership, self).save(*args, **kwargs)
-
     def __str__(self):
         return f"{self.subject_identifier}"
-
-    def get_consent_version(self):
-        subject_screening_cls = django_apps.get_model(
-            'td_maternal.subjectscreening')
-        consent_version_cls = django_apps.get_model(
-            'td_maternal.tdconsentversion')
-        try:
-            subject_screening_obj = subject_screening_cls.objects.get(
-                subject_identifier=self.subject_identifier)
-        except subject_screening_cls.DoesNotExist:
-            raise ValidationError(
-                'Missing Subject Screening form. Please complete '
-                'it before proceeding.')
-        else:
-            try:
-                consent_version_obj = consent_version_cls.objects.get(
-                    screening_identifier=subject_screening_obj.screening_identifier)
-            except consent_version_cls.DoesNotExist:
-                raise ValidationError(
-                    'Missing Consent Version form. Please complete '
-                    'it before proceeding.')
-            return consent_version_obj.version
 
     @property
     def schedule_name(self):

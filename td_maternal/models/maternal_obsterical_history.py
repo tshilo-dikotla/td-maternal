@@ -12,7 +12,7 @@ class MaternalObstericalHistory(CrfModelMixin):
     prev_pregnancies = models.IntegerField(
         verbose_name='Including this pregnancy, how many previous pregnancies '
         'for this participant?',
-        validators=[MinValueValidator(0), MaxValueValidator(20), ],
+        validators=[MinValueValidator(1), MaxValueValidator(20), ],
     )
 
     pregs_24wks_or_more = models.IntegerField(

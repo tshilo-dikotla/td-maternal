@@ -48,3 +48,5 @@ class MaternalLocatorAdmin(ModelAdminMixin, admin.ModelAdmin):
         'may_visit_home': admin.VERTICAL,
         'may_contact_indirectly': admin.VERTICAL,
         'has_caretaker': admin.VERTICAL}
+
+    search_fields = ['subject_identifier']
