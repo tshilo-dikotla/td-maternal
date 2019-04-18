@@ -49,10 +49,14 @@ class EnrollmentHelper(object):
         """
 
         pos = self.known_hiv_pos_with_evidence(
-        ) or self.tested_pos_at32wks() or self.tested_pos_rapidtest()
-        neg = (self.tested_neg_at32wks() or self.tested_neg_rapidtest() or
+        ) or self.tested_pos_at32wks()
+
+        neg = (self.tested_neg_at32wks() or
                self.tested_neg_previously_result_within_3_months())
-        if neg and not pos:
+
+        if self.rapidtest_result() in [POS, NEG]:
+            return self.rapidtest_result()
+        elif neg and not pos:
             return NEG
         elif pos and not neg:
             return POS
@@ -78,11 +82,9 @@ class EnrollmentHelper(object):
             return True
         return False
 
-    def tested_pos_rapidtest(self):
-        if (self.instance_antenatal.rapid_test_done == YES and
-                self.instance_antenatal.rapid_test_result == POS):
-            return True
-        return False
+    def rapidtest_result(self):
+        if self.instance_antenatal.rapid_test_done == YES:
+            return self.instance_antenatal.rapid_test_result
 
     def tested_neg_at32wks(self):
         """"""
@@ -90,12 +92,6 @@ class EnrollmentHelper(object):
             self.test_date_is_on_or_after_32wks() and
                 self.instance_antenatal.week32_result == NEG and
                 self.instance_antenatal.evidence_32wk_hiv_status == YES):
-            return True
-        return False
-
-    def tested_neg_rapidtest(self):
-        if (self.instance_antenatal.rapid_test_done == YES and
-                self.instance_antenatal.rapid_test_result == NEG):
             return True
         return False
 
@@ -131,7 +127,7 @@ class EnrollmentHelper(object):
         False to indicate a rapid test is required.
         """
         if (self.known_hiv_pos_with_evidence() or
-                self.tested_pos_at32wks() or self.tested_neg_at32wks()):
+                self.rapidtest_result() in [POS, NEG]):
             return True
         return False
 
