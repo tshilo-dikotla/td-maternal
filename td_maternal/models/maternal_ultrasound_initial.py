@@ -1,7 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 from edc_action_item.model_mixins import ActionModelMixin
-from edc_base.model_validators import date_is_future
 
 from ..action_items import ULTRASOUND_ACTION
 from ..choices import GESTATIONS_NUMBER, ZERO_ONE
