@@ -57,7 +57,8 @@ class MaternalVisitAdmin(
                 'appointment',
                 'report_datetime',
                 'reason',
-                'reason_unscheduled',
+                'reason_missed',
+                'reason_unscheduled'
                 'study_status',
                 'require_crfs',
                 'info_source',
