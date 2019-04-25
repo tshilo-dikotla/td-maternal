@@ -48,6 +48,8 @@ class MaternalVisit(VisitModelMixin, CreatesMetadataModelMixin,
         verbose_name=(
             'If \'Unscheduled\' above, provide reason for '
             'the unscheduled visit'),
+        blank=True,
+        null=True,
         max_length=25,)
 
     study_status = models.CharField(
