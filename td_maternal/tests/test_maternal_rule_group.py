@@ -444,3 +444,24 @@ class TestMaternalRuleGroup(BaseTestCase):
                 panel_name='pbmc_pl_store',
                 subject_identifier=self.subject_consent.subject_identifier,
                 visit_code='1010M').entry_status, REQUIRED)
+
+    @tag('1020')
+    def test_pbmc_store_required_1020M(self):
+        self.create_mother(self.hiv_neg_mother_options())
+
+        appointment_1020 = Appointment.objects.get(
+            subject_identifier=self.subject_consent.subject_identifier,
+            visit_code='1020M')
+
+        mommy.make_recipe(
+            'td_maternal.maternalvisit',
+            subject_identifier=self.subject_consent.subject_identifier,
+            report_datetime=get_utcnow(),
+            appointment=appointment_1020)
+
+        self.assertEqual(
+            RequisitionMetadata.objects.get(
+                model='td_maternal.maternalrequisition',
+                panel_name='pbmc_pl_store',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='1020M').entry_status, NOT_REQUIRED)
