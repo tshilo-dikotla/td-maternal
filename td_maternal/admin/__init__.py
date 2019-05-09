@@ -1,5 +1,7 @@
 from .antenatal_enrollment_admin import AntenatalEnrollmentAdmin
 from .antenatal_visit_membership_admin import AntenataVisitMembershipAdmin
+from .karabo_subject_consent_admin import KaraboSubjectConsentAdmin
+from .karabo_subject_screening_admin import KaraboSubjectScreeningAdmin
 from .maternal_arv_admin import MaternalArvAdmin
 from .maternal_arv_history_admin import MaternalLifetimeArvHistoryAdmin
 from .maternal_arv_post_admin import MaternalArvPostAdhAdmin

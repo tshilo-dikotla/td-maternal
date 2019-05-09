@@ -15,7 +15,6 @@ from edc_visit_schedule.fieldsets import visit_schedule_fieldset_tuple
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalVisitForm
 from ..models import MaternalVisit
-from .modeladmin_mixins import ModelAdminMixin
 
 
 class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMixin,

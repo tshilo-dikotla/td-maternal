@@ -3,6 +3,8 @@ from .antenatal_enrollment import AntenatalEnrollment
 from .antenatal_visit_membership import AntenatalVisitMembership
 from .eligibility import Eligibility
 from .enrollment_mixin import EnrollmentMixin
+from .karabo_subject_consent import KaraboSubjectConsent
+from .karabo_subject_screening import KaraboSubjectScreening
 from .list_models import Contraceptives
 from .maternal_arv import MaternalArv
 from .maternal_arv_history import MaternalLifetimeArvHistory
