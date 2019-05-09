@@ -96,7 +96,7 @@ class KaraboSubjectScreening(UniqueSubjectIdentifierFieldMixin,
         choices=YES_NO)
 
     class Meta:
-        app_label = 'td_infant'
+        app_label = 'td_maternal'
         verbose_name = "Karabo Eligibility"
         verbose_name_plural = "Karabo Eligibility"
 

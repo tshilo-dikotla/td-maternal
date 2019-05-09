@@ -121,6 +121,6 @@ class KaraboSubjectConsent(CryptoMixin, SiteModelMixin, BaseUuidModel):
         choices=ANSWERS)
 
     class Meta:
-        app_label = 'td_infant'
+        app_label = 'td_maternal'
         verbose_name = "Karabo Subject Consent"
         verbose_name_plural = "Karabo Subject Consents"
