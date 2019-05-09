@@ -30,10 +30,6 @@ class KaraboSubjectConsent(CryptoMixin, SiteModelMixin, BaseUuidModel):
         max_length=36,
         unique=True)
 
-    maternal_subject_identifier = models.CharField(
-        verbose_name="Subject Identifier",
-        max_length=50)
-
     report_datetime = models.DateTimeField(
         verbose_name="Report Date",
         validators=[
@@ -123,25 +119,6 @@ class KaraboSubjectConsent(CryptoMixin, SiteModelMixin, BaseUuidModel):
         ' of the consent form.',
         max_length=25,
         choices=ANSWERS)
-
-    def get_karabo_eligibility(self):
-        """Returns the maternal eligibility model instance.
-           Instance must exist since MaternalEligibility is completed
-           before consent.
-        """
-        model_cls = django_apps.get_model('td_infant.karabosubjectscreening')
-        try:
-            karabo_model_obj = model_cls.objects.get(
-                screening_identifier=self.screening_identifier)
-        except model_cls.DoesNotExist:
-            raise ValidationError(
-                f'Missing Karabo Screening.')
-        else:
-            return karabo_model_obj
-
-    def save(self, *args, **kwargs):
-        self.maternal_subject_identifier = self.subject_identifier[:-3]
-        super(KaraboSubjectConsent, self).save(*args, **kwargs)
 
     class Meta:
         app_label = 'td_infant'
