@@ -1,6 +1,4 @@
-from django.apps import apps as django_apps
 from django.conf import settings
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.safestring import mark_safe
 from django_crypto_fields.fields import (

@@ -72,8 +72,8 @@ class KaraboSubjectScreening(UniqueSubjectIdentifierFieldMixin,
         max_length=3)
 
     infant_months = models.CharField(
-        verbose_name='Has the infant reached 14 months of age or has the '
-        'infant already attended the 12 month Tshilo Dikotla Study visit?',
+        verbose_name='Has the infant reached 20 months of age or has the '
+        'infant already attended the 18 month Tshilo Dikotla Study visit?',
         choices=YES_NO,
         max_length=3)
 
