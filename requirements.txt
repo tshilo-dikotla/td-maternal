@@ -16,7 +16,6 @@ git+https://github.com/botswana-harvard/edc-metadata.git@develop#egg=edc_metadat
 git+https://github.com/botswana-harvard/edc-metadata-rules.git@develop#egg=edc_metadata_rules
 git+https://github.com/botswana-harvard/edc-model-admin.git@develop#egg=edc_model_admin
 git+https://github.com/botswana-harvard/edc-model-wrapper.git@develop#egg=edc_model_wrapper
-git+https://github.com/botswana-harvard/edc-offstudy.git
 git+https://github.com/botswana-harvard/edc-prn.git@develop#egg=edc_prn
 git+https://github.com/botswana-harvard/edc-protocol.git@develop#egg=edc_protocol
 git+https://github.com/botswana-harvard/edc-reference.git@develop#egg=edc_reference
@@ -29,7 +28,6 @@ git+https://github.com/botswana-harvard/edc-visit-tracking.git@develop#egg=edc_v
 git+https://github.com/botswana-harvard/edc-timepoint.git@develop#egg=edc_timepoint
 git+https://github.com/botswana-harvard/django-crypto-fields.git@develop#egg=django_crypto_fields
 git+https://github.com/botswana-harvard/django-revision.git@develop#egg=django_revision
-git+https://github.com/botswana-harvard/edc-label.git
 git+https://github.com/tshilo-dikotla/td-labs.git@develop#egg=td_labs
 git+https://github.com/tshilo-dikotla/td-reference.git@develop#egg=td_reference
 git+https://github.com/tshilo-dikotla/td-maternal-validators.git@develop#egg=td_maternal_validators

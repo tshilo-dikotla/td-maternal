@@ -1,6 +1,7 @@
 from edc_constants.constants import (
     OFF_STUDY, ON_STUDY, FAILED_ELIGIBILITY, PARTICIPANT)
 from edc_constants.constants import ALIVE, DEAD, NOT_APPLICABLE, OTHER, UNKNOWN
+from edc_constants.constants import NO
 from edc_visit_tracking.constants import MISSED_VISIT, COMPLETED_PROTOCOL_VISIT
 from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
 
@@ -10,6 +11,7 @@ from .constants import NO_MODIFICATIONS, START
 ANSWERS = (
     ('Accepted', 'Yes and the client accepted the signed copy of the consent'),
     ('Refused', 'Yes and the client refused the signed copy of the consent'),
+    (NO, 'No')
 )
 
 STUDY_SITES = (
