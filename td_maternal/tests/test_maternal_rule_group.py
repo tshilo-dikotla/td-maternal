@@ -466,33 +466,3 @@ class TestMaternalRuleGroup(BaseTestCase):
                 panel_name='pbmc_pl_store',
                 subject_identifier=self.subject_consent.subject_identifier,
                 visit_code='1020M').entry_status, NOT_REQUIRED)
-
-    @tag('srh')
-    def test_srh_required(self):
-        self.create_mother(self.hiv_pos_mother_options())
-
-        mommy.make_recipe(
-            'td_maternal.maternallabourdel',
-            subject_identifier=self.subject_consent.subject_identifier,
-            report_datetime=get_utcnow())
-
-        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", Appointment.objects.all())
-
-        for x in Appointment.objects.all().order_by('timepoint'):
-            visit = mommy.make_recipe(
-                'td_maternal.maternalvisit',
-                subject_identifier=self.subject_consent.subject_identifier,
-                report_datetime=get_utcnow(),
-                appointment=x)
-            if x.visit_code == '2120M':
-                mommy.make_recipe(
-                    'td_maternal.maternalcontraception',
-                    maternal_visit=visit,)
-            if x.visit_code == '2240M':
-                break
-
-        self.assertEqual(
-            CrfMetadata.objects.get(
-                model='td_maternal.maternalsrh',
-                subject_identifier=self.subject_consent.subject_identifier,
-                visit_code='2240M').entry_status, REQUIRED)
