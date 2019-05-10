@@ -1,8 +1,13 @@
 from django import forms
+from edc_form_validators import FormValidatorMixin
 from ..models import KaraboSubjectConsent
+from td_maternal_validators.form_validators import (
+    KaraboSubjectConsentFormValidator)
 
 
-class KaraboSubjectConsentForm(forms.ModelForm):
+class KaraboSubjectConsentForm(FormValidatorMixin):
+
+    form_validator_cls = KaraboSubjectConsentFormValidator
 
     screening_identifier = forms.CharField(
         label='Screening Identifier',

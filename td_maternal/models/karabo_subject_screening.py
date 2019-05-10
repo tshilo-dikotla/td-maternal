@@ -46,35 +46,41 @@ class KaraboSubjectScreening(UniqueSubjectIdentifierFieldMixin,
         verbose_name='Has this woman given birth to a live born infant'
         ' that has been enrolled in the Tshilo Dikotla ',
         choices=YES_NO,
+        help_text='If no then ineligible for study',
         max_length=3)
 
     infant_weight = models.CharField(
         verbose_name='Did the infant have a birth weight of ≥ 2.00 kilograms?',
         choices=YES_NO,
+        help_text='If no then ineligible for study',
         max_length=3)
 
     major_anomalies = models.CharField(
         verbose_name='Was this infant born with any major '
         'congenital anomalies',
         choices=YES_NO,
+        help_text='If yes then ineligible for study',
         max_length=3)
 
     birth_complications = models.CharField(
         verbose_name='Did this infant experience any severe birth '
         'complications such as birth asphyxia or seizures?',
         choices=YES_NO,
+        help_text='If yes then ineligible for study',
         max_length=3)
 
     infant_documentation = models.CharField(
         verbose_name='Does the infant have documentation that they received a '
         'BCG vaccine within 72 hours of birth in the Under 5 Health Booklet?',
         choices=YES_NO,
+        help_text='If no then ineligible for study',
         max_length=3)
 
     infant_months = models.CharField(
         verbose_name='Has the infant reached 20 months of age or has the '
         'infant already attended the 18 month Tshilo Dikotla Study visit?',
         choices=YES_NO,
+        help_text='If yes then ineligible for study',
         max_length=3)
 
     tb_treatment = models.CharField(
@@ -82,17 +88,20 @@ class KaraboSubjectScreening(UniqueSubjectIdentifierFieldMixin,
         'pregnancy or at the time she delivered the infant enrolled in '
         'the Tshilo Dikotla Study?',
         choices=YES_NO,
+        help_text='If yes then ineligible for study',
         max_length=3)
 
     incarcerated = models.CharField(
         verbose_name='Is this woman currently incarcerated?',
         max_length=3,
+        help_text='If yes then ineligible for study',
         choices=YES_NO)
 
     willing_to_consent = models.CharField(
         verbose_name='Is the woman willing to provide informed consent'
         ' to participate in the Karabo study?',
         max_length=3,
+        help_text='If no then ineligible for study',
         choices=YES_NO)
 
     class Meta:
