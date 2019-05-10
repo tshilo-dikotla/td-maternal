@@ -216,8 +216,8 @@ karabosubjectscreening = Recipe(
     major_anomalies=NO,
     birth_complications=NO,
     infant_documentation=YES,
-    infant_months=YES,
-    tb_treatment=YES,
+    infant_months=NO,
+    tb_treatment=NO,
     incarcerated=NO,
     willing_to_consent=YES
 )
