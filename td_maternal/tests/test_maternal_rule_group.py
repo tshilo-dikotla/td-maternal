@@ -1,5 +1,4 @@
 from dateutil.relativedelta import relativedelta
-from django.test import tag
 from django.utils import timezone
 from edc_base.utils import get_utcnow
 from edc_constants.constants import YES, NO, NEG
@@ -12,7 +11,6 @@ from edc_appointment.models import Appointment
 from .base_test_case import BaseTestCase
 
 
-@tag('m_rule')
 class TestMaternalRuleGroup(BaseTestCase):
 
     def setUp(self):
@@ -27,7 +25,6 @@ class TestMaternalRuleGroup(BaseTestCase):
                 subject_identifier=self.subject_consent.subject_identifier,
                 visit_code='1000M').entry_status, REQUIRED)
 
-    @tag('1020M')
     def test_maternalarvpreg_required_1020(self):
         self.create_mother(self.hiv_pos_mother_options())
 
@@ -101,7 +98,6 @@ class TestMaternalRuleGroup(BaseTestCase):
                 subject_identifier=self.subject_consent.subject_identifier,
                 visit_code='2020M').entry_status, REQUIRED)
 
-    @tag('m_rule')
     def test_maternalsrh_not_required(self):
         self.create_mother()
         mommy.make_recipe(
@@ -446,7 +442,6 @@ class TestMaternalRuleGroup(BaseTestCase):
                 subject_identifier=self.subject_consent.subject_identifier,
                 visit_code='1010M').entry_status, REQUIRED)
 
-    @tag('1020')
     def test_pbmc_store_required_1020M(self):
         self.create_mother(self.hiv_neg_mother_options())
 
@@ -466,3 +461,32 @@ class TestMaternalRuleGroup(BaseTestCase):
                 panel_name='pbmc_pl_store',
                 subject_identifier=self.subject_consent.subject_identifier,
                 visit_code='1020M').entry_status, NOT_REQUIRED)
+
+    def test_srh_required(self):
+        self.create_mother(self.hiv_pos_mother_options())
+
+        mommy.make_recipe(
+            'td_maternal.maternallabourdel',
+            subject_identifier=self.subject_consent.subject_identifier,
+            report_datetime=get_utcnow())
+
+        for x in Appointment.objects.all().order_by('timepoint'):
+
+            if x.visit_code not in ['1000M', '1010M']:
+                visit = mommy.make_recipe(
+                    'td_maternal.maternalvisit',
+                    subject_identifier=self.subject_consent.subject_identifier,
+                    report_datetime=get_utcnow(),
+                    appointment=x)
+            if x.visit_code == '2120M':
+                mommy.make_recipe(
+                    'td_maternal.maternalcontraception',
+                    maternal_visit=visit,)
+            if x.visit_code == '2240M':
+                break
+
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternalsrh',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='2240M').entry_status, REQUIRED)
