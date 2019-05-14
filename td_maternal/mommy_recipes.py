@@ -8,7 +8,7 @@ from model_mommy.recipe import Recipe, seq
 
 from .constants import NOT_APPLICABLE
 from .models import (
-    SubjectConsent, SubjectScreening, AntenatalEnrollment,
+    SubjectConsent, SubjectScreening, AntenatalEnrollment, MaternalSrh,
     AntenatalVisitMembership, MaternalLabourDel, MaternalUltraSoundInitial,
     MaternalVisit, MaternalRando, RapidTestResult, MaternalContraception,
     MaternalPostPartumDep, MaternalInterimIdcc, KaraboSubjectConsent)
@@ -114,6 +114,10 @@ maternallabourdel = Recipe(
     csection_reason=NOT_APPLICABLE,
     live_infants_to_register=1,
     valid_regiment_duration=YES)
+
+maternalsrh = Recipe(
+    MaternalSrh,
+    report_datetime=get_utcnow())
 
 maternalrando = Recipe(
     MaternalRando,

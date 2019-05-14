@@ -1,4 +1,5 @@
 from dateutil.relativedelta import relativedelta
+from django.test import tag
 from django.utils import timezone
 from edc_base.utils import get_utcnow
 from edc_constants.constants import YES, NO, NEG
@@ -8,6 +9,7 @@ from model_mommy import mommy
 
 from edc_appointment.models import Appointment
 
+from ..models import MaternalVisit
 from .base_test_case import BaseTestCase
 
 
@@ -462,6 +464,7 @@ class TestMaternalRuleGroup(BaseTestCase):
                 subject_identifier=self.subject_consent.subject_identifier,
                 visit_code='1020M').entry_status, NOT_REQUIRED)
 
+    @tag('rg')
     def test_srh_required(self):
         self.create_mother(self.hiv_pos_mother_options())
 
@@ -481,12 +484,25 @@ class TestMaternalRuleGroup(BaseTestCase):
             if x.visit_code == '2120M':
                 mommy.make_recipe(
                     'td_maternal.maternalcontraception',
-                    maternal_visit=visit,)
-            if x.visit_code == '2240M':
-                break
+                    maternal_visit=visit,
+                    report_datetime=get_utcnow(),
+                    srh_referral=YES)
 
         self.assertEqual(
             CrfMetadata.objects.get(
                 model='td_maternal.maternalsrh',
                 subject_identifier=self.subject_consent.subject_identifier,
                 visit_code='2240M').entry_status, REQUIRED)
+
+        visit_2240 = MaternalVisit.objects.get(visit_code='2240M')
+        mommy.make_recipe('td_maternal.maternalsrh',
+                          maternal_visit=visit_2240,
+                          report_datetime=get_utcnow())
+        visit_2300M = MaternalVisit.objects.get(visit_code='2300M')
+        visit_2300M.save()
+
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='td_maternal.maternalsrh',
+                subject_identifier=self.subject_consent.subject_identifier,
+                visit_code='2300M').entry_status, NOT_REQUIRED)
