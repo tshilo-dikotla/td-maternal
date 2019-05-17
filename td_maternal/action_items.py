@@ -55,8 +55,8 @@ class MaternalLabourDeliveryAction(Action):
 class MaternalOffStudyAction(Action):
     name = MATERNALOFF_STUDY_ACTION
     display_name = 'Submit Maternal Offstudy'
-    reference_model = 'td_maternal.maternaloffstudy'
-    admin_site_name = 'td_maternal_admin'
+    reference_model = 'td_prn.maternaloffstudy'
+    admin_site_name = 'td_prn_admin'
     priority = HIGH_PRIORITY
     singleton = True
 
@@ -64,15 +64,15 @@ class MaternalOffStudyAction(Action):
 class MaternalDeathReportAction(Action):
     name = MATERNAL_DEATH_REPORT_ACTION
     display_name = 'Submit Maternal Death Report'
-    reference_model = 'td_maternal.maternaldeathreport'
-    admin_site_name = 'td_maternal_admin'
+    reference_model = 'td_prn.maternaldeathreport'
+    admin_site_name = 'td_prn_admin'
     priority = HIGH_PRIORITY
     singleton = True
 
     def get_next_actions(self):
         actions = []
         maternal_deathreport_cls = django_apps.get_model(
-            'td_maternal.maternaldeathreport')
+            'td_prn.maternaldeathreport')
 
         subject_identifier = self.reference_model_obj.subject_identifier
         try:
