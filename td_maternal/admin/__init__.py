@@ -13,7 +13,6 @@ from .maternal_clinical_measurements_one_admin import MaternalClinicalMeasuremen
 from .maternal_clinical_measurements_two_admin import MaternalClinicalMeasurementsTwoAdmin
 from .maternal_contact_admin import MaternalContactAdmin
 from .maternal_contraception_admin import MaternalContraceptionAdmin
-# from .maternal_death_report_admin import MaternalDeathReportAdmin
 from .maternal_demographics_admin import MaternalDemographicsAdmin
 from .maternal_diagnoses_admin import MaternalDiagnosesAdmin
 from .maternal_hiv_interim_hx import MaternalHivInterimHxAdmin
@@ -22,7 +21,6 @@ from .maternal_labour_del_admin import MaternalLabourDelAdmin
 from .maternal_locator_admin import MaternalLocatorAdmin
 from .maternal_medical_history_admin import MaternalMedicalHistoryAdmin
 from .maternal_obsterical_history_admin import MaternalObstericalHistoryAdmin
-# from .maternal_off_study_admin import MaternalOffStudyAdmin
 from .maternal_postpartum_dep_admin import MaternalPostPartumDepAdmin
 from .maternal_postpartum_fu_admin import MaternalPostPartumFuAdmin
 from .maternal_randomization_admin import MartenalRandoAdmin

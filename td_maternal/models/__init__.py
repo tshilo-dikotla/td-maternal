@@ -16,7 +16,6 @@ from .maternal_clinical_measurements_one import MaternalClinicalMeasurementsOne
 from .maternal_clinical_measurements_two import MaternalClinicalMeasurementsTwo
 from .maternal_contact import MaternalContact
 from .maternal_contraception import MaternalContraception
-# from .maternal_death_report import MaternalDeathReport
 from .maternal_demographics import MaternalDemographics
 from .maternal_diagnoses import MaternalDiagnoses
 from .maternal_hiv_interim_hx import MaternalHivInterimHx
@@ -25,7 +24,6 @@ from .maternal_labour_del import MaternalLabourDel
 from .maternal_locator import MaternalLocator
 from .maternal_medical_history import MaternalMedicalHistory
 from .maternal_obsterical_history import MaternalObstericalHistory
-# from .maternal_off_study import MaternalOffStudy
 from .maternal_postpartum_dep import MaternalPostPartumDep
 from .maternal_postpartum_fu import MaternalPostPartumFu
 from .maternal_randomization import MaternalRando
