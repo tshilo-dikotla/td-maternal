@@ -391,97 +391,12 @@ INFO_PROVIDER = (
     (OTHER, 'Other'),
 )
 
-INFANT_OFF_DRUG_REASON = (
-    ('completed protocol',
-     '1. Completion of protocol-required period of study treatment'),
-    ('off-study',
-     '2. Participant going off-study for any reason, including death '
-     'or lost to follow-up'),
-    (
-        'toxicity',
-        ('3. At Investigator\'s discretion, due to persistent toxicity '
-         '(confirmed or suspected to be possibly related to study drug)')),
-    ('caregiver',
-     '4. Participant\'s mother/caregiver no longer wants child to '
-     'receive study drug'),
-    ('hiv infected', '5. Child is HIV- infected (Open-label CTX indicated)'),
-    (OTHER, '9. Other'),
-)
-
-INFANT_VISIT_STUDY_STATUS = (
-    (ON_STUDY, 'On study'),
-    (OFF_STUDY,
-     'Off study-no further follow-up (including death); use only '
-     'for last study contact'),
-)
-
 MATERNAL_VISIT_STUDY_STATUS = (
     (ON_STUDY, 'On study'),
     (OFF_STUDY,
      'Off study-no further follow-up (including death); use only '
      'for last study contact'),
 )
-
-OFF_STUDY_REASON = [
-    ('multiple_vialble_gestations',
-     'Multiple (2 or more) viable gestations seen on ultrasound'),
-    ('miscarriage_or_arbotion_lt_20wks',
-     'Miscarriage or arbotion (fetal demise < 20 weeks GA)'),
-    ('fetal_death_gt_20wks',
-     'fetal Death at >= 20weeks GA (IUFD) or still born'),
-    ('maternal_seroconversion_gt_33wks',
-     'Maternal seroconversion after 33 weeks GA'),
-    ('took_art_less_than_4weeks',
-     'Mother took ART for less than 4 weeks during pregnancy'),
-    ('maternal_death_pre_deliv',
-     'Maternal death PRIOR to delivery (complete the Death Report '
-     'Form AF005)'),
-    ('maternal_death_post_deliv',
-     'Maternal death POST delivery (complete the Death Report Form AF005)'),
-    ('moving_out_of_study_area_pre_deliv',
-     'Participant stated she will be moving out of the study area or '
-     'unable to stay in study area PRIOR delivery'),
-    ('moving_out_of_study_area_post_deliv',
-     'Participant stated she will be moving out of the study area or '
-     'unable to stay in study area POST delivery'),
-    ('loss_to_followup_prior_deliv',
-     'Participant lost to follow-up/unable to locate PRIOR to delivery'),
-    ('loss_to_followup_post_deliv',
-     'Participant lost to follow-up/unable to locate POST to delivery'),
-    ('loss_to_followup_contacted_prior_deliv',
-     'Participant lost to follow-up, contacted but did not come to study '
-     'clinic PRIOR to delivery'),
-    ('loss_to_followup_contacted_post_deliv',
-     'Participant lost to follow-up, contacted but did not come to study '
-     'clinic POST to delivery'),
-    ('withdrew_consent_prior_deliv',
-     'Mother changed mind and withdrew consent PRIOR to delivery'),
-    ('withdrew_consent_post_deliv',
-     'Mother changed mind and withdrew consent POST to delivery'),
-    ('father_refused_prior_deliv',
-     'Father of the baby refused to participate, hence participant '
-     'withdrew consent PRIOR delivery'),
-    ('father_refused_post_deliv',
-     'Father of the baby refused to participate, hence participant '
-     'withdrew consent POST delivery'),
-    ('family_member_refused_prior_deliv',
-     'Other family member refused to participate, hence participant '
-     'withdrew consent PRIOR delivery'),
-    ('family_member_refused_post_deliv',
-     'Other family member refused to participate, hence participant '
-     'withdrew consent POST delivery'),
-    ('infant_hiv_infected', 'Infant found to be HIV infected'),
-    ('infant_death', 'Infant death (complete infant Death Report Form)'),
-    ('protocol_completion',
-     'Completion of protocol required period of time for observation '
-     '(see Study Protocol for definition of'
-     ' "Completion") (skip to end of form)'),
-    ('unable_to_determine_ga', 'Unable to confirm GA by Ultrasound.'),
-    ('enrolled_erroneously',
-     'Enrolled erroneously – did not meet eligibility criteria'),
-    ('mother_not_complete_anv1', 'Mother did not complete ANV1 (1010) visit.'),
-    (OTHER, 'Other'),
-]
 
 LOWER_GASTROINTESTINAL_ABNORMALITY = (
     ('None', 'None'),
