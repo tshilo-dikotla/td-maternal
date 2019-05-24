@@ -3,8 +3,6 @@ from edc_locator.action_items import SubjectLocatorAction
 from td_prn.action_items import MaternalOffStudyAction
 
 MATERNAL_LOCATOR_ACTION = 'submit-maternal-locator'
-MATERNALOFF_STUDY_ACTION = 'submit-maternaloff-study'
-MATERNAL_DEATH_REPORT_ACTION = 'submit-maternal-death-report'
 ULTRASOUND_ACTION = 'submit-ultrasound'
 MATERNAL_DELIVERY_ACTION = 'submit-maternal-delivery'
 
