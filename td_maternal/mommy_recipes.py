@@ -5,6 +5,7 @@ from edc_constants.constants import YES, NO, POS, ON_STUDY, ALIVE, PARTICIPANT
 from edc_visit_tracking.constants import SCHEDULED
 from faker import Faker
 from model_mommy.recipe import Recipe, seq
+# from td_prn.models import MaternalOffStudy
 
 from .constants import NOT_APPLICABLE
 from .models import (
@@ -13,11 +14,9 @@ from .models import (
     MaternalVisit, MaternalRando, RapidTestResult, MaternalContraception,
     MaternalPostPartumDep, MaternalInterimIdcc, KaraboSubjectConsent)
 from .models import KaraboSubjectScreening
-from .models import TdConsentVersion, SpecimenConsent, MaternalOffStudy
-
+from .models import TdConsentVersion, SpecimenConsent
 
 fake = Faker()
-
 
 subjectconsent = Recipe(
     SubjectConsent,
@@ -72,7 +71,6 @@ antenatalenrollment = Recipe(
     will_breastfeed=YES,
     will_get_arvs=YES,
     will_remain_onstudy=YES)
-
 
 antenatalvisitmembership = Recipe(
     AntenatalVisitMembership,
@@ -185,13 +183,6 @@ specimenconsent = Recipe(
     may_store_samples=YES,
     study_questions=YES,
     consent_signature=YES,
-)
-
-maternaloffstudy = Recipe(
-    MaternalOffStudy,
-    offstudy_date=get_utcnow().date(),
-    report_datetime=get_utcnow(),
-    reason='multiple_vialble_gestations'
 )
 
 karabosubjectconsent = Recipe(
