@@ -104,6 +104,12 @@ class KaraboSubjectScreening(UniqueSubjectIdentifierFieldMixin,
         help_text='If no then ineligible for study',
         choices=YES_NO)
 
+    ineligibility = models.TextField(
+        verbose_name="Reason not eligible",
+        max_length=150,
+        null=True,
+        editable=False)
+
     class Meta:
         app_label = 'td_maternal'
         verbose_name = "Karabo Eligibility"
