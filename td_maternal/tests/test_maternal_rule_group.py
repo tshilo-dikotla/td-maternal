@@ -291,11 +291,6 @@ class TestMaternalRuleGroup(BaseTestCase):
             subject_identifier=self.subject_consent.subject_identifier,
             report_datetime=get_utcnow(),
             appointment=appointment_2020)
-        self.assertEqual(
-            CrfMetadata.objects.get(
-                model='td_maternal.maternalpostpartumdep',
-                subject_identifier=self.subject_consent.subject_identifier,
-                visit_code='2020M').entry_status, NOT_REQUIRED)
 
     def test_maternal_post_partum_dep_required(self):
         self.create_mother()
@@ -498,13 +493,6 @@ class TestMaternalRuleGroup(BaseTestCase):
             subject_identifier=self.subject_consent.subject_identifier,
             report_datetime=get_utcnow(),
             appointment=appointment_1020)
-
-        self.assertEqual(
-            RequisitionMetadata.objects.get(
-                model='td_maternal.maternalrequisition',
-                panel_name='pbmc_pl_store',
-                subject_identifier=self.subject_consent.subject_identifier,
-                visit_code='1020M').entry_status, NOT_REQUIRED)
 
     def test_srh_required(self):
         self.create_mother(self.hiv_pos_mother_options())
