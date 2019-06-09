@@ -105,5 +105,5 @@ class SubjectConsent(
         app_label = 'td_maternal'
         verbose_name = 'Maternal Consent'
         unique_together = (('subject_identifier', 'version'),
-                           ('subject_identifier', 'screening_identifier'),
+                           ('subject_identifier', 'screening_identifier', 'version'),
                            ('first_name', 'dob', 'initials', 'version'))
