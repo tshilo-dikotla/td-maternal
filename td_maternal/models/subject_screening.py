@@ -7,10 +7,11 @@ from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import datetime_not_before_study_start
-from edc_search.model_mixins import SearchSlugManager, SearchSlugModelMixin
+from edc_search.model_mixins import SearchSlugManager
 
 from ..identifiers import ScreeningIdentifier
 from .eligibility import Eligibility
+from .model_mixins import SearchSlugModelMixin
 
 
 class SubjectScreeningManager(SearchSlugManager, models.Manager):
@@ -86,3 +87,8 @@ class SubjectScreening(NonUniqueSubjectIdentifierFieldMixin, SiteModelMixin,
 
     def natural_key(self):
         return self.screening_identifier
+
+    def get_search_slug_fields(self):
+        fields = super().get_search_slug_fields()
+        fields.append('screening_identifier')
+        return fields
