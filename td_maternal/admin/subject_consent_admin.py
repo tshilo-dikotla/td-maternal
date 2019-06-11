@@ -2,14 +2,16 @@ from django.contrib import admin
 from django.urls.base import reverse
 from django.urls.exceptions import NoReverseMatch
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
-from edc_consent.actions import (
-    flag_as_verified_against_paper, unflag_as_verified_against_paper)
-from edc_consent.modeladmin_mixins import ModelAdminConsentMixin
 from edc_model_admin import (
     ModelAdminFormAutoNumberMixin, ModelAdminInstitutionMixin,
     audit_fieldset_tuple, audit_fields, ModelAdminNextUrlRedirectMixin,
     ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin)
+from edc_model_admin import ModelAdminBasicMixin
 from simple_history.admin import SimpleHistoryAdmin
+
+from edc_consent.actions import (
+    flag_as_verified_against_paper, unflag_as_verified_against_paper)
+from edc_consent.modeladmin_mixins import ModelAdminConsentMixin
 
 from ..admin_site import td_maternal_admin
 from ..forms import SubjectConsentForm
@@ -41,8 +43,8 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMi
 
 
 @admin.register(SubjectConsent, site=td_maternal_admin)
-class SubjectConsentAdmin(ModelAdminConsentMixin, ModelAdminMixin, SimpleHistoryAdmin,
-                          admin.ModelAdmin):
+class SubjectConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
+                          SimpleHistoryAdmin, admin.ModelAdmin):
 
     form = SubjectConsentForm
 
@@ -118,4 +120,4 @@ class SubjectConsentAdmin(ModelAdminConsentMixin, ModelAdminMixin, SimpleHistory
 
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj=obj)
-                + audit_fields)
+                +audit_fields)
