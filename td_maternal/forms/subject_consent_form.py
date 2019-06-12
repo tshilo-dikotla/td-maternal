@@ -5,10 +5,7 @@ from django.core.exceptions import ValidationError
 from edc_base.sites import SiteModelFormMixin
 from edc_constants.constants import FEMALE
 from edc_form_validators import FormValidatorMixin
-
-from edc_consent.exceptions import ConsentObjectDoesNotExist
 from edc_consent.modelform_mixins import ConsentModelFormMixin
-from edc_consent.site_consents import site_consents, SiteConsentError
 from td_maternal_validators.form_validators import SubjectConsentFormValidator
 
 from ..models import SubjectConsent
@@ -23,6 +20,11 @@ class SubjectConsentForm(
     screening_identifier = forms.CharField(
         label='Screening Identifier',
         widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+
+    subject_identifier = forms.CharField(
+        label='Subject Identifier',
+        widget=forms.TextInput(attrs={'readonly': 'readonly'}),
+        required=False)
 
     def clean(self):
         self.cleaned_data['gender'] = FEMALE

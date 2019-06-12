@@ -84,7 +84,6 @@ class KaraboSubjectConsent(CryptoMixin, SiteModelMixin, BaseUuidModel):
 
     consent_datetime = models.DateTimeField(
         verbose_name='Consent date and time',
-        default=get_utcnow,
         validators=[
             datetime_not_before_study_start,
             datetime_not_future])

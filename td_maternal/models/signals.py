@@ -172,15 +172,11 @@ def create_registered_infant(instance):
                         infant_consent_model_cls.objects.get(
                             subject_identifier=registered_subject.subject_identifier)
                     except infant_consent_model_cls.DoesNotExist:
-                        infant_onschedule_obj = django_apps.get_model(
-                            'td_infant.onscheduleinfantbirth')
                         infant_consent_model_cls.objects.create(
                             subject_identifier=registered_subject.subject_identifier,
                             version=maternal_consent.version,
                             report_datetime=instance.report_datetime,
                             consent_datetime=timezone.now())
-                        add_schedule_name(model_obj=infant_onschedule_obj,
-                                          instance=instance)
 
 
 def add_schedule_name(model_obj=None, instance=None):
