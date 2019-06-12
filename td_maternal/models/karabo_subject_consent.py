@@ -5,14 +5,14 @@ from django_crypto_fields.fields import (
     FirstnameField, LastnameField, EncryptedCharField,
     IdentityField)
 from django_crypto_fields.mixins import CryptoMixin
+from edc_base.model_fields import IsDateEstimatedField
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators.date import datetime_not_future
 from edc_base.sites.site_model_mixin import SiteModelMixin
 from edc_base.utils import get_utcnow
+from edc_consent.validators import FullNameValidator
 from edc_constants.choices import YES_NO
 from edc_protocol.validators import datetime_not_before_study_start
-
-from edc_consent.validators import FullNameValidator
 
 from ..choices import ANSWERS
 
@@ -51,6 +51,16 @@ class KaraboSubjectConsent(CryptoMixin, SiteModelMixin, BaseUuidModel):
         verbose_name='Initials ',
         help_text=('(Must match initials on file '
                    'with Tshilo Dikotla Study)'))
+
+    dob = models.DateField(
+        verbose_name="Date of birth",
+        null=True,
+        blank=False)
+
+    is_dob_estimated = IsDateEstimatedField(
+        verbose_name="Is date of birth estimated?",
+        null=True,
+        blank=False)
 
     language = models.CharField(
         verbose_name='Language of consent:',
