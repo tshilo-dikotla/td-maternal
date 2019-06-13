@@ -5,7 +5,7 @@ from edc_base.model_validators import datetime_not_future
 from edc_base.sites.site_model_mixin import SiteModelMixin
 from edc_consent.field_mixins import (
     SampleCollectionFieldsMixin, VulnerabilityFieldsMixin)
-from edc_consent.field_mixins import ReviewFieldsMixin
+from edc_consent.field_mixins import ReviewFieldsMixin, VerificationFieldsMixin
 from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_consent.validators import eligible_if_yes
 from edc_constants.choices import YES_NO, YES_NO_DECLINED
@@ -13,10 +13,11 @@ from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import datetime_not_before_study_start
 
 
+
 class SpecimenConsent(UniqueSubjectIdentifierFieldMixin,
                       SampleCollectionFieldsMixin, ReviewFieldsMixin,
                       RequiresConsentFieldsModelMixin, VulnerabilityFieldsMixin,
-                      SiteModelMixin, BaseUuidModel):
+                      VerificationFieldsMixin, SiteModelMixin, BaseUuidModel):
 
     """ A model completed by the user when a mother gives consent for specimen
      storage.
