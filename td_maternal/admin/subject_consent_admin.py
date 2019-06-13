@@ -6,12 +6,11 @@ from edc_model_admin import (
     ModelAdminFormAutoNumberMixin, ModelAdminInstitutionMixin,
     audit_fieldset_tuple, audit_fields, ModelAdminNextUrlRedirectMixin,
     ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin)
-from edc_model_admin import ModelAdminReadOnlyMixin
+from edc_model_admin import ModelAdminBasicMixin, ModelAdminReadOnlyMixin
 from simple_history.admin import SimpleHistoryAdmin
 
 from edc_consent.actions import (
     flag_as_verified_against_paper, unflag_as_verified_against_paper)
-from edc_consent.modeladmin_mixins import ModelAdminConsentMixin
 
 from ..admin_site import td_maternal_admin
 from ..forms import SubjectConsentForm
@@ -43,8 +42,8 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMi
 
 
 @admin.register(SubjectConsent, site=td_maternal_admin)
-class SubjectConsentAdmin(ModelAdminConsentMixin, ModelAdminMixin, SimpleHistoryAdmin,
-                          admin.ModelAdmin):
+class SubjectConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
+                          SimpleHistoryAdmin, admin.ModelAdmin):
 
     form = SubjectConsentForm
 
