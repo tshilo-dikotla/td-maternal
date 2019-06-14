@@ -34,6 +34,7 @@ from .maternal_substance_prior_preg import MaternalSubstanceUsePriorPreg
 from .maternal_ultrasound_fu import MaternalUltraSoundFu
 from .maternal_ultrasound_initial import MaternalUltraSoundInitial
 from .maternal_visit import MaternalVisit
+from .offschedule import MaternalOffSchedule
 from .onschedule import OnScheduleAntenatalEnrollment
 from .onschedule import OnScheduleAntenatalVisitMembership
 from .onschedule import OnScheduleMaternalLabourDel

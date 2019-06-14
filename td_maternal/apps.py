@@ -29,6 +29,10 @@ if settings.APP_NAME == 'td_maternal':
         AppConfig as BaseEdcVisitTrackingAppConfig)
     from edc_visit_tracking.constants import MISSED_VISIT
     from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
+    from edc_timepoint.apps import AppConfig as BaseEdcTimepointAppConfig
+    from edc_timepoint.timepoint_collection import TimepointCollection
+    from edc_timepoint.timepoint import Timepoint
+    from edc_appointment.constants import COMPLETE_APPT
 
     class EdcVisitTrackingAppConfig(BaseEdcVisitTrackingAppConfig):
         visit_models = {
@@ -50,7 +54,10 @@ if settings.APP_NAME == 'td_maternal':
         configurations = [
             AppointmentConfig(
                 model='edc_appointment.appointment',
-                related_visit_model='td_maternal.maternalvisit')
+                related_visit_model='td_maternal.maternalvisit'),
+            AppointmentConfig(
+                model='td_infant.appointment',
+                related_visit_model='td_infant.infantvisit')
         ]
 
     class EdcLabAppConfig(BaseEdcLabAppConfig):
@@ -67,7 +74,8 @@ if settings.APP_NAME == 'td_maternal':
             return '40'
 
     class EdcMetadataAppConfig(BaseEdcMetadataAppConfig):
-        reason_field = {'td_maternal.maternalvisit': 'reason'}
+        reason_field = {'td_infant.infantvisit': 'reason',
+                        'td_maternal.maternalvisit': 'reason'}
         create_on_reasons = [SCHEDULED, UNSCHEDULED]
         delete_on_reasons = [LOST_VISIT, FAILED_ELIGIBILITY]
 
@@ -78,3 +86,28 @@ if settings.APP_NAME == 'td_maternal':
                                  slots=[100, 100, 100, 100, 100, 100, 100]),
             '5-day clinic': dict(days=[MO, TU, WE, TH, FR],
                                  slots=[100, 100, 100, 100, 100])}
+
+    class EdcTimepointAppConfig(BaseEdcTimepointAppConfig):
+        timepoints = TimepointCollection(
+            timepoints=[
+                Timepoint(
+                    model='td_infant.appointment',
+                    datetime_field='appt_datetime',
+                    status_field='appt_status',
+                    closed_status=COMPLETE_APPT),
+                Timepoint(
+                    model='td_infant.historicalappointment',
+                    datetime_field='appt_datetime',
+                    status_field='appt_status',
+                    closed_status=COMPLETE_APPT),
+                Timepoint(
+                    model='edc_appointment.appointment',
+                    datetime_field='appt_datetime',
+                    status_field='appt_status',
+                    closed_status=COMPLETE_APPT),
+                Timepoint(
+                    model='edc_appointment.historicalappointment',
+                    datetime_field='appt_datetime',
+                    status_field='appt_status',
+                    closed_status=COMPLETE_APPT)
+            ])
