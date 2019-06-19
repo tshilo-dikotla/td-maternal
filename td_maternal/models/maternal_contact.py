@@ -1,15 +1,15 @@
+from td_maternal.models.subject_consent import SubjectConsent
+
 from django.db import models
 from django.utils import timezone
-
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import datetime_not_future
 from edc_constants.choices import YES_NO
-from edc_protocol.validators import datetime_not_before_study_start
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
+from edc_protocol.validators import datetime_not_before_study_start
 
 from ..maternal_choices import CALL_REASON, CONTACT_TYPE
-from td_maternal.models.subject_consent import SubjectConsent
 
 
 class MaternalContactManager(models.Manager):
@@ -40,9 +40,7 @@ class MaternalContact(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
 
     contact_datetime = models.DateTimeField(
         verbose_name='Contact datetime',
-        help_text='This date can be modified.',
-        null=True,
-        blank=True)
+        help_text='This date can be modified.')
 
     call_reason = models.CharField(
         verbose_name='Reason for call',
@@ -76,7 +74,7 @@ class MaternalContact(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
     objects = MaternalContactManager()
 
     def natural_key(self):
-        return (self.subject_identifier, )
+        return (self.subject_identifier,)
 
     class Meta:
         app_label = 'td_maternal'
