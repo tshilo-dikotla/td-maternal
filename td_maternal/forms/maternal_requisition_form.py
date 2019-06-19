@@ -5,17 +5,22 @@ from django.utils import timezone
 from edc_base.utils import convert_php_dateformat
 from edc_lab.forms.modelform_mixins import RequisitionFormMixin
 
+from td_maternal_validators.form_validators import TDCRFFormValidator
+
 from ..models import MaternalRequisition
-from .form_mixins import SubjectModelFormMixin, FormValidatorMixin
+from .form_mixins import SubjectModelFormMixin
 
 
-class MaternalRequisitionForm(SubjectModelFormMixin, RequisitionFormMixin, FormValidatorMixin):
+class MaternalRequisitionForm(SubjectModelFormMixin, RequisitionFormMixin,
+                              TDCRFFormValidator, forms.ModelForm):
 
     requisition_identifier = forms.CharField(
         label='Requisition identifier',
         widget=forms.TextInput(attrs={'readonly': 'readonly'}))
 
     def clean(self):
+        self.subject_identifier = self.cleaned_data.get(
+            'maternal_visit').subject_identifier
         super().clean()
 
     def validate_requisition_datetime(self):
