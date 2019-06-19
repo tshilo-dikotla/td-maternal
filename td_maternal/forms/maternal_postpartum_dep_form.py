@@ -12,7 +12,7 @@ class MaternalPostPartumDepForm(SubjectModelFormMixin, TDCRFFormValidator,
     def clean(self):
         self.subject_identifier = self.cleaned_data.get(
             'maternal_visit').subject_identifier
-        super().clean()
+        self.validate_offstudy_model()
 
     class Meta:
         model = MaternalPostPartumDep
