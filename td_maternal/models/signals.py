@@ -284,7 +284,7 @@ def take_off_schedule(subject_identifier=None, version=None):
                     subject_identifier=infant_subject_identifier,
                     onschedule_datetime=on_schedule_obj.report_datetime,
                     schedule_name=infant_v3_schedule_name)
-                add_schedule_name(model_obj=on_schedule,
+                add_schedule_name(model_obj=infant_v3_schedule,
                                   subject_identifier=infant_subject_identifier,
                                   schedule_name=infant_v3_schedule_name)
                 # update infant schedules
