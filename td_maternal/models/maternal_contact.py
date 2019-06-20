@@ -6,7 +6,7 @@ from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import datetime_not_future
 from edc_constants.choices import YES_NO
-from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
+from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 from edc_protocol.validators import datetime_not_before_study_start
 
 from ..maternal_choices import CALL_REASON, CONTACT_TYPE
@@ -19,7 +19,7 @@ class MaternalContactManager(models.Manager):
             subject_identifier=subject_identifier)
 
 
-class MaternalContact(UniqueSubjectIdentifierFieldMixin, BaseUuidModel):
+class MaternalContact(NonUniqueSubjectIdentifierFieldMixin, BaseUuidModel):
 
     consent_model = SubjectConsent
 
