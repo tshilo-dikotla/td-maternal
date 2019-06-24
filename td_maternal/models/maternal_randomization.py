@@ -4,7 +4,7 @@ from django.db import models
 from django_crypto_fields.fields import EncryptedCharField
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NO
-from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
+
 
 from td_rando.randomization import Randomization
 
@@ -12,7 +12,7 @@ from ..maternal_choices import DELIVERY_HEALTH_FACILITY
 from .model_mixins import CrfModelMixin
 
 
-class MaternalRando(CrfModelMixin, UniqueSubjectIdentifierFieldMixin):
+class MaternalRando(CrfModelMixin):
     """ Stores a prepared infant randomization list.
 
     If you need to undo a randomization, here is an example of how::

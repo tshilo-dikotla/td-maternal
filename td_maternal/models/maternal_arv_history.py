@@ -35,7 +35,9 @@ class MaternalLifetimeArvHistory(CrfModelMixin):
     haart_start_date = models.DateField(
         validators=[
             date_not_future, ],
-        verbose_name="Date of triple antiretrovirals first started",)
+        verbose_name="Date of triple antiretrovirals first started",
+        blank=True,
+        null=True)
 
     is_date_estimated = IsDateEstimatedField(
         verbose_name=("Is the subject's date of triple antiretrovirals estimated?"))
