@@ -1,10 +1,13 @@
 from django import forms
+
 from td_maternal_validators.form_validators import MaternalPostPartumFuFormValidator
+
 from ..models import MaternalPostPartumFu
 from .form_mixins import SubjectModelFormMixin
 
 
-class MaternalPostPartumFuForm(SubjectModelFormMixin, forms.ModelForm):
+class MaternalPostPartumFuForm(SubjectModelFormMixin,
+                               forms.ModelForm):
 
     form_validator_cls = MaternalPostPartumFuFormValidator
 
