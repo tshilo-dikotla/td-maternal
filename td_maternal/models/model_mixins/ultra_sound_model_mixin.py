@@ -1,4 +1,3 @@
-from django.apps import apps
 from django.apps import apps as django_apps
 from django.db import models
 

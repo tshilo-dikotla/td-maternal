@@ -42,7 +42,7 @@ class MaternalVisit(VisitModelMixin, CreatesMetadataModelMixin,
             'scheduled visit was missed'),
         blank=True,
         null=True,
-        max_length=25)
+        max_length=250)
 
     reason_unscheduled = models.CharField(
         verbose_name=(
