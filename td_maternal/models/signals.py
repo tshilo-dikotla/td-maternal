@@ -304,12 +304,20 @@ def take_off_schedule(subject_identifier=None, version=None):
 
 
 def check_labour_del(subject_identifier):
+
     try:
-        return MaternalLabourDel.objects.get(
+        MaternalLabourDel.objects.get(
             subject_identifier=subject_identifier,
             live_infants_to_register=1)
     except MaternalLabourDel.DoesNotExist:
         return None
+    else:
+        infant_birth_cls = django_apps.get_model('td_infant.infantbirth')
+        try:
+            return infant_birth_cls.objects.get(
+                subject_identifier=subject_identifier)
+        except infant_birth_cls.DoesNotExist:
+            return None
 
 
 def delete_appointments_new_schedule(
