@@ -1,3 +1,4 @@
+from td_infant.models import Appointment as InfantAppointment
 from django.test import TestCase, tag
 from edc_base.utils import get_utcnow
 from edc_facility.import_holidays import import_holidays
@@ -5,7 +6,6 @@ from model_mommy import mommy
 
 from edc_appointment.constants import INCOMPLETE_APPT
 from edc_appointment.models import Appointment
-from td_infant.models import Appointment as InfantAppointment
 
 from ..models import OnScheduleAntenatalVisitMembership, OnScheduleMaternalLabourDel
 from ..models import SubjectConsent, MaternalOffSchedule, OnScheduleAntenatalEnrollment
@@ -121,6 +121,61 @@ class TestSubjectConsent(TestCase):
             subject_identifier=self.consent_v1.subject_identifier).count(), 3)
 
         self.assertEqual(OnScheduleAntenatalVisitMembership.objects.filter(
+            subject_identifier=self.consent_v1.subject_identifier).count(), 2)
+
+    def test_reconsent_participant_post_delivery_no_appointments(self):
+
+        appointment_1000 = Appointment.objects.get(
+            subject_identifier=self.consent_v1.subject_identifier,
+            visit_code='1000M')
+
+        maternal_visit_1000 = mommy.make_recipe(
+            'td_maternal.maternalvisit',
+            report_datetime=get_utcnow(),
+            subject_identifier=self.consent_v1.subject_identifier,
+            appointment=appointment_1000)
+
+        mommy.make_recipe(
+            'td_maternal.maternalultrasoundinitial',
+            report_datetime=maternal_visit_1000.report_datetime,
+            maternal_visit=maternal_visit_1000,
+            number_of_gestations=1)
+
+        appointment_1000.appt_status = INCOMPLETE_APPT
+        appointment_1000.save()
+
+        mommy.make_recipe(
+            'td_maternal.antenatalvisitmembership',
+            subject_identifier=self.consent_v1.subject_identifier)
+
+        mommy.make_recipe(
+            'td_maternal.maternallabourdel',
+            subject_identifier=self.consent_v1.subject_identifier)
+
+        mommy.make_recipe(
+            'td_infant.infantbirth',
+            subject_identifier=self.consent_v1.subject_identifier + '-10',
+            report_datetime=get_utcnow())
+
+        self.td_consent_version.version = '3'
+        self.td_consent_version.save()
+
+        self.options.update(version='3')
+        mommy.make_recipe(
+            'td_maternal.subjectconsent',
+            subject_identifier=self.consent_v1.subject_identifier,
+            **self.options)
+
+        self.assertEqual(SubjectConsent.objects.filter(
+            subject_identifier=self.consent_v1.subject_identifier).count(), 2)
+
+        self.assertEqual(MaternalOffSchedule.objects.filter(
+            subject_identifier=self.consent_v1.subject_identifier,).count(), 1)
+
+        self.assertEqual(Appointment.objects.filter(
+            subject_identifier=self.consent_v1.subject_identifier).count(), 12)
+
+        self.assertEqual(OnScheduleMaternalLabourDel.objects.filter(
             subject_identifier=self.consent_v1.subject_identifier).count(), 2)
 
     def test_reconsent_participant_post_delivery(self):

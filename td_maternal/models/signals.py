@@ -9,7 +9,8 @@ from edc_constants.constants import YES
 from edc_identifier.infant_identifier import InfantIdentifier
 from edc_registration.models import RegisteredSubject
 
-from edc_appointment.constants import COMPLETE_APPT, IN_PROGRESS_APPT, INCOMPLETE_APPT
+from edc_appointment.constants import COMPLETE_APPT, IN_PROGRESS_APPT
+from edc_appointment.constants import NEW_APPT, INCOMPLETE_APPT
 from edc_appointment.models import Appointment
 from edc_visit_schedule.site_visit_schedules import site_visit_schedules
 
@@ -216,11 +217,11 @@ def take_off_schedule(subject_identifier=None, version=None):
     This is not to be confused with Off study. Off study removes
     participants completely from ALL schedules.
     '''
-    infant_appointment = django_apps.get_model(
-        'td_infant.appointment')
+#     infant_appointment = django_apps.get_model(
+#         'td_infant.appointment')
 
-    infant_birth_onschedule = django_apps.get_model(
-        'td_infant.onscheduleinfantbirth')
+#     infant_birth_onschedule = django_apps.get_model(
+#         'td_infant.onscheduleinfantbirth')
     maternal_labour_del_schedule = django_apps.get_model(
         'td_maternal.onschedulematernallabourdel')
     antenatal_visit_membership_schedule = django_apps.get_model(
@@ -269,38 +270,44 @@ def take_off_schedule(subject_identifier=None, version=None):
                 subject_identifier=subject_identifier)
             break
 
-    if check_labour_del(subject_identifier=subject_identifier):
-        # get old infant schedule and put participant offschedule
-        # TODO: get infant schedule names without hardcoding
-        infant_subject_identifier = subject_identifier + '-10'
-        _, infant_schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
-            onschedule_model=infant_birth_onschedule._meta.label_lower,
-            name='infant_schedule_v1')
-        infant_schedule.take_off_schedule(
-            subject_identifier=infant_subject_identifier)
-        add_schedule_name(model_cls=schedule.offschedule_model_cls().__class__,
-                          subject_identifier=subject_identifier,
-                          schedule_name=infant_schedule.name)
+        if check_labour_del(subject_identifier=subject_identifier):
+            # get old infant schedule and put participant offschedule
+            # TODO: get infant schedule names without hardcoding
+            infant_birth_onschedule = django_apps.get_model(
+            'td_infant.onscheduleinfantbirth')
 
-        infant_v3_schedule_name = infant_schedule.name[:-1] + version
-        _, infant_v3_schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
-            onschedule_model=infant_birth_onschedule._meta.label_lower,
-            name=infant_v3_schedule_name)
+            infant_appointment = django_apps.get_model(
+                'td_infant.appointment')
 
-        infant_v3_schedule.put_on_schedule(
-            subject_identifier=infant_subject_identifier,
-            onschedule_datetime=on_schedule_obj.report_datetime,
-            schedule_name=infant_v3_schedule_name)
+            infant_subject_identifier = subject_identifier + '-10'
+            _, infant_schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
+                onschedule_model=infant_birth_onschedule._meta.label_lower,
+                name='infant_schedule_v1')
+            infant_schedule.take_off_schedule(
+                subject_identifier=infant_subject_identifier)
+            add_schedule_name(model_cls=infant_schedule.offschedule_model_cls().__class__,
+                              subject_identifier=subject_identifier,
+                              schedule_name=infant_schedule.name)
 
-        add_schedule_name(model_cls=infant_v3_schedule,
-                          subject_identifier=infant_subject_identifier,
-                          schedule_name=infant_v3_schedule_name)
-        # update infant schedules
-        delete_appointments_new_schedule(
-            appointment_obj=infant_appointment,
-            old_schedule='infant_schedule_v1',
-            new_schedule=infant_v3_schedule.name,
-            subject_identifier=infant_subject_identifier)
+            infant_v3_schedule_name = infant_schedule.name[:-1] + version
+            _, infant_v3_schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
+                onschedule_model=infant_birth_onschedule._meta.label_lower,
+                name=infant_v3_schedule_name)
+
+            infant_v3_schedule.put_on_schedule(
+                subject_identifier=infant_subject_identifier,
+                onschedule_datetime=infant_schedule.onschedule_model_cls().onschedule_datetime,
+                schedule_name=infant_v3_schedule_name)
+
+            add_schedule_name(model_cls=infant_v3_schedule.onschedule_model_cls().__class__,
+                              subject_identifier=infant_subject_identifier,
+                              schedule_name=infant_v3_schedule_name)
+            # update infant schedules
+            delete_appointments_new_schedule(
+                appointment_obj=infant_appointment,
+                old_schedule='infant_schedule_v1',
+                new_schedule=infant_v3_schedule.name,
+                subject_identifier=infant_subject_identifier)
 
 
 def check_labour_del(subject_identifier):
@@ -315,7 +322,7 @@ def check_labour_del(subject_identifier):
         infant_birth_cls = django_apps.get_model('td_infant.infantbirth')
         try:
             return infant_birth_cls.objects.get(
-                subject_identifier=subject_identifier)
+                subject_identifier=subject_identifier + '-10')
         except infant_birth_cls.DoesNotExist:
             return None
 
@@ -328,6 +335,15 @@ def delete_appointments_new_schedule(
         schedule_name=old_schedule,
         subject_identifier=subject_identifier,
         appt_status__in=[COMPLETE_APPT, IN_PROGRESS_APPT, INCOMPLETE_APPT]).order_by('timepoint').last()
+
+    old_schedule_appointments = appointment_obj.objects.filter(
+        schedule_name=old_schedule,
+        subject_identifier=subject_identifier,
+        appt_status=NEW_APPT)
+
+    if old_schedule_appointments:
+        for old in old_schedule_appointments:
+            old.delete()
 
     if appointment_old:
         appointments_new = appointment_obj.objects.filter(
