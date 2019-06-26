@@ -270,44 +270,44 @@ def take_off_schedule(subject_identifier=None, version=None):
                 subject_identifier=subject_identifier)
             break
 
-        if check_labour_del(subject_identifier=subject_identifier):
-            # get old infant schedule and put participant offschedule
-            # TODO: get infant schedule names without hardcoding
-            infant_birth_onschedule = django_apps.get_model(
+    if check_labour_del(subject_identifier=subject_identifier):
+        # get old infant schedule and put participant offschedule
+        # TODO: get infant schedule names without hardcoding
+        infant_birth_onschedule = django_apps.get_model(
             'td_infant.onscheduleinfantbirth')
 
-            infant_appointment = django_apps.get_model(
-                'td_infant.appointment')
+        infant_appointment = django_apps.get_model(
+            'td_infant.appointment')
 
-            infant_subject_identifier = subject_identifier + '-10'
-            _, infant_schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
-                onschedule_model=infant_birth_onschedule._meta.label_lower,
-                name='infant_schedule_v1')
-            infant_schedule.take_off_schedule(
-                subject_identifier=infant_subject_identifier)
-            add_schedule_name(model_cls=infant_schedule.offschedule_model_cls().__class__,
-                              subject_identifier=subject_identifier,
-                              schedule_name=infant_schedule.name)
+        infant_subject_identifier = subject_identifier + '-10'
+        _, infant_schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
+            onschedule_model=infant_birth_onschedule._meta.label_lower,
+            name='infant_schedule_v1')
+        infant_schedule.take_off_schedule(
+            subject_identifier=infant_subject_identifier)
+        add_schedule_name(model_cls=infant_schedule.offschedule_model_cls().__class__,
+                          subject_identifier=subject_identifier,
+                          schedule_name=infant_schedule.name)
 
-            infant_v3_schedule_name = infant_schedule.name[:-1] + version
-            _, infant_v3_schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
-                onschedule_model=infant_birth_onschedule._meta.label_lower,
-                name=infant_v3_schedule_name)
+        infant_v3_schedule_name = infant_schedule.name[:-1] + version
+        _, infant_v3_schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
+            onschedule_model=infant_birth_onschedule._meta.label_lower,
+            name=infant_v3_schedule_name)
 
-            infant_v3_schedule.put_on_schedule(
-                subject_identifier=infant_subject_identifier,
-                onschedule_datetime=infant_schedule.onschedule_model_cls().onschedule_datetime,
-                schedule_name=infant_v3_schedule_name)
+        infant_v3_schedule.put_on_schedule(
+            subject_identifier=infant_subject_identifier,
+            onschedule_datetime=infant_schedule.onschedule_model_cls().onschedule_datetime,
+            schedule_name=infant_v3_schedule_name)
 
-            add_schedule_name(model_cls=infant_v3_schedule.onschedule_model_cls().__class__,
-                              subject_identifier=infant_subject_identifier,
-                              schedule_name=infant_v3_schedule_name)
-            # update infant schedules
-            delete_appointments_new_schedule(
-                appointment_obj=infant_appointment,
-                old_schedule='infant_schedule_v1',
-                new_schedule=infant_v3_schedule.name,
-                subject_identifier=infant_subject_identifier)
+        add_schedule_name(model_cls=infant_v3_schedule.onschedule_model_cls().__class__,
+                          subject_identifier=infant_subject_identifier,
+                          schedule_name=infant_v3_schedule_name)
+        # update infant schedules
+        delete_appointments_new_schedule(
+            appointment_obj=infant_appointment,
+            old_schedule='infant_schedule_v1',
+            new_schedule=infant_v3_schedule.name,
+            subject_identifier=infant_subject_identifier)
 
 
 def check_labour_del(subject_identifier):
