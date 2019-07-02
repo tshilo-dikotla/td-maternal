@@ -8,7 +8,7 @@ from edc_model_admin import (
     ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin)
 from edc_model_admin import ModelAdminBasicMixin, ModelAdminReadOnlyMixin
 from simple_history.admin import SimpleHistoryAdmin
-
+from import_export.admin import ImportExportActionModelAdmin
 from edc_consent.actions import (
     flag_as_verified_against_paper, unflag_as_verified_against_paper)
 
@@ -19,7 +19,8 @@ from ..models import SubjectConsent
 
 class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMixin,
                       ModelAdminRevisionMixin, ModelAdminReplaceLabelTextMixin,
-                      ModelAdminInstitutionMixin, ModelAdminReadOnlyMixin):
+                      ModelAdminInstitutionMixin, ModelAdminReadOnlyMixin,
+                      ImportExportActionModelAdmin):
 
     list_per_page = 10
     date_hierarchy = 'modified'
