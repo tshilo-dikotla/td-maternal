@@ -22,7 +22,8 @@ class MaternalRequisitionForm(SubjectModelFormMixin, RequisitionFormMixin,
     def clean(self):
         self.subject_identifier = self.cleaned_data.get(
             'maternal_visit').subject_identifier
-        super().clean()
+        if self.instance and not self.instance.id:
+            self.validate_offstudy_model()
 
     def validate_requisition_datetime(self):
         requisition_datetime = self.cleaned_data.get('requisition_datetime')
