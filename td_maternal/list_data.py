@@ -2,19 +2,18 @@ from edc_constants.constants import NOT_APPLICABLE, OTHER, NONE
 
 from edc_list_data import PreloadData
 
-
 list_data = {
     'td_maternal.chronicconditions': [
-        ('asthma', 'Asthma'),
-        ('hypertension', 'Hypertension'),
-        ('hypercholesterolemia', 'Hypercholesterolemia'),
-        ('heart_disease', 'Heart disease'),
-        ('hepatitis_b_surface_ag_positive', 'Hepatitis B surface Ag positive'),
-        ('chronic_hepatitis_b_carrier', 'Chronic Hepatitis B carrier'),
-        ('hepatitis_c', 'Hepatitis C'),
-        ('diabetes', 'Diabetes'),
-        (OTHER, 'Other, Specify'),
-        (NOT_APPLICABLE, 'Not Applicable')
+        ('Asthma', 'Asthma'),
+        ('Hypertension', 'Hypertension'),
+        ('Hypercholesterolemia', 'Hypercholesterolemia'),
+        ('Heart disease', 'Heart disease'),
+        ('Hepatitis B surface Ag positive', 'Hepatitis B surface Ag positive'),
+        ('Chronic Hepatitis B carrier', 'Chronic Hepatitis B carrier'),
+        ('Hepatitis C', 'Hepatitis C'),
+        ('Diabetes', 'Diabetes'),
+        ('Other, specify', 'Other, Specify'),
+        ('Not Applicable', 'Not Applicable')
     ],
     'td_maternal.contraceptives': [
         (OTHER, 'Other, specify'),
