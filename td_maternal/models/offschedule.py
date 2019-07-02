@@ -13,12 +13,11 @@ class MaternalOffSchedule(ConsentVersionModelModelMixin, OffScheduleModelMixin, 
     schedule_name = models.CharField(
         max_length=25,
         blank=True,
-        null=True,
-        unique=True)
-
-    on_site = CurrentSiteManager()
+        null=True)
 
     objects = SubjectIdentifierManager()
+
+    on_site = CurrentSiteManager()
 
     history = HistoricalRecords()
 
@@ -26,4 +25,4 @@ class MaternalOffSchedule(ConsentVersionModelModelMixin, OffScheduleModelMixin, 
         pass
 
     class Meta:
-        pass
+        unique_together = ('subject_identifier', 'schedule_name')
