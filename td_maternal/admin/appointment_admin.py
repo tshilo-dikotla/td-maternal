@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.urls.base import reverse
 from django.urls.exceptions import NoReverseMatch
 from django.utils.safestring import mark_safe
+from import_export.admin import ImportExportActionModelAdmin
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
 from edc_appointment.models import Appointment
 from edc_base.sites.admin import ModelAdminSiteMixin
@@ -23,7 +24,7 @@ from ..forms import AppointmentForm
 class AppointmentAdmin(ModelAdminFormInstructionsMixin, ModelAdminNextUrlRedirectMixin,
                        ModelAdminFormAutoNumberMixin, ModelAdminRevisionMixin,
                        ModelAdminAuditFieldsMixin, ModelAdminRedirectOnDeleteMixin,
-                       ModelAdminReadOnlyMixin, ModelAdminSiteMixin,
+                       ModelAdminReadOnlyMixin, ModelAdminSiteMixin, ImportExportActionModelAdmin,
                        ModelAdminSubjectDashboardMixin, admin.ModelAdmin):
 
     post_url_on_delete_name = settings.DASHBOARD_URL_NAMES.get(
