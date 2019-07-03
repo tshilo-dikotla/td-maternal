@@ -1,10 +1,12 @@
 from django.apps import apps as django_apps
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.core.exceptions import ValidationError, ObjectDoesNotExist, \
+    MultipleObjectsReturned
 from django.db import transaction
 from django.db.models.deletion import ProtectedError
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
+from edc_base.utils import get_utcnow
 from edc_constants.constants import YES
 from edc_identifier.infant_identifier import InfantIdentifier
 from edc_registration.models import RegisteredSubject
@@ -280,6 +282,24 @@ def take_off_schedule(subject_identifier=None, version=None):
             'td_infant.appointment')
 
         infant_subject_identifier = subject_identifier + '-10'
+
+        # Create infant dummy consent
+        infant_consent_model_cls = django_apps.get_model(
+            'td_infant.infantdummysubjectconsent')
+        try:
+            infant_consent_model_cls.objects.get(
+                subject_identifier=infant_subject_identifier)
+        except infant_consent_model_cls.DoesNotExist:
+            pass
+        except MultipleObjectsReturned:
+            pass
+        else:
+            infant_consent_model_cls.objects.create(
+                subject_identifier=infant_subject_identifier,
+                version=version,
+                report_datetime=get_utcnow(),
+                consent_datetime=timezone.now())
+
         _, infant_schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
             onschedule_model=infant_birth_onschedule._meta.label_lower,
             name='infant_schedule_v1')

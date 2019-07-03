@@ -1,5 +1,7 @@
 from td_infant.models import Appointment as InfantAppointment
-from django.test import TestCase, tag
+
+from django.apps import apps as django_apps
+from django.test import TestCase
 from edc_base.utils import get_utcnow
 from edc_facility.import_holidays import import_holidays
 from model_mommy import mommy
@@ -11,7 +13,6 @@ from ..models import OnScheduleAntenatalVisitMembership, OnScheduleMaternalLabou
 from ..models import SubjectConsent, MaternalOffSchedule, OnScheduleAntenatalEnrollment
 
 
-@tag('recon')
 class TestSubjectConsent(TestCase):
 
     def setUp(self):
@@ -356,6 +357,11 @@ class TestSubjectConsent(TestCase):
 
         self.assertEqual(SubjectConsent.objects.filter(
             subject_identifier=self.consent_v1.subject_identifier).count(), 2)
+
+        infant_dummy_consent_cls = django_apps.get_model(
+            'td_infant.infantdummysubjectconsent')
+        self.assertEqual(infant_dummy_consent_cls.objects.filter(
+            subject_identifier=self.consent_v1.subject_identifier + '-10').count(), 2)
 
         self.assertEqual(MaternalOffSchedule.objects.filter(
             subject_identifier=self.consent_v1.subject_identifier,).count(), 1)
