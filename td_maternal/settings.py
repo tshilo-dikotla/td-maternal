@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'edc_visit_schedule.apps.AppConfig',
     'td_metadata_rules.apps.AppConfig',
     'td_visit_schedule.apps.AppConfig',
+    'td_prn.apps.AppConfig',
     'td_labs.apps.AppConfig',
     'td_reference.apps.AppConfig',
     'td_rando.apps.AppConfig',
