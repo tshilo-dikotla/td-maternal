@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls.base import reverse
 from django.urls.exceptions import NoReverseMatch
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
-from import_export.admin import ImportExportActionModelAdmin
+# from import_export.admin import ImportExportActionModelAdmin
 from edc_model_admin import (
     ModelAdminFormAutoNumberMixin, ModelAdminInstitutionMixin,
     ModelAdminNextUrlRedirectMixin,
@@ -19,7 +19,7 @@ from ..models import MaternalVisit
 
 class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMixin,
                       ModelAdminRevisionMixin, ModelAdminReplaceLabelTextMixin,
-                      ImportExportActionModelAdmin,
+#                       ImportExportActionModelAdmin,
                       ModelAdminInstitutionMixin):
 
     list_per_page = 10

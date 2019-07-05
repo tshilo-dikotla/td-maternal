@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls.base import reverse
 from django.urls.exceptions import NoReverseMatch
-from import_export.admin import ImportExportActionModelAdmin
+# from import_export.admin import ImportExportActionModelAdmin
 
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
 from edc_model_admin import (
@@ -39,7 +39,9 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMi
 
 
 @admin.register(AntenatalEnrollment, site=td_maternal_admin)
-class AntenatalEnrollmentAdmin(ImportExportActionModelAdmin, ModelAdminMixin, admin.ModelAdmin):
+class AntenatalEnrollmentAdmin(
+#         ImportExportActionModelAdmin,
+         ModelAdminMixin, admin.ModelAdmin):
 
     form = AntenatalEnrollmentForm
 

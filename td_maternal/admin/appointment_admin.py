@@ -3,28 +3,29 @@ from django.contrib import admin
 from django.urls.base import reverse
 from django.urls.exceptions import NoReverseMatch
 from django.utils.safestring import mark_safe
-from import_export.admin import ImportExportActionModelAdmin
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
-from edc_appointment.models import Appointment
 from edc_base.sites.admin import ModelAdminSiteMixin
 from edc_model_admin import (
     ModelAdminFormInstructionsMixin, ModelAdminNextUrlRedirectMixin,
     ModelAdminFormAutoNumberMixin, ModelAdminRedirectOnDeleteMixin,
     ModelAdminAuditFieldsMixin, ModelAdminReadOnlyMixin,
     audit_fieldset_tuple)
-from edc_subject_dashboard import ModelAdminSubjectDashboardMixin
 
+from edc_appointment.models import Appointment
+from edc_subject_dashboard import ModelAdminSubjectDashboardMixin
 from edc_visit_schedule.fieldsets import visit_schedule_fieldset_tuple, visit_schedule_fields
 
 from ..admin_site import td_maternal_admin
 from ..forms import AppointmentForm
 
 
+# from import_export.admin import ImportExportActionModelAdmin
 @admin.register(Appointment, site=td_maternal_admin)
 class AppointmentAdmin(ModelAdminFormInstructionsMixin, ModelAdminNextUrlRedirectMixin,
                        ModelAdminFormAutoNumberMixin, ModelAdminRevisionMixin,
                        ModelAdminAuditFieldsMixin, ModelAdminRedirectOnDeleteMixin,
-                       ModelAdminReadOnlyMixin, ModelAdminSiteMixin, ImportExportActionModelAdmin,
+                       ModelAdminReadOnlyMixin, ModelAdminSiteMixin,
+#                        ImportExportActionModelAdmin,
                        ModelAdminSubjectDashboardMixin, admin.ModelAdmin):
 
     post_url_on_delete_name = settings.DASHBOARD_URL_NAMES.get(
@@ -38,7 +39,7 @@ class AppointmentAdmin(ModelAdminFormInstructionsMixin, ModelAdminNextUrlRedirec
                     'appt_datetime', 'appt_type', 'appt_status')
     list_filter = ('visit_code', 'appt_datetime', 'appt_type', 'appt_status')
 
-    search_fields = ('subject_identifier', )
+    search_fields = ('subject_identifier',)
 
     additional_instructions = mark_safe(
         'To start or continue to edit FORMS for this subject, change the '
@@ -78,8 +79,8 @@ class AppointmentAdmin(ModelAdminFormInstructionsMixin, ModelAdminNextUrlRedirec
 
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj=obj)
-                + visit_schedule_fields
-                + ('subject_identifier', 'timepoint', 'timepoint_datetime',
+                +visit_schedule_fields
+                +('subject_identifier', 'timepoint', 'timepoint_datetime',
                    'visit_code_sequence', 'facility_name'))
 
     def view_on_site(self, obj):
