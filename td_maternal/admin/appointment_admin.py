@@ -10,6 +10,7 @@ from edc_model_admin import (
     ModelAdminFormAutoNumberMixin, ModelAdminRedirectOnDeleteMixin,
     ModelAdminAuditFieldsMixin, ModelAdminReadOnlyMixin,
     audit_fieldset_tuple)
+from import_export.admin import ImportExportActionModelAdmin
 
 from edc_appointment.models import Appointment
 from edc_subject_dashboard import ModelAdminSubjectDashboardMixin
@@ -19,13 +20,12 @@ from ..admin_site import td_maternal_admin
 from ..forms import AppointmentForm
 
 
-# from import_export.admin import ImportExportActionModelAdmin
 @admin.register(Appointment, site=td_maternal_admin)
 class AppointmentAdmin(ModelAdminFormInstructionsMixin, ModelAdminNextUrlRedirectMixin,
                        ModelAdminFormAutoNumberMixin, ModelAdminRevisionMixin,
                        ModelAdminAuditFieldsMixin, ModelAdminRedirectOnDeleteMixin,
                        ModelAdminReadOnlyMixin, ModelAdminSiteMixin,
-#                        ImportExportActionModelAdmin,
+                       ImportExportActionModelAdmin,
                        ModelAdminSubjectDashboardMixin, admin.ModelAdmin):
 
     post_url_on_delete_name = settings.DASHBOARD_URL_NAMES.get(

@@ -2,12 +2,13 @@ from django.contrib import admin
 from django.urls.base import reverse
 from django.urls.exceptions import NoReverseMatch
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
-# from import_export.admin import ImportExportActionModelAdmin
 from edc_model_admin import (
     ModelAdminFormAutoNumberMixin, ModelAdminInstitutionMixin,
     ModelAdminNextUrlRedirectMixin,
     ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin)
 from edc_model_admin import audit_fieldset_tuple
+from import_export.admin import ImportExportActionModelAdmin
+
 from edc_visit_schedule.fieldsets import visit_schedule_fieldset_tuple
 from edc_visit_tracking.constants import MISSED_VISIT, LOST_VISIT
 from edc_visit_tracking.modeladmin_mixins import VisitModelAdminMixin
@@ -19,8 +20,7 @@ from ..models import MaternalVisit
 
 class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMixin,
                       ModelAdminRevisionMixin, ModelAdminReplaceLabelTextMixin,
-#                       ImportExportActionModelAdmin,
-                      ModelAdminInstitutionMixin):
+                      ModelAdminInstitutionMixin, ImportExportActionModelAdmin):
 
     list_per_page = 10
     date_hierarchy = 'modified'

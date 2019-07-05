@@ -4,7 +4,6 @@ from django.urls.base import reverse
 from django.urls.exceptions import NoReverseMatch
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
 from edc_base.sites.admin import ModelAdminSiteMixin
-# from import_export.admin import ImportExportActionModelAdmin
 from edc_fieldsets import FieldsetsModelAdminMixin
 from edc_metadata import NextFormGetter
 from edc_model_admin import (
@@ -12,6 +11,7 @@ from edc_model_admin import (
     ModelAdminFormAutoNumberMixin, ModelAdminAuditFieldsMixin,
     ModelAdminReadOnlyMixin, ModelAdminInstitutionMixin,
     FormAsJSONModelAdminMixin, ModelAdminRedirectOnDeleteMixin)
+from import_export.admin import ImportExportActionModelAdmin
 
 from edc_visit_tracking.modeladmin_mixins import (
     CrfModelAdminMixin as VisitTrackingCrfModelAdminMixin)
@@ -23,8 +23,8 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
                       ModelAdminAuditFieldsMixin, ModelAdminReadOnlyMixin,
                       ModelAdminInstitutionMixin,
                       ModelAdminRedirectOnDeleteMixin,
-#                       ImportExportActionModelAdmin,
-                      ModelAdminSiteMixin):
+                      ModelAdminSiteMixin,
+                      ImportExportActionModelAdmin):
 
     list_per_page = 10
     date_hierarchy = 'modified'
