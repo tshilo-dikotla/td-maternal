@@ -24,6 +24,7 @@ list_data = {
         ('Oral contraceptive pills', 'Oral contraceptive pills'),
         ('Abstinence', 'Abstinence'),
         ('IUD', 'IUD'),
+        ('tubilagation', 'Tubilagation'),
         ('Menstrual timing', 'Menstrual timing'),
         ('Withdrawal', 'Withdrawal'),
         ('Depo Provera (Injection)', 'Depo Provera (Injection)'),
@@ -87,13 +88,13 @@ list_data = {
         ('Other, specify', 'Other, specify')
     ],
     'td_maternal.maternalmedications': [
+        ('N/A',  'Not Applicable'),
         ('Cholesterol medications', 'Cholesterol medications'),
         ('Vitamin D supplement', 'Vitamin D supplement'),
+        ('None', 'None'),
         ('Traditional medications', 'Traditional medications'),
         ('Hypertensive medications', 'Hypertensive medications'),
-        ('Prenatal Vitamins', 'Prenatal Vitamins'),
-        (NOT_APPLICABLE, 'Not Applicable'),
-        (OTHER, 'Other, specify')
+        ('Prenatal Vitamins', 'Prenatal Vitamins')
     ],
     'td_maternal.maternalrelatives': [
         ('Your mother', 'Your mother'),
@@ -183,7 +184,7 @@ list_data = {
          'Atypical disseminated leishmaniasis'),
         ('Sympt nephropathy/cardiomyopathy',
          'Sympt nephropathy/cardiomyopathy'),
-        (NOT_APPLICABLE, 'Not Applicable')
+        (NOT_APPLICABLE, NOT_APPLICABLE)
     ],
     'td_maternal.wcsdxped': [
         ('Asymptomatic', 'Asymptomatic'),
