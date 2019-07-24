@@ -72,6 +72,8 @@ class MaternalVisit(VisitModelMixin, CreatesMetadataModelMixin,
 
     last_alive_date = models.DateField(
         verbose_name='Date participant last known alive',
+        blank=True,
+        null=True,
         validators=[date_not_before_study_start, date_not_future])
 
     on_site = CurrentSiteManager()
