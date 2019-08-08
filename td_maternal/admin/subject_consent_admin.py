@@ -114,6 +114,8 @@ class SubjectConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
                    'is_verified',
                    'is_literate',
                    'identity_type')
+    
+    search_fields = ('subject_identifier',)
 
     actions = [
         flag_as_verified_against_paper,
