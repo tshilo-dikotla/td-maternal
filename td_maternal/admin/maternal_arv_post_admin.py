@@ -22,7 +22,7 @@ class MaternalArvPostMedInlineAdmin(TabularInlineMixin, admin.TabularInline):
                 'dose_status',
                 'modification_date',
                 'modification_code']}
-         ),)
+         ), audit_fieldset_tuple)
 
 
 @admin.register(MaternalArvPostMed, site=td_maternal_admin)
@@ -61,7 +61,7 @@ class MaternalArvPostAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'on_arv_reason',
                 'on_arv_reason_other',
                 'arv_status']}
-         ), audit_fieldset_tuple)
+         ),)
 
     radio_fields = {
         "on_arv_since": admin.VERTICAL,

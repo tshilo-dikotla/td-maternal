@@ -22,7 +22,7 @@ class MaternalArvInlineAdmin(TabularInlineMixin, admin.TabularInline):
                 'stop_date',
                 'reason_for_stop',
                 'reason_for_stop_other']}
-         ),)
+         ), audit_fieldset_tuple)
 
 
 @admin.register(MaternalArvPreg, site=td_maternal_admin)
@@ -41,7 +41,7 @@ class MaternalArvPregAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'is_interrupt',
                 'interrupt',
                 'interrupt_other']}
-         ), audit_fieldset_tuple)
+         ),)
 
     radio_fields = {'took_arv': admin.VERTICAL,
                     'is_interrupt': admin.VERTICAL,
