@@ -19,7 +19,6 @@ from edc_consent.model_mixins import ConsentModelMixin
 
 from ..choices import IDENTITY_TYPE
 from ..maternal_choices import RECRUIT_SOURCE, RECRUIT_CLINIC
-from ..subject_identifier import SubjectIdentifier
 from .model_mixins import SearchSlugModelMixin
 
 
@@ -71,7 +70,7 @@ class SubjectConsent(
         max_length=100,
         verbose_name="if other recruitment clinic, specify...",
         blank=True,
-        null=True,)
+        null=True, )
 
     objects = SubjectConsentManager()
 
@@ -84,17 +83,6 @@ class SubjectConsent(
 
     def natural_key(self):
         return (self.subject_identifier, self.version)
-
-    def make_new_identifier(self):
-        """Returns a new and unique identifier.
-
-        Override this if needed.
-        """
-        subject_identifier = SubjectIdentifier(
-            identifier_type='subject',
-            requesting_model=self._meta.label_lower,
-            site=self.site)
-        return subject_identifier.identifier
 
     def save(self, *args, **kwargs):
         consent_version_cls = django_apps.get_model(
