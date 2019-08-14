@@ -30,6 +30,8 @@ class MartenalRandoAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     list_filter = ('randomization_datetime', 'site')
 
+    list_display = ('subject_identifier', 'dispensed', 'rx',)
+
     readonly_fields = (
         'sid',
         'subject_identifier',
