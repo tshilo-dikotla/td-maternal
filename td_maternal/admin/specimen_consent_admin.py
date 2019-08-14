@@ -1,7 +1,8 @@
 from django.contrib import admin
+from edc_model_admin import audit_fieldset_tuple
+
 from edc_consent.actions import (
     flag_as_verified_against_paper, unflag_as_verified_against_paper)
-from edc_model_admin import audit_fieldset_tuple
 
 from ..admin_site import td_maternal_admin
 from ..forms import SpecimenConsentForm
@@ -42,6 +43,9 @@ class SpecimenConsentAdmin(ModelAdminMixin, admin.ModelAdmin):
                     'user_modified')
     list_filter = ('language',
                    'is_literate')
+
+    search_fields = ('subject_identifier',)
+
     actions = [
         flag_as_verified_against_paper,
         unflag_as_verified_against_paper, ]
