@@ -13,6 +13,7 @@ class MaternalSubstanceUsePriorPregAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     form = MaternalSubstanceUsePriorPregForm
 
     list_display = (
+        'maternal_visit',
         'smoked_prior_to_preg',
         'smoking_prior_preg_freq',
         'alcohol_prior_pregnancy',

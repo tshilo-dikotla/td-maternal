@@ -41,8 +41,13 @@ class KaraboSubjectScreeningAdmin(ModelAdminMixin, admin.ModelAdmin):
         'willing_to_consent': admin.VERTICAL,
     }
 
+    list_display = ('screening_identifier',
+                    'subject_identifier',
+                    'infant_alive',
+                    'willing_to_consent')
+
     readonly_fields = ('screening_identifier',)
 
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj=obj)
-                + audit_fields)
+                +audit_fields)

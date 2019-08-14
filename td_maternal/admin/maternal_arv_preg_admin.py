@@ -29,7 +29,7 @@ class MaternalArvInlineAdmin(TabularInlineMixin, admin.TabularInline):
 class MaternalArvPregAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     form = MaternalArvPregForm
     inlines = [MaternalArvInlineAdmin, ]
-    list_display = ('maternal_visit', 'took_arv',)
+    list_display = ('maternal_visit', 'took_arv', 'is_interrupt',)
     list_filter = ('took_arv',)
 
     fieldsets = (

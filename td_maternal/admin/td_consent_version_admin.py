@@ -21,5 +21,7 @@ class TdConsentVersionAdmin(ModelAdminMixin, admin.ModelAdmin):
          ), audit_fieldset_tuple)
 
     radio_fields = {'version': admin.VERTICAL}
-#     readonly_fields = ('screening_identifier', 'subject_identifier')
-    list_display = ('version',)
+
+    list_display = ('screening_identifier',
+                    'report_datetime',
+                    'version',)
