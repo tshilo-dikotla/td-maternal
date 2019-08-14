@@ -46,6 +46,12 @@ class KaraboSubjectConsentAdmin(ModelAdminMixin, admin.ModelAdmin):
         'is_dob_estimated': admin.VERTICAL
     }
 
+    list_display = ('subject_identifier',
+                    'first_name',
+                    'last_name',
+                    'initials',
+                    'identity',)
+
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj=obj)
                 +audit_fields)

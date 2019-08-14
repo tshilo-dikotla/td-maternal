@@ -32,4 +32,6 @@ class MaternalSrhAdmin(ModelAdminMixin, admin.ModelAdmin):
                     'reason_not_initiated': admin.VERTICAL
                     }
 
-    filter_horizontal = ('contr', )
+    filter_horizontal = ('contr',)
+
+    list_display = ('maternal_visit', 'seen_at_clinic')

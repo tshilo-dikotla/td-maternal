@@ -1,9 +1,10 @@
 from django.contrib import admin
+from edc_model_admin import audit_fieldset_tuple
+
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalSubstanceUseDuringPregForm
 from ..models import MaternalSubstanceUseDuringPreg
 from .modeladmin_mixins import CrfModelAdminMixin
-from edc_model_admin import audit_fieldset_tuple
 
 
 @admin.register(MaternalSubstanceUseDuringPreg, site=td_maternal_admin)
@@ -13,6 +14,7 @@ class MaternalSubstanceUseDuringPregAdmin(
     form = MaternalSubstanceUseDuringPregForm
 
     list_display = (
+        'maternal_visit',
         'smoked_during_pregnancy',
         'smoking_during_preg_freq',
         'alcohol_during_pregnancy',

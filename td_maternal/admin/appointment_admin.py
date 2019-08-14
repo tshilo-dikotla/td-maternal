@@ -68,6 +68,12 @@ class AppointmentAdmin(ModelAdminFormInstructionsMixin, ModelAdminNextUrlRedirec
         audit_fieldset_tuple,
     )
 
+    list_display = ('subject_identifier',
+                    'appt_datetime',
+                    'appt_type',
+                    'appt_status',
+                    'appt_reason',)
+
     radio_fields = {
         'appt_type': admin.VERTICAL,
         'appt_status': admin.VERTICAL,

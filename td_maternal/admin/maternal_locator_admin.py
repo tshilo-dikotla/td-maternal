@@ -50,3 +50,6 @@ class MaternalLocatorAdmin(ModelAdminMixin, admin.ModelAdmin):
         'has_caretaker': admin.VERTICAL}
 
     search_fields = ['subject_identifier']
+
+    list_display = ('subject_identifier', 'may_visit_home', 'may_call',
+                    'may_call_work')

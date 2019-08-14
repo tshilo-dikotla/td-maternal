@@ -67,6 +67,7 @@ class MaternalArvPostAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         "on_arv_since": admin.VERTICAL,
         "on_arv_reason": admin.VERTICAL,
         "arv_status": admin.VERTICAL}
+
     inlines = [MaternalArvPostMedInlineAdmin, ]
 
 

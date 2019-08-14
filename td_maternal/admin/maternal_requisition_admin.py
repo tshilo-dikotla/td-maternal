@@ -1,9 +1,10 @@
 from django.contrib import admin
+from edc_model_admin import audit_fieldset_tuple
+
 from edc_lab.admin import RequisitionAdminMixin
 from edc_lab.admin import requisition_identifier_fields
 from edc_lab.admin import requisition_identifier_fieldset, requisition_verify_fields
 from edc_lab.admin import requisition_verify_fieldset, requisition_status_fieldset
-from edc_model_admin import audit_fieldset_tuple
 
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalRequisitionForm
@@ -49,7 +50,9 @@ class MaternalRequisitionAdmin(CrfModelAdminMixin, RequisitionAdminMixin,
         'study_site': admin.VERTICAL,
     }
 
+    list_display = ('maternal_visit', 'is_drawn', 'panel', 'estimated_volume',)
+
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj)
-                + requisition_identifier_fields
-                + requisition_verify_fields)
+                +requisition_identifier_fields
+                +requisition_verify_fields)

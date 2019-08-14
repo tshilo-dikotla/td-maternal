@@ -1,9 +1,10 @@
 from django.contrib import admin
-from ..admin_site import td_maternal_admin
-from ..models import MaternalContact
-from ..forms import MaternalContactForm
-from .modeladmin_mixins import ModelAdminMixin
 from edc_model_admin import audit_fieldset_tuple
+
+from ..admin_site import td_maternal_admin
+from ..forms import MaternalContactForm
+from ..models import MaternalContact
+from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(MaternalContact, site=td_maternal_admin)
@@ -27,7 +28,7 @@ class MaternalContactAdmin(ModelAdminMixin, admin.ModelAdmin):
          ), audit_fieldset_tuple)
 
     list_display = [
-        'contact_type',
+        'subject_identifier', 'contact_type',
         'contact_datetime', 'call_reason', 'contact_success']
 
     list_filter = ['contact_type', 'call_reason', 'contact_success']

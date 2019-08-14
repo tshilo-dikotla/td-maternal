@@ -29,3 +29,5 @@ class MaternalHivInterimHxAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     radio_fields = {'has_cd4': admin.VERTICAL,
                     'has_vl': admin.VERTICAL,
                     'vl_detectable': admin.VERTICAL}
+
+    list_display = ('maternal_visit', 'report_datetime', 'has_cd4', 'has_vl')

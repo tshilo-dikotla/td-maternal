@@ -51,4 +51,7 @@ class MaternalContraceptionAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                     'pap_smear_result': admin.VERTICAL,
                     'pap_smear_result_status': admin.VERTICAL,
                     'srh_referral': admin.VERTICAL}
+
     filter_horizontal = ('contraceptive_relative', 'contr',)
+
+    list_display = ('maternal_visit', 'report_datetime', 'srh_referral')
