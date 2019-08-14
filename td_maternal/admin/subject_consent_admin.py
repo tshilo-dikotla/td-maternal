@@ -7,11 +7,11 @@ from edc_model_admin import (
     audit_fieldset_tuple, audit_fields, ModelAdminNextUrlRedirectMixin,
     ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin)
 from edc_model_admin import ModelAdminBasicMixin, ModelAdminReadOnlyMixin
-from import_export.admin import ImportExportActionModelAdmin
 from simple_history.admin import SimpleHistoryAdmin
 
 from edc_consent.actions import (
     flag_as_verified_against_paper, unflag_as_verified_against_paper)
+from import_export.admin import ImportExportActionModelAdmin
 
 from ..admin_site import td_maternal_admin
 from ..forms import SubjectConsentForm
@@ -114,8 +114,8 @@ class SubjectConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
                    'is_verified',
                    'is_literate',
                    'identity_type')
-    
-    search_fields = ('subject_identifier',)
+
+    search_fields = ('subject_identifier', 'dob',)
 
     actions = [
         flag_as_verified_against_paper,
