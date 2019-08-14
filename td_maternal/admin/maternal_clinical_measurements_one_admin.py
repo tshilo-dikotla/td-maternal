@@ -13,7 +13,8 @@ class MaternalClinicalMeasurementsOneAdmin(
 
     form = MaternalClinicalMeasurementsOneForm
 
-    list_display = ('weight_kg', 'height', 'systolic_bp', 'diastolic_bp')
+    list_display = ('maternal_visit', 'weight_kg', 'height',
+                    'systolic_bp', 'diastolic_bp')
 
     fieldsets = (
         (None, {

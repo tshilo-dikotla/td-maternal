@@ -26,7 +26,7 @@ class AntenataVisitMembershipAdmin(ModelAdminMixin, admin.ModelAdmin):
     radio_fields = {'antenatal_visits': admin.VERTICAL}
 
     list_display = (
-        'report_datetime', 'antenatal_visits')
+        'subject_identifier', 'report_datetime', 'antenatal_visits')
 
 
 admin.site.register(AntenatalVisitMembership, AntenataVisitMembershipAdmin)

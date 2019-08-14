@@ -40,4 +40,6 @@ class MaternalUltraSoundInitialAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         'number_of_gestations', 'ga_confrimation_method', 'edd_confirmed',
         'ga_confirmed', 'ga_by_lmp')
 
-    list_filter = ('number_of_gestations', 'ga_confrimation_method')
+    list_filter = ('maternal_visit',
+                   'number_of_gestations',
+                   'ga_confrimation_method')
