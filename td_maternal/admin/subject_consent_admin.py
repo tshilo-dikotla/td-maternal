@@ -114,7 +114,6 @@ class SubjectConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
                    'is_verified',
                    'is_literate',
                    'identity_type')
-
     search_fields = ('subject_identifier', 'dob',)
 
     actions = [
