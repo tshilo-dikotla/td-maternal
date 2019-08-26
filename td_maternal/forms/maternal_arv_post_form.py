@@ -99,9 +99,7 @@ class MaternalArvPostMedForm(SubjectModelFormMixin, forms.ModelForm):
 
     def clean(self):
         self.subject_identifier = self.cleaned_data.get(
-            'maternal_visit').subject_identifier
-        if self.instance and not self.instance.id:
-            self.validate_offstudy_model()
+            'maternal_arv_post').maternal_visit.appointment.subject_identifier
 
     class Meta:
         model = MaternalArvPostMed
