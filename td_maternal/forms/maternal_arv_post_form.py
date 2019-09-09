@@ -20,10 +20,12 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
         arv_code = self.data.get('maternalarvpostmed_set-0-arv_code')
 
         if cleaned_data.get('arv_status') == 'modified' and not arv_code:
-                    raise forms.ValidationError(
-                        {'arv_status':
-                         'Please complete the maternal arv table.'})
-        self.validate_arv_modified()
+            raise forms.ValidationError(
+                {'arv_status':
+                 'Please complete the maternal arv table.'})
+
+        if cleaned_data.get('modification_code') not in ['Non-adherence with ARVs']:
+            self.validate_arv_modified()
         self.validate_arv_history()
 
     def validate_arv_modified(self):
@@ -78,8 +80,7 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
             'maternal_visit').appointment.subject_identifier
         try:
             maternal_arvs = self.maternal_arv_cls.objects.filter(
-                maternal_arv_preg__maternal_visit__appointment__subject_identifier=\
-                subject_identifier, stop_date__isnull=True)
+                maternal_arv_preg__maternal_visit__appointment__subject_identifier=subject_identifier, stop_date__isnull=True)
         except self.maternal_arv_cls.DoesNotExist:
             raise forms.ValidationError(
                 'Participant have not started arv\'s yet')
