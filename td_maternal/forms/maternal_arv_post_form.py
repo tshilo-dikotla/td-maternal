@@ -24,9 +24,8 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
                 {'arv_status':
                  'Please complete the maternal arv table.'})
 
-        if cleaned_data.get('modification_code') not in ['Non-adherence with ARVs']:
-            self.validate_arv_modified()
-            self.validate_arv_history()
+        self.validate_arv_modified()
+        self.validate_arv_history()
 
     def validate_arv_modified(self):
         total_arvs = int(self.data.get('maternalarvpostmed_set-TOTAL_FORMS'))
@@ -37,11 +36,15 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
             arv_status = self.data.get(
                 'maternalarvpostmed_set-' + str(i) + '-dose_status')
 
-            if (arv_status == NEW and
-                    modification_date != self.get_arv_modification_date()):
-                raise forms.ValidationError(
-                    {'arv_status': 'Modification date of new ARV should be'
-                     ' same as ARV permanently discountinued date'})
+            mod_code = self.data.get(
+                'maternalarvpostmed_set-' + str(i) + '-modification_code')
+
+            if mod_code not in ['Non-adherence with ARVs']:
+                if (arv_status == NEW and
+                        modification_date != self.get_arv_modification_date()):
+                    raise forms.ValidationError(
+                        {'arv_status': 'Modification date of new ARV should be'
+                         ' same as ARV permanently discountinued date'})
 
     def get_arv_modification_date(self):
         total_arvs = int(self.data.get('maternalarvpostmed_set-TOTAL_FORMS'))
