@@ -26,7 +26,7 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
 
         if cleaned_data.get('modification_code') not in ['Non-adherence with ARVs']:
             self.validate_arv_modified()
-        self.validate_arv_history()
+            self.validate_arv_history()
 
     def validate_arv_modified(self):
         total_arvs = int(self.data.get('maternalarvpostmed_set-TOTAL_FORMS'))
