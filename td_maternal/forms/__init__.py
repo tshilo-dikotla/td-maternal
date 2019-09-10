@@ -21,6 +21,7 @@ from .maternal_labour_del_form import MaternalLabourDelForm
 from .maternal_locator_fom import MaternalLocatorForm
 from .maternal_medical_history_form import MaternalMedicalHistoryForm
 from .maternal_obsterical_history_form import MaternalObstericalHistoryForm
+from .maternal_offschedule_form import MaternalOffScheduleForm
 from .maternal_postpartum_dep_form import MaternalPostPartumDepForm
 from .maternal_postpartum_fu_form import MaternalPostPartumFuForm
 from .maternal_randomization_form import MaternalRandomizationForm
