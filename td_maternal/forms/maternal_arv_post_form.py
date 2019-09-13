@@ -29,19 +29,17 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
 
     def validate_arv_modified(self):
         total_arvs = int(self.data.get('maternalarvpostmed_set-TOTAL_FORMS'))
-
+        mod_code = self.get_modification_reason(
+            reason='Non-adherence with ARVs')
         for i in range(total_arvs):
             modification_date = self.data.get(
                 'maternalarvpostmed_set-' + str(i) + '-modification_date')
             arv_status = self.data.get(
                 'maternalarvpostmed_set-' + str(i) + '-dose_status')
 
-            mod_code = self.data.get(
-                'maternalarvpostmed_set-' + str(i) + '-modification_code')
-
-            if mod_code not in ['Non-adherence with ARVs']:
-                if (arv_status == NEW and
-                        modification_date != self.get_arv_modification_date()):
+            if (arv_status == NEW and
+                    modification_date != self.get_arv_modification_date()):
+                if not mod_code:
                     raise forms.ValidationError(
                         {'arv_status': 'Modification date of new ARV should be'
                          ' same as ARV permanently discountinued date'})
@@ -76,7 +74,7 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
                 if not (arv_status == NEW):
                     raise forms.ValidationError(
                         {'arv_status':
-                         'Patient have not taking ARV ' + arv_code})
+                         'Patient has not been taking ARV ' + arv_code})
 
     def get_all_arvs(self):
         subject_identifier = self.cleaned_data.get(
@@ -86,9 +84,18 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
                 maternal_arv_preg__maternal_visit__appointment__subject_identifier=subject_identifier, stop_date__isnull=True)
         except self.maternal_arv_cls.DoesNotExist:
             raise forms.ValidationError(
-                'Participant have not started arv\'s yet')
+                'Participant has not started arv\'s yet')
         else:
             return maternal_arvs
+
+    def get_modification_reason(self, reason=None):
+        total_arvs = int(self.data.get('maternalarvpostmed_set-TOTAL_FORMS'))
+        for i in range(total_arvs):
+            modification_code = self.data.get(
+                'maternalarvpostmed_set-' + str(i) + '-modification_code')
+            if modification_code == reason:
+                return modification_code
+        return reason
 
     @property
     def maternal_arv_cls(self):
