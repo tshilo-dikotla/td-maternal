@@ -49,3 +49,10 @@ class SpecimenConsentAdmin(ModelAdminMixin, admin.ModelAdmin):
     actions = [
         flag_as_verified_against_paper,
         unflag_as_verified_against_paper, ]
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        if not request.user.has_perm('td_maternal.can_change_specimen_consent'):
+            del actions['flag_as_verified_against_paper']
+            del actions['unflag_as_verified_against_paper']
+        return actions
