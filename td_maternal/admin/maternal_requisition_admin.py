@@ -1,3 +1,5 @@
+import datetime
+from pytz import timezone
 from django.contrib import admin
 from django.http import HttpResponse
 import csv
@@ -16,23 +18,45 @@ from .modeladmin_mixins import CrfModelAdminMixin
 
 class ExportRequisitionCsvMixin:
 
+    def fix_date_format(self, obj_dict=None):
+        """Change all dates into a format for the export
+        and split the time into a separate value.
+        
+        Format: m/d/y
+        """
+
+        result_dict_obj = {**obj_dict}
+        for key, value in obj_dict.items():
+            if isinstance(value, datetime.datetime):
+                value = value.astimezone(timezone('Africa/Gaborone'))
+                time_value = value.time().strftime('%H:%M:%S.%f')
+                time_variable = key + '_time'
+                value = value.strftime('%m/%d/%Y')
+                result_dict_obj[key] = value
+                result_dict_obj[time_variable] = time_value
+            elif isinstance(value, datetime.date):
+                value = value.strftime('%m/%d/%Y')
+                result_dict_obj[key] = value
+        return result_dict_obj
+
     def export_as_csv(self, request, queryset):
 
         meta = self.model._meta
-        field_names = [field.name for field in meta.fields]
-        field_names += ['panel_name'] 
-
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename={}.csv'.format(meta)
         writer = csv.writer(response)
 
+        field_names = self.fix_date_format(queryset[0].__dict__)
+        field_names = [a for a in field_names.keys()]
+        field_names += ['panel_name']
+        
         writer.writerow(field_names)
         field_names.remove('panel_name')
         for obj in queryset:
-            data = [getattr(obj, field) for field in field_names]
+            obj_data = self.fix_date_format(obj.__dict__)
+            data = [obj_data[field] for field in field_names]
             data += [obj.panel.name]
             writer.writerow(data)
-
         return response
 
     export_as_csv.short_description = "Export with panel name"
