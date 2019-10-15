@@ -31,8 +31,8 @@ class SubjectConsentManager(SearchSlugManager, models.Manager):
 
 
 class SubjectConsent(
-        ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
-        SiteModelMixin,
+        ConsentModelMixin, SiteModelMixin,
+        UpdatesOrCreatesRegistrationModelMixin,
         NonUniqueSubjectIdentifierModelMixin, IdentityFieldsMixin,
         ReviewFieldsMixin, PersonalFieldsMixin, CitizenFieldsMixin,
         VulnerabilityFieldsMixin, SearchSlugModelMixin, BaseUuidModel):
@@ -85,17 +85,6 @@ class SubjectConsent(
     def natural_key(self):
         return (self.subject_identifier, self.version)
 
-    def make_new_identifier(self):
-        """Returns a new and unique identifier.
-
-        Override this if needed.
-        """
-        subject_identifier = SubjectIdentifier(
-            identifier_type='subject',
-            requesting_model=self._meta.label_lower,
-            site=self.site)
-        return subject_identifier.identifier
-
     def save(self, *args, **kwargs):
         consent_version_cls = django_apps.get_model(
             'td_maternal.tdconsentversion')
@@ -108,6 +97,17 @@ class SubjectConsent(
                 'it before proceeding.')
         self.version = consent_version_obj.version
         super().save(self, *args, **kwargs)
+
+    def make_new_identifier(self):
+        """Returns a new and unique identifier.
+
+        Override this if needed.
+        """
+        subject_identifier = SubjectIdentifier(
+            identifier_type='subject',
+            requesting_model=self._meta.label_lower,
+            site=self.site)
+        return subject_identifier.identifier
 
     @property
     def consent_version(self):

@@ -10,14 +10,16 @@ from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators.date import datetime_not_future
 from edc_base.sites.site_model_mixin import SiteModelMixin
 from edc_base.utils import get_utcnow
-from edc_consent.validators import FullNameValidator
 from edc_constants.choices import YES_NO
 from edc_protocol.validators import datetime_not_before_study_start
+
+from edc_consent.field_mixins import VerificationFieldsMixin
+from edc_consent.validators import FullNameValidator
 
 from ..choices import ANSWERS
 
 
-class KaraboSubjectConsent(CryptoMixin, SiteModelMixin, BaseUuidModel):
+class KaraboSubjectConsent(CryptoMixin, VerificationFieldsMixin, SiteModelMixin, BaseUuidModel):
 
     subject_identifier = models.CharField(
         verbose_name="Subject Identifier",

@@ -1,6 +1,9 @@
 from django.contrib import admin
 from edc_model_admin import audit_fieldset_tuple, audit_fields
 
+from edc_consent.actions import (
+    flag_as_verified_against_paper, unflag_as_verified_against_paper)
+
 from ..admin_site import td_maternal_admin
 from ..forms import KaraboSubjectConsentForm
 from ..models import KaraboSubjectConsent
@@ -52,6 +55,19 @@ class KaraboSubjectConsentAdmin(ModelAdminMixin, admin.ModelAdmin):
                     'initials',
                     'identity',)
 
+    search_fields = ('subject_identifier',)
+
+    actions = [
+        flag_as_verified_against_paper,
+        unflag_as_verified_against_paper, ]
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        if 'td_maternal.change_karabosubjectconsent' not in request.user.get_group_permissions():
+            del actions['flag_as_verified_against_paper']
+            del actions['unflag_as_verified_against_paper']
+        return actions
+
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj=obj)
-                +audit_fields)
+                + audit_fields)
