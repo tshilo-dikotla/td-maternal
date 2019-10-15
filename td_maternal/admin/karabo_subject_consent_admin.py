@@ -50,6 +50,9 @@ class KaraboSubjectConsentAdmin(ModelAdminMixin, admin.ModelAdmin):
     }
 
     list_display = ('subject_identifier',
+                    'verified_by',
+                    'is_verified',
+                    'is_verified_datetime',
                     'first_name',
                     'last_name',
                     'initials',
