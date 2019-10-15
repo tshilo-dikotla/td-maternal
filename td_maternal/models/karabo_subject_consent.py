@@ -19,7 +19,8 @@ from edc_consent.validators import FullNameValidator
 from ..choices import ANSWERS
 
 
-class KaraboSubjectConsent(CryptoMixin, VerificationFieldsMixin, SiteModelMixin, BaseUuidModel):
+class KaraboSubjectConsent(CryptoMixin, VerificationFieldsMixin,
+                           SiteModelMixin, BaseUuidModel):
 
     subject_identifier = models.CharField(
         verbose_name="Subject Identifier",
