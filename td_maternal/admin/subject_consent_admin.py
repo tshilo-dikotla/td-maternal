@@ -97,6 +97,7 @@ class SubjectConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
         'study_questions': admin.VERTICAL}
 
     list_display = ('subject_identifier',
+                    'verified_by',
                     'is_verified',
                     'is_verified_datetime',
                     'first_name',

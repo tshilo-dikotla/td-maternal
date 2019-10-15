@@ -96,7 +96,7 @@ class SubjectConsent(
                 'Missing Consent Version form. Please complete '
                 'it before proceeding.')
         self.version = consent_version_obj.version
-        super().save(self, *args, **kwargs)
+        super().save(*args, **kwargs)
 
     def make_new_identifier(self):
         """Returns a new and unique identifier.

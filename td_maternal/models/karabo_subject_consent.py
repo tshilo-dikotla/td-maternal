@@ -6,8 +6,10 @@ from django_crypto_fields.fields import (
     IdentityField)
 from django_crypto_fields.mixins import CryptoMixin
 from edc_base.model_fields import IsDateEstimatedField
+from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators.date import datetime_not_future
+from edc_base.sites import CurrentSiteManager
 from edc_base.sites.site_model_mixin import SiteModelMixin
 from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO
@@ -17,6 +19,13 @@ from edc_consent.field_mixins import VerificationFieldsMixin
 from edc_consent.validators import FullNameValidator
 
 from ..choices import ANSWERS
+
+
+class KaraboSubjectConsentManager(models.Manager):
+
+    def get_by_natural_key(self, subject_identifier, screening_identifier):
+        return self.get(
+            subject_identifier=subject_identifier, screening_identifier=screening_identifier)
 
 
 class KaraboSubjectConsent(CryptoMixin, VerificationFieldsMixin,
@@ -129,6 +138,18 @@ class KaraboSubjectConsent(CryptoMixin, VerificationFieldsMixin,
         ' of the consent form.',
         max_length=25,
         choices=ANSWERS)
+
+    def __str__(self):
+        return f'{self.subject_identifier} {self.screening_identifier}'
+
+    def natural_key(self):
+        return (self.subject_identifier, self.screening_identifier)
+
+    objects = KaraboSubjectConsentManager()
+
+    history = HistoricalRecords()
+
+    on_site = CurrentSiteManager()
 
     class Meta:
         app_label = 'td_maternal'
