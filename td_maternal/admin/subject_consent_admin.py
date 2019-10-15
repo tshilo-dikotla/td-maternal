@@ -128,4 +128,5 @@ class SubjectConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
         return actions
 
     def get_readonly_fields(self, request, obj=None):
-        return audit_fields
+        return (super().get_readonly_fields(request, obj=obj)
+                + audit_fields)
