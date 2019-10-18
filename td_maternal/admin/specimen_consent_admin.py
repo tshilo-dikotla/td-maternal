@@ -37,6 +37,9 @@ class SpecimenConsentAdmin(ModelAdminMixin, admin.ModelAdmin):
                     'consent_copy': admin.VERTICAL, }
 
     list_display = ('subject_identifier',
+                    'verified_by',
+                    'is_verified',
+                    'is_verified_datetime',
                     'created',
                     'modified',
                     'user_created',
