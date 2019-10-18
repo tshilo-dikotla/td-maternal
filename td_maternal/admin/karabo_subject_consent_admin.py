@@ -58,6 +58,9 @@ class KaraboSubjectConsentAdmin(ModelAdminMixin, admin.ModelAdmin):
                     'initials',
                     'identity',)
 
+    list_filter = ('is_verified',
+                   'verified_by',)
+
     search_fields = ('subject_identifier',)
 
     actions = [
