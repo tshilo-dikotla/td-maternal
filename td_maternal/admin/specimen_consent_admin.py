@@ -45,7 +45,9 @@ class SpecimenConsentAdmin(ModelAdminMixin, admin.ModelAdmin):
                     'user_created',
                     'user_modified')
     list_filter = ('language',
-                   'is_literate')
+                   'is_literate',
+                   'is_verified',
+                   'verified_by',)
 
     search_fields = ('subject_identifier',)
 
