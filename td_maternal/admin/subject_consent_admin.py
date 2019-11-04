@@ -1,27 +1,27 @@
+from collections import OrderedDict
 from django.contrib import admin
 from django.urls.base import reverse
 from django.urls.exceptions import NoReverseMatch
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
+from edc_consent.actions import (
+    flag_as_verified_against_paper, unflag_as_verified_against_paper)
 from edc_model_admin import (
     ModelAdminFormAutoNumberMixin, ModelAdminInstitutionMixin,
     audit_fieldset_tuple, audit_fields, ModelAdminNextUrlRedirectMixin,
     ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin)
 from edc_model_admin import ModelAdminBasicMixin, ModelAdminReadOnlyMixin
-from simple_history.admin import SimpleHistoryAdmin
-
-from edc_consent.actions import (
-    flag_as_verified_against_paper, unflag_as_verified_against_paper)
 from import_export.admin import ImportExportActionModelAdmin
+from simple_history.admin import SimpleHistoryAdmin
 
 from ..admin_site import td_maternal_admin
 from ..forms import SubjectConsentForm
 from ..models import SubjectConsent
 
 
-class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMixin,
+class ModelAdminMixin(ImportExportActionModelAdmin,
+                      ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMixin,
                       ModelAdminRevisionMixin, ModelAdminReplaceLabelTextMixin,
-                      ModelAdminInstitutionMixin, ModelAdminReadOnlyMixin,
-                      ImportExportActionModelAdmin):
+                      ModelAdminInstitutionMixin, ModelAdminReadOnlyMixin):
 
     list_per_page = 10
     date_hierarchy = 'modified'
@@ -117,17 +117,33 @@ class SubjectConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
                    'identity_type')
     search_fields = ('subject_identifier', 'dob',)
 
-    actions = [
-        flag_as_verified_against_paper,
-        unflag_as_verified_against_paper, ]
-
     def get_actions(self, request):
-        actions = super().get_actions(request)
-        if 'td_maternal.change_subjectconsent' not in request.user.get_group_permissions():
-            del actions['flag_as_verified_against_paper']
-            del actions['unflag_as_verified_against_paper']
-        return actions
+
+        super_actions = super().get_actions(request)
+
+        if ('td_maternal.change_subjectconsent'
+                in request.user.get_group_permissions()):
+
+            consent_actions = [
+                flag_as_verified_against_paper,
+                unflag_as_verified_against_paper]
+
+            # Add actions from this ModelAdmin.
+            actions = (self.get_action(action) for action in consent_actions)
+            # get_action might have returned None, so filter any of those out.
+            actions = filter(None, actions)
+
+            actions = self._filter_actions_by_permissions(request, actions)
+            # Convert the actions into an OrderedDict keyed by name.
+            actions = OrderedDict(
+                (name, (func, name, desc))
+                for func, name, desc in actions
+            )
+
+            super_actions.update(actions)
+
+        return super_actions
 
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj=obj)
-                + audit_fields)
+                +audit_fields)
