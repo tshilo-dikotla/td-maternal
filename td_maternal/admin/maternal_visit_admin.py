@@ -1,17 +1,18 @@
+from edc_visit_schedule.fieldsets import visit_schedule_fieldset_tuple
+
 from django.contrib import admin
 from django.urls.base import reverse
 from django.urls.exceptions import NoReverseMatch
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
+from edc_constants.constants import NO
 from edc_model_admin import (
     ModelAdminFormAutoNumberMixin, ModelAdminInstitutionMixin,
     ModelAdminNextUrlRedirectMixin,
     ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin)
 from edc_model_admin import audit_fieldset_tuple
-from edc_visit_tracking.constants import MISSED_VISIT, LOST_VISIT
-from edc_visit_tracking.modeladmin_mixins import VisitModelAdminMixin
-
-from edc_visit_schedule.fieldsets import visit_schedule_fieldset_tuple
 from import_export.admin import ImportExportActionModelAdmin
+
+from edc_visit_tracking.modeladmin_mixins import VisitModelAdminMixin
 
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalVisitForm
@@ -34,7 +35,7 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMi
             attrs = request.GET.dict().get('next').split(',')[1:]
             options = {k: request.GET.dict().get(k)
                        for k in attrs if request.GET.dict().get(k)}
-            if obj.reason in [MISSED_VISIT, LOST_VISIT]:
+            if (obj.require_crfs == NO):
                 del options['appointment']
                 del options['reason']
             try:
