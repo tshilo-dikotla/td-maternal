@@ -27,6 +27,7 @@ from .maternal_obsterical_history import MaternalObstericalHistory
 from .maternal_postpartum_dep import MaternalPostPartumDep
 from .maternal_postpartum_fu import MaternalPostPartumFu
 from .maternal_randomization import MaternalRando
+from .maternal_recontact import MaternalRecontact
 from .maternal_requisition import MaternalRequisition
 from .maternal_srh import MaternalSrh
 from .maternal_substance_during_preg import MaternalSubstanceUseDuringPreg

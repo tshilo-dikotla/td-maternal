@@ -25,6 +25,7 @@ from .maternal_offschedule_form import MaternalOffScheduleForm
 from .maternal_postpartum_dep_form import MaternalPostPartumDepForm
 from .maternal_postpartum_fu_form import MaternalPostPartumFuForm
 from .maternal_randomization_form import MaternalRandomizationForm
+from .maternal_recontact_form import MaternalRecontactForm
 from .maternal_requisition_form import MaternalRequisitionForm
 from .maternal_srh_form import MaternalSrhForm
 from .maternal_substance_during_preg_form import MaternalSubstanceUseDuringPregForm
