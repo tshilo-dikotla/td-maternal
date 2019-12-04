@@ -18,10 +18,10 @@ from ..forms import SubjectConsentForm
 from ..models import SubjectConsent
 
 
-class ModelAdminMixin(ImportExportActionModelAdmin,
-                      ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMixin,
+class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMixin,
                       ModelAdminRevisionMixin, ModelAdminReplaceLabelTextMixin,
-                      ModelAdminInstitutionMixin, ModelAdminReadOnlyMixin):
+                      ModelAdminInstitutionMixin, ModelAdminReadOnlyMixin,
+                      ImportExportActionModelAdmin):
 
     list_per_page = 10
     date_hierarchy = 'modified'
