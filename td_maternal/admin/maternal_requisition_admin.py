@@ -21,7 +21,7 @@ class ExportRequisitionCsvMixin:
     def fix_date_format(self, obj_dict=None):
         """Change all dates into a format for the export
         and split the time into a separate value.
-        
+
         Format: m/d/y
         """
 
@@ -49,7 +49,7 @@ class ExportRequisitionCsvMixin:
         field_names = self.fix_date_format(queryset[0].__dict__)
         field_names = [a for a in field_names.keys()]
         field_names += ['panel_name']
-        
+
         writer.writerow(field_names)
         field_names.remove('panel_name')
         for obj in queryset:
@@ -63,8 +63,8 @@ class ExportRequisitionCsvMixin:
 
 
 @admin.register(MaternalRequisition, site=td_maternal_admin)
-class MaternalRequisitionAdmin(CrfModelAdminMixin, RequisitionAdminMixin,
-                               ExportRequisitionCsvMixin, admin.ModelAdmin):
+class MaternalRequisitionAdmin(ExportRequisitionCsvMixin, CrfModelAdminMixin,
+                               RequisitionAdminMixin, admin.ModelAdmin):
 
     form = MaternalRequisitionForm
     actions = ["export_as_csv"]
@@ -104,5 +104,5 @@ class MaternalRequisitionAdmin(CrfModelAdminMixin, RequisitionAdminMixin,
 
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj)
-                +requisition_identifier_fields
-                +requisition_verify_fields)
+                + requisition_identifier_fields
+                + requisition_verify_fields)

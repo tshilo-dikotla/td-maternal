@@ -10,7 +10,7 @@ from edc_model_admin import (
     ModelAdminFormAutoNumberMixin, ModelAdminRedirectOnDeleteMixin,
     ModelAdminAuditFieldsMixin, ModelAdminReadOnlyMixin,
     audit_fieldset_tuple)
-from import_export.admin import ImportExportActionModelAdmin
+from .exportaction_mixin import ExportActionMixin
 
 from edc_appointment.models import Appointment
 from edc_subject_dashboard import ModelAdminSubjectDashboardMixin
@@ -25,7 +25,7 @@ class AppointmentAdmin(ModelAdminFormInstructionsMixin, ModelAdminNextUrlRedirec
                        ModelAdminFormAutoNumberMixin, ModelAdminRevisionMixin,
                        ModelAdminAuditFieldsMixin, ModelAdminRedirectOnDeleteMixin,
                        ModelAdminReadOnlyMixin, ModelAdminSiteMixin,
-                       ImportExportActionModelAdmin,
+                       ExportActionMixin,
                        ModelAdminSubjectDashboardMixin, admin.ModelAdmin):
 
     post_url_on_delete_name = settings.DASHBOARD_URL_NAMES.get(
@@ -85,8 +85,8 @@ class AppointmentAdmin(ModelAdminFormInstructionsMixin, ModelAdminNextUrlRedirec
 
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj=obj)
-                +visit_schedule_fields
-                +('subject_identifier', 'timepoint', 'timepoint_datetime',
+                + visit_schedule_fields
+                + ('subject_identifier', 'timepoint', 'timepoint_datetime',
                    'visit_code_sequence', 'facility_name'))
 
     def view_on_site(self, obj):
