@@ -7,7 +7,7 @@ from edc_model_admin import (
     audit_fieldset_tuple, ModelAdminNextUrlRedirectMixin,
     ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin)
 
-from import_export.admin import ImportExportActionModelAdmin
+from .exportaction_mixin import ExportActionMixin
 
 from ..admin_site import td_maternal_admin
 from ..forms import AntenatalEnrollmentForm
@@ -39,7 +39,7 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMi
 
 
 @admin.register(AntenatalEnrollment, site=td_maternal_admin)
-class AntenatalEnrollmentAdmin(ModelAdminMixin, ImportExportActionModelAdmin,
+class AntenatalEnrollmentAdmin(ModelAdminMixin, ExportActionMixin,
                                admin.ModelAdmin):
 
     form = AntenatalEnrollmentForm
