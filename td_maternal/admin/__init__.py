@@ -1,6 +1,7 @@
 from .antenatal_enrollment_admin import AntenatalEnrollmentAdmin
 from .antenatal_visit_membership_admin import AntenataVisitMembershipAdmin
 from .appointment_admin import AppointmentAdmin
+from .exportaction_mixin import ExportActionMixin
 from .karabo_subject_consent_admin import KaraboSubjectConsentAdmin
 from .karabo_subject_screening_admin import KaraboSubjectScreeningAdmin
 from .maternal_arv_history_admin import MaternalLifetimeArvHistoryAdmin
