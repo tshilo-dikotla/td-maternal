@@ -126,19 +126,30 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
             subject_identifier=subject_identifier)
 
         if previous_visit:
-            previous_arv_preg = self.maternal_arv_cls.objects.filter(
-                maternal_arv_preg__maternal_visit__appointment__subject_identifier=subject_identifier,
-                stop_date__isnull=True).order_by('-start_date').last()
+            arv_count = self.data.get('maternalarv_set-TOTAL_FORMS')
 
-            if previous_arv_preg:
-                arv_count = self.data.get('maternalarv_set-TOTAL_FORMS')
+            for index in range(int(arv_count)):
+                arv_start_date = self.data.get(
+                    'maternalarv_set-' + str(index) + '-start_date')
+                start_date = datetime.datetime.strptime(
+                    arv_start_date, '%Y-%m-%d') if arv_start_date else None
 
-                for index in range(int(arv_count)):
-                    arv_start_date = self.data.get(
-                        'maternalarv_set-' + str(index) + '-start_date')
-                    start_date = datetime.datetime.strptime(
-                        arv_start_date, '%Y-%m-%d') if arv_start_date else None
+                arv_code = self.data.get(
+                    'maternalarv_set-' + str(index) + '-arv_code')
 
+                arv_stop_date = self.data.get(
+                    'maternalarv_set-' + str(index) + '-stop_date')
+                stop_date = datetime.datetime.strptime(
+                    arv_stop_date, '%Y-%m-%d') if arv_stop_date else None
+
+                try:
+                    previous_arv_preg = self.maternal_arv_cls.objects.get(
+                        maternal_arv_preg__maternal_visit=previous_visit,
+                        stop_date=stop_date,
+                        arv_code=arv_code)
+                except self.maternal_arv_cls.DoesNotExist:
+                    pass
+                else:
                     if start_date and \
                             start_date.date() != previous_arv_preg.start_date:
                         current_arv_stop_date = \
@@ -156,19 +167,19 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                         elif not current_arv_stop_date:
                             prev_arv_stop_date = \
                                 self.get_previous_stopped_arv_date(
-                                    subject_identifier)
+                                    subject_identifier, arv_code)
 
                             if prev_arv_stop_date and \
                                     prev_arv_stop_date != start_date.date():
                                 raise forms.ValidationError(
                                     "Please enter ARV date(s) same as "
-                                    "{}, ARV date(s) at {} visit."
+                                    "{}, ARV date(s) at {} visit1."
                                     .format(prev_arv_stop_date,
                                             previous_visit.visit_code))
                             elif not prev_arv_stop_date:
                                 raise forms.ValidationError(
                                     "Please enter ARV date(s) same as "
-                                    "{}, ARV date(s) at {} visit."
+                                    "{}, ARV date(s) at {} visit2."
                                     .format(previous_arv_preg.start_date,
                                             previous_visit.visit_code))
 
@@ -192,11 +203,12 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
 
         return None
 
-    def get_previous_stopped_arv_date(self, subject_identifier):
+    def get_previous_stopped_arv_date(self, subject_identifier, arv_code):
             previous_arv_preg = self.maternal_arv_cls.objects.filter(
                 maternal_arv_preg__maternal_visit__appointment__subject_identifier=\
                 subject_identifier,
-                stop_date__isnull=False).order_by('-stop_date').first()
+                arv_code=arv_code,
+                stop_date__isnull=False)
 
             if previous_arv_preg:
                 return previous_arv_preg.stop_date
