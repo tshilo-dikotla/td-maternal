@@ -2,7 +2,7 @@ import datetime
 
 from django import forms
 from django.apps import apps as django_apps
-from edc_constants.constants import YES
+from edc_constants.constants import YES, NO
 
 from td_maternal_validators.form_validators import MaternalArvPregFormValidator
 
@@ -45,7 +45,9 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                 raise forms.ValidationError(
                     {'took_arv': 'Please complete the maternal arv table.'})
 
-        self.validate_date_arv_stopped()
+        if(cleaned_data.get('took_arv') == YES
+                and cleaned_data.get('is_interrupt' == NO)):
+            self.validate_date_arv_stopped()
         self.validate_arv_date_start_after_enrollment()
         self.validate_previous_maternal_arv_preg_arv_start_dates()
         return cleaned_data
