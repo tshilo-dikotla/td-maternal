@@ -16,12 +16,13 @@ from simple_history.admin import SimpleHistoryAdmin
 from ..admin_site import td_maternal_admin
 from ..forms import SubjectConsentForm
 from ..models import SubjectConsent
+from .exportaction_mixin import ExportActionMixin
 
 
 class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMixin,
                       ModelAdminRevisionMixin, ModelAdminReplaceLabelTextMixin,
                       ModelAdminInstitutionMixin, ModelAdminReadOnlyMixin,
-                      ImportExportActionModelAdmin):
+                      ExportActionMixin):
 
     list_per_page = 10
     date_hierarchy = 'modified'
