@@ -10,7 +10,6 @@ from edc_model_admin import (
     audit_fieldset_tuple, audit_fields, ModelAdminNextUrlRedirectMixin,
     ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin)
 from edc_model_admin import ModelAdminBasicMixin, ModelAdminReadOnlyMixin
-from import_export.admin import ImportExportActionModelAdmin
 from simple_history.admin import SimpleHistoryAdmin
 
 from ..admin_site import td_maternal_admin
@@ -147,4 +146,4 @@ class SubjectConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
 
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj=obj)
-                + audit_fields)
+                +audit_fields)
