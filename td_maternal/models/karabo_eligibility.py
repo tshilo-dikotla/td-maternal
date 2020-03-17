@@ -13,44 +13,36 @@ class KaraboEligibility:
 
         if model_obj.infant_alive == NO:
             self.eligible = False
-            self.reasons_ineligible.append('Infant is not alive.')
+            self.reasons_ineligible.append('Infant not alive.')
 
         if model_obj.infant_weight == NO:
             self.eligible = False
-            self.reasons_ineligible.append('Infant weight < 2.00 kilograms.')
+            self.reasons_ineligible.append('Low birth weight.')
 
         if model_obj.major_anomalies == YES:
             self.eligible = False
-            self.reasons_ineligible.append('Infant was born with major'
-                                           ' congenital anomalies.')
+            self.reasons_ineligible.append('Congenital anomalies.')
 
         if model_obj.birth_complications == YES:
             self.eligible = False
-            self.reasons_ineligible.append(
-                'Infant experienced birth complications.')
+            self.reasons_ineligible.append('Birth complications.')
 
         if model_obj.infant_documentation == NO:
             self.eligible = False
-            self.reasons_ineligible.append(
-                'Infant does not have documentation that'
-                ' they received a BCG vaccine within 72 hours of birth'
-                ' in the Under 5 Health.')
+            self.reasons_ineligible.append('BCG documentation')
 
         if model_obj.infant_months == YES:
             self.eligible = False
-            self.reasons_ineligible.append(
-                'Infant has reached 21 months of age.')
+            self.reasons_ineligible.append('Too old')
 
         if model_obj.tb_treatment == YES:
             self.eligible = False
-            self.reasons_ineligible.append('Woman was in tb treatment'
-                                           ' during pregnancy.')
+            self.reasons_ineligible.append('Maternal TB treatment')
 
         if model_obj.incarcerated == YES:
             self.eligible = False
-            self.reasons_ineligible.append('Woman is incarcerated.')
+            self.reasons_ineligible.append('Maternal incarceration')
 
         if model_obj.willing_to_consent == NO:
             self.eligible = False
-            self.reasons_ineligible.append('Woman is not willing to provide'
-                                           ' informed consent.')
+            self.reasons_ineligible.append('Maternal Consent')
