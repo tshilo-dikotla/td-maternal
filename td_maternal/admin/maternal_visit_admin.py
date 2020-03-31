@@ -10,18 +10,18 @@ from edc_model_admin import (
     ModelAdminNextUrlRedirectMixin,
     ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin)
 from edc_model_admin import audit_fieldset_tuple
-from import_export.admin import ImportExportActionModelAdmin
 
 from edc_visit_tracking.modeladmin_mixins import VisitModelAdminMixin
 
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalVisitForm
 from ..models import MaternalVisit
+from .exportaction_mixin import ExportActionMixin
 
 
 class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMixin,
                       ModelAdminRevisionMixin, ModelAdminReplaceLabelTextMixin,
-                      ModelAdminInstitutionMixin, ImportExportActionModelAdmin):
+                      ModelAdminInstitutionMixin, ExportActionMixin):
 
     list_per_page = 10
     date_hierarchy = 'modified'
