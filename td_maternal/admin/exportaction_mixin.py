@@ -1,44 +1,50 @@
-import csv
 import datetime
-from pytz import timezone
+import uuid
+
 from django.http import HttpResponse
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+import xlwt
 
 
 class ExportActionMixin:
 
-    def fix_date_format(self, obj_dict=None):
-        """Change all datetime into a format for the export
-
-        Format: m-d-y H:m:s
-        """
-
-        result_dict_obj = {**obj_dict}
-        for key, value in obj_dict.items():
-            if isinstance(value, datetime.datetime):
-                value = value.astimezone(timezone('Africa/Gaborone'))
-                value = value.strftime('%Y-%m-%d %H:%M:%S')
-                result_dict_obj[key] = value
-            elif isinstance(value, datetime.date):
-                value = value.strftime('%Y-%m-%d')
-                result_dict_obj[key] = value
-        return result_dict_obj
-
     def export_as_csv(self, request, queryset):
 
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename=%s.csv' % (
+        response = HttpResponse(content_type='application/ms-excel')
+        response['Content-Disposition'] = 'attachment; filename=%s.xls' % (
             self.get_export_filename())
-        writer = csv.writer(response)
 
-        field_names = self.fix_date_format(queryset[0].__dict__)
+        wb = xlwt.Workbook(encoding='utf-8', style_compression=2)
+        ws = wb.add_sheet('%s')
+
+        row_num = 0
+
+        font_style = xlwt.XFStyle()
+        font_style.font.bold = True
+        font_style.num_format_str = 'YYYY/MM/DD h:mm:ss'
+
+        field_names = queryset[0].__dict__
         field_names = [a for a in field_names.keys()]
         field_names.remove('_state')
-        writer.writerow(field_names)
+
+        for col_num in range(len(field_names)):
+            ws.write(row_num, col_num, field_names[col_num], font_style)
+
         for obj in queryset:
-            obj_data = self.fix_date_format(obj.__dict__)
+            obj_data = obj.__dict__
             data = [obj_data[field] for field in field_names]
-            writer.writerow(data)
+
+            row_num += 1
+            for col_num in range(len(data)):
+                if isinstance(data[col_num], uuid.UUID):
+                    ws.write(row_num, col_num, str(data[col_num]))
+                elif isinstance(data[col_num], datetime.datetime):
+                    data[col_num] = timezone.make_naive(data[col_num])
+                    ws.write(row_num, col_num, data[col_num])
+                else:
+                    ws.write(row_num, col_num, data[col_num])
+        wb.save(response)
         return response
 
     export_as_csv.short_description = _(
