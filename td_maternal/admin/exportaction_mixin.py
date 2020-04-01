@@ -41,7 +41,7 @@ class ExportActionMixin:
                     ws.write(row_num, col_num, str(data[col_num]))
                 elif isinstance(data[col_num], datetime.datetime):
                     data[col_num] = timezone.make_naive(data[col_num])
-                    ws.write(row_num, col_num, data[col_num])
+                    ws.write(row_num, col_num, data[col_num], xlwt.easyxf(num_format_str='YYYY/MM/DD h:mm:ss'))
                 else:
                     ws.write(row_num, col_num, data[col_num])
         wb.save(response)
