@@ -5,6 +5,7 @@ from edc_base.model_validators import date_not_future
 from edc_base.sites import CurrentSiteManager as BaseCurrentSiteManager
 from edc_base.sites.site_model_mixin import SiteModelMixin
 from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
+from edc_constants.choices import YES_NO
 from edc_constants.constants import ALIVE, PARTICIPANT
 from edc_metadata.model_mixins.creates import CreatesMetadataModelMixin
 from edc_protocol.validators import date_not_before_study_start
@@ -44,6 +45,12 @@ class MaternalVisit(VisitModelMixin, CreatesMetadataModelMixin,
         blank=True,
         null=True,
         max_length=250)
+
+    covid_visit = models.CharField(
+        verbose_name=('Is this a telephonic visit that is occurring '
+                      'during COVID-19?'),
+        max_length=3,
+        choices=YES_NO)
 
     reason_unscheduled = models.CharField(
         verbose_name=(

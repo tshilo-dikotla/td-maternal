@@ -59,6 +59,7 @@ class MaternalVisitAdmin(
                 'report_datetime',
                 'reason',
                 'reason_missed',
+                'covid_visit',
                 'study_status',
                 'require_crfs',
                 'info_source',
@@ -74,6 +75,7 @@ class MaternalVisitAdmin(
 
     radio_fields = {
         'reason': admin.VERTICAL,
+        'covid_visit': admin.VERTICAL,
         'study_status': admin.VERTICAL,
         'require_crfs': admin.VERTICAL,
         'info_source': admin.VERTICAL,
