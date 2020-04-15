@@ -1,7 +1,7 @@
 from edc_constants.constants import (
     OFF_STUDY, ON_STUDY, FAILED_ELIGIBILITY, PARTICIPANT)
 from edc_constants.constants import ALIVE, DEAD, NOT_APPLICABLE, OTHER, UNKNOWN
-from edc_constants.constants import NO
+from edc_constants.constants import YES, NO, POS, NEG
 from edc_visit_tracking.constants import MISSED_VISIT, COMPLETED_PROTOCOL_VISIT
 from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
 
@@ -995,6 +995,12 @@ FAMILY_RELATION = (
     (NOT_APPLICABLE, 'Not applicable'),
 )
 
+POS_NEG_PENDING = (
+    (POS, 'Positive'),
+    (NEG, 'Negative'),
+    ('pending', 'Pending')
+)
+
 REASON_NOT_DRAWN = (
     (NOT_APPLICABLE, 'Not applicable'),
     ('collection_failed', 'Tried, but unable to obtain sample from patient'),
@@ -1002,4 +1008,11 @@ REASON_NOT_DRAWN = (
     ('refused', 'Patient refused'),
     ('no_supplies', 'No supplies'),
     ('other', 'Other'),
+)
+
+YES_NO_TRIED = (
+    (YES, YES),
+    (NO, NO),
+    ('tried', 'Tried, but could not get tested'),
+    (UNKNOWN, 'Unknown'),
 )
