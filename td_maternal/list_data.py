@@ -1,4 +1,4 @@
-from edc_constants.constants import NOT_APPLICABLE, OTHER, NONE
+from edc_constants.constants import NOT_APPLICABLE
 
 from edc_list_data import PreloadData
 
@@ -30,6 +30,20 @@ list_data = {
         ('Depo Provera (Injection)', 'Depo Provera (Injection)'),
         ('Hormonal Implant', 'Hormonal Implant'),
         ('Intrauterine Device', 'Intrauterine Device'),
+        (NOT_APPLICABLE, 'Not Applicable')
+    ],
+    'td_maternal.covidsymptoms': [
+        ('fever', 'Fever >37.5°C (99.5°F)'),
+        ('chills', 'Chills'),
+        ('nasal_congestion', 'Nasal Congestion'),
+        ('sore_throat', 'Sore throat'),
+        ('cough', 'Cough(new onset)'),
+        ('shortness_of_breath', 'Shortness of breath (dyspnea)'),
+        ('muscle_aches', 'Muscle aches (myalgia)'),
+        ('nausea/vomiting', 'Nausea/vomiting'),
+        ('diarrhea', 'Diarrhea'),
+        ('abdominal_pain', 'Abdominal pain'),
+        ('chest_pain', 'Chest pain'),
         (NOT_APPLICABLE, 'Not Applicable')
     ],
     'td_maternal.deliverycomplications': [
@@ -88,7 +102,7 @@ list_data = {
         ('Other, specify', 'Other, specify')
     ],
     'td_maternal.maternalmedications': [
-        ('N/A',  'Not Applicable'),
+        ('N/A', 'Not Applicable'),
         ('Cholesterol medications', 'Cholesterol medications'),
         ('Vitamin D supplement', 'Vitamin D supplement'),
         ('None', 'None'),

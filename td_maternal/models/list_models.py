@@ -16,6 +16,11 @@ class Contraceptives(ListModelMixin, BaseUuidModel):
     pass
 
 
+class CovidSymptoms (ListModelMixin, BaseUuidModel):
+
+    pass
+
+
 class DeliveryComplications(ListModelMixin, BaseUuidModel):
 
     pass

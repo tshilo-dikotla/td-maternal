@@ -14,6 +14,7 @@ from .maternal_clinical_measurements_one_admin import MaternalClinicalMeasuremen
 from .maternal_clinical_measurements_two_admin import MaternalClinicalMeasurementsTwoAdmin
 from .maternal_contact_admin import MaternalContactAdmin
 from .maternal_contraception_admin import MaternalContraceptionAdmin
+from .maternal_covid_screening_admin import MaternalCovidScreeningAdmin
 from .maternal_demographics_admin import MaternalDemographicsAdmin
 from .maternal_diagnoses_admin import MaternalDiagnosesAdmin
 from .maternal_hiv_interim_hx import MaternalHivInterimHxAdmin
@@ -38,6 +39,3 @@ from .specimen_consent_admin import SpecimenConsentAdmin
 from .subject_consent_admin import SubjectConsentAdmin
 from .subject_screening_admin import SubjectScreeningAdmin
 from .td_consent_version_admin import TdConsentVersionAdmin
-
-
-# from .maternal_offschedule_admin import MaternalOffScheduleAdmin

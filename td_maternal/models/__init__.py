@@ -16,6 +16,7 @@ from .maternal_clinical_measurements_one import MaternalClinicalMeasurementsOne
 from .maternal_clinical_measurements_two import MaternalClinicalMeasurementsTwo
 from .maternal_contact import MaternalContact
 from .maternal_contraception import MaternalContraception
+from .maternal_covid_screening import MaternalCovidScreening
 from .maternal_demographics import MaternalDemographics
 from .maternal_diagnoses import MaternalDiagnoses
 from .maternal_hiv_interim_hx import MaternalHivInterimHx
@@ -48,3 +49,4 @@ from .specimen_consent import SpecimenConsent
 from .subject_consent import SubjectConsent
 from .subject_screening import SubjectScreening
 from .td_consent_version import TdConsentVersion
+

@@ -13,6 +13,7 @@ from .maternal_clinical_measurements_one_form import MaternalClinicalMeasurement
 from .maternal_clinical_measurements_two_form import MaternalClinicalMeasurementsTwoForm
 from .maternal_contact_form import MaternalContactForm
 from .maternal_contraception_form import MaternalContraceptionForm
+from .maternal_covid_screening_form import MaternalCovidScreeningForm
 from .maternal_demographics_form import MaternalDemographicsForm
 from .maternal_diagnoses_form import MaternalDiagnosesForm
 from .maternal_hiv_interim_hx_form import MaternalHivInterimHxForm
@@ -38,3 +39,4 @@ from .specimen_consent_form import SpecimenConsentForm
 from .subject_consent_form import SubjectConsentForm
 from .subject_screening_form import SubjectScreeningForm
 from .td_consent_version_form import TdConsentVersionForm
+
