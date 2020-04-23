@@ -77,7 +77,8 @@ def antenatal_enrollment_on_post_save(sender, instance, raw, created, **kwargs):
                                       schedule_name=instance.schedule_name)
                 else:
                     schedule.refresh_schedule(
-                        subject_identifier=instance.subject_identifier)
+                        subject_identifier=instance.subject_identifier,
+                        schedule_name=instance.schedule_name)
         else:
             # put subject on schedule
             if instance.is_eligible:
@@ -116,7 +117,8 @@ def antenatal_visit_membership_on_post_save(sender, instance, raw, created, **kw
                                       schedule_name=instance.schedule_name)
             else:
                 schedule.refresh_schedule(
-                    subject_identifier=instance.subject_identifier)
+                    subject_identifier=instance.subject_identifier,
+                    schedule_name=instance.schedule_name)
 
 
 @receiver(post_save, weak=False, sender=MaternalLabourDel,
@@ -132,7 +134,8 @@ def maternal_labour_del_on_post_save(sender, instance, raw, created, **kwargs):
         try:
 
             schedule.refresh_schedule(
-                subject_identifier=instance.subject_identifier)
+                subject_identifier=instance.subject_identifier,
+                schedule_name=instance.schedule_name)
         except ObjectDoesNotExist:
             # put subject on schedule if live_infants_to_register is ONLY 1.
             if instance.live_infants_to_register == 1:
