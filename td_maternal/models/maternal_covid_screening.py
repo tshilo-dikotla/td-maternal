@@ -2,12 +2,19 @@ from django.db import models
 from edc_base.model_validators.date import date_not_future
 from edc_constants.choices import YES_NO, YES_NO_UNKNOWN
 
+from edc_action_item.model_mixins.action_model_mixin import ActionModelMixin
+
+from ..action_items import MATERNAL_COVID_SCREENING_ACTION
 from ..choices import YES_NO_TRIED, POS_NEG_PENDING
 from .list_models import CovidSymptoms
 from .model_mixins import CrfModelMixin
 
 
-class MaternalCovidScreening(CrfModelMixin):
+class MaternalCovidScreening(ActionModelMixin, CrfModelMixin):
+
+    tracking_identifier_prefix = 'MC'
+
+    action_name = MATERNAL_COVID_SCREENING_ACTION
 
     covid_tested = models.CharField(
         verbose_name='Have you been tested for COVID-19?',
@@ -67,6 +74,10 @@ class MaternalCovidScreening(CrfModelMixin):
         max_length=150,
         null=True,
         blank=True)
+
+    @property
+    def subject_identifier(self):
+        return self.maternal_visit.subject_identifier
 
     class Meta:
         app_label = 'td_maternal'
