@@ -1,7 +1,10 @@
 from django.db import models
 from django.utils.html import mark_safe
 from edc_base.model_mixins import BaseUuidModel
+<<<<<<< HEAD
 from edc_base.utils import get_utcnow
+=======
+>>>>>>> 5889b5a... odk - add clinician notes form
 from .model_mixins import CrfModelMixin
 
 
@@ -20,12 +23,15 @@ class ClinicianNotesImage(BaseUuidModel):
         on_delete=models.PROTECT,
         related_name='maternal_clinician_notes',)
     image = models.ImageField(upload_to='media/')
+<<<<<<< HEAD
     user_uploaded = models.CharField(
         max_length=50,
         blank=True,
         verbose_name='user uploaded',)
     datetime_captured = models.DateTimeField(
         default=get_utcnow)
+=======
+>>>>>>> 5889b5a... odk - add clinician notes form
 
     def clinician_notes_image(self):
         return mark_safe(
