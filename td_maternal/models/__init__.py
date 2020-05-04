@@ -14,6 +14,8 @@ from .maternal_arv_post import MaternalArvPostMed
 from .maternal_arv_preg import MaternalArvPreg
 from .maternal_clinical_measurements_one import MaternalClinicalMeasurementsOne
 from .maternal_clinical_measurements_two import MaternalClinicalMeasurementsTwo
+from .maternal_clinician_notes import ClinicianNotes
+from .maternal_clinician_notes import ClinicianNotesImage
 from .maternal_contact import MaternalContact
 from .maternal_contraception import MaternalContraception
 from .maternal_covid_screening import MaternalCovidScreening
