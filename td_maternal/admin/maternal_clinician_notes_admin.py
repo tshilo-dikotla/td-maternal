@@ -13,9 +13,15 @@ class ClinicianNotesImageInline(TabularInlineMixin, admin.TabularInline):
     form = ClinicianNotesImageForm
     extra = 0
 
-    fields = ('clinician_notes_image', audit_fields)
+    fields = ('clinician_notes_image', 'user_uploaded', 'datetime_captured',
+              'modified', 'hostname_created',)
 
-    readonly_fields = ('clinician_notes_image',)
+    def get_readonly_fields(self, request, obj=None):
+        fields = super().get_readonly_fields(request, obj)
+        fields = (
+            'clinician_notes_image', 'datetime_captured', 'user_uploaded') + fields
+
+        return fields
 
 
 @admin.register(ClinicianNotes, site=td_maternal_admin)
