@@ -44,7 +44,7 @@ class MaternalCovidScreening(ActionModelMixin, CrfModelMixin):
     household_positive = models.CharField(
         verbose_name=('Has anyone in your household tested positive '
                       'for COVID-19'),
-        max_length=3,
+        max_length=7,
         choices=YES_NO_UNKNOWN)
 
     household_test_date = models.DateField(
@@ -63,7 +63,7 @@ class MaternalCovidScreening(ActionModelMixin, CrfModelMixin):
     covid_contact = models.CharField(
         verbose_name=('Have you been in close contact with anyone outside of '
                       'your household who tested positive for COVID-19?'),
-        max_length=3,
+        max_length=7,
         choices=YES_NO_UNKNOWN)
 
     covid_symptoms = models.ManyToManyField(
