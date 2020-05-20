@@ -13,7 +13,6 @@ class ClinicianNotesImageInline(TabularInlineMixin, admin.TabularInline):
     form = ClinicianNotesImageForm
     extra = 0
 
-<<<<<<< HEAD
     fields = ('clinician_notes_image', 'user_uploaded', 'datetime_captured',
               'modified', 'hostname_created',)
 
@@ -23,11 +22,6 @@ class ClinicianNotesImageInline(TabularInlineMixin, admin.TabularInline):
             'clinician_notes_image', 'datetime_captured', 'user_uploaded') + fields
 
         return fields
-=======
-    fields = ('clinician_notes_image', audit_fields)
-
-    readonly_fields = ('clinician_notes_image',)
->>>>>>> 5889b5a... odk - add clinician notes form
 
 
 @admin.register(ClinicianNotes, site=td_maternal_admin)
@@ -40,6 +34,6 @@ class ClinicianNotesAdmin(CrfModelAdminMixin, admin.ModelAdmin):
             'fields': [
                 'maternal_visit',
             ]}
-         ), )
+         ),)
 
     inlines = [ClinicianNotesImageInline]
