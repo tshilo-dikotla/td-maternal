@@ -32,6 +32,13 @@ ALIVE_DEAD_UNKNOWN = (
     (UNKNOWN, 'Unknown'),
 )
 
+OFTEN_SOMETIMES_NEVER_TRUE = (
+    ('often_true', 'Often true'),
+    ('sometimes_true', 'Sometimes true'),
+    ('never_true', 'Never true'),
+    ('dont_know_or_refused', 'Don\'t know or refused')
+)
+
 VISIT_INFO_SOURCE = [
     (PARTICIPANT, 'Clinic visit with participant'),
     ('other_contact',
@@ -671,6 +678,24 @@ SKIN_ABNORMALITY = (
     ('Icthyosis', 'Icthyosis'),
     ('Ectodermal dysplasia', 'Ectodermal dysplasia'),
     (OTHER, 'Other skin abnormality, specify'),
+)
+
+SKIP_MEALS_FREQUEENCY = (
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+    ('4', '4'),
+    ('5', '5'),
+    ('6', '6'),
+    ('7', '7'),
+    ('8', '8'),
+    ('9', '9'),
+    ('10', '10'),
+    ('11', '11'),
+    ('12', '12'),
+    ('13', '13'),
+    ('14', '14'),
+    ('dont_know', 'Don\'t know')
 )
 
 TIMES_BREASTFED = (
