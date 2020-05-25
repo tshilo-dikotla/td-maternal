@@ -19,6 +19,7 @@ from .maternal_contraception import MaternalContraception
 from .maternal_covid_screening import MaternalCovidScreening
 from .maternal_demographics import MaternalDemographics
 from .maternal_diagnoses import MaternalDiagnoses
+from .maternal_food_security import MaternalFoodSecurity
 from .maternal_hiv_interim_hx import MaternalHivInterimHx
 from .maternal_interim_idcc_data import MaternalInterimIdcc
 from .maternal_labour_del import MaternalLabourDel
@@ -49,4 +50,3 @@ from .specimen_consent import SpecimenConsent
 from .subject_consent import SubjectConsent
 from .subject_screening import SubjectScreening
 from .td_consent_version import TdConsentVersion
-

@@ -16,6 +16,7 @@ from .maternal_contraception_form import MaternalContraceptionForm
 from .maternal_covid_screening_form import MaternalCovidScreeningForm
 from .maternal_demographics_form import MaternalDemographicsForm
 from .maternal_diagnoses_form import MaternalDiagnosesForm
+from .maternal_food_security_form import MaternalFoodSecurityForm
 from .maternal_hiv_interim_hx_form import MaternalHivInterimHxForm
 from .maternal_interim_idcc_form import MaternalInterimIdccForm
 from .maternal_labour_del_form import MaternalLabourDelForm
@@ -39,4 +40,3 @@ from .specimen_consent_form import SpecimenConsentForm
 from .subject_consent_form import SubjectConsentForm
 from .subject_screening_form import SubjectScreeningForm
 from .td_consent_version_form import TdConsentVersionForm
-
