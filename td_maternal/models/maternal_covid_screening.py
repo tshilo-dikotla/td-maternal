@@ -81,3 +81,4 @@ class MaternalCovidScreening(ActionModelMixin, CrfModelMixin):
 
     class Meta:
         app_label = 'td_maternal'
+        verbose_name = 'Maternal Covid Screening'

@@ -1,8 +1,7 @@
 from django.db import models
-
 from edc_constants.choices import YES_NO
 
-from td_maternal.maternal_choices import SMOKING_DRINKING_FREQUENCY
+from ..maternal_choices import SMOKING_DRINKING_FREQUENCY
 from .model_mixins import CrfModelMixin
 
 
@@ -64,6 +63,4 @@ class MaternalSubstanceUsePriorPreg(CrfModelMixin):
     class Meta(CrfModelMixin.Meta):
         app_label = 'td_maternal'
         verbose_name = 'Substance Use Prior to Pregnancy'
-
-
-verbose_name_plural = 'Substance Use Prior to Pregnancy'
+        verbose_name_plural = 'Substance Use Prior to Pregnancy'
