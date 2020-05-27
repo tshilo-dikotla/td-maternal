@@ -1,3 +1,5 @@
+from edc_visit_schedule.site_visit_schedules import site_visit_schedules
+
 from django.apps import apps as django_apps
 from django.core.exceptions import ValidationError, ObjectDoesNotExist, \
     MultipleObjectsReturned
@@ -14,7 +16,6 @@ from edc_registration.models import RegisteredSubject
 from edc_appointment.constants import COMPLETE_APPT, IN_PROGRESS_APPT
 from edc_appointment.constants import NEW_APPT, INCOMPLETE_APPT
 from edc_appointment.models import Appointment
-from edc_visit_schedule.site_visit_schedules import site_visit_schedules
 
 from .antenatal_enrollment import AntenatalEnrollment
 from .antenatal_visit_membership import AntenatalVisitMembership
@@ -77,8 +78,7 @@ def antenatal_enrollment_on_post_save(sender, instance, raw, created, **kwargs):
                                       schedule_name=instance.schedule_name)
                 else:
                     schedule.refresh_schedule(
-                        subject_identifier=instance.subject_identifier,
-                        schedule_name=instance.schedule_name)
+                        subject_identifier=instance.subject_identifier,)
         else:
             # put subject on schedule
             if instance.is_eligible:

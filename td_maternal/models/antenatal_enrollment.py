@@ -27,9 +27,7 @@ class AntenatalEnrollment(ConsentVersionModelModelMixin,
     last_period_date = models.DateField(
         verbose_name="What is the approximate date of the first day of "
         "the mother’s last menstrual period",
-        validators=[
-            date_not_before_study_start,
-            date_not_future, ],
+        validators=[date_not_future, ],
         null=True,
         blank=True,
         help_text='LMP')
