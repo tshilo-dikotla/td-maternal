@@ -57,7 +57,6 @@ class MaternalCovidScreeningAction(Action):
     reference_model = 'td_maternal.maternalcovidscreening'
     admin_site_name = 'td_maternal_admin'
     priority = HIGH_PRIORITY
-    singleton = True
 
     def close_action_item_on_save(self):
         """Returns True if action item for \'action_identifier\'
