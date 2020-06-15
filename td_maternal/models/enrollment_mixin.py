@@ -1,4 +1,5 @@
 from django.apps import apps as django_apps
+from django.core.exceptions import ValidationError
 from django.db import models
 from edc_base.model_validators import datetime_not_future, date_not_future
 from edc_base.utils import get_utcnow
@@ -154,7 +155,7 @@ class EnrollmentMixin(models.Model):
 #        raise ValidationError('Ensure a rapid test id done for this subject.')
         self.edd_by_lmp = enrollment_helper.evaluate_edd_by_lmp
         self.ga_lmp_enrollment_wks = enrollment_helper.evaluate_ga_lmp(
-            self.report_datetime.date())
+            self.get_registration_date())
         self.enrollment_hiv_status = enrollment_helper.enrollment_hiv_status
         self.date_at_32wks = enrollment_helper.date_at_32wks
         if not self.ultrasound:
@@ -188,8 +189,16 @@ class EnrollmentMixin(models.Model):
         else:
             return False
 
-    def get_registration_datetime(self):
-        return self.report_datetime
+    def get_registration_date(self):
+        consent_cls = django_apps.get_model('td_maternal.subjectconsent')
+        try:
+            subject_consent = consent_cls.objects.filter(
+                subject_identifier=self.subject_identifier).order_by(
+                    'consent_datetime')[0]
+        except Exception as e:
+            raise ValidationError(e)
+        else:
+            return subject_consent.consent_datetime.date()
 
     @property
     def ultrasound(self):
