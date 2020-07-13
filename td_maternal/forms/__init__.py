@@ -11,6 +11,8 @@ from .maternal_arv_post_form import MaternalArvPostMedForm
 from .maternal_arv_preg_form import MaternalArvPregForm
 from .maternal_clinical_measurements_one_form import MaternalClinicalMeasurementsOneForm
 from .maternal_clinical_measurements_two_form import MaternalClinicalMeasurementsTwoForm
+from .maternal_clinician_notes_form import ClinicianNotesForm
+from .maternal_clinician_notes_form import ClinicianNotesImageForm
 from .maternal_contact_form import MaternalContactForm
 from .maternal_contraception_form import MaternalContraceptionForm
 from .maternal_covid_screening_form import MaternalCovidScreeningForm
