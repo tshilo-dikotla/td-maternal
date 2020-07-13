@@ -1,5 +1,6 @@
 from django.contrib import admin
 from edc_model_admin import TabularInlineMixin, audit_fields
+from edc_odk.admin import StampImageActionMixin
 
 from ..admin_site import td_maternal_admin
 from ..forms import ClinicianNotesForm, ClinicianNotesImageForm
@@ -25,7 +26,8 @@ class ClinicianNotesImageInline(TabularInlineMixin, admin.TabularInline):
 
 
 @admin.register(ClinicianNotes, site=td_maternal_admin)
-class ClinicianNotesAdmin(CrfModelAdminMixin, admin.ModelAdmin):
+class ClinicianNotesAdmin(
+        StampImageActionMixin, CrfModelAdminMixin, admin.ModelAdmin):
 
     form = ClinicianNotesForm
 
