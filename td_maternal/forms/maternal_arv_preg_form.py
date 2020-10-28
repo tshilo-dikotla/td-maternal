@@ -126,7 +126,6 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
             visit_obj=cleaned_data.get('maternal_visit'),
             timepoints=['1000M', '1020M', '2000M'],
             subject_identifier=subject_identifier)
-
         if previous_visit:
             arv_count = self.data.get('maternalarv_set-TOTAL_FORMS')
 
@@ -145,10 +144,9 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                     arv_stop_date, '%Y-%m-%d') if arv_stop_date else None
 
                 try:
-                    previous_arv_preg = self.maternal_arv_cls.objects.get(
-                        maternal_arv_preg__maternal_visit=previous_visit,
-                        stop_date=stop_date,
-                        arv_code=arv_code)
+                    previous_arv_preg = self.maternal_arv_cls.objects.filter(
+                        maternal_arv_preg__maternal_visit__subject_identifier=subject_identifier,
+                        arv_code=arv_code).order_by('-created').first()
                 except self.maternal_arv_cls.DoesNotExist:
                     pass
                 else:
@@ -181,7 +179,7 @@ class MaternalArvPregForm(SubjectModelFormMixin, forms.ModelForm):
                             elif not prev_arv_stop_date:
                                 raise forms.ValidationError(
                                     "Please enter ARV date(s) same as "
-                                    "{}, ARV date(s) at {} visit2."
+                                    "{}, ARV date(s) at {} visit."
                                     .format(previous_arv_preg.start_date,
                                             previous_visit.visit_code))
 
