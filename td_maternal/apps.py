@@ -24,6 +24,7 @@ if settings.APP_NAME == 'td_maternal':
     from edc_facility.apps import AppConfig as BaseEdcFacilityAppConfig
     from edc_lab.apps import AppConfig as BaseEdcLabAppConfig
     from edc_metadata.apps import AppConfig as BaseEdcMetadataAppConfig
+    from edc_odk.apps import AppConfig as BaseEdcOdkAppConfig
     from edc_protocol.apps import AppConfig as BaseEdcProtocolAppConfig
     from edc_visit_tracking.apps import (
         AppConfig as BaseEdcVisitTrackingAppConfig)
@@ -47,7 +48,7 @@ if settings.APP_NAME == 'td_maternal':
         study_open_datetime = datetime(
             2016, 4, 1, 0, 0, 0, tzinfo=gettz('UTC'))
         study_close_datetime = datetime(
-            2021, 5, 31, 23, 59, 59, tzinfo=gettz('UTC'))
+            2022, 5, 31, 23, 59, 59, tzinfo=gettz('UTC'))
 
     class EdcAppointmentAppConfig(BaseEdcAppointmentAppConfig):
         default_appt_type = 'clinic'
@@ -72,6 +73,11 @@ if settings.APP_NAME == 'td_maternal':
         @property
         def site_code(self):
             return '40'
+        
+    class EdcOdkAppConfig(BaseEdcOdkAppConfig):
+        clinician_notes_form_ids = {
+            'td_maternal': 'maternal_cliniciannotes_v1.0',
+            'td_infant': 'infant_cliniciannotes_v1.0'}
 
     class EdcMetadataAppConfig(BaseEdcMetadataAppConfig):
         reason_field = {'td_infant.infantvisit': 'reason',
