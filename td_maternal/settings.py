@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'td_maternal.apps.EdcAppointmentAppConfig',
     'td_maternal.apps.EdcMetadataAppConfig',
     'td_maternal.apps.EdcLabAppConfig',
+    'td_maternal.apps.EdcOdkAppConfig',
     'td_maternal.apps.AppConfig',
 ]
 
