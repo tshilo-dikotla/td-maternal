@@ -2,7 +2,7 @@ from django.test import TestCase, tag
 from edc_base.utils import get_utcnow
 
 
-class MaternalArvPregForm(TestCase):
+class TestMaternalArvPregForm(TestCase):
 
     def setUp(self):
         self.data = {
@@ -16,6 +16,7 @@ class MaternalArvPregForm(TestCase):
             'maternalarv_set-2-stop_date': 'MLS',
             'maternalarv_set-2-arv_code': None,
         }
+        super(TestMaternalArvPregForm, self).setUp()
 
     def test_match_prev_arvs(self):
         pass
