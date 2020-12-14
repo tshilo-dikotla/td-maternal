@@ -15,6 +15,7 @@ from .models import (
     MaternalPostPartumDep, MaternalInterimIdcc, KaraboSubjectConsent)
 from .models import KaraboSubjectScreening
 from .models import TdConsentVersion, SpecimenConsent
+from .models import MaternalArvPreg, MaternalArv
 
 fake = Faker()
 
@@ -216,3 +217,20 @@ karabosubjectscreening = Recipe(
     incarcerated=NO,
     willing_to_consent=YES
 )
+
+maternalarvpreg = Recipe(
+    MaternalArvPreg,
+    report_datetime=get_utcnow(),
+    took_arv=YES,
+    is_interrupt=NO,
+    interrupt=None,
+)
+
+maternalarvpreg = Recipe(
+    MaternalArv,
+    report_datetime=get_utcnow(),
+    start_date=get_utcnow(),
+    stop_date=None,
+    arv_code='Any',
+)
+
