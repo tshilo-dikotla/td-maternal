@@ -39,7 +39,8 @@ class ExportActionMixin:
             obj_data = obj.__dict__
             obj_data['subject_identifier'] = obj.subject_identifier
             obj_data['consent_datetime'] = self.get_consent_datetime(obj)
-            obj_data['visit_code'] = obj.maternal_visit.visit_code
+            if getattr(obj, 'maternal_visit', None):
+                obj_data['visit_code'] = obj.maternal_visit.visit_code
             data = [obj_data[field] for field in field_names]
 
             row_num += 1
