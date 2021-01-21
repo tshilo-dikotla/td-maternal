@@ -30,7 +30,7 @@ class ExportActionMixin:
         field_names = [a for a in field_names.keys()]
         field_names.remove('_state')
         if getattr(queryset[0], 'maternal_visit', None):
-            field_names[:0] = ['subject_identifier', 'consent_datetime']
+            field_names[:0] = ['subject_identifier', 'consent_datetime', 'visit_code']
 
         for col_num in range(len(field_names)):
             ws.write(row_num, col_num, field_names[col_num], font_style)
@@ -39,6 +39,7 @@ class ExportActionMixin:
             obj_data = obj.__dict__
             obj_data['subject_identifier'] = obj.subject_identifier
             obj_data['consent_datetime'] = self.get_consent_datetime(obj)
+            obj_data['visit_code'] = obj.maternal_visit.visit_code
             data = [obj_data[field] for field in field_names]
 
             row_num += 1
