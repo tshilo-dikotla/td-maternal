@@ -32,8 +32,8 @@ class LabResultsFile(BaseUuidModel):
 
     def lab_results_preview(self):
         return mark_safe(
-            '<iframe src="%(url)s" style="border:none" height="120" width="120"'
-            'title="lab results" scrolling="yes"></iframe>' % {'url': self.image.url})
+            '<embed src="%(url)s" style="border:none" height="100" width="150"'
+            'title="lab results"></embed>' % {'url': self.image.url})
 
     lab_results_preview.short_description = 'Preview'
     lab_results_preview.allow_tags = True
