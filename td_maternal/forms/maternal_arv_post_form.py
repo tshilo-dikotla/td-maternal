@@ -57,13 +57,9 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
                 return modification_date
 
     def validate_arv_history(self):
-        arvs = self.get_all_arvs()
-        arv_codes = []
-        total_arvs = int(self.data.get('maternalarvpostmed_set-TOTAL_FORMS'))
+        arv_codes = self.get_all_arvs()
 
-        if arvs:
-            for arv in arvs:
-                arv_codes.append(arv.arv_code)
+        total_arvs = int(self.data.get('maternalarvpostmed_set-TOTAL_FORMS'))
 
         for i in range(total_arvs):
             arv_code = self.data.get(
@@ -79,14 +75,18 @@ class MaternalArvPostForm(SubjectModelFormMixin, forms.ModelForm):
     def get_all_arvs(self):
         subject_identifier = self.cleaned_data.get(
             'maternal_visit').appointment.subject_identifier
-        try:
-            maternal_arvs = self.maternal_arv_cls.objects.filter(
-                maternal_arv_preg__maternal_visit__appointment__subject_identifier=subject_identifier, stop_date__isnull=True)
-        except self.maternal_arv_cls.DoesNotExist:
-            raise forms.ValidationError(
-                'Participant has not started arv\'s yet')
-        else:
-            return maternal_arvs
+
+        preg_maternal_arvs = self.maternal_arv_cls.objects.filter(
+            maternal_arv_preg__maternal_visit__appointment__subject_identifier=subject_identifier,
+            stop_date__isnull=True).values_list('arv_code', flat=True)
+
+        post_maternal_arvs = MaternalArvPostMed.objects.filter(
+            maternal_arv_post__maternal_visit__appointment__subject_identifier=subject_identifier,
+            ).exclude(dose_status='Permanently discontinued').values_list(
+                'arv_code', flat=True)
+
+        prev_arvs = list(set(list(preg_maternal_arvs) + list(post_maternal_arvs)))
+        return prev_arvs
 
     def get_modification_reason(self, reason=None):
         total_arvs = int(self.data.get('maternalarvpostmed_set-TOTAL_FORMS'))

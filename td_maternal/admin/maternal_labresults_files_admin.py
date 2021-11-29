@@ -3,41 +3,41 @@ from edc_model_admin import TabularInlineMixin
 from edc_odk.admin import StampImageActionMixin
 
 from ..admin_site import td_maternal_admin
-from ..forms import ClinicianNotesForm, ClinicianNotesImageForm
-from ..models import ClinicianNotes, ClinicianNotesImage
+from ..forms import MaternalLabResultsFilesForm, LabResultsFileForm
+from ..models import MaternalLabResultsFiles, LabResultsFile
 from .modeladmin_mixins import CrfModelAdminMixin
 
 
-class ClinicianNotesImageInline(TabularInlineMixin, admin.TabularInline):
+class LabResultsFileInline(TabularInlineMixin, admin.TabularInline):
 
-    model = ClinicianNotesImage
-    form = ClinicianNotesImageForm
+    model = LabResultsFile
+    form = LabResultsFileForm
     extra = 0
 
-    fields = ('clinician_notes_image', 'image', 'user_uploaded', 'datetime_captured',
+    fields = ('lab_results_preview', 'image', 'user_uploaded', 'datetime_captured',
               'modified', 'hostname_created',)
 
     def get_readonly_fields(self, request, obj=None):
         fields = super().get_readonly_fields(request, obj)
         fields = (
-            'clinician_notes_image', 'datetime_captured', 'user_uploaded') + fields
+            'lab_results_preview', 'datetime_captured', 'user_uploaded') + fields
 
         return fields
 
 
-@admin.register(ClinicianNotes, site=td_maternal_admin)
-class ClinicianNotesAdmin(
+@admin.register(MaternalLabResultsFiles, site=td_maternal_admin)
+class MaternalLabResultsFilesAdmin(
         StampImageActionMixin, CrfModelAdminMixin, admin.ModelAdmin):
 
-    form = ClinicianNotesForm
+    form = MaternalLabResultsFilesForm
 
     fieldsets = (
         (None, {
             'fields': [
                 'maternal_visit',
             ]}
-         ),)
+         ), )
 
-    inlines = [ClinicianNotesImageInline]
+    inlines = [LabResultsFileInline]
 
     search_fields = ('maternal_visit__subject_identifier',)

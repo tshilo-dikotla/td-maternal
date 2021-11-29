@@ -22,6 +22,7 @@ from .maternal_food_security_admin import MaternalFoodSecurityAdmin
 from .maternal_hiv_interim_hx import MaternalHivInterimHxAdmin
 from .maternal_interim_idcc_admin import MaternalInterimIdccAdmin
 from .maternal_labour_del_admin import MaternalLabourDelAdmin
+from .maternal_labresults_files_admin import MaternalLabResultsFilesAdmin
 from .maternal_locator_admin import MaternalLocatorAdmin
 from .maternal_medical_history_admin import MaternalMedicalHistoryAdmin
 from .maternal_obsterical_history_admin import MaternalObstericalHistoryAdmin

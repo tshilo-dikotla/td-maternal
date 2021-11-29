@@ -5,22 +5,22 @@ from edc_base.utils import get_utcnow
 from .model_mixins import CrfModelMixin
 
 
-class ClinicianNotes(CrfModelMixin):
+class MaternalLabResultsFiles(CrfModelMixin):
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'td_maternal'
-        verbose_name = 'Maternal Clinician Notes'
-        verbose_name_plural = 'Maternal Clinician Notes'
+        verbose_name = 'Maternal Lab Results Files'
+        verbose_name_plural = 'Maternal Lab Results Files'
 
 
-class ClinicianNotesImage(BaseUuidModel):
+class LabResultsFile(BaseUuidModel):
 
-    clinician_notes = models.ForeignKey(
-        ClinicianNotes,
+    lab_results = models.ForeignKey(
+        MaternalLabResultsFiles,
         on_delete=models.PROTECT,
-        related_name='maternal_clinician_notes',)
+        related_name='maternal_lab_results',)
 
-    image = models.FileField(upload_to='maternal_notes/')
+    image = models.FileField(upload_to='maternal_lab_results/')
 
     user_uploaded = models.CharField(
         max_length=50,
@@ -30,10 +30,10 @@ class ClinicianNotesImage(BaseUuidModel):
     datetime_captured = models.DateTimeField(
         default=get_utcnow)
 
-    def clinician_notes_image(self):
+    def lab_results_preview(self):
         return mark_safe(
             '<embed src="%(url)s" style="border:none" height="100" width="150"'
-            'title="clinician notes"></embed>' % {'url': self.image.url})
+            'title="lab results"></embed>' % {'url': self.image.url})
 
-    clinician_notes_image.short_description = 'Clinician Notes Image'
-    clinician_notes_image.allow_tags = True
+    lab_results_preview.short_description = 'Preview'
+    lab_results_preview.allow_tags = True

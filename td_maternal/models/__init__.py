@@ -25,6 +25,7 @@ from .maternal_food_security import MaternalFoodSecurity
 from .maternal_hiv_interim_hx import MaternalHivInterimHx
 from .maternal_interim_idcc_data import MaternalInterimIdcc
 from .maternal_labour_del import MaternalLabourDel
+from .maternal_labresults_files import MaternalLabResultsFiles, LabResultsFile
 from .maternal_locator import MaternalLocator
 from .maternal_medical_history import MaternalMedicalHistory
 from .maternal_obsterical_history import MaternalObstericalHistory
