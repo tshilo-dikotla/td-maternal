@@ -5,7 +5,7 @@ from edc_odk.admin import StampImageActionMixin
 from ..admin_site import td_maternal_admin
 from ..forms import MaternalLabResultsFilesForm, LabResultsFileForm
 from ..models import MaternalLabResultsFiles, LabResultsFile
-from .modeladmin_mixins import CrfModelAdminMixin
+from .modeladmin_mixins import ModelAdminMixin
 
 
 class LabResultsFileInline(TabularInlineMixin, admin.TabularInline):
@@ -27,17 +27,19 @@ class LabResultsFileInline(TabularInlineMixin, admin.TabularInline):
 
 @admin.register(MaternalLabResultsFiles, site=td_maternal_admin)
 class MaternalLabResultsFilesAdmin(
-        StampImageActionMixin, CrfModelAdminMixin, admin.ModelAdmin):
+        StampImageActionMixin, ModelAdminMixin, admin.ModelAdmin):
 
     form = MaternalLabResultsFilesForm
 
     fieldsets = (
         (None, {
             'fields': [
-                'maternal_visit',
+                'subject_identifier',
             ]}
          ), )
 
+    list_display = ('subject_identifier', 'created', )
+
     inlines = [LabResultsFileInline]
 
-    search_fields = ('maternal_visit__subject_identifier',)
+    search_fields = ('subject_identifier',)
