@@ -14,8 +14,6 @@ from .maternal_arv_post import MaternalArvPostMed
 from .maternal_arv_preg import MaternalArvPreg
 from .maternal_clinical_measurements_one import MaternalClinicalMeasurementsOne
 from .maternal_clinical_measurements_two import MaternalClinicalMeasurementsTwo
-from .maternal_clinician_notes_archives import ClinicianNotesArchives
-from .maternal_clinician_notes_archives import ClinicianNotesImageArchive
 from .maternal_clinician_notes import ClinicianNotes
 from .maternal_clinician_notes import ClinicianNotesImage
 from .maternal_contact import MaternalContact
@@ -27,7 +25,6 @@ from .maternal_food_security import MaternalFoodSecurity
 from .maternal_hiv_interim_hx import MaternalHivInterimHx
 from .maternal_interim_idcc_data import MaternalInterimIdcc
 from .maternal_labour_del import MaternalLabourDel
-from .maternal_labresults_files import MaternalLabResultsFiles, LabResultsFile
 from .maternal_locator import MaternalLocator
 from .maternal_medical_history import MaternalMedicalHistory
 from .maternal_obsterical_history import MaternalObstericalHistory

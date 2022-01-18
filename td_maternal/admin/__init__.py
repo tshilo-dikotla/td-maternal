@@ -12,7 +12,6 @@ from .maternal_arv_post_admin import MaternalArvPostMedInlineAdmin
 from .maternal_arv_preg_admin import MaternalArvPregAdmin
 from .maternal_clinical_measurements_one_admin import MaternalClinicalMeasurementsOneAdmin
 from .maternal_clinical_measurements_two_admin import MaternalClinicalMeasurementsTwoAdmin
-from .maternal_clinician_notes_archives_admin import ClinicianNotesArchivesAdmin
 from .maternal_clinician_notes_admin import ClinicianNotesAdmin
 from .maternal_contact_admin import MaternalContactAdmin
 from .maternal_contraception_admin import MaternalContraceptionAdmin
@@ -23,7 +22,6 @@ from .maternal_food_security_admin import MaternalFoodSecurityAdmin
 from .maternal_hiv_interim_hx import MaternalHivInterimHxAdmin
 from .maternal_interim_idcc_admin import MaternalInterimIdccAdmin
 from .maternal_labour_del_admin import MaternalLabourDelAdmin
-from .maternal_labresults_files_admin import MaternalLabResultsFilesAdmin
 from .maternal_locator_admin import MaternalLocatorAdmin
 from .maternal_medical_history_admin import MaternalMedicalHistoryAdmin
 from .maternal_obsterical_history_admin import MaternalObstericalHistoryAdmin
