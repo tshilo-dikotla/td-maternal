@@ -7,6 +7,10 @@ from .model_mixins import CrfModelMixin
 
 class ClinicianNotes(CrfModelMixin):
 
+    @property
+    def related_objects(self):
+        return getattr(self, 'maternal_clinician_notes')
+
     class Meta(CrfModelMixin.Meta):
         app_label = 'td_maternal'
         verbose_name = 'Maternal Clinician Notes'
